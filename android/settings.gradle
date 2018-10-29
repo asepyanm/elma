@@ -1,0 +1,3 @@
+rootProject.name = 'elma_cfue'
+
+include ':app'
