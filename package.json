@@ -8,7 +8,17 @@
   },
   "dependencies": {
     "react": "16.6.0-alpha.8af6728",
-    "react-native": "0.57.4"
+    "react-native": "0.57.4",
+    "axios": "^0.18.0",
+    "native-base": "^2.8.1",
+    "react-native-responsive-screen": "^1.1.9",
+    "react-native-vector-icons": "^6.0.2",
+    "react-navigation": "1.0.0-beta.15",
+    "react-redux": "^5.1.0",
+    "redux": "^4.0.1",
+    "redux-logger": "^3.0.6",
+    "redux-persist": "^5.10.0",
+    "redux-promise-middleware": "^5.1.1"
   },
   "devDependencies": {
     "babel-jest": "23.6.0",
