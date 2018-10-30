@@ -4,9 +4,7 @@ const initialState = {
   isLoggedIn: false,
   statusErrorFrom:true,
   loaderStatus:false,
-  compdep_id:'',
-  token:'',
-  messageStatus:'',
+  data:[]
 };
 
 const loginReducer = (state = initialState, action) => {
@@ -17,6 +15,7 @@ const loginReducer = (state = initialState, action) => {
         ...state, 
         isLoggedIn: false,
         loaderStatus:false,
+        statusErrorFrom:false,
       }
     break;
     
@@ -31,12 +30,9 @@ const loginReducer = (state = initialState, action) => {
     case 'LOGIN_FULFILLED':
       return {
         ...state, 
-        isLoggedIn: action.payload.data.data.status === 'Failed' ? false : true,
+        isLoggedIn: true,
         loaderStatus:false,
-        statusErrorFrom:action.payload.data.data.status === 'Failed' ? false : true,
-        compdep_id:action.payload.data.data.status === 'Failed' ? '' : action.payload.data.data.auth_mobile[0].compdep_id,
-        token:action.payload.data.data.status === 'Failed' ? '' : action.payload.data.data.jwt.token,
-        messageStatus:action.payload.data.data.status === 'Failed' ? action.payload.data.data.message : '',
+        data:action.payload.data
       }
     break;
 

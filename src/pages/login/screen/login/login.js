@@ -62,15 +62,12 @@ class Login extends Component {
     
     this.props.dispatch({
       type:'LOGIN',
-      payload:axios.post(`${url.API}/token`,{
-        username: username,
-        password: password,
-      }),
+      payload:axios.get(`${url.API}/ebis_getlogin?user_id=${username}&user_pass=${password}`),
     })
   }
 
   render() {
-    const {statusForm, loaderStatus, messageStatus} = this.props;
+    const {statusForm, loaderStatus} = this.props;
     return (
       <View style={styles.container}>
         <Image 
@@ -82,7 +79,7 @@ class Login extends Component {
         {renderIf(!statusForm)(
           <View style={styles.containerStatusError}>
             <Text style={styles.statusError}>
-              {messageStatus}
+              Username / Password Salah
             </Text>
           </View>
         )}
@@ -122,10 +119,8 @@ class Login extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  status: state.LoginReducer.status,
   loaderStatus:state.LoginReducer.loaderStatus,
   statusForm:state.LoginReducer.statusErrorFrom,
-  messageStatus:state.LoginReducer.messageStatus
 })
 
 export default connect(mapStateToProps)(Login);

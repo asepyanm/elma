@@ -10,7 +10,6 @@ import Login from '../pages/login/screen/login/login';
 
 //main dashboard
 import Dashboard from '../pages/dashboard/dashboard';
-import DashboardDetail from '../pages/dashboard/dashboardDetail';
 
 
 const noTransitionConfig = () => ({
@@ -24,7 +23,6 @@ const noTransitionConfig = () => ({
 // Drawer stack
 const MainStack = StackNavigator({
   MainDashboard: { screen: Dashboard},
-  DashboardDetail: { screen: DashboardDetail}
 },{
   navigationOptions:{
     header:null

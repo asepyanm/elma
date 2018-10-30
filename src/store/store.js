@@ -10,8 +10,6 @@ import promiseMiddleware from 'redux-promise-middleware';
 
 import NavigationReducer  from '../navigations/reducer/navigationReducers';
 import loginReducer       from '../pages/login/reducer/loginReducer';
-import dashboardReducer   from '../pages/dashboard/reducer/dashboardReducer';
-import dashboardDetailReducer   from '../pages/dashboard/reducer/dashboardDetailReducer';
 
 //config persist
 const config1 = {
@@ -24,8 +22,6 @@ const LoginReducer = persistReducer(config1, loginReducer);
 const rootReducer = combineReducers({
   NavigationReducer,
   LoginReducer,
-  dashboardReducer,
-  dashboardDetailReducer
 });
 
 const middlewares = applyMiddleware( 
