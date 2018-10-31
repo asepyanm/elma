@@ -73,9 +73,7 @@ export default class HomeScreens extends Component{
           </Right>
         </Header>
 
-        <Content>
-          {this.renderSelectedTab()}
-        </Content>
+        {this.renderSelectedTab()}
       </View>
     );
   }

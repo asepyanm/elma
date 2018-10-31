@@ -52,7 +52,7 @@ export default class EbisScreens extends Component{
       <View style={styles.container}>
         <View style={styles.wrapperPeriode}>
           <View>
-            <Text style={styles.textPeriode}>Periode</Text>
+            <Text style={styles.textPeriode}>Periode : </Text>
           </View>
           <View style={styles.wrapperModalPeriode}>
             <View>
@@ -201,6 +201,116 @@ export default class EbisScreens extends Component{
               resizeMode={'stretch'}
             />
           </View>
+        
+          <View style={styles.wrapperRatio}>
+            <View style={styles.wrapperKontenRatio}>
+              <View style={styles.judulRatio}>
+                <Text style={styles.textJudulRatio}>SPR</Text>
+              </View>
+              <View style={styles.wrapperIsiRatio}>
+                <Text style={styles.isiRatio}>81.46%</Text>
+              </View>
+              <View style={styles.subJudulRatio}>
+                <Text style={styles.subTextJudulRatio}>Sub to Prosp Ratio</Text>
+              </View>
+            </View>
+
+            <View style={styles.wrapperKontenRatio}>
+              <View style={styles.judulRatio}>
+                <Text style={styles.textJudulRatio}>WSR</Text>
+              </View>
+              <View style={styles.wrapperIsiRatio2}>
+                <Text style={styles.isiRatio}>81.18%</Text>
+              </View>
+              <View style={styles.subJudulRatio}>
+                <Text style={styles.subTextJudulRatio}>Win to Sub Ratio</Text>
+              </View>
+            </View>
+
+            <View style={styles.wrapperKontenRatio}>
+              <View style={styles.judulRatio}>
+                <Text style={styles.textJudulRatio}>BWR</Text>
+              </View>
+              <View style={styles.wrapperIsiRatio3}>
+                <Text style={styles.isiRatio}>23.84%</Text>
+              </View>
+              <View style={styles.subJudulRatio}>
+                <Text style={styles.subTextJudulRatio}>Bill to Win Ratio</Text>
+              </View>
+            </View>
+
+            <View style={styles.wrapperKontenRatio}>
+              <View style={styles.judulRatio}>
+                <Text style={styles.textJudulRatio}>WPR</Text>
+              </View>
+              <View style={styles.wrapperIsiRatio4}>
+                <Text style={styles.isiRatio}>66.13%</Text>
+              </View>
+              <View style={styles.subJudulRatio}>
+                <Text style={styles.subTextJudulRatio}>Win to Prosp Ratio</Text>
+              </View>
+            </View>
+          </View>
+        
+
+          <View style={{marginTop:hp('2%')}}>
+            <View style={{marginBottom:hp('1%'), marginLeft:wp('4%')}}>
+              <Text stle={{fontSize:15, fontWeight:'bold'}}>
+                SUBMISSION STATUS
+              </Text>
+            </View>
+            
+            <View style={styles.wrapperSubStatus}>
+              <View style={styles.wrapperKontenSubStatus}>
+                <View style={styles.judulSubStatus}>
+                  <Text style={styles.textJudulSubStatus}>WIN</Text>
+                </View>
+                <View style={styles.wrapperIsiSubStatus}>
+                  <Text style={styles.isiSubStatus}>13823 M</Text>
+                </View>
+                <View style={styles.subJudulSubStatus}>
+                  <Text style={styles.subTextJudulSubStatus}>9872 Projects</Text>
+                </View>
+              </View>
+
+              <View style={styles.wrapperKontenSubStatus}>
+                <View style={styles.judulSubStatus}>
+                  <Text style={styles.textJudulSubStatus}>LOSE</Text>
+                </View>
+                <View style={styles.wrapperIsiSubStatus}>
+                  <Text style={styles.isiSubStatus}>0 M</Text>
+                </View>
+                <View style={styles.subJudulSubStatus}>
+                  <Text style={styles.subTextJudulSubStatus}>0 Projects</Text>
+                </View>
+              </View>
+
+              <View style={styles.wrapperKontenSubStatus}>
+                <View style={styles.judulSubStatus}>
+                  <Text style={styles.textJudulSubStatus}>WAITING</Text>
+                </View>
+                <View style={styles.wrapperIsiSubStatus}>
+                  <Text style={styles.isiSubStatus}>81.6 M</Text>
+                </View>
+                <View style={styles.subJudulSubStatus}>
+                  <Text style={styles.subTextJudulSubStatus}>428 Projects</Text>
+                </View>
+              </View>
+
+              <View style={styles.wrapperKontenSubStatus}>
+                <View style={styles.judulSubStatus}>
+                  <Text style={styles.textJudulSubStatus}>CANCEL</Text>
+                </View>
+                <View style={styles.wrapperIsiSubStatus}>
+                  <Text style={styles.isiSubStatus}>0 M</Text>
+                </View>
+                <View style={styles.subJudulSubStatus}>
+                  <Text style={styles.subTextJudulSubStatus}>0 Projects</Text>
+                </View>
+              </View>
+            </View>
+          </View>
+        
         </ScrollView>
       </View>
     );
@@ -235,6 +345,8 @@ const styles = StyleSheet.create({
     width:wp('35%'), 
     height:hp('5.5%')
   },
+
+  //style buat arrownya
   wrapperArrow:{
     flexDirection:'row', 
     marginTop:hp('2%')
@@ -310,5 +422,88 @@ const styles = StyleSheet.create({
   textKeterangan:{
     fontSize:9,
     fontWeight:'500',
-  }
+  },
+
+  //style keterangan ratio
+  wrapperRatio:{
+    flexDirection:'row', 
+    justifyContent:'space-around',
+    marginTop:hp('2%')
+  },
+  wrapperKontenRatio:{
+    width:wp('23%')
+  },
+  judulRatio:{
+    justifyContent:'center',
+    alignItems:'center',
+    height:hp('4%'),
+  },
+  textJudulRatio:{
+    textAlign:'center',
+    fontWeight:'bold'
+  },
+  wrapperIsiRatio:{
+    backgroundColor:'#ddc8df',
+    padding:wp('1%')
+  },
+  wrapperIsiRatio2:{
+    backgroundColor:'#ecb889',
+    padding:wp('1%')
+  },
+  wrapperIsiRatio3:{
+    backgroundColor:'#c7eecc',
+    padding:wp('1%')
+  },
+  wrapperIsiRatio4:{
+    backgroundColor:'#a9c1fb',
+    padding:wp('1%')
+  },
+  isiRatio:{
+    textAlign:'center',
+    fontWeight:'500',
+  },
+  subJudulRatio:{
+    justifyContent:'center',
+    alignItems:'center',
+  },
+  subTextJudulRatio:{
+    textAlign:'center',
+    fontSize:7
+  },
+
+  //style submission status 
+  wrapperSubStatus:{
+    flexDirection:'row', 
+    justifyContent:'space-around',
+  },
+  wrapperKontenSubStatus:{
+    width:wp('25%'),
+  },
+  judulSubStatus:{
+    justifyContent:'center',
+    alignItems:'center',
+    height:hp('4%'),
+    backgroundColor:'#212634'
+  },
+  textJudulSubStatus:{
+    textAlign:'center',
+    fontWeight:'bold',
+    color:'#FFF'
+  },
+  wrapperIsiSubStatus:{
+    padding:wp('1%')
+  },
+  isiSubStatus:{
+    textAlign:'center',
+    fontWeight:'500',
+    fontSize:12
+  },
+  subJudulSubStatus:{
+    justifyContent:'center',
+    alignItems:'center',
+  },
+  subTextJudulSubStatus:{
+    textAlign:'center',
+    fontSize:7
+  },
 });
