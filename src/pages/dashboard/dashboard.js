@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Alert, FlatList, ActivityIndicator, TouchableOpacity, StyleSheet, Image} from 'react-native';
+import {Alert, FlatList, ActivityIndicator, TouchableOpacity, StyleSheet} from 'react-native';
 import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Icon, Text, Item, Card, CardItem } from 'native-base';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import {connect} from 'react-redux';
@@ -63,72 +63,55 @@ class Dashboard extends Component {
     const {selectedTab} = this.state;
     return (
       <Container>
-        <Header style={{backgroundColor:'#820000'}}>
-          <Left style={{flex:1}}>
-            <Image 
-              source={require('../../assets/headerLogo/headerLogo.png')}
-              style={{width:wp('50%'), height:hp('50%')}}
-              resizeMode={'contain'}
-            />
-          </Left>
-          <Body/>
-          <Right style={{flex:2}}>
-            <Title style={{color:'#FFF'}}>Selamat Datang</Title>
-          </Right>
-        </Header>
-
+        
         {this.renderSelectedTab()}
 
         <Footer style={styles.containerWrapper}>
           <FooterTab style={styles.containerWrapper}>
             <Button 
               vertical
-              // active={selectedTab==='home'} 
               onPress={() => this.setState({selectedTab: 'home'})} 
             >
               <Icon 
                 name="home" 
                 type={'MaterialIcons'} 
-                style={this.state.selectedTab === 'home' ? styles.iconBarActive : styles.iconBarNonActive}
+                style={selectedTab === 'home' ? styles.iconBarActive : styles.iconBarNonActive}
               />
               <Text style={styles.textStyleFooter}>Home</Text>
             </Button>
 
             <Button 
               vertical
-              // active={selectedTab==='rekap'} 
               onPress={() => this.setState({selectedTab: 'rekap'})} 
             >
               <Icon 
                 name="insert-drive-file" 
                 type={'MaterialIcons'} 
-                style={this.state.selectedTab === 'rekap' ? styles.iconBarActive : styles.iconBarNonActive}
+                style={selectedTab === 'rekap' ? styles.iconBarActive : styles.iconBarNonActive}
               />
               <Text style={styles.textStyleFooter}>Rekap</Text>
             </Button>
 
             <Button 
               vertical
-              // active={selectedTab==='chat'} 
               onPress={() => this.setState({selectedTab: 'chat'})} 
             >
               <Icon 
                 name="sms" 
                 type={'MaterialIcons'} 
-                style={this.state.selectedTab === 'chat' ? styles.iconBarActive : styles.iconBarNonActive}
+                style={selectedTab === 'chat' ? styles.iconBarActive : styles.iconBarNonActive}
               />
               <Text style={styles.textStyleFooter}>Chat</Text>
             </Button>
 
             <Button 
               vertical
-              // active={selectedTab==='treg'} 
               onPress={() => this.setState({selectedTab: 'treg'})} 
             >
               <Icon 
                 name="show-chart" 
                 type={'MaterialIcons'}
-                style={this.state.selectedTab === 'treg' ? styles.iconBarActive : styles.iconBarNonActive}
+                style={selectedTab === 'treg' ? styles.iconBarActive : styles.iconBarNonActive}
               />
               <Text style={styles.textStyleFooter}>T-Reg</Text>
             </Button>
