@@ -84,7 +84,7 @@ export default class HomeScreens extends Component{
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#FFF',
   },
   segmentButtonActive:{
     borderColor:'#FFF', 
