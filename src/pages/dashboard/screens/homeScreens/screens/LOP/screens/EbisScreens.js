@@ -3,7 +3,9 @@ import {
   Platform,
   StyleSheet,
   Text,
-  View
+  View,
+  ScrollView,
+  Image
 } from 'react-native';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import ModalSelector from 'react-native-modal-selector';
@@ -25,6 +27,27 @@ export default class EbisScreens extends Component{
           { key: index++, label: 'Nov 2018', value:'201811'},
           { key: index++, label: 'Des 2018', value:'201812'},
       ];
+
+    //import image arrow
+    const images = {
+      prospect: {
+        arrowProspect1: require('../../../../../../../assets/Arrow/arrowProspect.png'),
+        arrowProspect2: require('../../../../../../../assets/Arrow/arrowProspect2.png'),
+      },
+      Submission: {
+        arrowSub1: require('../../../../../../../assets/Arrow/arrowSub.png'),
+        arrowSub2: require('../../../../../../../assets/Arrow/arrowSub2.png'),
+      },
+      Win: {
+        arrowWin1: require('../../../../../../../assets/Arrow/arrowWin.png'),
+        arrowWin2: require('../../../../../../../assets/Arrow/arrowWin2.png'),
+      },
+      Billcom: {
+        arrowBil1: require('../../../../../../../assets/Arrow/arrowBillcom.png'),
+        arrowBil2: require('../../../../../../../assets/Arrow/arrowBillcom2.png'),
+      },
+      arrowGrey:require('../../../../../../../assets/Arrow/arrowGrey.png')
+    };
     return (
       <View style={styles.container}>
         <View style={styles.wrapperPeriode}>
@@ -53,6 +76,132 @@ export default class EbisScreens extends Component{
             </View>
           </View>
         </View>
+
+        <ScrollView>
+          <View style={styles.wrapperArrow}>
+            <Image 
+              source={images.prospect.arrowProspect1}
+              style={styles.imageStyle}
+              resizeMode={'stretch'}
+            />
+
+            <View style={styles.containerArrowProspect}>
+              <Text style={styles.textJudul}>PROSPECT</Text>
+              <Text style={styles.textIsi}>2183 M</Text>
+              <Text style={styles.textKeterangan}>per 17627 Project</Text>
+            </View>
+
+            <Image 
+              source={images.prospect.arrowProspect2}
+              style={styles.imageStyle}
+              resizeMode={'stretch'}
+            />
+
+            <View style={styles.containerArrowProspect2}>
+              <Text style={styles.textJudul}>Target</Text>
+              <Text style={styles.textIsi}>1236 M</Text>
+            </View>
+
+            <Image 
+              source={images.arrowGrey}
+              style={styles.imageStyle}
+              resizeMode={'stretch'}
+            />
+          </View>
+
+          <View style={styles.wrapperArrow}>
+            <Image 
+              source={images.Submission.arrowSub1}
+              style={styles.imageStyle}
+              resizeMode={'stretch'}
+            />
+
+            <View style={styles.containerArrowSubmission}>
+              <Text style={styles.textJudul}>SUBMISSION</Text>
+              <Text style={styles.textIsi}>2183 M</Text>
+              <Text style={styles.textKeterangan}>per 17627 Project</Text>
+            </View>
+
+            <Image 
+              source={images.Submission.arrowSub2}
+              style={styles.imageStyle}
+              resizeMode={'stretch'}
+            />
+
+            <View style={styles.containerArrowSubmission2}>
+              <Text style={styles.textJudul}>Target</Text>
+              <Text style={styles.textIsi}>1236 M</Text>
+            </View>
+
+            <Image 
+              source={images.arrowGrey}
+              style={styles.imageStyle}
+              resizeMode={'stretch'}
+            />
+          </View>
+
+          <View style={styles.wrapperArrow}>
+            <Image 
+              source={images.Win.arrowWin1}
+              style={styles.imageStyle}
+              resizeMode={'stretch'}
+            />
+
+            <View style={styles.containerArrowWin}>
+              <Text style={styles.textJudul}>WIN</Text>
+              <Text style={styles.textIsi}>2183 M</Text>
+              <Text style={styles.textKeterangan}>per 17627 Project</Text>
+            </View>
+
+            <Image 
+              source={images.Win.arrowWin2}
+              style={styles.imageStyle}
+              resizeMode={'stretch'}
+            />
+
+            <View style={styles.containerArrowWin2}>
+              <Text style={styles.textJudul}>Target</Text>
+              <Text style={styles.textIsi}>1236 M</Text>
+            </View>
+
+            <Image 
+              source={images.arrowGrey}
+              style={styles.imageStyle}
+              resizeMode={'stretch'}
+            />
+          </View>
+
+          <View style={styles.wrapperArrow}>
+            <Image 
+              source={images.Billcom.arrowBil1}
+              style={styles.imageStyle}
+              resizeMode={'stretch'}
+            />
+
+            <View style={styles.containerArrowBill}>
+              <Text style={styles.textJudul}>BILLCOM</Text>
+              <Text style={styles.textIsi}>2183 M</Text>
+              <Text style={styles.textKeterangan}>per 17627 Project</Text>
+            </View>
+
+            <Image 
+              source={images.Billcom.arrowBil2}
+              style={styles.imageStyle}
+              resizeMode={'stretch'}
+            />
+
+            <View style={styles.containerArrowBill2}>
+              <Text style={styles.textJudul}>Target</Text>
+              <Text style={styles.textIsi}>1236 M</Text>
+            </View>
+
+            <Image 
+              source={images.arrowGrey}
+              style={styles.imageStyle}
+              resizeMode={'stretch'}
+            />
+          </View>
+        </ScrollView>
       </View>
     );
   }
@@ -85,5 +234,81 @@ const styles = StyleSheet.create({
     backgroundColor:'#FFF', 
     width:wp('35%'), 
     height:hp('5.5%')
+  },
+  wrapperArrow:{
+    flexDirection:'row', 
+    marginTop:hp('2%')
+  },
+  imageStyle:{
+    width:wp('9%'), 
+    height:hp('9%')
+  },
+  containerArrowProspect:{
+    height:hp('9%'), 
+    width:wp('24%'), 
+    backgroundColor:'#ddc8df',
+    justifyContent:'center',
+    alignItems:'center'
+  },
+  containerArrowProspect2:{
+    height:hp('9%'), 
+    width:wp('24%'), 
+    backgroundColor:'#dfdfdd',
+    justifyContent:'center',
+    alignItems:'center'
+  },
+  containerArrowSubmission:{
+    height:hp('9%'), 
+    width:wp('24%'), 
+    backgroundColor:'#ecb889',
+    justifyContent:'center',
+    alignItems:'center'
+  },
+  containerArrowSubmission2:{
+    height:hp('9%'), 
+    width:wp('24%'), 
+    backgroundColor:'#dfdfdd',
+    justifyContent:'center',
+    alignItems:'center'
+  },
+  containerArrowWin:{
+    height:hp('9%'), 
+    width:wp('24%'), 
+    backgroundColor:'#c7eecc',
+    justifyContent:'center',
+    alignItems:'center'
+  },
+  containerArrowWin2:{
+    height:hp('9%'), 
+    width:wp('24%'), 
+    backgroundColor:'#dfdfdd',
+    justifyContent:'center',
+    alignItems:'center'
+  },
+  containerArrowBill:{
+    height:hp('9%'), 
+    width:wp('24%'), 
+    backgroundColor:'#a9c1fb',
+    justifyContent:'center',
+    alignItems:'center'
+  },
+  containerArrowBill2:{
+    height:hp('9%'), 
+    width:wp('24%'), 
+    backgroundColor:'#dfdfdd',
+    justifyContent:'center',
+    alignItems:'center'
+  },
+  textJudul:{
+    fontWeight:'bold',
+    fontSize:13
+  },
+  textIsi:{
+    fontWeight:'700',
+    fontSize:11
+  },
+  textKeterangan:{
+    fontSize:9,
+    fontWeight:'500',
   }
 });
