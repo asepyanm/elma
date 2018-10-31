@@ -46,7 +46,21 @@ export default class EbisScreens extends Component{
         arrowBil1: require('../../../../../../../assets/Arrow/arrowBillcom.png'),
         arrowBil2: require('../../../../../../../assets/Arrow/arrowBillcom2.png'),
       },
-      arrowGrey:require('../../../../../../../assets/Arrow/arrowGrey.png')
+      arrowGrey:require('../../../../../../../assets/Arrow/arrowGrey.png'),
+
+      //icon current status
+      currentProspect: {
+        iconProspect: require('../../../../../../../assets/icon_current_status/cur01a.png'),
+      },
+      currentSubmission: {
+        iconSubmission: require('../../../../../../../assets/icon_current_status/cur02a.png'),
+      },
+      currentWin: {
+        iconWin: require('../../../../../../../assets/icon_current_status/cur03a.png'),
+      },
+      currentBillcom: {
+        iconBill: require('../../../../../../../assets/icon_current_status/cur04a.png'),
+      },
     };
     return (
       <View style={styles.container}>
@@ -311,6 +325,83 @@ export default class EbisScreens extends Component{
             </View>
           </View>
         
+          <View style={{marginTop:hp('2%'), marginBottom:hp('5%')}}>
+            <View style={styles.wrapperJudulCurrent}>
+              <Text stle={{fontSize:15, fontWeight:'bold'}}>
+                CURRENT STATUS per 2018-10-18
+              </Text>
+            </View>
+            
+            <View style={styles.wrapperCurStatus}>
+              <View style={styles.wrapperKontenCurStatus}>
+                <View style={styles.judulCurStatus}>
+                  <Text style={styles.textJudulCurStatus}>+PROSPECT</Text>
+                </View>
+                <View style={styles.wrapperIsiCurStatus}>
+                  <Image 
+                    source={images.currentProspect.iconProspect}
+                    style={{height:hp('3%'), width:wp('5%')}}
+                    resizeMode={'stretch'}
+                  />
+                  <Text style={styles.isiCurStatus}>0 M</Text>
+                </View>
+                <View style={styles.subJudulCurStatus}>
+                  <Text style={styles.subTextJudulCurStatus}>0 Projects</Text>
+                </View>
+              </View>
+
+              <View style={styles.wrapperKontenCurStatus}>
+                <View style={styles.judulCurStatus}>
+                  <Text style={styles.textJudulCurStatus2}>+SUBMISSION</Text>
+                </View>
+                <View style={styles.wrapperIsiCurStatus}>
+                  <Image 
+                    source={images.currentSubmission.iconSubmission}
+                    style={{height:hp('3%'), width:wp('5%')}}
+                    resizeMode={'stretch'}
+                  />
+                  <Text style={styles.isiCurStatus}>15.3 M</Text>
+                </View>
+                <View style={styles.subJudulCurStatus}>
+                  <Text style={styles.subTextJudulCurStatus}>4 Projects</Text>
+                </View>
+              </View>
+
+              <View style={styles.wrapperKontenCurStatus}>
+                <View style={styles.judulCurStatus}>
+                  <Text style={styles.textJudulCurStatus3}>+WIN</Text>
+                </View>
+                <View style={styles.wrapperIsiCurStatus}>
+                  <Image 
+                    source={images.currentWin.iconWin}
+                    style={{height:hp('3%'), width:wp('5%')}}
+                    resizeMode={'stretch'}
+                  />
+                  <Text style={styles.isiCurStatus}>0 M</Text>
+                </View>
+                <View style={styles.subJudulCurStatus}>
+                  <Text style={styles.subTextJudulCurStatus}>0 Projects</Text>
+                </View>
+              </View>
+
+              <View style={styles.wrapperKontenCurStatus}>
+                <View style={styles.judulCurStatus}>
+                  <Text style={styles.textJudulCurStatus4}>+BILLCOM</Text>
+                </View>
+                <View style={styles.wrapperIsiCurStatus}>
+                  <Image 
+                    source={images.currentBillcom.iconBill}
+                    style={{height:hp('3%'), width:wp('5%')}}
+                    resizeMode={'stretch'}
+                  />
+                  <Text style={styles.isiCurStatus}>0 M</Text>
+                </View>
+                <View style={styles.subJudulCurStatus}>
+                  <Text style={styles.subTextJudulCurStatus}>0 Projects</Text>
+                </View>
+              </View>
+            </View>
+          </View>
         </ScrollView>
       </View>
     );
@@ -506,4 +597,70 @@ const styles = StyleSheet.create({
     textAlign:'center',
     fontSize:7
   },
+
+    //style current status 
+    wrapperCurStatus:{
+      flexDirection:'row', 
+      justifyContent:'space-around',
+    },
+    wrapperJudulCurrent:{
+      marginBottom:hp('1%'), 
+      paddingLeft:wp('4%'), 
+      paddingBottom:wp('2%'),
+      borderBottomColor:'#000', 
+      borderBottomWidth:1
+    },
+    wrapperKontenCurStatus:{
+      width:wp('25%'),
+    },
+    judulCurStatus:{
+      justifyContent:'center',
+      alignItems:'center',
+      height:hp('2%'),
+    },
+    textJudulCurStatus:{
+      textAlign:'center',
+      fontWeight:'bold',
+      color:'#532e63',
+      fontSize:10
+    },
+    textJudulCurStatus2:{
+      textAlign:'center',
+      fontWeight:'bold',
+      color:'#bd6b3a',
+      fontSize:10
+    },
+    textJudulCurStatus3:{
+      textAlign:'center',
+      fontWeight:'bold',
+      color:'#66953f',
+      fontSize:10
+    },
+    textJudulCurStatus4:{
+      textAlign:'center',
+      fontWeight:'bold',
+      color:'#5373a4',
+      fontSize:10
+    },
+    wrapperIsiCurStatus:{
+      flexDirection:'row',
+      justifyContent:'center',
+      alignItems:'center',
+      padding:wp('1%')
+    },
+    isiCurStatus:{
+      textAlign:'center',
+      fontWeight:'500',
+      fontSize:12,
+      alignSelf:'center',
+      marginLeft:wp('1%')
+    },
+    subJudulCurStatus:{
+      justifyContent:'center',
+      alignItems:'center',
+    },
+    subTextJudulCurStatus:{
+      textAlign:'center',
+      fontSize:7
+    },
 });
