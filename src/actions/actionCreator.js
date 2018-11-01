@@ -1,7 +1,8 @@
+import url from '../config/api_service';
 import axios from 'axios';
 import {
   Login,
-  Logout,
+  Logout
 } from "./actionTypes";
 
 

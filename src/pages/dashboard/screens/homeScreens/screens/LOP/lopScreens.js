@@ -6,6 +6,11 @@ import {
   View
 } from 'react-native';
 import { Container, Header, Content, Tab, Tabs } from 'native-base';
+import {connect} from 'react-redux';
+import axios from 'axios';
+
+//global
+import url from '../../../../../../config/api_service';
 
 //screens
 import EbisScreens from './screens/EbisScreens';
@@ -13,7 +18,7 @@ import DesScreens  from './screens/DesScreens';
 import DbsScreens  from './screens/DbsScreens';
 import DgsScreens  from './screens/DgsScreens';
 
-export default class LOPscreen extends Component{
+class LOPscreen extends Component{
   render() {
     return (
       <View style={styles.container}>
@@ -35,6 +40,13 @@ export default class LOPscreen extends Component{
     );
   }
 }
+
+const mapStateToProps = (state) => ({
+  //data LOP Home
+
+})
+
+export default connect(mapStateToProps)(LOPscreen);
 
 const styles = StyleSheet.create({
   container: {

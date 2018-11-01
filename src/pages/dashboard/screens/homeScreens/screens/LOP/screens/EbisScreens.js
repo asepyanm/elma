@@ -9,8 +9,17 @@ import {
 } from 'react-native';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import ModalSelector from 'react-native-modal-selector';
+import {connect} from 'react-redux';
 
-export default class EbisScreens extends Component{
+
+class EbisScreens extends Component{
+  constructor(props){
+    super(props);
+    this.state = {
+      data:[]
+    }
+  }
+  
   render() {
     let index = 0;
       const data = [
@@ -62,6 +71,31 @@ export default class EbisScreens extends Component{
         iconBill: require('../../../../../../../assets/icon_current_status/cur04a.png'),
       },
     };
+
+    const {
+      //prospect
+      ebisProspectREVENUE,ebisProspectProject,ebisProspectTarget,
+      //submission
+      ebisSubmisionREVENUE,ebisSubmissionProject,ebisSubmissionTarget,
+      //win
+      ebisWinREVENUE,ebisWinProject,ebisWinTarget,
+      //billcom
+      ebisBillcomREVENUE,ebisBillcomeProject,ebisBillcommTarget,
+
+      ProspectREVENUE,ProspectProject,ProspectTarget,ProspectREVENUE2,
+    
+      //submission status
+      SubmissionWINRevenue,SubmissionWINProject,
+      SubmissionLOOSERevenue,SubmissionLooseProject,
+      SubmissionWaitingRevenue,SubmissionWaitingProject,
+      SubmissionCancelRevenue,SubmissionCancekProject,
+    
+      //current status
+      currentProspectRevenue,currentProspectProject,
+      currentSubmissionRevenue,currentSubmissionProject,
+      currentWINRevenue,currentWINProject,
+      currentBIllcomRevenue,currentBillcomProject,
+    } = this.props;
     return (
       <View style={styles.container}>
         <View style={styles.wrapperPeriode}>
@@ -101,8 +135,8 @@ export default class EbisScreens extends Component{
 
             <View style={styles.containerArrowProspect}>
               <Text style={styles.textJudul}>PROSPECT</Text>
-              <Text style={styles.textIsi}>2183 M</Text>
-              <Text style={styles.textKeterangan}>per 17627 Project</Text>
+              <Text style={styles.textIsi}>{ebisProspectREVENUE}M</Text>
+              <Text style={styles.textKeterangan}>per {ebisProspectProject} Project</Text>
             </View>
 
             <Image 
@@ -113,7 +147,7 @@ export default class EbisScreens extends Component{
 
             <View style={styles.containerArrowProspect2}>
               <Text style={styles.textJudul}>Target</Text>
-              <Text style={styles.textIsi}>1236 M</Text>
+              <Text style={styles.textIsi}>{ebisProspectTarget}M</Text>
             </View>
 
             <Image 
@@ -132,8 +166,8 @@ export default class EbisScreens extends Component{
 
             <View style={styles.containerArrowSubmission}>
               <Text style={styles.textJudul}>SUBMISSION</Text>
-              <Text style={styles.textIsi}>2183 M</Text>
-              <Text style={styles.textKeterangan}>per 17627 Project</Text>
+              <Text style={styles.textIsi}>{ebisSubmisionREVENUE}M</Text>
+              <Text style={styles.textKeterangan}>per {ebisSubmissionProject} Project</Text>
             </View>
 
             <Image 
@@ -144,7 +178,7 @@ export default class EbisScreens extends Component{
 
             <View style={styles.containerArrowSubmission2}>
               <Text style={styles.textJudul}>Target</Text>
-              <Text style={styles.textIsi}>1236 M</Text>
+              <Text style={styles.textIsi}>{ebisSubmissionTarget}M</Text>
             </View>
 
             <Image 
@@ -163,8 +197,8 @@ export default class EbisScreens extends Component{
 
             <View style={styles.containerArrowWin}>
               <Text style={styles.textJudul}>WIN</Text>
-              <Text style={styles.textIsi}>2183 M</Text>
-              <Text style={styles.textKeterangan}>per 17627 Project</Text>
+              <Text style={styles.textIsi}>{ebisWinREVENUE}M</Text>
+              <Text style={styles.textKeterangan}>per {ebisWinProject} Project</Text>
             </View>
 
             <Image 
@@ -175,7 +209,7 @@ export default class EbisScreens extends Component{
 
             <View style={styles.containerArrowWin2}>
               <Text style={styles.textJudul}>Target</Text>
-              <Text style={styles.textIsi}>1236 M</Text>
+              <Text style={styles.textIsi}>{ebisWinTarget}M</Text>
             </View>
 
             <Image 
@@ -194,8 +228,8 @@ export default class EbisScreens extends Component{
 
             <View style={styles.containerArrowBill}>
               <Text style={styles.textJudul}>BILLCOM</Text>
-              <Text style={styles.textIsi}>2183 M</Text>
-              <Text style={styles.textKeterangan}>per 17627 Project</Text>
+              <Text style={styles.textIsi}>{ebisBillcomREVENUE}M</Text>
+              <Text style={styles.textKeterangan}>per {ebisBillcomeProject} Project</Text>
             </View>
 
             <Image 
@@ -206,7 +240,7 @@ export default class EbisScreens extends Component{
 
             <View style={styles.containerArrowBill2}>
               <Text style={styles.textJudul}>Target</Text>
-              <Text style={styles.textIsi}>1236 M</Text>
+              <Text style={styles.textIsi}>{ebisBillcommTarget}M</Text>
             </View>
 
             <Image 
@@ -222,7 +256,7 @@ export default class EbisScreens extends Component{
                 <Text style={styles.textJudulRatio}>SPR</Text>
               </View>
               <View style={styles.wrapperIsiRatio}>
-                <Text style={styles.isiRatio}>81.46%</Text>
+                <Text style={styles.isiRatio}>{ProspectREVENUE}%</Text>
               </View>
               <View style={styles.subJudulRatio}>
                 <Text style={styles.subTextJudulRatio}>Sub to Prosp Ratio</Text>
@@ -234,19 +268,19 @@ export default class EbisScreens extends Component{
                 <Text style={styles.textJudulRatio}>WSR</Text>
               </View>
               <View style={styles.wrapperIsiRatio2}>
-                <Text style={styles.isiRatio}>81.18%</Text>
+                <Text style={styles.isiRatio}>{ProspectProject}%</Text>
               </View>
               <View style={styles.subJudulRatio}>
                 <Text style={styles.subTextJudulRatio}>Win to Sub Ratio</Text>
               </View>
             </View>
-
+    
             <View style={styles.wrapperKontenRatio}>
               <View style={styles.judulRatio}>
                 <Text style={styles.textJudulRatio}>BWR</Text>
               </View>
               <View style={styles.wrapperIsiRatio3}>
-                <Text style={styles.isiRatio}>23.84%</Text>
+                <Text style={styles.isiRatio}>{ProspectTarget}%</Text>
               </View>
               <View style={styles.subJudulRatio}>
                 <Text style={styles.subTextJudulRatio}>Bill to Win Ratio</Text>
@@ -258,7 +292,7 @@ export default class EbisScreens extends Component{
                 <Text style={styles.textJudulRatio}>WPR</Text>
               </View>
               <View style={styles.wrapperIsiRatio4}>
-                <Text style={styles.isiRatio}>66.13%</Text>
+                <Text style={styles.isiRatio}>{ProspectREVENUE2}%</Text>
               </View>
               <View style={styles.subJudulRatio}>
                 <Text style={styles.subTextJudulRatio}>Win to Prosp Ratio</Text>
@@ -266,24 +300,23 @@ export default class EbisScreens extends Component{
             </View>
           </View>
         
-
           <View style={{marginTop:hp('2%')}}>
             <View style={{marginBottom:hp('1%'), marginLeft:wp('4%')}}>
               <Text stle={{fontSize:15, fontWeight:'bold'}}>
                 SUBMISSION STATUS
               </Text>
             </View>
-            
+          
             <View style={styles.wrapperSubStatus}>
               <View style={styles.wrapperKontenSubStatus}>
                 <View style={styles.judulSubStatus}>
                   <Text style={styles.textJudulSubStatus}>WIN</Text>
                 </View>
                 <View style={styles.wrapperIsiSubStatus}>
-                  <Text style={styles.isiSubStatus}>13823 M</Text>
+                  <Text style={styles.isiSubStatus}>{SubmissionWINRevenue} M</Text>
                 </View>
                 <View style={styles.subJudulSubStatus}>
-                  <Text style={styles.subTextJudulSubStatus}>9872 Projects</Text>
+                  <Text style={styles.subTextJudulSubStatus}>{SubmissionWINProject} Projects</Text>
                 </View>
               </View>
 
@@ -292,10 +325,10 @@ export default class EbisScreens extends Component{
                   <Text style={styles.textJudulSubStatus}>LOSE</Text>
                 </View>
                 <View style={styles.wrapperIsiSubStatus}>
-                  <Text style={styles.isiSubStatus}>0 M</Text>
+                  <Text style={styles.isiSubStatus}>{SubmissionLOOSERevenue} M</Text>
                 </View>
                 <View style={styles.subJudulSubStatus}>
-                  <Text style={styles.subTextJudulSubStatus}>0 Projects</Text>
+                  <Text style={styles.subTextJudulSubStatus}>{SubmissionLooseProject} Projects</Text>
                 </View>
               </View>
 
@@ -304,10 +337,10 @@ export default class EbisScreens extends Component{
                   <Text style={styles.textJudulSubStatus}>WAITING</Text>
                 </View>
                 <View style={styles.wrapperIsiSubStatus}>
-                  <Text style={styles.isiSubStatus}>81.6 M</Text>
+                  <Text style={styles.isiSubStatus}>{SubmissionWaitingRevenue} M</Text>
                 </View>
                 <View style={styles.subJudulSubStatus}>
-                  <Text style={styles.subTextJudulSubStatus}>428 Projects</Text>
+                  <Text style={styles.subTextJudulSubStatus}>{SubmissionWaitingProject} Projects</Text>
                 </View>
               </View>
 
@@ -316,10 +349,10 @@ export default class EbisScreens extends Component{
                   <Text style={styles.textJudulSubStatus}>CANCEL</Text>
                 </View>
                 <View style={styles.wrapperIsiSubStatus}>
-                  <Text style={styles.isiSubStatus}>0 M</Text>
+                  <Text style={styles.isiSubStatus}>{SubmissionCancelRevenue} M</Text>
                 </View>
                 <View style={styles.subJudulSubStatus}>
-                  <Text style={styles.subTextJudulSubStatus}>0 Projects</Text>
+                  <Text style={styles.subTextJudulSubStatus}>{SubmissionCancekProject} Projects</Text>
                 </View>
               </View>
             </View>
@@ -343,10 +376,10 @@ export default class EbisScreens extends Component{
                     style={{height:hp('3%'), width:wp('5%')}}
                     resizeMode={'stretch'}
                   />
-                  <Text style={styles.isiCurStatus}>0 M</Text>
+                  <Text style={styles.isiCurStatus}>{currentProspectRevenue}M</Text>
                 </View>
                 <View style={styles.subJudulCurStatus}>
-                  <Text style={styles.subTextJudulCurStatus}>0 Projects</Text>
+                  <Text style={styles.subTextJudulCurStatus}>{currentProspectProject} Projects</Text>
                 </View>
               </View>
 
@@ -360,10 +393,10 @@ export default class EbisScreens extends Component{
                     style={{height:hp('3%'), width:wp('5%')}}
                     resizeMode={'stretch'}
                   />
-                  <Text style={styles.isiCurStatus}>15.3 M</Text>
+                  <Text style={styles.isiCurStatus}>{currentSubmissionRevenue}M</Text>
                 </View>
                 <View style={styles.subJudulCurStatus}>
-                  <Text style={styles.subTextJudulCurStatus}>4 Projects</Text>
+                  <Text style={styles.subTextJudulCurStatus}>{currentSubmissionProject} Projects</Text>
                 </View>
               </View>
 
@@ -377,10 +410,10 @@ export default class EbisScreens extends Component{
                     style={{height:hp('3%'), width:wp('5%')}}
                     resizeMode={'stretch'}
                   />
-                  <Text style={styles.isiCurStatus}>0 M</Text>
+                  <Text style={styles.isiCurStatus}>{currentWINRevenue}M</Text>
                 </View>
                 <View style={styles.subJudulCurStatus}>
-                  <Text style={styles.subTextJudulCurStatus}>0 Projects</Text>
+                  <Text style={styles.subTextJudulCurStatus}>{currentWINProject} Projects</Text>
                 </View>
               </View>
 
@@ -394,10 +427,10 @@ export default class EbisScreens extends Component{
                     style={{height:hp('3%'), width:wp('5%')}}
                     resizeMode={'stretch'}
                   />
-                  <Text style={styles.isiCurStatus}>0 M</Text>
+                  <Text style={styles.isiCurStatus}>{currentBIllcomRevenue}M</Text>
                 </View>
                 <View style={styles.subJudulCurStatus}>
-                  <Text style={styles.subTextJudulCurStatus}>0 Projects</Text>
+                  <Text style={styles.subTextJudulCurStatus}>{currentBillcomProject} Projects</Text>
                 </View>
               </View>
             </View>
@@ -407,6 +440,51 @@ export default class EbisScreens extends Component{
     );
   }
 }
+
+const mapStateToProps = (state) => ({
+  ebisProspectREVENUE:state.EbisReducer.ebisProspectREVENUE,
+  ebisProspectProject:state.EbisReducer.ebisProspectProject,
+  ebisProspectTarget:state.EbisReducer.ebisProspectTarget,
+
+  ebisSubmisionREVENUE:state.EbisReducer.ebisSubmisionREVENUE,
+  ebisSubmissionProject:state.EbisReducer.ebisSubmissionProject,
+  ebisSubmissionTarget:state.EbisReducer.ebisSubmissionTarget,
+
+  ebisWinREVENUE:state.EbisReducer.ebisWinREVENUE,
+  ebisWinProject:state.EbisReducer.ebisWinProject,
+  ebisWinTarget:state.EbisReducer.ebisWinTarget,
+
+  ebisBillcomREVENUE:state.EbisReducer.ebisBillcomREVENUE,
+  ebisBillcomeProject:state.EbisReducer.ebisBillcomeProject,
+  ebisBillcommTarget:state.EbisReducer.ebisBillcommTarget,
+
+  ProspectREVENUE:state.EbisReducer.ProspectREVENUE,
+  ProspectProject:state.EbisReducer.ProspectProject,
+  ProspectTarget:state.EbisReducer.ProspectTarget,
+  ProspectREVENUE2:state.EbisReducer.ProspectREVENUE2,
+
+  //submission status
+  SubmissionWINRevenue:state.EbisReducer.SubmissionWINRevenue,
+  SubmissionWINProject:state.EbisReducer.SubmissionWINProject,
+  SubmissionLOOSERevenue:state.EbisReducer.SubmissionLOOSERevenue,
+  SubmissionLooseProject:state.EbisReducer.SubmissionLooseProject,
+  SubmissionWaitingRevenue:state.EbisReducer.SubmissionWaitingRevenue,
+  SubmissionWaitingProject:state.EbisReducer.SubmissionWaitingProject,
+  SubmissionCancelRevenue:state.EbisReducer.SubmissionCancelRevenue,
+  SubmissionCancekProject:state.EbisReducer.SubmissionCancekProject,
+
+  //current status
+  currentProspectRevenue:state.EbisReducer.currentProspectRevenue,
+  currentProspectProject:state.EbisReducer.currentProspectProject,
+  currentSubmissionRevenue:state.EbisReducer.currentSubmissionRevenue,
+  currentSubmissionProject:state.EbisReducer.currentSubmissionProject,
+  currentWINRevenue:state.EbisReducer.currentWINRevenue,
+  currentWINProject:state.EbisReducer.currentWINProject,
+  currentBIllcomRevenue:state.EbisReducer.currentBIllcomRevenue,
+  currentBillcomProject:state.EbisReducer.currentBillcomProject,
+})
+
+export default connect(mapStateToProps)(EbisScreens);
 
 const styles = StyleSheet.create({
   container: {
