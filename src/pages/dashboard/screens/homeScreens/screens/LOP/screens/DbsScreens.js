@@ -106,6 +106,7 @@ class DbsScreens extends Component{
               <ModalSelector
                 data={data}
                 initValue="Pilih"
+                selectTextStyle={{textAlign:'center', alignSelf:'center', alignItems:'center'}}
                 selectStyle={styles.modalPeriode}
                 // onChange={(option)=>{ alert(`${option.label} (${option.key}) nom nom nom`) }} 
               />

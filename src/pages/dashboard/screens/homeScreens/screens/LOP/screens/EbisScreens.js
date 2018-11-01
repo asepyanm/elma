@@ -106,6 +106,7 @@ class EbisScreens extends Component{
             <View>
               <ModalSelector
                 data={data}
+                selectTextStyle={{textAlign:'center', alignSelf:'center', alignItems:'center'}}
                 initValue="Pilih"
                 selectStyle={styles.modalPeriode}
                 // onChange={(option)=>{ alert(`${option.label} (${option.key}) nom nom nom`) }} 
