@@ -16,11 +16,17 @@ class EbisScreens extends Component{
   constructor(props){
     super(props);
     this.state = {
-      data:[]
+      data:[],
     }
   }
   
   render() {
+    var date = new Date().getDate();
+    var month = new Date().getMonth() + 1;
+    var year = new Date().getFullYear();
+
+    var dateNow = `${date}-${month}-${year}`
+
     let index = 0;
       const data = [
           { key: index++, label: 'Jan 2018', value:'201801'},
@@ -70,6 +76,12 @@ class EbisScreens extends Component{
       currentBillcom: {
         iconBill: require('../../../../../../../assets/icon_current_status/cur04a.png'),
       },
+
+      //arrow presentase
+      presentase: {
+        arrowUp: require('../../../../../../../assets/arrowPresentase/pro03.png'),
+        arrowDown: require('../../../../../../../assets/arrowPresentase/pro01.png'),
+      },
     };
 
     const {
@@ -96,6 +108,22 @@ class EbisScreens extends Component{
       currentWINRevenue,currentWINProject,
       currentBIllcomRevenue,currentBillcomProject,
     } = this.props;
+
+    const ebisPresentase = (parseInt(ebisProspectREVENUE) / parseInt(ebisProspectTarget))*100;
+    const ebisPresentase2 = (parseInt(ebisSubmisionREVENUE) / parseInt(ebisSubmissionTarget))*100;
+    const ebisPresentase3 = (parseInt(ebisWinREVENUE) / parseInt(ebisWinTarget))*100;
+    const ebisPresentase4 = (parseInt(ebisBillcomREVENUE) / parseInt(ebisBillcommTarget))*100;
+
+    SPRratio = (parseInt(ebisSubmisionREVENUE) / parseInt(ebisProspectREVENUE))*100;
+    WSRratio = (parseInt(ebisWinREVENUE) / parseInt(ebisSubmisionREVENUE))*100;
+    BWRratio = (parseInt(ebisBillcomREVENUE) / parseInt(ebisWinREVENUE))*100;
+    WPRratio = (parseInt(ebisWinREVENUE) / parseInt(ebisProspectREVENUE))*100;
+
+    // SPRratio = (parseInt(ebisPresentase2) / parseInt(ebisPresentase))*100;
+    // WSRratio = (parseInt(ebisPresentase3) / parseInt(ebisPresentase2))*100;
+    // BWRratio = (parseInt(ebisPresentase4) / parseInt(ebisPresentase3))*100;
+    // WPRratio = (parseInt(ebisPresentase3) / parseInt(ebisPresentase))*100;
+
     return (
       <View style={styles.container}>
         <View style={styles.wrapperPeriode}>
@@ -107,7 +135,7 @@ class EbisScreens extends Component{
               <ModalSelector
                 data={data}
                 selectTextStyle={{textAlign:'center', alignSelf:'center', alignItems:'center'}}
-                initValue="Pilih"
+                initValue="2018-01"
                 selectStyle={styles.modalPeriode}
                 // onChange={(option)=>{ alert(`${option.label} (${option.key}) nom nom nom`) }} 
               />
@@ -118,7 +146,7 @@ class EbisScreens extends Component{
             <View>
               <ModalSelector
                 data={data}
-                initValue="Pilih"
+                initValue={`${year}-${month}`}
                 selectStyle={styles.modalPeriode}
                 // onChange={(option)=>{ alert(`${option.label} (${option.key}) nom nom nom`) }} 
               />
@@ -156,6 +184,27 @@ class EbisScreens extends Component{
               style={styles.imageStyle}
               resizeMode={'stretch'}
             />
+
+            <View style={styles.wrapperPresentase}>
+              {
+                ebisPresentase < 100 
+                  ?
+                  <Image 
+                    source={images.presentase.arrowDown}
+                    style={styles.imagesStylePresentase}
+                    resizeMode={'stretch'}
+                  />
+                  :
+                  <Image 
+                    source={images.presentase.arrowUp}
+                    style={styles.imagesStylePresentase}
+                    resizeMode={'stretch'}
+                  />
+              }
+              <View style={styles.wrapperTextPresentase}>
+                <Text style={styles.textJudul}>{Math.ceil(ebisPresentase)}</Text>
+              </View>
+            </View>
           </View>
 
           <View style={styles.wrapperArrow}>
@@ -187,6 +236,27 @@ class EbisScreens extends Component{
               style={styles.imageStyle}
               resizeMode={'stretch'}
             />
+
+            <View style={styles.wrapperPresentase}>
+              {
+                ebisPresentase2 < 100 
+                  ?
+                  <Image 
+                    source={images.presentase.arrowDown}
+                    style={styles.imagesStylePresentase}
+                    resizeMode={'stretch'}
+                  />
+                  :
+                  <Image 
+                    source={images.presentase.arrowUp}
+                    style={styles.imagesStylePresentase}
+                    resizeMode={'stretch'}
+                  />
+              }
+              <View style={styles.wrapperTextPresentase}>
+                <Text style={styles.textJudul}>{Math.ceil(ebisPresentase2)}</Text>
+              </View>
+            </View>
           </View>
 
           <View style={styles.wrapperArrow}>
@@ -218,6 +288,27 @@ class EbisScreens extends Component{
               style={styles.imageStyle}
               resizeMode={'stretch'}
             />
+
+            <View style={styles.wrapperPresentase}>
+              {
+                ebisPresentase3 < 100 
+                  ?
+                  <Image 
+                    source={images.presentase.arrowDown}
+                    style={styles.imagesStylePresentase}
+                    resizeMode={'stretch'}
+                  />
+                  :
+                  <Image 
+                    source={images.presentase.arrowUp}
+                    style={styles.imagesStylePresentase}
+                    resizeMode={'stretch'}
+                  />
+              }
+              <View style={styles.wrapperTextPresentase}>
+                <Text style={styles.textJudul}>{Math.ceil(ebisPresentase3)}</Text>
+              </View>
+            </View>
           </View>
 
           <View style={styles.wrapperArrow}>
@@ -249,6 +340,27 @@ class EbisScreens extends Component{
               style={styles.imageStyle}
               resizeMode={'stretch'}
             />
+
+            <View style={styles.wrapperPresentase}>
+              {
+                ebisPresentase4 < 100 
+                  ?
+                  <Image 
+                    source={images.presentase.arrowDown}
+                    style={styles.imagesStylePresentase}
+                    resizeMode={'stretch'}
+                  />
+                  :
+                  <Image 
+                    source={images.presentase.arrowUp}
+                    style={styles.imagesStylePresentase}
+                    resizeMode={'stretch'}
+                  />
+              }
+              <View style={styles.wrapperTextPresentase}>
+                <Text style={styles.textJudul}>{Math.ceil(ebisPresentase4)}</Text>
+              </View>
+            </View>
           </View>
         
           <View style={styles.wrapperRatio}>
@@ -257,7 +369,7 @@ class EbisScreens extends Component{
                 <Text style={styles.textJudulRatio}>SPR</Text>
               </View>
               <View style={styles.wrapperIsiRatio}>
-                <Text style={styles.isiRatio}>{ProspectREVENUE}%</Text>
+                <Text style={styles.isiRatio}>{Math.ceil(SPRratio)}%</Text>
               </View>
               <View style={styles.subJudulRatio}>
                 <Text style={styles.subTextJudulRatio}>Sub to Prosp Ratio</Text>
@@ -269,7 +381,7 @@ class EbisScreens extends Component{
                 <Text style={styles.textJudulRatio}>WSR</Text>
               </View>
               <View style={styles.wrapperIsiRatio2}>
-                <Text style={styles.isiRatio}>{ProspectProject}%</Text>
+                <Text style={styles.isiRatio}>{Math.ceil(WSRratio)}%</Text>
               </View>
               <View style={styles.subJudulRatio}>
                 <Text style={styles.subTextJudulRatio}>Win to Sub Ratio</Text>
@@ -281,7 +393,7 @@ class EbisScreens extends Component{
                 <Text style={styles.textJudulRatio}>BWR</Text>
               </View>
               <View style={styles.wrapperIsiRatio3}>
-                <Text style={styles.isiRatio}>{ProspectTarget}%</Text>
+                <Text style={styles.isiRatio}>{Math.ceil(BWRratio)}%</Text>
               </View>
               <View style={styles.subJudulRatio}>
                 <Text style={styles.subTextJudulRatio}>Bill to Win Ratio</Text>
@@ -293,7 +405,7 @@ class EbisScreens extends Component{
                 <Text style={styles.textJudulRatio}>WPR</Text>
               </View>
               <View style={styles.wrapperIsiRatio4}>
-                <Text style={styles.isiRatio}>{ProspectREVENUE2}%</Text>
+                <Text style={styles.isiRatio}>{Math.ceil(WPRratio)}%</Text>
               </View>
               <View style={styles.subJudulRatio}>
                 <Text style={styles.subTextJudulRatio}>Win to Prosp Ratio</Text>
@@ -362,7 +474,7 @@ class EbisScreens extends Component{
           <View style={{marginTop:hp('2%'), marginBottom:hp('5%')}}>
             <View style={styles.wrapperJudulCurrent}>
               <Text stle={{fontSize:15, fontWeight:'bold'}}>
-                CURRENT STATUS per 2018-10-18
+                CURRENT STATUS per {dateNow}
               </Text>
             </View>
             
@@ -514,6 +626,23 @@ const styles = StyleSheet.create({
     backgroundColor:'#FFF', 
     width:wp('35%'), 
     height:hp('5.5%')
+  },
+
+  //style presentase arrow
+  wrapperPresentase:{
+    flexDirection:'row',
+    justifyContent:'space-around',
+    alignSelf:'center',
+    alignItems:'center',
+    width:wp('22%'),
+  },
+  wrapperTextPresentase:{
+    justifyContent:'center',
+    alignSelf:'center'
+  },
+  imagesStylePresentase:{
+    width:wp('8%'), 
+    height:hp('6%')
   },
 
   //style buat arrownya

@@ -4,6 +4,7 @@ const initialState = {
   ebisProspectREVENUE:'',
   ebisProspectProject:'',
   ebisProspectTarget:'',
+  ebisPresentase:'',
 
   ebisSubmisionREVENUE:'',
   ebisSubmissionProject:'',

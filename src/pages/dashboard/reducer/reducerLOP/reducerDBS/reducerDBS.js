@@ -132,5 +132,4 @@ const DbsReducer = (state = initialState, action) => {
   }
 };
 
-
 export default DbsReducer;

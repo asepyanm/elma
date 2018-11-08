@@ -11,15 +11,451 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 import ModalSelector from 'react-native-modal-selector';
 import {connect} from 'react-redux';
 
+// class DbsScreens extends Component{
+//   constructor(props){
+//     super(props);
+//     this.state = {
+//       data:[]
+//     }
+//   }
+  
+//   render() {
+//     let index = 0;
+//       const data = [
+//           { key: index++, label: 'Jan 2018', value:'201801'},
+//           { key: index++, label: 'Feb 2018', value:'201802'},
+//           { key: index++, label: 'Mar 2018', value:'201803'},
+//           { key: index++, label: 'Apr 2018', value:'201804'},
+//           { key: index++, label: 'Mei 2018', value:'201805'},
+//           { key: index++, label: 'Jun 2018', value:'201806'},
+//           { key: index++, label: 'Jul 2018', value:'201807'},
+//           { key: index++, label: 'Agu 2018', value:'201808'},
+//           { key: index++, label: 'Sep 2018', value:'201809'},
+//           { key: index++, label: 'Okt 2018', value:'201810'},
+//           { key: index++, label: 'Nov 2018', value:'201811'},
+//           { key: index++, label: 'Des 2018', value:'201812'},
+//       ];
+
+//     //import image arrow
+//     const images = {
+//       prospect: {
+//         arrowProspect1: require('../../../../../../../assets/Arrow/arrowProspect.png'),
+//         arrowProspect2: require('../../../../../../../assets/Arrow/arrowProspect2.png'),
+//       },
+//       Submission: {
+//         arrowSub1: require('../../../../../../../assets/Arrow/arrowSub.png'),
+//         arrowSub2: require('../../../../../../../assets/Arrow/arrowSub2.png'),
+//       },
+//       Win: {
+//         arrowWin1: require('../../../../../../../assets/Arrow/arrowWin.png'),
+//         arrowWin2: require('../../../../../../../assets/Arrow/arrowWin2.png'),
+//       },
+//       Billcom: {
+//         arrowBil1: require('../../../../../../../assets/Arrow/arrowBillcom.png'),
+//         arrowBil2: require('../../../../../../../assets/Arrow/arrowBillcom2.png'),
+//       },
+//       arrowGrey:require('../../../../../../../assets/Arrow/arrowGrey.png'),
+
+//       //icon current status
+//       currentProspect: {
+//         iconProspect: require('../../../../../../../assets/icon_current_status/cur01a.png'),
+//       },
+//       currentSubmission: {
+//         iconSubmission: require('../../../../../../../assets/icon_current_status/cur02a.png'),
+//       },
+//       currentWin: {
+//         iconWin: require('../../../../../../../assets/icon_current_status/cur03a.png'),
+//       },
+//       currentBillcom: {
+//         iconBill: require('../../../../../../../assets/icon_current_status/cur04a.png'),
+//       },
+//     };
+
+//     const {
+//       //prospect
+//       ebisProspectREVENUE,ebisProspectProject,ebisProspectTarget,
+//       //submission
+//       ebisSubmisionREVENUE,ebisSubmissionProject,ebisSubmissionTarget,
+//       //win
+//       ebisWinREVENUE,ebisWinProject,ebisWinTarget,
+//       //billcom
+//       ebisBillcomREVENUE,ebisBillcomeProject,ebisBillcommTarget,
+
+//       ProspectREVENUE,ProspectProject,ProspectTarget,ProspectREVENUE2,
+    
+//       //submission status
+//       SubmissionWINRevenue,SubmissionWINProject,
+//       SubmissionLOOSERevenue,SubmissionLooseProject,
+//       SubmissionWaitingRevenue,SubmissionWaitingProject,
+//       SubmissionCancelRevenue,SubmissionCancekProject,
+    
+//       //current status
+//       currentProspectRevenue,currentProspectProject,
+//       currentSubmissionRevenue,currentSubmissionProject,
+//       currentWINRevenue,currentWINProject,
+//       currentBIllcomRevenue,currentBillcomProject,
+//     } = this.props;
+//     return (
+//       <View style={styles.container}>
+//         <View style={styles.wrapperPeriode}>
+//           <View>
+//             <Text style={styles.textPeriode}>Periode : </Text>
+//           </View>
+//           <View style={styles.wrapperModalPeriode}>
+//             <View>
+//               <ModalSelector
+//                 data={data}
+//                 initValue="Pilih"
+//                 selectTextStyle={{textAlign:'center', alignSelf:'center', alignItems:'center'}}
+//                 selectStyle={styles.modalPeriode}
+//                 // onChange={(option)=>{ alert(`${option.label} (${option.key}) nom nom nom`) }} 
+//               />
+//             </View>
+//             <View>
+//               <Text style={{fontSize:20, fontWeight:'bold'}}> - </Text>
+//             </View>
+//             <View>
+//               <ModalSelector
+//                 data={data}
+//                 initValue="Pilih"
+//                 selectStyle={styles.modalPeriode}
+//                 // onChange={(option)=>{ alert(`${option.label} (${option.key}) nom nom nom`) }} 
+//               />
+//             </View>
+//           </View>
+//         </View>
+
+//         <ScrollView>
+//           <View style={styles.wrapperArrow}>
+//             <Image 
+//               source={images.prospect.arrowProspect1}
+//               style={styles.imageStyle}
+//               resizeMode={'stretch'}
+//             />
+
+//             <View style={styles.containerArrowProspect}>
+//               <Text style={styles.textJudul}>PROSPECT</Text>
+//               <Text style={styles.textIsi}>{ebisProspectREVENUE}M</Text>
+//               <Text style={styles.textKeterangan}>per {ebisProspectProject} Project</Text>
+//             </View>
+
+//             <Image 
+//               source={images.prospect.arrowProspect2}
+//               style={styles.imageStyle}
+//               resizeMode={'stretch'}
+//             />
+
+//             <View style={styles.containerArrowProspect2}>
+//               <Text style={styles.textJudul}>Target</Text>
+//               <Text style={styles.textIsi}>{ebisProspectTarget}M</Text>
+//             </View>
+
+//             <Image 
+//               source={images.arrowGrey}
+//               style={styles.imageStyle}
+//               resizeMode={'stretch'}
+//             />
+//           </View>
+
+//           <View style={styles.wrapperArrow}>
+//             <Image 
+//               source={images.Submission.arrowSub1}
+//               style={styles.imageStyle}
+//               resizeMode={'stretch'}
+//             />
+
+//             <View style={styles.containerArrowSubmission}>
+//               <Text style={styles.textJudul}>SUBMISSION</Text>
+//               <Text style={styles.textIsi}>{ebisSubmisionREVENUE}M</Text>
+//               <Text style={styles.textKeterangan}>per {ebisSubmissionProject} Project</Text>
+//             </View>
+
+//             <Image 
+//               source={images.Submission.arrowSub2}
+//               style={styles.imageStyle}
+//               resizeMode={'stretch'}
+//             />
+
+//             <View style={styles.containerArrowSubmission2}>
+//               <Text style={styles.textJudul}>Target</Text>
+//               <Text style={styles.textIsi}>{ebisSubmissionTarget}M</Text>
+//             </View>
+
+//             <Image 
+//               source={images.arrowGrey}
+//               style={styles.imageStyle}
+//               resizeMode={'stretch'}
+//             />
+//           </View>
+
+//           <View style={styles.wrapperArrow}>
+//             <Image 
+//               source={images.Win.arrowWin1}
+//               style={styles.imageStyle}
+//               resizeMode={'stretch'}
+//             />
+
+//             <View style={styles.containerArrowWin}>
+//               <Text style={styles.textJudul}>WIN</Text>
+//               <Text style={styles.textIsi}>{ebisWinREVENUE}M</Text>
+//               <Text style={styles.textKeterangan}>per {ebisWinProject} Project</Text>
+//             </View>
+
+//             <Image 
+//               source={images.Win.arrowWin2}
+//               style={styles.imageStyle}
+//               resizeMode={'stretch'}
+//             />
+
+//             <View style={styles.containerArrowWin2}>
+//               <Text style={styles.textJudul}>Target</Text>
+//               <Text style={styles.textIsi}>{ebisWinTarget}M</Text>
+//             </View>
+
+//             <Image 
+//               source={images.arrowGrey}
+//               style={styles.imageStyle}
+//               resizeMode={'stretch'}
+//             />
+//           </View>
+
+//           <View style={styles.wrapperArrow}>
+//             <Image 
+//               source={images.Billcom.arrowBil1}
+//               style={styles.imageStyle}
+//               resizeMode={'stretch'}
+//             />
+
+//             <View style={styles.containerArrowBill}>
+//               <Text style={styles.textJudul}>BILLCOM</Text>
+//               <Text style={styles.textIsi}>{ebisBillcomREVENUE}M</Text>
+//               <Text style={styles.textKeterangan}>per {ebisBillcomeProject} Project</Text>
+//             </View>
+
+//             <Image 
+//               source={images.Billcom.arrowBil2}
+//               style={styles.imageStyle}
+//               resizeMode={'stretch'}
+//             />
+
+//             <View style={styles.containerArrowBill2}>
+//               <Text style={styles.textJudul}>Target</Text>
+//               <Text style={styles.textIsi}>{ebisBillcommTarget}M</Text>
+//             </View>
+
+//             <Image 
+//               source={images.arrowGrey}
+//               style={styles.imageStyle}
+//               resizeMode={'stretch'}
+//             />
+//           </View>
+        
+//           <View style={styles.wrapperRatio}>
+//             <View style={styles.wrapperKontenRatio}>
+//               <View style={styles.judulRatio}>
+//                 <Text style={styles.textJudulRatio}>SPR</Text>
+//               </View>
+//               <View style={styles.wrapperIsiRatio}>
+//                 <Text style={styles.isiRatio}>{ProspectREVENUE}%</Text>
+//               </View>
+//               <View style={styles.subJudulRatio}>
+//                 <Text style={styles.subTextJudulRatio}>Sub to Prosp Ratio</Text>
+//               </View>
+//             </View>
+
+//             <View style={styles.wrapperKontenRatio}>
+//               <View style={styles.judulRatio}>
+//                 <Text style={styles.textJudulRatio}>WSR</Text>
+//               </View>
+//               <View style={styles.wrapperIsiRatio2}>
+//                 <Text style={styles.isiRatio}>{ProspectProject}%</Text>
+//               </View>
+//               <View style={styles.subJudulRatio}>
+//                 <Text style={styles.subTextJudulRatio}>Win to Sub Ratio</Text>
+//               </View>
+//             </View>
+    
+//             <View style={styles.wrapperKontenRatio}>
+//               <View style={styles.judulRatio}>
+//                 <Text style={styles.textJudulRatio}>BWR</Text>
+//               </View>
+//               <View style={styles.wrapperIsiRatio3}>
+//                 <Text style={styles.isiRatio}>{ProspectTarget}%</Text>
+//               </View>
+//               <View style={styles.subJudulRatio}>
+//                 <Text style={styles.subTextJudulRatio}>Bill to Win Ratio</Text>
+//               </View>
+//             </View>
+
+//             <View style={styles.wrapperKontenRatio}>
+//               <View style={styles.judulRatio}>
+//                 <Text style={styles.textJudulRatio}>WPR</Text>
+//               </View>
+//               <View style={styles.wrapperIsiRatio4}>
+//                 <Text style={styles.isiRatio}>{ProspectREVENUE2}%</Text>
+//               </View>
+//               <View style={styles.subJudulRatio}>
+//                 <Text style={styles.subTextJudulRatio}>Win to Prosp Ratio</Text>
+//               </View>
+//             </View>
+//           </View>
+        
+//           <View style={{marginTop:hp('2%')}}>
+//             <View style={{marginBottom:hp('1%'), marginLeft:wp('4%')}}>
+//               <Text stle={{fontSize:15, fontWeight:'bold'}}>
+//                 SUBMISSION STATUS
+//               </Text>
+//             </View>
+          
+//             <View style={styles.wrapperSubStatus}>
+//               <View style={styles.wrapperKontenSubStatus}>
+//                 <View style={styles.judulSubStatus}>
+//                   <Text style={styles.textJudulSubStatus}>WIN</Text>
+//                 </View>
+//                 <View style={styles.wrapperIsiSubStatus}>
+//                   <Text style={styles.isiSubStatus}>{SubmissionWINRevenue} M</Text>
+//                 </View>
+//                 <View style={styles.subJudulSubStatus}>
+//                   <Text style={styles.subTextJudulSubStatus}>{SubmissionWINProject} Projects</Text>
+//                 </View>
+//               </View>
+
+//               <View style={styles.wrapperKontenSubStatus}>
+//                 <View style={styles.judulSubStatus}>
+//                   <Text style={styles.textJudulSubStatus}>LOSE</Text>
+//                 </View>
+//                 <View style={styles.wrapperIsiSubStatus}>
+//                   <Text style={styles.isiSubStatus}>{SubmissionLOOSERevenue} M</Text>
+//                 </View>
+//                 <View style={styles.subJudulSubStatus}>
+//                   <Text style={styles.subTextJudulSubStatus}>{SubmissionLooseProject} Projects</Text>
+//                 </View>
+//               </View>
+
+//               <View style={styles.wrapperKontenSubStatus}>
+//                 <View style={styles.judulSubStatus}>
+//                   <Text style={styles.textJudulSubStatus}>WAITING</Text>
+//                 </View>
+//                 <View style={styles.wrapperIsiSubStatus}>
+//                   <Text style={styles.isiSubStatus}>{SubmissionWaitingRevenue} M</Text>
+//                 </View>
+//                 <View style={styles.subJudulSubStatus}>
+//                   <Text style={styles.subTextJudulSubStatus}>{SubmissionWaitingProject} Projects</Text>
+//                 </View>
+//               </View>
+
+//               <View style={styles.wrapperKontenSubStatus}>
+//                 <View style={styles.judulSubStatus}>
+//                   <Text style={styles.textJudulSubStatus}>CANCEL</Text>
+//                 </View>
+//                 <View style={styles.wrapperIsiSubStatus}>
+//                   <Text style={styles.isiSubStatus}>{SubmissionCancelRevenue} M</Text>
+//                 </View>
+//                 <View style={styles.subJudulSubStatus}>
+//                   <Text style={styles.subTextJudulSubStatus}>{SubmissionCancekProject} Projects</Text>
+//                 </View>
+//               </View>
+//             </View>
+//           </View>
+        
+//           <View style={{marginTop:hp('2%'), marginBottom:hp('5%')}}>
+//             <View style={styles.wrapperJudulCurrent}>
+//               <Text stle={{fontSize:15, fontWeight:'bold'}}>
+//                 CURRENT STATUS per 2018-10-18
+//               </Text>
+//             </View>
+            
+//             <View style={styles.wrapperCurStatus}>
+//               <View style={styles.wrapperKontenCurStatus}>
+//                 <View style={styles.judulCurStatus}>
+//                   <Text style={styles.textJudulCurStatus}>+PROSPECT</Text>
+//                 </View>
+//                 <View style={styles.wrapperIsiCurStatus}>
+//                   <Image 
+//                     source={images.currentProspect.iconProspect}
+//                     style={{height:hp('3%'), width:wp('5%')}}
+//                     resizeMode={'stretch'}
+//                   />
+//                   <Text style={styles.isiCurStatus}>{currentProspectRevenue}M</Text>
+//                 </View>
+//                 <View style={styles.subJudulCurStatus}>
+//                   <Text style={styles.subTextJudulCurStatus}>{currentProspectProject} Projects</Text>
+//                 </View>
+//               </View>
+
+//               <View style={styles.wrapperKontenCurStatus}>
+//                 <View style={styles.judulCurStatus}>
+//                   <Text style={styles.textJudulCurStatus2}>+SUBMISSION</Text>
+//                 </View>
+//                 <View style={styles.wrapperIsiCurStatus}>
+//                   <Image 
+//                     source={images.currentSubmission.iconSubmission}
+//                     style={{height:hp('3%'), width:wp('5%')}}
+//                     resizeMode={'stretch'}
+//                   />
+//                   <Text style={styles.isiCurStatus}>{currentSubmissionRevenue}M</Text>
+//                 </View>
+//                 <View style={styles.subJudulCurStatus}>
+//                   <Text style={styles.subTextJudulCurStatus}>{currentSubmissionProject} Projects</Text>
+//                 </View>
+//               </View>
+
+//               <View style={styles.wrapperKontenCurStatus}>
+//                 <View style={styles.judulCurStatus}>
+//                   <Text style={styles.textJudulCurStatus3}>+WIN</Text>
+//                 </View>
+//                 <View style={styles.wrapperIsiCurStatus}>
+//                   <Image 
+//                     source={images.currentWin.iconWin}
+//                     style={{height:hp('3%'), width:wp('5%')}}
+//                     resizeMode={'stretch'}
+//                   />
+//                   <Text style={styles.isiCurStatus}>{currentWINRevenue}M</Text>
+//                 </View>
+//                 <View style={styles.subJudulCurStatus}>
+//                   <Text style={styles.subTextJudulCurStatus}>{currentWINProject} Projects</Text>
+//                 </View>
+//               </View>
+
+//               <View style={styles.wrapperKontenCurStatus}>
+//                 <View style={styles.judulCurStatus}>
+//                   <Text style={styles.textJudulCurStatus4}>+BILLCOM</Text>
+//                 </View>
+//                 <View style={styles.wrapperIsiCurStatus}>
+//                   <Image 
+//                     source={images.currentBillcom.iconBill}
+//                     style={{height:hp('3%'), width:wp('5%')}}
+//                     resizeMode={'stretch'}
+//                   />
+//                   <Text style={styles.isiCurStatus}>{currentBIllcomRevenue}M</Text>
+//                 </View>
+//                 <View style={styles.subJudulCurStatus}>
+//                   <Text style={styles.subTextJudulCurStatus}>{currentBillcomProject} Projects</Text>
+//                 </View>
+//               </View>
+//             </View>
+//           </View>
+//         </ScrollView>
+//       </View>
+//     );
+//   }
+// }
+
 class DbsScreens extends Component{
   constructor(props){
     super(props);
     this.state = {
-      data:[]
+      data:[],
     }
   }
   
   render() {
+    var date = new Date().getDate();
+    var month = new Date().getMonth() + 1;
+    var year = new Date().getFullYear();
+
+    var dateNow = `${date}-${month}-${year}`
+
     let index = 0;
       const data = [
           { key: index++, label: 'Jan 2018', value:'201801'},
@@ -69,6 +505,12 @@ class DbsScreens extends Component{
       currentBillcom: {
         iconBill: require('../../../../../../../assets/icon_current_status/cur04a.png'),
       },
+
+      //arrow presentase
+      presentase: {
+        arrowUp: require('../../../../../../../assets/arrowPresentase/pro03.png'),
+        arrowDown: require('../../../../../../../assets/arrowPresentase/pro01.png'),
+      },
     };
 
     const {
@@ -95,6 +537,22 @@ class DbsScreens extends Component{
       currentWINRevenue,currentWINProject,
       currentBIllcomRevenue,currentBillcomProject,
     } = this.props;
+
+    const ebisPresentase = (parseInt(ebisProspectREVENUE) / parseInt(ebisProspectTarget))*100;
+    const ebisPresentase2 = (parseInt(ebisSubmisionREVENUE) / parseInt(ebisSubmissionTarget))*100;
+    const ebisPresentase3 = (parseInt(ebisWinREVENUE) / parseInt(ebisWinTarget))*100;
+    const ebisPresentase4 = (parseInt(ebisBillcomREVENUE) / parseInt(ebisBillcommTarget))*100;
+
+    SPRratio = (parseInt(ebisSubmisionREVENUE) / parseInt(ebisProspectREVENUE))*100;
+    WSRratio = (parseInt(ebisWinREVENUE) / parseInt(ebisSubmisionREVENUE))*100;
+    BWRratio = (parseInt(ebisBillcomREVENUE) / parseInt(ebisWinREVENUE))*100;
+    WPRratio = (parseInt(ebisWinREVENUE) / parseInt(ebisProspectREVENUE))*100;
+
+    // SPRratio = (parseInt(ebisPresentase2) / parseInt(ebisPresentase))*100;
+    // WSRratio = (parseInt(ebisPresentase3) / parseInt(ebisPresentase2))*100;
+    // BWRratio = (parseInt(ebisPresentase4) / parseInt(ebisPresentase3))*100;
+    // WPRratio = (parseInt(ebisPresentase3) / parseInt(ebisPresentase))*100;
+
     return (
       <View style={styles.container}>
         <View style={styles.wrapperPeriode}>
@@ -105,8 +563,8 @@ class DbsScreens extends Component{
             <View>
               <ModalSelector
                 data={data}
-                initValue="Pilih"
                 selectTextStyle={{textAlign:'center', alignSelf:'center', alignItems:'center'}}
+                initValue="2018-01"
                 selectStyle={styles.modalPeriode}
                 // onChange={(option)=>{ alert(`${option.label} (${option.key}) nom nom nom`) }} 
               />
@@ -117,7 +575,7 @@ class DbsScreens extends Component{
             <View>
               <ModalSelector
                 data={data}
-                initValue="Pilih"
+                initValue={`${year}-${month}`}
                 selectStyle={styles.modalPeriode}
                 // onChange={(option)=>{ alert(`${option.label} (${option.key}) nom nom nom`) }} 
               />
@@ -155,6 +613,27 @@ class DbsScreens extends Component{
               style={styles.imageStyle}
               resizeMode={'stretch'}
             />
+
+            <View style={styles.wrapperPresentase}>
+              {
+                ebisPresentase < 100 
+                  ?
+                  <Image 
+                    source={images.presentase.arrowDown}
+                    style={styles.imagesStylePresentase}
+                    resizeMode={'stretch'}
+                  />
+                  :
+                  <Image 
+                    source={images.presentase.arrowUp}
+                    style={styles.imagesStylePresentase}
+                    resizeMode={'stretch'}
+                  />
+              }
+              <View style={styles.wrapperTextPresentase}>
+                <Text style={styles.textJudul}>{Math.ceil(ebisPresentase)}</Text>
+              </View>
+            </View>
           </View>
 
           <View style={styles.wrapperArrow}>
@@ -186,6 +665,27 @@ class DbsScreens extends Component{
               style={styles.imageStyle}
               resizeMode={'stretch'}
             />
+
+            <View style={styles.wrapperPresentase}>
+              {
+                ebisPresentase2 < 100 
+                  ?
+                  <Image 
+                    source={images.presentase.arrowDown}
+                    style={styles.imagesStylePresentase}
+                    resizeMode={'stretch'}
+                  />
+                  :
+                  <Image 
+                    source={images.presentase.arrowUp}
+                    style={styles.imagesStylePresentase}
+                    resizeMode={'stretch'}
+                  />
+              }
+              <View style={styles.wrapperTextPresentase}>
+                <Text style={styles.textJudul}>{Math.ceil(ebisPresentase2)}</Text>
+              </View>
+            </View>
           </View>
 
           <View style={styles.wrapperArrow}>
@@ -217,6 +717,27 @@ class DbsScreens extends Component{
               style={styles.imageStyle}
               resizeMode={'stretch'}
             />
+
+            <View style={styles.wrapperPresentase}>
+              {
+                ebisPresentase3 < 100 
+                  ?
+                  <Image 
+                    source={images.presentase.arrowDown}
+                    style={styles.imagesStylePresentase}
+                    resizeMode={'stretch'}
+                  />
+                  :
+                  <Image 
+                    source={images.presentase.arrowUp}
+                    style={styles.imagesStylePresentase}
+                    resizeMode={'stretch'}
+                  />
+              }
+              <View style={styles.wrapperTextPresentase}>
+                <Text style={styles.textJudul}>{Math.ceil(ebisPresentase3)}</Text>
+              </View>
+            </View>
           </View>
 
           <View style={styles.wrapperArrow}>
@@ -248,6 +769,27 @@ class DbsScreens extends Component{
               style={styles.imageStyle}
               resizeMode={'stretch'}
             />
+
+            <View style={styles.wrapperPresentase}>
+              {
+                ebisPresentase4 < 100 
+                  ?
+                  <Image 
+                    source={images.presentase.arrowDown}
+                    style={styles.imagesStylePresentase}
+                    resizeMode={'stretch'}
+                  />
+                  :
+                  <Image 
+                    source={images.presentase.arrowUp}
+                    style={styles.imagesStylePresentase}
+                    resizeMode={'stretch'}
+                  />
+              }
+              <View style={styles.wrapperTextPresentase}>
+                <Text style={styles.textJudul}>{Math.ceil(ebisPresentase4)}</Text>
+              </View>
+            </View>
           </View>
         
           <View style={styles.wrapperRatio}>
@@ -256,7 +798,7 @@ class DbsScreens extends Component{
                 <Text style={styles.textJudulRatio}>SPR</Text>
               </View>
               <View style={styles.wrapperIsiRatio}>
-                <Text style={styles.isiRatio}>{ProspectREVENUE}%</Text>
+                <Text style={styles.isiRatio}>{Math.ceil(SPRratio)}%</Text>
               </View>
               <View style={styles.subJudulRatio}>
                 <Text style={styles.subTextJudulRatio}>Sub to Prosp Ratio</Text>
@@ -268,7 +810,7 @@ class DbsScreens extends Component{
                 <Text style={styles.textJudulRatio}>WSR</Text>
               </View>
               <View style={styles.wrapperIsiRatio2}>
-                <Text style={styles.isiRatio}>{ProspectProject}%</Text>
+                <Text style={styles.isiRatio}>{Math.ceil(WSRratio)}%</Text>
               </View>
               <View style={styles.subJudulRatio}>
                 <Text style={styles.subTextJudulRatio}>Win to Sub Ratio</Text>
@@ -280,7 +822,7 @@ class DbsScreens extends Component{
                 <Text style={styles.textJudulRatio}>BWR</Text>
               </View>
               <View style={styles.wrapperIsiRatio3}>
-                <Text style={styles.isiRatio}>{ProspectTarget}%</Text>
+                <Text style={styles.isiRatio}>{Math.ceil(BWRratio)}%</Text>
               </View>
               <View style={styles.subJudulRatio}>
                 <Text style={styles.subTextJudulRatio}>Bill to Win Ratio</Text>
@@ -292,7 +834,7 @@ class DbsScreens extends Component{
                 <Text style={styles.textJudulRatio}>WPR</Text>
               </View>
               <View style={styles.wrapperIsiRatio4}>
-                <Text style={styles.isiRatio}>{ProspectREVENUE2}%</Text>
+                <Text style={styles.isiRatio}>{Math.ceil(WPRratio)}%</Text>
               </View>
               <View style={styles.subJudulRatio}>
                 <Text style={styles.subTextJudulRatio}>Win to Prosp Ratio</Text>
@@ -361,7 +903,7 @@ class DbsScreens extends Component{
           <View style={{marginTop:hp('2%'), marginBottom:hp('5%')}}>
             <View style={styles.wrapperJudulCurrent}>
               <Text stle={{fontSize:15, fontWeight:'bold'}}>
-                CURRENT STATUS per 2018-10-18
+                CURRENT STATUS per {dateNow}
               </Text>
             </View>
             
@@ -513,6 +1055,23 @@ const styles = StyleSheet.create({
     backgroundColor:'#FFF', 
     width:wp('35%'), 
     height:hp('5.5%')
+  },
+
+  //style presentase arrow
+  wrapperPresentase:{
+    flexDirection:'row',
+    justifyContent:'space-around',
+    alignSelf:'center',
+    alignItems:'center',
+    width:wp('22%'),
+  },
+  wrapperTextPresentase:{
+    justifyContent:'center',
+    alignSelf:'center'
+  },
+  imagesStylePresentase:{
+    width:wp('8%'), 
+    height:hp('6%')
   },
 
   //style buat arrownya
