@@ -32,6 +32,7 @@ const loginReducer = (state = initialState, action) => {
         ...state, 
         isLoggedIn: true,
         loaderStatus:false,
+        statusErrorFrom:true,
         data:action.payload.data
       }
     break;
