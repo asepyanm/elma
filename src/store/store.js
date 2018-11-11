@@ -11,12 +11,17 @@ import promiseMiddleware from 'redux-promise-middleware';
 import NavigationReducer  from '../navigations/reducer/navigationReducers';
 import loginReducer       from '../pages/login/reducer/loginReducer';
 
-//reducer home
+//reducer home LOP
 import EbisReducer from '../pages/dashboard/reducer/reducerLOP/reducerEBIS/reducerEBIS';
 import DesReducer from '../pages/dashboard/reducer/reducerLOP/reducerDES/reducerDES';
 import DbsReducer from '../pages/dashboard/reducer/reducerLOP/reducerDBS/reducerDBS';
 import DgsReducer from '../pages/dashboard/reducer/reducerLOP/reducerDGS/reducerDGS';
 
+//reducer home ABC
+import EbisReducerABC from '../pages/dashboard/reducer/reducerABC/reducerEBIS/reducerEBIS';
+import DESReducerABC from '../pages/dashboard/reducer/reducerABC/redcuerDES/reducerDES';
+import DBSReducerABC from '../pages/dashboard/reducer/reducerABC/reducerDBS/reducerDBS';
+import DGSReducerABC from '../pages/dashboard/reducer/reducerABC/reducerDGS/reducerDGS';
 
 
 //config persist
@@ -35,7 +40,13 @@ const rootReducer = combineReducers({
   EbisReducer,
   DesReducer,
   DbsReducer,
-  DgsReducer
+  DgsReducer,
+
+  //reducer home ABC
+  EbisReducerABC,
+  DESReducerABC,
+  DBSReducerABC,
+  DGSReducerABC
 });
 
 const middlewares = applyMiddleware( 

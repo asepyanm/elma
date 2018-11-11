@@ -14,48 +14,84 @@ import ComponentDashboard from '../components/dashboardComponent';
 class Dashboard extends Component {
   
   componentWillMount(){
-    //EBIS HOME
+    //get data LOP ---------------
+    //EBIS HOME LOP
     this.props.dispatch({
       type:'EBIS_HOME',
       payload:axios.get(`${url.API}/ebis_getlopmain_ytd/div/EBIS`)
     });
-
     this.props.dispatch({
       type:'EBIS_HOME_CURRENT',
       payload:axios.get(`${url.API}/ebis_getlopmain_current/div/EBIS`)
     });
-
-    //DES HOME
+    //DES HOME LOP
     this.props.dispatch({
       type:'DES_HOME',
       payload:axios.get(`${url.API}/ebis_getlopmain_ytd/div/DES`)
     });
-
     this.props.dispatch({
       type:'DES_HOME_CURRENT',
       payload:axios.get(`${url.API}/ebis_getlopmain_current/div/DES`)
     });
-
-    //DGS HOME
+    //DGS HOME LOP
     this.props.dispatch({
       type:'DGS_HOME',
       payload:axios.get(`${url.API}/ebis_getlopmain_ytd/div/DGS`)
     });
-
     this.props.dispatch({
       type:'DGS_HOME_CURRENT',
       payload:axios.get(`${url.API}/ebis_getlopmain_current/div/DGS`)
     });
-
-    //DBS HOME
+    //DBS HOME LOP
     this.props.dispatch({
       type:'DBS_HOME',
       payload:axios.get(`${url.API}/ebis_getlopmain_ytd/div/DBS`)
     });
-
     this.props.dispatch({
       type:'DBS_HOME_CURRENT',
       payload:axios.get(`${url.API}/ebis_getlopmain_current/div/DBS`)
+    });
+
+
+    //get data ABC -----------------------
+    //EBIS HOME ABC
+    this.props.dispatch({
+      type:'EBIS_ABC',
+      payload:axios.get(`${url.API}/ebis_getabcmain_ytd/div/EBIS`)
+    });
+    this.props.dispatch({
+      type:'EBIS_CURRENT_ABC',
+      payload:axios.get(`${url.API}/ebis_getabcmain_current/div/EBIS`)
+    });
+
+    //DES HOME ABC
+    this.props.dispatch({
+      type:'DES_ABC',
+      payload:axios.get(`${url.API}/ebis_getabcmain_ytd/div/DES`)
+    });
+    this.props.dispatch({
+      type:'DES_CURRENT_ABC',
+      payload:axios.get(`${url.API}/ebis_getabcmain_current/div/DES`)
+    });
+
+    //DBS HOME ABC
+    this.props.dispatch({
+      type:'DBS_ABC',
+      payload:axios.get(`${url.API}/ebis_getabcmain_ytd/div/DBS`)
+    });
+    this.props.dispatch({
+      type:'DBS_CURRENT_ABC',
+      payload:axios.get(`${url.API}/ebis_getabcmain_current/div/DBS`)
+    });
+
+    //DGS HOME ABC
+    this.props.dispatch({
+      type:'DGS_ABC',
+      payload:axios.get(`${url.API}/ebis_getabcmain_ytd/div/DGS`)
+    });
+    this.props.dispatch({
+      type:'DGS_CURRENT_ABC',
+      payload:axios.get(`${url.API}/ebis_getabcmain_current/div/DGS`)
     });
   }
 
