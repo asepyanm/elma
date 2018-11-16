@@ -62,7 +62,7 @@ const rootReducer = combineReducers({
 
 const middlewares = applyMiddleware( 
   promiseMiddleware(),
-  logger
+  // logger
 );
 
 function configureStore() {

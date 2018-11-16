@@ -27,13 +27,13 @@ class LOPscreen extends Component{
             <EbisScreens navigation={this.props.navigation} />
           </Tab>
           <Tab heading="DES" tabStyle={styles.tabStyle} activeTabStyle={styles.activeTabStyle} activeTextStyle={styles.activeTextStyle} textStyle={styles.textStyle}>
-            <DesScreens />
+            <DesScreens navigation={this.props.navigation} />
           </Tab>
           <Tab heading="DBS" tabStyle={styles.tabStyle} activeTabStyle={styles.activeTabStyle} activeTextStyle={styles.activeTextStyle} textStyle={styles.textStyle}>
-            <DbsScreens />
+            <DbsScreens navigation={this.props.navigation} />
           </Tab>
           <Tab heading="DGS" tabStyle={styles.tabStyle} activeTabStyle={styles.activeTabStyle} activeTextStyle={styles.activeTextStyle} textStyle={styles.textStyle}>
-            <DgsScreens />
+            <DgsScreens navigation={this.props.navigation} />
           </Tab>
         </Tabs>
       </View>

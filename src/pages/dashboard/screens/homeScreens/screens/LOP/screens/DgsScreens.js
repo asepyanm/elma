@@ -5,7 +5,8 @@ import {
   Text,
   View,
   ScrollView,
-  Image
+  Image,
+  TouchableOpacity
 } from 'react-native';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import ModalSelector from 'react-native-modal-selector';
@@ -84,6 +85,8 @@ class DgsScreens extends Component{
     };
 
     const {
+      //navigation
+      navigation,
       //prospect
       ebisProspectREVENUE,ebisProspectProject,ebisProspectTarget,
       //submission
@@ -161,11 +164,11 @@ class DgsScreens extends Component{
               resizeMode={'stretch'}
             />
 
-            <View style={styles.containerArrowProspect}>
+            <TouchableOpacity onPress={() => navigation.navigate('EbisDetailLOP')} style={styles.containerArrowProspect}>
               <Text style={styles.textJudul}>PROSPECT</Text>
               <Text style={styles.textIsi}>{ebisProspectREVENUE}M</Text>
               <Text style={styles.textKeterangan}>per {ebisProspectProject} Project</Text>
-            </View>
+            </TouchableOpacity>
 
             <Image 
               source={images.prospect.arrowProspect2}
@@ -213,11 +216,11 @@ class DgsScreens extends Component{
               resizeMode={'stretch'}
             />
 
-            <View style={styles.containerArrowSubmission}>
+            <TouchableOpacity onPress={() => navigation.navigate('DesDetailLOP')} style={styles.containerArrowSubmission}>
               <Text style={styles.textJudul}>SUBMISSION</Text>
               <Text style={styles.textIsi}>{ebisSubmisionREVENUE}M</Text>
               <Text style={styles.textKeterangan}>per {ebisSubmissionProject} Project</Text>
-            </View>
+            </TouchableOpacity>
 
             <Image 
               source={images.Submission.arrowSub2}
@@ -265,11 +268,11 @@ class DgsScreens extends Component{
               resizeMode={'stretch'}
             />
 
-            <View style={styles.containerArrowWin}>
+            <TouchableOpacity onPress={() => navigation.navigate('DbsDetailLOP')} style={styles.containerArrowWin}>
               <Text style={styles.textJudul}>WIN</Text>
               <Text style={styles.textIsi}>{ebisWinREVENUE}M</Text>
               <Text style={styles.textKeterangan}>per {ebisWinProject} Project</Text>
-            </View>
+            </TouchableOpacity>
 
             <Image 
               source={images.Win.arrowWin2}
@@ -317,11 +320,11 @@ class DgsScreens extends Component{
               resizeMode={'stretch'}
             />
 
-            <View style={styles.containerArrowBill}>
+            <TouchableOpacity onPress={() => navigation.navigate('DgsDetailLOP')} style={styles.containerArrowBill}>
               <Text style={styles.textJudul}>BILLCOM</Text>
               <Text style={styles.textIsi}>{ebisBillcomREVENUE}M</Text>
               <Text style={styles.textKeterangan}>per {ebisBillcomeProject} Project</Text>
-            </View>
+            </TouchableOpacity>
 
             <Image 
               source={images.Billcom.arrowBil2}
