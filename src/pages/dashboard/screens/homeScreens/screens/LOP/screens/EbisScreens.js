@@ -218,11 +218,11 @@ class EbisScreens extends Component{
               resizeMode={'stretch'}
             />
 
-            <View style={styles.containerArrowSubmission}>
+            <TouchableOpacity onPress={() => navigation.navigate('DesDetailLOP')} style={styles.containerArrowSubmission}>
               <Text style={styles.textJudul}>SUBMISSION</Text>
               <Text style={styles.textIsi}>{ebisSubmisionREVENUE}M</Text>
               <Text style={styles.textKeterangan}>per {ebisSubmissionProject} Project</Text>
-            </View>
+            </TouchableOpacity>
 
             <Image 
               source={images.Submission.arrowSub2}
@@ -270,11 +270,11 @@ class EbisScreens extends Component{
               resizeMode={'stretch'}
             />
 
-            <View style={styles.containerArrowWin}>
+            <TouchableOpacity onPress={() => navigation.navigate('DbsDetailLOP')} style={styles.containerArrowWin}>
               <Text style={styles.textJudul}>WIN</Text>
               <Text style={styles.textIsi}>{ebisWinREVENUE}M</Text>
               <Text style={styles.textKeterangan}>per {ebisWinProject} Project</Text>
-            </View>
+            </TouchableOpacity>
 
             <Image 
               source={images.Win.arrowWin2}
@@ -322,11 +322,11 @@ class EbisScreens extends Component{
               resizeMode={'stretch'}
             />
 
-            <View style={styles.containerArrowBill}>
+            <TouchableOpacity onPress={() => navigation.navigate('DgsDetailLOP')} style={styles.containerArrowBill}>
               <Text style={styles.textJudul}>BILLCOM</Text>
               <Text style={styles.textIsi}>{ebisBillcomREVENUE}M</Text>
               <Text style={styles.textKeterangan}>per {ebisBillcomeProject} Project</Text>
-            </View>
+            </TouchableOpacity>
 
             <Image 
               source={images.Billcom.arrowBil2}

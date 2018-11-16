@@ -13,7 +13,9 @@ import Dashboard from '../pages/dashboard/dashboard';
 
 //detail screen LOP
 import EbisDetailScreen from '../pages/dashboard/screens/homeScreens/screens/LOP/screens/detail_screens/EbisDetail';
-
+import DesDetailScreen from '../pages/dashboard/screens/homeScreens/screens/LOP/screens/detail_screens/DesDetail';
+import DbsDetailScreen from '../pages/dashboard/screens/homeScreens/screens/LOP/screens/detail_screens/DbsDetail';
+import DgsDetailScreen from '../pages/dashboard/screens/homeScreens/screens/LOP/screens/detail_screens/DgsDetail';
 
 const noTransitionConfig = () => ({
   transitionSpec: {
@@ -29,6 +31,9 @@ const MainStack = StackNavigator({
 
   //detail screen
   EbisDetailLOP:{screen:EbisDetailScreen},
+  DesDetailLOP :{screen:DesDetailScreen},
+  DbsDetailLOP :{screen:DbsDetailScreen},
+  DgsDetailLOP :{screen:DgsDetailScreen},
 },{
   navigationOptions:{
     header:null

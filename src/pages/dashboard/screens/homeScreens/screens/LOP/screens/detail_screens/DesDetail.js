@@ -20,7 +20,7 @@ import axios from 'axios';
 import renderIf from '../../../../../../../components/renderIf';
 import url from '../../../../../../../../config/api_service';
 
-class EbisDetailScreens extends Component{
+class DesDetailScreens extends Component{
   constructor(props){
     super(props);
     this.state = {
@@ -42,7 +42,7 @@ class EbisDetailScreens extends Component{
       visibleModal: !this.state.visibleModal,
       loaderTampilDetail:true
     })
-    axios.get(`${url.API}/ebis_getstage5/stage/PROSPECT/div/DES/maindiv/EBIS/mainseg/ALL/nmitra/${item}/start_date/201801/end_date/201811`).then((res) => {
+    axios.get(`${url.API}/ebis_getstage5/stage/SUBMISSION/div/DES/maindiv/DES/mainseg/ALL/nmitra/${item}/start_date/201801/end_date/201811`).then((res) => {
       this.setState({dataTampung:res.data, loaderTampilDetail:false });
     }).catch((err) => {
       this.setState({
@@ -156,7 +156,7 @@ class EbisDetailScreens extends Component{
         }
       </View>
   )};
-  
+
   EbisScreen(){
     //import image arrow
     const images = {
@@ -179,19 +179,19 @@ class EbisDetailScreens extends Component{
 
       //logo
       allImage:{
-        allAktif: require('../../../../../../../../assets/detailKonten/stage-on10.png'),
+        allAktif: require('../../../../../../../../assets/detailKonten/stage-on20.png'),
         allNon  : require('../../../../../../../../assets/detailKonten/stage-off00.png'),
       },
       subsImage:{
-        subsAktif: require('../../../../../../../../assets/detailKonten/stage-on11.png'),
+        subsAktif: require('../../../../../../../../assets/detailKonten/stage-on21.png'),
         subsNon  : require('../../../../../../../../assets/detailKonten/stage-off01.png'),
       },
       mitraImage:{
-        mitraAktif: require('../../../../../../../../assets/detailKonten/stage-on12.png'),
+        mitraAktif: require('../../../../../../../../assets/detailKonten/stage-on22.png'),
         mitraNon  : require('../../../../../../../../assets/detailKonten/stage-off02.png'),
       },
       telkomImage:{
-        telkomAktif: require('../../../../../../../../assets/detailKonten/stage-on13.png'),
+        telkomAktif: require('../../../../../../../../assets/detailKonten/stage-on23.png'),
         telkomNon  : require('../../../../../../../../assets/detailKonten/stage-off03.png'),
       }
     };
@@ -206,92 +206,92 @@ class EbisDetailScreens extends Component{
     return(
       <View style={{backgroundColor:'#FFF', flex:1}}>
         <View style={styles.wrapperArrow}>
-        <Image 
-          source={images.prospect.arrowProspect1}
-          style={styles.imageStyle}
-          resizeMode={'stretch'}
-        />
+          <Image 
+              source={images.Submission.arrowSub1}
+              style={styles.imageStyle}
+              resizeMode={'stretch'}
+            />
 
-        <View style={styles.containerArrowProspect}>
-          <Text style={styles.textJudul}>PROSPECT</Text>
-          <Text style={styles.textIsi}>{ebisProspectREVENUE}M</Text>
-          <Text style={styles.textKeterangan}>per {ebisProspectProject} Project</Text>
+            <TouchableOpacity style={styles.containerArrowSubmission}>
+              <Text style={styles.textJudul}>SUBMISSION</Text>
+              <Text style={styles.textIsi}>{ebisProspectREVENUE}M</Text>
+              <Text style={styles.textKeterangan}>per {ebisProspectProject} Project</Text>
+            </TouchableOpacity>
+
+            <Image 
+              source={images.Submission.arrowSub2}
+              style={styles.imageStyle}
+              resizeMode={'stretch'}
+          />
+
+          <TouchableOpacity onPress={() => this.buttonAll()} style={styles.containerArrowSubmission2}>
+            { statusAll === false 
+                ?
+              <Image 
+                source={images.allImage.allAktif}
+                style={styles.imageContent}
+                resizeMode={'stretch'}
+              />
+                :
+              <Image 
+                source={images.allImage.allNon}
+                style={styles.imageContent}
+                resizeMode={'stretch'}
+              />
+            }
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={() => this.buttonSubs()} style={styles.containerArrowSubmission2}>
+            { statusSubs === false 
+                ?
+              <Image 
+                source={images.subsImage.subsAktif}
+                style={styles.imageContent}
+                resizeMode={'stretch'}
+              />
+                :
+              <Image 
+                source={images.subsImage.subsNon}
+                style={styles.imageContent}
+                resizeMode={'stretch'}
+              />
+            }
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={() => this.buttonMitra()} style={styles.containerArrowSubmission2}>
+            { statusMitra === false
+                ?
+              <Image 
+                source={images.mitraImage.mitraAktif}
+                style={styles.imageContent}
+                resizeMode={'stretch'}
+              />
+                :
+              <Image 
+                source={images.mitraImage.mitraNon}
+                style={styles.imageContent}
+                resizeMode={'stretch'}
+              />
+            }
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={() => this.buttonTelkom()} style={styles.containerArrowSubmission2}>
+            { statusTelkom === false 
+                ?
+              <Image 
+                source={images.telkomImage.telkomAktif}
+                style={styles.imageContent}
+                resizeMode={'stretch'}
+              />
+                :
+              <Image 
+                source={images.telkomImage.telkomNon}
+                style={styles.imageContent}
+                resizeMode={'stretch'}
+              />
+            }
+          </TouchableOpacity>
         </View>
-
-        <Image 
-          source={images.prospect.arrowProspect2}
-          style={styles.imageStyle}
-          resizeMode={'stretch'}
-        />
-
-        <TouchableOpacity onPress={() => this.buttonAll()} style={styles.containerArrowProspect2}>
-          { statusAll === false 
-              ?
-            <Image 
-              source={images.allImage.allAktif}
-              style={styles.imageContent}
-              resizeMode={'stretch'}
-            />
-              :
-            <Image 
-              source={images.allImage.allNon}
-              style={styles.imageContent}
-              resizeMode={'stretch'}
-            />
-          }
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={() => this.buttonSubs()} style={styles.containerArrowProspect2}>
-          { statusSubs === false 
-              ?
-            <Image 
-              source={images.subsImage.subsAktif}
-              style={styles.imageContent}
-              resizeMode={'stretch'}
-            />
-              :
-            <Image 
-              source={images.subsImage.subsNon}
-              style={styles.imageContent}
-              resizeMode={'stretch'}
-            />
-          }
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={() => this.buttonMitra()} style={styles.containerArrowProspect2}>
-          { statusMitra === false
-              ?
-            <Image 
-              source={images.mitraImage.mitraAktif}
-              style={styles.imageContent}
-              resizeMode={'stretch'}
-            />
-              :
-            <Image 
-              source={images.mitraImage.mitraNon}
-              style={styles.imageContent}
-              resizeMode={'stretch'}
-            />
-          }
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={() => this.buttonTelkom()} style={styles.containerArrowProspect2}>
-          { statusTelkom === false 
-              ?
-            <Image 
-              source={images.telkomImage.telkomAktif}
-              style={styles.imageContent}
-              resizeMode={'stretch'}
-            />
-              :
-            <Image 
-              source={images.telkomImage.telkomNon}
-              style={styles.imageContent}
-              resizeMode={'stretch'}
-            />
-          }
-        </TouchableOpacity>
-      </View>
         
         <View style={styles.wrapperHeaderContent}>
           <View style={{width:wp('70%')}}>
@@ -390,19 +390,19 @@ class EbisDetailScreens extends Component{
 
       //logo
       allImage:{
-        allAktif: require('../../../../../../../../assets/detailKonten/stage-on10.png'),
+        allAktif: require('../../../../../../../../assets/detailKonten/stage-on20.png'),
         allNon  : require('../../../../../../../../assets/detailKonten/stage-off00.png'),
       },
       subsImage:{
-        subsAktif: require('../../../../../../../../assets/detailKonten/stage-on11.png'),
+        subsAktif: require('../../../../../../../../assets/detailKonten/stage-on21.png'),
         subsNon  : require('../../../../../../../../assets/detailKonten/stage-off01.png'),
       },
       mitraImage:{
-        mitraAktif: require('../../../../../../../../assets/detailKonten/stage-on12.png'),
+        mitraAktif: require('../../../../../../../../assets/detailKonten/stage-on22.png'),
         mitraNon  : require('../../../../../../../../assets/detailKonten/stage-off02.png'),
       },
       telkomImage:{
-        telkomAktif: require('../../../../../../../../assets/detailKonten/stage-on13.png'),
+        telkomAktif: require('../../../../../../../../assets/detailKonten/stage-on23.png'),
         telkomNon  : require('../../../../../../../../assets/detailKonten/stage-off03.png'),
       }
     };
@@ -418,24 +418,24 @@ class EbisDetailScreens extends Component{
       <View style={{backgroundColor:'#FFF', flex:1}}>
         <View style={styles.wrapperArrow}>
           <Image 
-            source={images.prospect.arrowProspect1}
+            source={images.Submission.arrowSub1}
             style={styles.imageStyle}
             resizeMode={'stretch'}
           />
 
-          <View style={styles.containerArrowProspect}>
-            <Text style={styles.textJudul}>PROSPECT</Text>
+          <View style={styles.containerArrowSubmission}>
+            <Text style={styles.textJudul}>SUBMISSION</Text>
             <Text style={styles.textIsi}>{ebisProspectREVENUE2}M</Text>
             <Text style={styles.textKeterangan}>per {ebisProspectProject2} Project</Text>
           </View>
 
           <Image 
-            source={images.prospect.arrowProspect2}
+            source={images.Submission.arrowSub2}
             style={styles.imageStyle}
             resizeMode={'stretch'}
           />
 
-          <TouchableOpacity onPress={() => this.buttonAll()} style={styles.containerArrowProspect2}>
+          <TouchableOpacity onPress={() => this.buttonAll()} style={styles.containerArrowSubmission2}>
             { statusAll === false 
                 ?
               <Image 
@@ -452,7 +452,7 @@ class EbisDetailScreens extends Component{
             }
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={() => this.buttonSubs()} style={styles.containerArrowProspect2}>
+          <TouchableOpacity onPress={() => this.buttonSubs()} style={styles.containerArrowSubmission2}>
             { statusSubs === false 
                 ?
               <Image 
@@ -469,7 +469,7 @@ class EbisDetailScreens extends Component{
             }
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={() => this.buttonMitra()} style={styles.containerArrowProspect2}>
+          <TouchableOpacity onPress={() => this.buttonMitra()} style={styles.containerArrowSubmission2}>
             { statusMitra === false
                 ?
               <Image 
@@ -486,7 +486,7 @@ class EbisDetailScreens extends Component{
             }
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={() => this.buttonTelkom()} style={styles.containerArrowProspect2}>
+          <TouchableOpacity onPress={() => this.buttonTelkom()} style={styles.containerArrowSubmission2}>
             { statusTelkom === false 
                 ?
               <Image 
@@ -601,19 +601,19 @@ class EbisDetailScreens extends Component{
 
       //logo
       allImage:{
-        allAktif: require('../../../../../../../../assets/detailKonten/stage-on10.png'),
+        allAktif: require('../../../../../../../../assets/detailKonten/stage-on20.png'),
         allNon  : require('../../../../../../../../assets/detailKonten/stage-off00.png'),
       },
       subsImage:{
-        subsAktif: require('../../../../../../../../assets/detailKonten/stage-on11.png'),
+        subsAktif: require('../../../../../../../../assets/detailKonten/stage-on21.png'),
         subsNon  : require('../../../../../../../../assets/detailKonten/stage-off01.png'),
       },
       mitraImage:{
-        mitraAktif: require('../../../../../../../../assets/detailKonten/stage-on12.png'),
+        mitraAktif: require('../../../../../../../../assets/detailKonten/stage-on22.png'),
         mitraNon  : require('../../../../../../../../assets/detailKonten/stage-off02.png'),
       },
       telkomImage:{
-        telkomAktif: require('../../../../../../../../assets/detailKonten/stage-on13.png'),
+        telkomAktif: require('../../../../../../../../assets/detailKonten/stage-on23.png'),
         telkomNon  : require('../../../../../../../../assets/detailKonten/stage-off03.png'),
       }
     };
@@ -629,24 +629,24 @@ class EbisDetailScreens extends Component{
       <View style={{backgroundColor:'#FFF', flex:1}}>
         <View style={styles.wrapperArrow}>
           <Image 
-            source={images.prospect.arrowProspect1}
+            source={images.Submission.arrowSub1}
             style={styles.imageStyle}
             resizeMode={'stretch'}
           />
 
-          <View style={styles.containerArrowProspect}>
-            <Text style={styles.textJudul}>PROSPECT</Text>
+          <View style={styles.containerArrowSubmission}>
+            <Text style={styles.textJudul}>SUBMISSION</Text>
             <Text style={styles.textIsi}>{ebisProspectREVENUE3}M</Text>
             <Text style={styles.textKeterangan}>per {ebisProspectProject3} Project</Text>
           </View>
 
           <Image 
-            source={images.prospect.arrowProspect2}
+            source={images.Submission.arrowSub2}
             style={styles.imageStyle}
             resizeMode={'stretch'}
           />
 
-          <TouchableOpacity onPress={() => this.buttonAll()} style={styles.containerArrowProspect2}>
+          <TouchableOpacity onPress={() => this.buttonAll()} style={styles.containerArrowSubmission2}>
             { statusAll === false 
                 ?
               <Image 
@@ -663,7 +663,7 @@ class EbisDetailScreens extends Component{
             }
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={() => this.buttonSubs()} style={styles.containerArrowProspect2}>
+          <TouchableOpacity onPress={() => this.buttonSubs()} style={styles.containerArrowSubmission2}>
             { statusSubs === false 
                 ?
               <Image 
@@ -680,7 +680,7 @@ class EbisDetailScreens extends Component{
             }
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={() => this.buttonMitra()} style={styles.containerArrowProspect2}>
+          <TouchableOpacity onPress={() => this.buttonMitra()} style={styles.containerArrowSubmission2}>
             { statusMitra === false
                 ?
               <Image 
@@ -697,7 +697,7 @@ class EbisDetailScreens extends Component{
             }
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={() => this.buttonTelkom()} style={styles.containerArrowProspect2}>
+          <TouchableOpacity onPress={() => this.buttonTelkom()} style={styles.containerArrowSubmission2}>
             { statusTelkom === false 
                 ?
               <Image 
@@ -812,19 +812,19 @@ class EbisDetailScreens extends Component{
 
       //logo
       allImage:{
-        allAktif: require('../../../../../../../../assets/detailKonten/stage-on10.png'),
+        allAktif: require('../../../../../../../../assets/detailKonten/stage-on20.png'),
         allNon  : require('../../../../../../../../assets/detailKonten/stage-off00.png'),
       },
       subsImage:{
-        subsAktif: require('../../../../../../../../assets/detailKonten/stage-on11.png'),
+        subsAktif: require('../../../../../../../../assets/detailKonten/stage-on21.png'),
         subsNon  : require('../../../../../../../../assets/detailKonten/stage-off01.png'),
       },
       mitraImage:{
-        mitraAktif: require('../../../../../../../../assets/detailKonten/stage-on12.png'),
+        mitraAktif: require('../../../../../../../../assets/detailKonten/stage-on22.png'),
         mitraNon  : require('../../../../../../../../assets/detailKonten/stage-off02.png'),
       },
       telkomImage:{
-        telkomAktif: require('../../../../../../../../assets/detailKonten/stage-on13.png'),
+        telkomAktif: require('../../../../../../../../assets/detailKonten/stage-on23.png'),
         telkomNon  : require('../../../../../../../../assets/detailKonten/stage-off03.png'),
       }
     };
@@ -840,24 +840,24 @@ class EbisDetailScreens extends Component{
       <View style={{backgroundColor:'#FFF', flex:1}}>
         <View style={styles.wrapperArrow}>
           <Image 
-            source={images.prospect.arrowProspect1}
+            source={images.Submission.arrowSub1}
             style={styles.imageStyle}
             resizeMode={'stretch'}
           />
 
-          <View style={styles.containerArrowProspect}>
-            <Text style={styles.textJudul}>PROSPECT</Text>
+          <View style={styles.containerArrowSubmission}>
+            <Text style={styles.textJudul}>SUBMISSION</Text>
             <Text style={styles.textIsi}>{ebisProspectREVENUE4}M</Text>
             <Text style={styles.textKeterangan}>per {ebisProspectProject4} Project</Text>
           </View>
 
           <Image 
-            source={images.prospect.arrowProspect2}
+            source={images.Submission.arrowSub2}
             style={styles.imageStyle}
             resizeMode={'stretch'}
           />
 
-          <TouchableOpacity onPress={() => this.buttonAll()} style={styles.containerArrowProspect2}>
+          <TouchableOpacity onPress={() => this.buttonAll()} style={styles.containerArrowSubmission2}>
             { statusAll === false 
                 ?
               <Image 
@@ -874,7 +874,7 @@ class EbisDetailScreens extends Component{
             }
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={() => this.buttonSubs()} style={styles.containerArrowProspect2}>
+          <TouchableOpacity onPress={() => this.buttonSubs()} style={styles.containerArrowSubmission2}>
             { statusSubs === false 
                 ?
               <Image 
@@ -891,7 +891,7 @@ class EbisDetailScreens extends Component{
             }
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={() => this.buttonMitra()} style={styles.containerArrowProspect2}>
+          <TouchableOpacity onPress={() => this.buttonMitra()} style={styles.containerArrowSubmission2}>
             { statusMitra === false
                 ?
               <Image 
@@ -908,7 +908,7 @@ class EbisDetailScreens extends Component{
             }
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={() => this.buttonTelkom()} style={styles.containerArrowProspect2}>
+          <TouchableOpacity onPress={() => this.buttonTelkom()} style={styles.containerArrowSubmission2}>
             { statusTelkom === false 
                 ?
               <Image 
@@ -1052,24 +1052,24 @@ class EbisDetailScreens extends Component{
 
 const mapStateToProps = (state) => ({
   //EBIS
-  ebisProspectREVENUE:state.EbisReducer.ebisProspectREVENUE,
-  ebisProspectProject:state.EbisReducer.ebisProspectProject,
-  ebisProspectTarget:state.EbisReducer.ebisProspectTarget,
+  ebisProspectREVENUE:state.EbisReducer.ebisSubmisionREVENUE,
+  ebisProspectProject:state.EbisReducer.ebisSubmisionProject,
+  ebisProspectTarget:state.EbisReducer.ebisSubmisionTarget,
   
   //DES
-  ebisProspectREVENUE2:state.DesReducer.ebisProspectREVENUE,
-  ebisProspectProject2:state.DesReducer.ebisProspectProject,
-  ebisProspectTarget2:state.DesReducer.ebisProspectTarget,
+  ebisProspectREVENUE2:state.DesReducer.ebisSubmisionREVENUE,
+  ebisProspectProject2:state.DesReducer.ebisSubmisionProject,
+  ebisProspectTarget2:state.DesReducer.ebisSubmisionTarget,
 
   //DBS
-  ebisProspectREVENUE3:state.DbsReducer.ebisProspectREVENUE,
-  ebisProspectProject3:state.DbsReducer.ebisProspectProject,
-  ebisProspectTarget3:state.DbsReducer.ebisProspectTarget,
+  ebisProspectREVENUE3:state.DbsReducer.ebisSubmisionREVENUE,
+  ebisProspectProject3:state.DbsReducer.ebisSubmisionProject,
+  ebisProspectTarget3:state.DbsReducer.ebisSubmisionTarget,
 
   //DGS
-  ebisProspectREVENUE4:state.DgsReducer.ebisProspectREVENUE,
-  ebisProspectProject4:state.DgsReducer.ebisProspectProject,
-  ebisProspectTarget4:state.DgsReducer.ebisProspectTarget,
+  ebisProspectREVENUE4:state.DgsReducer.ebisSubmisionREVENUE,
+  ebisProspectProject4:state.DgsReducer.ebisSubmisionProject,
+  ebisProspectTarget4:state.DgsReducer.ebisSubmisionTarget,
 
   //data Mitra
   dataMitra:state.EbisDetailReducer.dataMitra,
@@ -1078,7 +1078,7 @@ const mapStateToProps = (state) => ({
   dataMitra4:state.DgsDetailReducer.dataMitra,
 })
 
-export default connect(mapStateToProps)(EbisDetailScreens);
+export default connect(mapStateToProps)(DesDetailScreens);
 
 const styles = StyleSheet.create({
   container: {
@@ -1150,11 +1150,10 @@ const styles = StyleSheet.create({
     alignItems:'center'
   },
   containerArrowSubmission2:{
+    marginLeft:wp('.5'),
+    marginRight:wp('.5'),
     height:hp('9%'), 
-    width:wp('24%'), 
-    backgroundColor:'#dfdfdd',
-    justifyContent:'center',
-    alignItems:'center'
+    width:wp('13%'), 
   },
   containerArrowWin:{
     height:hp('9%'), 
@@ -1164,11 +1163,10 @@ const styles = StyleSheet.create({
     alignItems:'center'
   },
   containerArrowWin2:{
+    marginLeft:wp('.5'),
+    marginRight:wp('.5'),
     height:hp('9%'), 
-    width:wp('24%'), 
-    backgroundColor:'#dfdfdd',
-    justifyContent:'center',
-    alignItems:'center'
+    width:wp('13%'), 
   },
   containerArrowBill:{
     height:hp('9%'), 
@@ -1178,11 +1176,10 @@ const styles = StyleSheet.create({
     alignItems:'center'
   },
   containerArrowBill2:{
+    marginLeft:wp('.5'),
+    marginRight:wp('.5'),
     height:hp('9%'), 
-    width:wp('24%'), 
-    backgroundColor:'#dfdfdd',
-    justifyContent:'center',
-    alignItems:'center'
+    width:wp('13%'), 
   },
   textJudul:{
     fontWeight:'bold',
