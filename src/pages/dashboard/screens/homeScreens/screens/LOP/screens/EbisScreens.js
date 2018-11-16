@@ -5,7 +5,8 @@ import {
   Text,
   View,
   ScrollView,
-  Image
+  Image,
+  TouchableOpacity
 } from 'react-native';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import ModalSelector from 'react-native-modal-selector';
@@ -85,6 +86,9 @@ class EbisScreens extends Component{
     };
 
     const {
+      //navgaiton props
+      navigation,
+      
       //prospect
       ebisProspectREVENUE,ebisProspectProject,ebisProspectTarget,
       //submission
@@ -162,11 +166,11 @@ class EbisScreens extends Component{
               resizeMode={'stretch'}
             />
 
-            <View style={styles.containerArrowProspect}>
+            <TouchableOpacity onPress={() => navigation.navigate('EbisDetailLOP')} style={styles.containerArrowProspect} underlayColor="#ffffff00">
               <Text style={styles.textJudul}>PROSPECT</Text>
               <Text style={styles.textIsi}>{ebisProspectREVENUE}M</Text>
               <Text style={styles.textKeterangan}>per {ebisProspectProject} Project</Text>
-            </View>
+            </TouchableOpacity>
 
             <Image 
               source={images.prospect.arrowProspect2}

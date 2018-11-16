@@ -93,6 +93,27 @@ class Dashboard extends Component {
       type:'DGS_CURRENT_ABC',
       payload:axios.get(`${url.API}/ebis_getabcmain_current/div/DGS`)
     });
+
+    //get data detail
+    this.props.dispatch({
+      type:'DETAIL_PROSPECT_EBIS',
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/DES/maindiv/DES/mainseg/ALL/start_date/2018001/end_date/201811`)
+    });
+
+    this.props.dispatch({
+      type:'DETAIL_PROSPECT_DES',
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/DES/maindiv/DES/mainseg/ALL/start_date/2018001/end_date/201811`)
+    });
+
+    this.props.dispatch({
+      type:'DETAIL_PROSPECT_DBS',
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/DBS/maindiv/DBS/mainseg/ALL/start_date/2018001/end_date/201811`)
+    });
+
+    this.props.dispatch({
+      type:'DETAIL_PROSPECT_DGS',
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/DGS/maindiv/DGS/mainseg/ALL/start_date/2018001/end_date/201811`)
+    });
   }
 
   render() {
@@ -106,9 +127,10 @@ class Dashboard extends Component {
             <ActivityIndicator size={'large'}/>
           </View>
             :
-          // setTimeout(() => { 
-            <ComponentDashboard/>
-          // }, 1000)
+          <ComponentDashboard 
+            //navigasi LOP screens
+            navigation={this.props.navigation} 
+          />
         }
       </View>
     );

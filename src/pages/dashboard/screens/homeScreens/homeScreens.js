@@ -30,7 +30,7 @@ export default class HomeScreens extends Component{
   renderSelectedTab () {
     switch (this.state.selectedTab) {
       case 'lop':
-        return (<LOPscreen/>);
+        return (<LOPscreen navigation={this.props.navigation}/>);
       break;
       case 'abc':
         return (<ABCscreen/>);

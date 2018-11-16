@@ -31,7 +31,7 @@ class ComponentDashboard extends Component {
   renderSelectedTab(){
     switch (this.state.selectedTab) {
       case 'home':
-        return (<Home/>);
+        return (<Home navigation={this.props.navigation}/>);
       break;
       case 'rekap':
         return (<Rekap/>);

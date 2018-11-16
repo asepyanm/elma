@@ -24,7 +24,7 @@ class LOPscreen extends Component{
       <View style={styles.container}>
         <Tabs tabBarUnderlineStyle={{backgroundColor: '#575F6A'}}>
           <Tab heading="EBIS" tabStyle={styles.tabStyle} activeTabStyle={styles.activeTabStyle} activeTextStyle={styles.activeTextStyle} textStyle={styles.textStyle}>
-            <EbisScreens />
+            <EbisScreens navigation={this.props.navigation} />
           </Tab>
           <Tab heading="DES" tabStyle={styles.tabStyle} activeTabStyle={styles.activeTabStyle} activeTextStyle={styles.activeTextStyle} textStyle={styles.textStyle}>
             <DesScreens />

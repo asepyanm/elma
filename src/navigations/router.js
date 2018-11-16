@@ -11,6 +11,9 @@ import Login from '../pages/login/screen/login/login';
 //main dashboard
 import Dashboard from '../pages/dashboard/dashboard';
 
+//detail screen LOP
+import EbisDetailScreen from '../pages/dashboard/screens/homeScreens/screens/LOP/screens/detail_screens/EbisDetail';
+
 
 const noTransitionConfig = () => ({
   transitionSpec: {
@@ -23,6 +26,9 @@ const noTransitionConfig = () => ({
 // Drawer stack
 const MainStack = StackNavigator({
   MainDashboard: { screen: Dashboard},
+
+  //detail screen
+  EbisDetailLOP:{screen:EbisDetailScreen},
 },{
   navigationOptions:{
     header:null

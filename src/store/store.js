@@ -23,6 +23,11 @@ import DESReducerABC from '../pages/dashboard/reducer/reducerABC/redcuerDES/redu
 import DBSReducerABC from '../pages/dashboard/reducer/reducerABC/reducerDBS/reducerDBS';
 import DGSReducerABC from '../pages/dashboard/reducer/reducerABC/reducerDGS/reducerDGS';
 
+//reducer detail 
+import EbisDetailReducer from '../pages/dashboard/reducer/reducerLOP/detailReducer/reducerEBIS/reducerDetailEbis';
+import DesDetailReducer from '../pages/dashboard/reducer/reducerLOP/detailReducer/reducerDES/reducerDetailDes';
+import DbsDetailReducer from '../pages/dashboard/reducer/reducerLOP/detailReducer/reducerDBS/reducerDetailDbs';
+import DgsDetailReducer from '../pages/dashboard/reducer/reducerLOP/detailReducer/reducerDGS/reducerDetailDgs';
 
 //config persist
 const config1 = {
@@ -46,7 +51,13 @@ const rootReducer = combineReducers({
   EbisReducerABC,
   DESReducerABC,
   DBSReducerABC,
-  DGSReducerABC
+  DGSReducerABC,
+
+  //reducer detail
+  EbisDetailReducer,
+  DesDetailReducer,
+  DbsDetailReducer,
+  DgsDetailReducer
 });
 
 const middlewares = applyMiddleware( 
