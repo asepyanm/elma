@@ -17,6 +17,9 @@ import DesDetailScreen from '../pages/dashboard/screens/homeScreens/screens/LOP/
 import DbsDetailScreen from '../pages/dashboard/screens/homeScreens/screens/LOP/screens/detail_screens/DbsDetail';
 import DgsDetailScreen from '../pages/dashboard/screens/homeScreens/screens/LOP/screens/detail_screens/DgsDetail';
 
+//monitor_kb LOP
+import MonitorKB from '../pages/dashboard/screens/homeScreens/screens/LOP/screens/monitorkb_screen/index.js';
+
 const noTransitionConfig = () => ({
   transitionSpec: {
     duration: 0,
@@ -40,7 +43,6 @@ const MainStack = StackNavigator({
   }
 })
 
-
 //primary stack
 const navigator = StackNavigator({
   login: {
@@ -55,6 +57,12 @@ const navigator = StackNavigator({
       header:null
     }
   },
+  MonitorKB: {
+    screen: MonitorKB,
+    navigationOptions: {
+      header: null
+    }
+  }
 },{
   transitionConfig: noTransitionConfig
 });

@@ -28,8 +28,9 @@ class DbsDetailScreens extends Component{
       visibleModal:false,
       loaderTampilDetail:false,
       dataTampung:[],
-
+      dataEbis: [],
       data:[],
+      selected: '',
       statusAll:false, 
       statusSubs:true,
       statusMitra:true,
@@ -158,6 +159,7 @@ class DbsDetailScreens extends Component{
   )};
 
   EbisScreen(){
+      
     //import image arrow
     const images = {
       prospect: {
@@ -171,6 +173,7 @@ class DbsDetailScreens extends Component{
       Win: {
         arrowWin1: require('../../../../../../../../assets/Arrow/arrowWin.png'),
         arrowWin2: require('../../../../../../../../assets/Arrow/arrowWin3.png'),
+        arrowWin3: require('../../../../../../../../assets/Arrow/arrowWin2.png'),
       },
       Billcom: {
         arrowBil1: require('../../../../../../../../assets/Arrow/arrowBillcom.png'),
@@ -193,15 +196,20 @@ class DbsDetailScreens extends Component{
       telkomImage:{
         telkomAktif: require('../../../../../../../../assets/detailKonten/stage-on33.png'),
         telkomNon  : require('../../../../../../../../assets/detailKonten/stage-off03.png'),
-      }
+      },
+      arrowGrey:require('../../../../../../../../assets/Arrow/arrowGrey.png'),
     };
+
+    const ebisPresentase = (parseInt(ebisMonitorDone) / parseInt(ebisMonitor))*100;
 
     const{
       //prospect
       ebisProspectREVENUE,ebisProspectProject,dataMitra,
+      ebisMonitor, ebisMonitorWP, ebisMonitorDone, ebisMonitorDoneWP,
+      ebisMonitorOgp, ebisMonitorOgpWP
     } = this.props;
 
-    const {statusAll, statusSubs, statusMitra, statusTelkom} = this.state;
+    const {statusAll, statusSubs, statusMitra, statusTelkom, dataEbis} = this.state;
 
     return(
       <View style={{backgroundColor:'#FFF', flex:1}}>
@@ -292,23 +300,11 @@ class DbsDetailScreens extends Component{
             }
           </TouchableOpacity>
         </View>
-
-        <View style={styles.buttonTab}>
-          <TouchableOpacity style={styles.buttonTabStyle} onPress={() => this.props.navigation.navigate('MonitorKB')}>
-            <Text>Monitor KB</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.buttonTabStyle}>
-            <Text>Monitor KL</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.buttonTabStyle}>
-            <Text>Monitor Delivery</Text>
-          </TouchableOpacity>
-        </View>
         
         <View style={styles.wrapperHeaderContent}>
           <View style={{width:wp('70%')}}>
             {renderIf(!statusAll)(
-              <Text style={{textAlign:'center', color:'#FFF'}}>ALL</Text>              
+              <Text style={{textAlign:'center', color:'#FFF'}}>NAMA</Text>              
             )}
 
             {renderIf(!statusSubs)(
@@ -331,30 +327,118 @@ class DbsDetailScreens extends Component{
         {/* <ScrollView> */}
           <Content style={{backgroundColor:'#FFF'}}>
             {renderIf(!statusAll)(
-              <View>
-                <FlatList
-                  data={dataMitra}
-                  keyExtractor={(item, index) => index.toString()}
-                  renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModal(item.MITRA)}> 
-                      <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
-                        <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
-                      </View>
-                      <View style={{width:wp('65%')}}>
-                        <Text>{item.MITRA}</Text>
-                      </View>
-                      <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center'}}>{item.jumlah}M</Text>                    
-                      </View>
-                    </TouchableOpacity>
-                  )}
-                />
-                <Modal 
-                  isVisible={this.state.visibleModal === true}
-                  onBackdropPress={() => this.setState({ visibleModal: false })}>
-                  {this.renderModalContent()}
-                </Modal>
-              </View>
+                <View style={{ margin: hp('2%')}}>
+                    <View style={styles.wrapperArrow}>
+                        <Image 
+                            source={images.Win.arrowWin1}
+                            style={styles.imageStyle}
+                            resizeMode={'stretch'}
+                        />
+            
+                        <TouchableOpacity style={styles.containerArrowWin}>
+                            <Text style={styles.textJudul}>WIN</Text>
+                            <Text style={styles.textIsi}>{ebisMonitor}M</Text>
+                            <Text style={styles.textKeterangan}>per {ebisMonitorWP} Project</Text>
+                        </TouchableOpacity>
+            
+                        <Image 
+                            source={images.Win.arrowWin3}
+                            style={styles.imageStyle}
+                            resizeMode={'stretch'}
+                        />
+            
+                        <View style={styles.containerArrowWin2}>
+                            <Text style={styles.textJudul}>Done KB</Text>
+                            <Text style={styles.textIsi}>{ebisMonitorDone}M</Text>
+                            <Text style={styles.textKeterangan}>per {ebisMonitorDoneWP} Project</Text>
+                        </View>
+            
+                        <Image 
+                            source={images.arrowGrey}
+                            style={styles.imageStyle}
+                            resizeMode={'stretch'}
+                        />
+            
+                        <View style={styles.wrapperPresentase}>
+                            <View style={styles.wrapperTextPresentase}>
+                            <Text style={styles.textJudul}>10%</Text>
+                            </View>
+                        </View>
+                    </View>
+                    <View style={styles.wrapperArrow}>
+                        <Image 
+                            source={images.Win.arrowWin1}
+                            style={styles.imageStyle}
+                            resizeMode={'stretch'}
+                        />
+            
+                        <TouchableOpacity style={styles.containerArrowWin}>
+                            <Text style={styles.textJudul}>WIN</Text>
+                            <Text style={styles.textIsi}>{ebisMonitor}M</Text>
+                            <Text style={styles.textKeterangan}>per {ebisMonitorWP} Project</Text>
+                        </TouchableOpacity>
+            
+                        <Image 
+                            source={images.Win.arrowWin3}
+                            style={styles.imageStyle}
+                            resizeMode={'stretch'}
+                        />
+            
+                        <View style={styles.containerArrowWin2}>
+                            <Text style={styles.textJudul}>OGP KB</Text>
+                            <Text style={styles.textIsi}>{ebisMonitorOgp}M</Text>
+                            <Text style={styles.textKeterangan}>per {ebisMonitorOgpWP} Project</Text>
+                        </View>
+            
+                        <Image 
+                            source={images.arrowGrey}
+                            style={styles.imageStyle}
+                            resizeMode={'stretch'}
+                        />
+            
+                        <View style={styles.wrapperPresentase}>
+                            <View style={styles.wrapperTextPresentase}>
+                            <Text style={styles.textJudul}>10%</Text>
+                            </View>
+                        </View>
+                    </View>
+                    
+                    <View style={{ flexDirection: 'row', margin: hp('2%'), justifyContent: 'space-between' }}>
+                        <View style={{ marginBottom: hp('2%')}}>
+                            <Text style={[styles.textJudul, {marginBottom: 20, alignItems: 'center'}]}>Progress OGP KB &#60; 3 Hari</Text>
+                        </View>
+
+                        <View>
+                        <Text style={styles.textIsi}>{ebisMonitorOgp}M</Text>
+                            <Text style={styles.textKeterangan}>per {ebisMonitorOgpWP} Project</Text>
+                        </View>
+                        
+                    </View>
+
+                    <View style={{ flexDirection: 'row', margin: hp('2%'), justifyContent: 'space-between' }}>
+                        <View style={{ marginBottom: hp('2%')}}>
+                            <Text style={[styles.textJudul, {marginBottom: 20, alignItems: 'center'}]}>Progress OGP KB &#60; 7 Hari</Text>
+                        </View>
+
+                        <View>
+                        <Text style={styles.textIsi}>{ebisMonitorOgp}M</Text>
+                            <Text style={styles.textKeterangan}>per {ebisMonitorOgpWP} Project</Text>
+                        </View>
+                        
+                    </View>
+
+                    <View style={{ flexDirection: 'row', margin: hp('2%'), justifyContent: 'space-between' }}>
+                        <View style={{ marginBottom: hp('2%')}}>
+                            <Text style={[styles.textJudul, {marginBottom: 20, alignItems: 'center'}]}>Progress OGP KB &#62; 7 Hari</Text>
+                        </View>
+
+                        <View>
+                        <Text style={styles.textIsi}>{ebisMonitorOgp}M</Text>
+                            <Text style={styles.textKeterangan}>per {ebisMonitorOgpWP} Project</Text>
+                        </View>
+                        
+                    </View>
+                </View>
             )}
 
             {renderIf(!statusSubs)(
@@ -394,6 +478,7 @@ class DbsDetailScreens extends Component{
       Win: {
         arrowWin1: require('../../../../../../../../assets/Arrow/arrowWin.png'),
         arrowWin2: require('../../../../../../../../assets/Arrow/arrowWin3.png'),
+        arrowWin3: require('../../../../../../../../assets/Arrow/arrowWin2.png'),
       },
       Billcom: {
         arrowBil1: require('../../../../../../../../assets/Arrow/arrowBillcom.png'),
@@ -416,15 +501,20 @@ class DbsDetailScreens extends Component{
       telkomImage:{
         telkomAktif: require('../../../../../../../../assets/detailKonten/stage-on33.png'),
         telkomNon  : require('../../../../../../../../assets/detailKonten/stage-off03.png'),
-      }
+      },
+      arrowGrey:require('../../../../../../../../assets/Arrow/arrowGrey.png'),
     };
+
+    const desPresentase = (parseInt(DesMonitorDone) / parseInt(DesMonitor))*100;
 
     const{
       //prospect
       ebisProspectREVENUE2,ebisProspectProject2,dataMitra2,
+      DesMonitor, DesMonitorWP, DesMonitorDone, DesMonitorDoneWP,
+      DesMonitorOgp, DesMonitorOgpWP
     } = this.props;
 
-    const {statusAll, statusSubs, statusMitra, statusTelkom} = this.state;
+    const {statusAll, statusSubs, statusMitra, statusTelkom, dataEbis} = this.state;
 
     return(
       <View style={{backgroundColor:'#FFF', flex:1}}>
@@ -515,23 +605,11 @@ class DbsDetailScreens extends Component{
             }
           </TouchableOpacity>
         </View>
-
-        <View style={styles.buttonTab}>
-          <TouchableOpacity style={styles.buttonTabStyle}>
-            <Text>Monitor KB</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.buttonTabStyle}>
-            <Text>Monitor KL</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.buttonTabStyle}>
-            <Text>Monitor Delivery</Text>
-          </TouchableOpacity>
-        </View>
         
         <View style={styles.wrapperHeaderContent}>
           <View style={{width:wp('70%')}}>
             {renderIf(!statusAll)(
-              <Text style={{textAlign:'center', color:'#FFF'}}>ALL</Text>              
+              <Text style={{textAlign:'center', color:'#FFF'}}>NAMA</Text>              
             )}
 
             {renderIf(!statusSubs)(
@@ -554,30 +632,118 @@ class DbsDetailScreens extends Component{
         {/* <ScrollView> */}
           <Content style={{backgroundColor:'#FFF'}}>
             {renderIf(!statusAll)(
-              <View>
-                <FlatList
-                  data={dataMitra2}
-                  keyExtractor={(item, index) => index.toString()}
-                  renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModal(item.MITRA)}> 
-                      <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
-                        <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
-                      </View>
-                      <View style={{width:wp('65%')}}>
-                        <Text>{item.MITRA}</Text>
-                      </View>
-                      <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center'}}>{item.jumlah}M</Text>                    
-                      </View>
-                    </TouchableOpacity>
-                  )}
-                />
-                <Modal 
-                  isVisible={this.state.visibleModal === true}
-                  onBackdropPress={() => this.setState({ visibleModal: false })}>
-                  {this.renderModalContent()}
-                </Modal>
-              </View>
+              <View style={{ margin: hp('2%')}}>
+                    <View style={styles.wrapperArrow}>
+                        <Image 
+                            source={images.Win.arrowWin1}
+                            style={styles.imageStyle}
+                            resizeMode={'stretch'}
+                        />
+            
+                        <TouchableOpacity style={styles.containerArrowWin}>
+                            <Text style={styles.textJudul}>WIN</Text>
+                            <Text style={styles.textIsi}>{DesMonitor}M</Text>
+                            <Text style={styles.textKeterangan}>per {DesMonitorWP} Project</Text>
+                        </TouchableOpacity>
+            
+                        <Image 
+                            source={images.Win.arrowWin3}
+                            style={styles.imageStyle}
+                            resizeMode={'stretch'}
+                        />
+            
+                        <View style={styles.containerArrowWin2}>
+                            <Text style={styles.textJudul}>Done KB</Text>
+                            <Text style={styles.textIsi}>{DesMonitorDone}M</Text>
+                            <Text style={styles.textKeterangan}>per {DesMonitorDoneWP} Project</Text>
+                        </View>
+            
+                        <Image 
+                            source={images.arrowGrey}
+                            style={styles.imageStyle}
+                            resizeMode={'stretch'}
+                        />
+            
+                        <View style={styles.wrapperPresentase}>
+                            <View style={styles.wrapperTextPresentase}>
+                            <Text style={styles.textJudul}>10%</Text>
+                            </View>
+                        </View>
+                    </View>
+                    <View style={styles.wrapperArrow}>
+                        <Image 
+                            source={images.Win.arrowWin1}
+                            style={styles.imageStyle}
+                            resizeMode={'stretch'}
+                        />
+            
+                        <TouchableOpacity style={styles.containerArrowWin}>
+                            <Text style={styles.textJudul}>WIN</Text>
+                            <Text style={styles.textIsi}>{DesMonitor}M</Text>
+                            <Text style={styles.textKeterangan}>per {DesMonitorWP} Project</Text>
+                        </TouchableOpacity>
+            
+                        <Image 
+                            source={images.Win.arrowWin3}
+                            style={styles.imageStyle}
+                            resizeMode={'stretch'}
+                        />
+            
+                        <View style={styles.containerArrowWin2}>
+                            <Text style={styles.textJudul}>OGP KB</Text>
+                            <Text style={styles.textIsi}>{DesMonitorOgp}M</Text>
+                            <Text style={styles.textKeterangan}>per {DesMonitorOgpWP} Project</Text>
+                        </View>
+            
+                        <Image 
+                            source={images.arrowGrey}
+                            style={styles.imageStyle}
+                            resizeMode={'stretch'}
+                        />
+            
+                        <View style={styles.wrapperPresentase}>
+                            <View style={styles.wrapperTextPresentase}>
+                            <Text style={styles.textJudul}>10%</Text>
+                            </View>
+                        </View>
+                    </View>
+
+                    <View style={{ flexDirection: 'row', margin: hp('2%'), justifyContent: 'space-between' }}>
+                        <View style={{ marginBottom: hp('2%')}}>
+                            <Text style={[styles.textJudul, {marginBottom: 20, alignItems: 'center'}]}>Progress OGP KB &#60; 3 Hari</Text>
+                        </View>
+
+                        <View>
+                            <Text style={styles.textIsi}>{DesMonitorOgp}M</Text>
+                            <Text style={styles.textKeterangan}>per {DesMonitorOgpWP} Project</Text>
+                        </View>
+                        
+                    </View>
+
+                    <View style={{ flexDirection: 'row', margin: hp('2%'), justifyContent: 'space-between' }}>
+                        <View style={{ marginBottom: hp('2%')}}>
+                            <Text style={[styles.textJudul, {marginBottom: 20, alignItems: 'center'}]}>Progress OGP KB &#60; 7 Hari</Text>
+                        </View>
+
+                        <View>
+                            <Text style={styles.textIsi}>{DesMonitorOgp}M</Text>
+                            <Text style={styles.textKeterangan}>per {DesMonitorOgpWP} Project</Text>
+                        </View>
+                        
+                    </View>
+
+                    <View style={{ flexDirection: 'row', margin: hp('2%'), justifyContent: 'space-between' }}>
+                        <View style={{ marginBottom: hp('2%')}}>
+                            <Text style={[styles.textJudul, {marginBottom: 20, alignItems: 'center'}]}>Progress OGP KB &#62; 7 Hari</Text>
+                        </View>
+
+                        <View>
+                            <Text style={styles.textIsi}>{DesMonitorOgp}M</Text>
+                            <Text style={styles.textKeterangan}>per {DesMonitorOgpWP} Project</Text>
+                        </View>
+                        
+                    </View>
+                </View>
             )}
 
             {renderIf(!statusSubs)(
@@ -617,6 +783,7 @@ class DbsDetailScreens extends Component{
       Win: {
         arrowWin1: require('../../../../../../../../assets/Arrow/arrowWin.png'),
         arrowWin2: require('../../../../../../../../assets/Arrow/arrowWin3.png'),
+        arrowWin3: require('../../../../../../../../assets/Arrow/arrowWin2.png'),
       },
       Billcom: {
         arrowBil1: require('../../../../../../../../assets/Arrow/arrowBillcom.png'),
@@ -639,15 +806,18 @@ class DbsDetailScreens extends Component{
       telkomImage:{
         telkomAktif: require('../../../../../../../../assets/detailKonten/stage-on33.png'),
         telkomNon  : require('../../../../../../../../assets/detailKonten/stage-off03.png'),
-      }
+      },
+      arrowGrey:require('../../../../../../../../assets/Arrow/arrowGrey.png'),
     };
 
     const{
       //prospect
       ebisProspectREVENUE3,ebisProspectProject3,dataMitra3,
+      DbsMonitor, DbsMonitorWP, DbsMonitorDone, DbsMonitorDoneWP,
+      DbsMonitorOgp, DbsMonitorOgpWP
     } = this.props;
 
-    const {statusAll, statusSubs, statusMitra, statusTelkom} = this.state;
+    const {statusAll, statusSubs, statusMitra, statusTelkom, dataEbis} = this.state;
 
     return(
       <View style={{backgroundColor:'#FFF', flex:1}}>
@@ -738,23 +908,11 @@ class DbsDetailScreens extends Component{
             }
           </TouchableOpacity>
         </View>
-
-        <View style={styles.buttonTab}>
-          <TouchableOpacity style={styles.buttonTabStyle}>
-            <Text>Monitor KB</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.buttonTabStyle}>
-            <Text>Monitor KL</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.buttonTabStyle}>
-            <Text>Monitor Delivery</Text>
-          </TouchableOpacity>
-        </View>
         
         <View style={styles.wrapperHeaderContent}>
           <View style={{width:wp('70%')}}>
             {renderIf(!statusAll)(
-              <Text style={{textAlign:'center', color:'#FFF'}}>ALL</Text>              
+              <Text style={{textAlign:'center', color:'#FFF'}}>NAMA</Text>              
             )}
 
             {renderIf(!statusSubs)(
@@ -777,30 +935,118 @@ class DbsDetailScreens extends Component{
         {/* <ScrollView> */}
           <Content style={{backgroundColor:'#FFF'}}>
             {renderIf(!statusAll)(
-              <View>
-                <FlatList
-                  data={dataMitra3}
-                  keyExtractor={(item, index) => index.toString()}
-                  renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModal(item.MITRA)}> 
-                      <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
-                        <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
-                      </View>
-                      <View style={{width:wp('65%')}}>
-                        <Text>{item.MITRA}</Text>
-                      </View>
-                      <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center'}}>{item.jumlah}M</Text>                    
-                      </View>
+              <View style={{ margin: hp('2%') }}>
+                <View style={styles.wrapperArrow}>
+                    <Image 
+                        source={images.Win.arrowWin1}
+                        style={styles.imageStyle}
+                        resizeMode={'stretch'}
+                    />
+        
+                    <TouchableOpacity style={styles.containerArrowWin}>
+                        <Text style={styles.textJudul}>WIN</Text>
+                        <Text style={styles.textIsi}>{DbsMonitor}M</Text>
+                        <Text style={styles.textKeterangan}>per {DbsMonitorWP} Project</Text>
                     </TouchableOpacity>
-                  )}
-                />
-                <Modal 
-                  isVisible={this.state.visibleModal === true}
-                  onBackdropPress={() => this.setState({ visibleModal: false })}>
-                  {this.renderModalContent()}
-                </Modal>
-              </View>
+        
+                    <Image 
+                        source={images.Win.arrowWin3}
+                        style={styles.imageStyle}
+                        resizeMode={'stretch'}
+                    />
+        
+                    <View style={styles.containerArrowWin2}>
+                        <Text style={styles.textJudul}>Done KB</Text>
+                        <Text style={styles.textIsi}>{DbsMonitorDone}M</Text>
+                        <Text style={styles.textKeterangan}>per {DbsMonitorDoneWP} Project</Text>
+                    </View>
+        
+                    <Image 
+                        source={images.arrowGrey}
+                        style={styles.imageStyle}
+                        resizeMode={'stretch'}
+                    />
+        
+                    <View style={styles.wrapperPresentase}>
+                        <View style={styles.wrapperTextPresentase}>
+                        <Text style={styles.textJudul}>10%</Text>
+                        </View>
+                    </View>
+                </View>
+                <View style={styles.wrapperArrow}>
+                    <Image 
+                        source={images.Win.arrowWin1}
+                        style={styles.imageStyle}
+                        resizeMode={'stretch'}
+                    />
+        
+                    <TouchableOpacity style={styles.containerArrowWin}>
+                        <Text style={styles.textJudul}>WIN</Text>
+                        <Text style={styles.textIsi}>{DbsMonitor}M</Text>
+                        <Text style={styles.textKeterangan}>per {DbsMonitorWP} Project</Text>
+                    </TouchableOpacity>
+        
+                    <Image 
+                        source={images.Win.arrowWin3}
+                        style={styles.imageStyle}
+                        resizeMode={'stretch'}
+                    />
+        
+                    <View style={styles.containerArrowWin2}>
+                        <Text style={styles.textJudul}>OGP KB</Text>
+                        <Text style={styles.textIsi}>{DbsMonitorOgp}M</Text>
+                        <Text style={styles.textKeterangan}>per {DbsMonitorOgpWP} Project</Text>
+                    </View>
+        
+                    <Image 
+                        source={images.arrowGrey}
+                        style={styles.imageStyle}
+                        resizeMode={'stretch'}
+                    />
+        
+                    <View style={styles.wrapperPresentase}>
+                        <View style={styles.wrapperTextPresentase}>
+                        <Text style={styles.textJudul}>10%</Text>
+                        </View>
+                    </View>
+                </View>
+
+                <View style={{ flexDirection: 'row', margin: hp('2%'), justifyContent: 'space-between' }}>
+                        <View style={{ marginBottom: hp('2%')}}>
+                            <Text style={[styles.textJudul, {marginBottom: 20, alignItems: 'center'}]}>Progress OGP KB &#60; 3 Hari</Text>
+                        </View>
+
+                        <View>
+                            <Text style={styles.textIsi}>{DbsMonitorOgp}M</Text>
+                            <Text style={styles.textKeterangan}>per {DbsMonitorOgpWP} Project</Text>
+                        </View>
+                        
+                    </View>
+
+                    <View style={{ flexDirection: 'row', margin: hp('2%'), justifyContent: 'space-between' }}>
+                        <View style={{ marginBottom: hp('2%')}}>
+                            <Text style={[styles.textJudul, {marginBottom: 20, alignItems: 'center'}]}>Progress OGP KB &#60; 7 Hari</Text>
+                        </View>
+
+                        <View>
+                            <Text style={styles.textIsi}>{DbsMonitorOgp}M</Text>
+                            <Text style={styles.textKeterangan}>per {DbsMonitorOgpWP} Project</Text>
+                        </View>
+                        
+                    </View>
+
+                    <View style={{ flexDirection: 'row', margin: hp('2%'), justifyContent: 'space-between' }}>
+                        <View style={{ marginBottom: hp('2%')}}>
+                            <Text style={[styles.textJudul, {marginBottom: 20, alignItems: 'center'}]}>Progress OGP KB &#62; 7 Hari</Text>
+                        </View>
+
+                        <View>
+                            <Text style={styles.textIsi}>{DbsMonitorOgp}M</Text>
+                            <Text style={styles.textKeterangan}>per {DbsMonitorOgpWP} Project</Text>
+                        </View>
+                        
+                    </View>
+            </View>
             )}
 
             {renderIf(!statusSubs)(
@@ -840,6 +1086,7 @@ class DbsDetailScreens extends Component{
       Win: {
         arrowWin1: require('../../../../../../../../assets/Arrow/arrowWin.png'),
         arrowWin2: require('../../../../../../../../assets/Arrow/arrowWin3.png'),
+        arrowWin3: require('../../../../../../../../assets/Arrow/arrowWin2.png'),
       },
       Billcom: {
         arrowBil1: require('../../../../../../../../assets/Arrow/arrowBillcom.png'),
@@ -862,15 +1109,18 @@ class DbsDetailScreens extends Component{
       telkomImage:{
         telkomAktif: require('../../../../../../../../assets/detailKonten/stage-on33.png'),
         telkomNon  : require('../../../../../../../../assets/detailKonten/stage-off03.png'),
-      }
+      },
+      arrowGrey:require('../../../../../../../../assets/Arrow/arrowGrey.png'),
     };
 
     const{
       //prospect
       ebisProspectREVENUE4,ebisProspectProject4,dataMitra4,
+      DgsMonitor, DgsMonitorWP, DgsMonitorDone, DgsMonitorDoneWP,
+      DgsMonitorOgp, DgsMonitorOgpWP
     } = this.props;
 
-    const {statusAll, statusSubs, statusMitra, statusTelkom} = this.state;
+    const {statusAll, statusSubs, statusMitra, statusTelkom, dataEbis} = this.state;
 
     return(
       <View style={{backgroundColor:'#FFF', flex:1}}>
@@ -962,22 +1212,10 @@ class DbsDetailScreens extends Component{
           </TouchableOpacity>
         </View>
 
-        <View style={styles.buttonTab}>
-          <TouchableOpacity style={styles.buttonTabStyle} onPress={() => this.props.navigation.navigate('MonitorKB')}>
-            <Text>Monitor KB</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.buttonTabStyle}>
-            <Text>Monitor KL</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.buttonTabStyle}>
-            <Text>Monitor Delivery</Text>
-          </TouchableOpacity>
-        </View>
-        
         <View style={styles.wrapperHeaderContent}>
           <View style={{width:wp('70%')}}>
             {renderIf(!statusAll)(
-              <Text style={{textAlign:'center', color:'#FFF'}}>ALL</Text>              
+              <Text style={{textAlign:'center', color:'#FFF'}}>NAMA</Text>              
             )}
 
             {renderIf(!statusSubs)(
@@ -1000,30 +1238,118 @@ class DbsDetailScreens extends Component{
         {/* <ScrollView> */}
           <Content style={{backgroundColor:'#FFF'}}>
             {renderIf(!statusAll)(
-              <View>
-                <FlatList
-                  data={dataMitra4}
-                  keyExtractor={(item, index) => index.toString()}
-                  renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModal(item.MITRA)}> 
-                      <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
-                        <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
-                      </View>
-                      <View style={{width:wp('65%')}}>
-                        <Text>{item.MITRA}</Text>
-                      </View>
-                      <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center'}}>{item.jumlah}M</Text>                    
-                      </View>
+              <View style={{ margin: hp('2%') }}>
+                <View style={styles.wrapperArrow}>
+                    <Image 
+                        source={images.Win.arrowWin1}
+                        style={styles.imageStyle}
+                        resizeMode={'stretch'}
+                    />
+        
+                    <TouchableOpacity style={styles.containerArrowWin}>
+                        <Text style={styles.textJudul}>WIN</Text>
+                        <Text style={styles.textIsi}>{DgsMonitor}M</Text>
+                        <Text style={styles.textKeterangan}>per {DgsMonitorWP} Project</Text>
                     </TouchableOpacity>
-                  )}
-                />
-                <Modal 
-                  isVisible={this.state.visibleModal === true}
-                  onBackdropPress={() => this.setState({ visibleModal: false })}>
-                  {this.renderModalContent()}
-                </Modal>
-              </View>
+        
+                    <Image 
+                        source={images.Win.arrowWin3}
+                        style={styles.imageStyle}
+                        resizeMode={'stretch'}
+                    />
+        
+                    <View style={styles.containerArrowWin2}>
+                        <Text style={styles.textJudul}>Done KB</Text>
+                        <Text style={styles.textIsi}>{DgsMonitorDone}M</Text>
+                        <Text style={styles.textKeterangan}>per {DgsMonitorDoneWP} Project</Text>
+                    </View>
+        
+                    <Image 
+                        source={images.arrowGrey}
+                        style={styles.imageStyle}
+                        resizeMode={'stretch'}
+                    />
+        
+                    <View style={styles.wrapperPresentase}>
+                        <View style={styles.wrapperTextPresentase}>
+                        <Text style={styles.textJudul}>10%</Text>
+                        </View>
+                    </View>
+                </View>
+                <View style={styles.wrapperArrow}>
+                    <Image 
+                        source={images.Win.arrowWin1}
+                        style={styles.imageStyle}
+                        resizeMode={'stretch'}
+                    />
+        
+                    <TouchableOpacity style={styles.containerArrowWin}>
+                        <Text style={styles.textJudul}>WIN</Text>
+                        <Text style={styles.textIsi}>{DgsMonitor}M</Text>
+                        <Text style={styles.textKeterangan}>per {DgsMonitorWP} Project</Text>
+                    </TouchableOpacity>
+        
+                    <Image 
+                        source={images.Win.arrowWin3}
+                        style={styles.imageStyle}
+                        resizeMode={'stretch'}
+                    />
+        
+                    <View style={styles.containerArrowWin2}>
+                        <Text style={styles.textJudul}>OGP KB</Text>
+                        <Text style={styles.textIsi}>{DgsMonitorOgp}M</Text>
+                        <Text style={styles.textKeterangan}>per {DgsMonitorOgpWP} Project</Text>
+                    </View>
+        
+                    <Image 
+                        source={images.arrowGrey}
+                        style={styles.imageStyle}
+                        resizeMode={'stretch'}
+                    />
+        
+                    <View style={styles.wrapperPresentase}>
+                        <View style={styles.wrapperTextPresentase}>
+                        <Text style={styles.textJudul}>10%</Text>
+                        </View>
+                    </View>
+                </View>
+
+                <View style={{ flexDirection: 'row', margin: hp('2%'), justifyContent: 'space-between' }}>
+                        <View style={{ marginBottom: hp('2%')}}>
+                            <Text style={[styles.textJudul, {marginBottom: 20, alignItems: 'center'}]}>Progress OGP KB &#60; 3 Hari</Text>
+                        </View>
+
+                        <View>
+                            <Text style={styles.textIsi}>{DgsMonitorOgp}M</Text>
+                            <Text style={styles.textKeterangan}>per {DgsMonitorOgpWP} Project</Text>
+                        </View>
+                        
+                    </View>
+
+                    <View style={{ flexDirection: 'row', margin: hp('2%'), justifyContent: 'space-between' }}>
+                        <View style={{ marginBottom: hp('2%')}}>
+                            <Text style={[styles.textJudul, {marginBottom: 20, alignItems: 'center'}]}>Progress OGP KB &#60; 7 Hari</Text>
+                        </View>
+
+                        <View>
+                            <Text style={styles.textIsi}>{DgsMonitorOgp}M</Text>
+                            <Text style={styles.textKeterangan}>per {DgsMonitorOgpWP} Project</Text>
+                        </View>
+                        
+                    </View>
+
+                    <View style={{ flexDirection: 'row', margin: hp('2%'), justifyContent: 'space-between' }}>
+                        <View style={{ marginBottom: hp('2%')}}>
+                            <Text style={[styles.textJudul, {marginBottom: 20, alignItems: 'center'}]}>Progress OGP KB &#62; 7 Hari</Text>
+                        </View>
+
+                        <View>
+                            <Text style={styles.textIsi}>{DgsMonitorOgp}M</Text>
+                            <Text style={styles.textKeterangan}>per {DgsMonitorOgpWP} Project</Text>
+                        </View>
+                        
+                    </View>
+            </View>
             )}
 
             {renderIf(!statusSubs)(
@@ -1072,7 +1398,7 @@ class DbsDetailScreens extends Component{
             </Button>
           </Left>
           <Body>
-            <Title style={{color:'#FFF'}}>Detail Screen</Title>
+            <Title style={{color:'#FFF'}}>Monitor KB</Title>
           </Body>
           <Right/>
         </Header>
@@ -1124,6 +1450,38 @@ const mapStateToProps = (state) => ({
   dataMitra2:state.DesDetailReducer.dataMitra,
   dataMitra3:state.DbsDetailReducer.dataMitra,
   dataMitra4:state.DgsDetailReducer.dataMitra,
+
+  //MonitorEBIS
+  ebisMonitor: state.MonitorEbisReducer.dataEbisWin,
+  ebisMonitorWP: state.MonitorEbisReducer.dataEbisWP,
+  ebisMonitorDone: state.MonitorEbisReducer.dataEbisDoneWin,
+  ebisMonitorDoneWP: state.MonitorEbisReducer.dataEbisDoneWP,
+  ebisMonitorOgp: state.MonitorEbisReducer.dataEbisOgpWin,
+  ebisMonitorOgpWP: state.MonitorEbisReducer.dataEbisOgpWP,
+
+  //MonitorDES
+  DesMonitor: state.MonitorDesReducer.dataDesWin,
+  DesMonitorWP: state.MonitorDesReducer.dataDesWP,
+  DesMonitorDone: state.MonitorDesReducer.dataDesDoneWin,
+  DesMonitorDoneWP: state.MonitorDesReducer.dataDesDoneWP,
+  DesMonitorOgp: state.MonitorDesReducer.dataDesOgpWin,
+  DesMonitorOgpWP: state.MonitorDesReducer.dataDesOgpWP,
+
+  //MonitorDBS
+  DbsMonitor: state.MonitorDbsReducer.dataDbsWin,
+  DbsMonitorWP: state.MonitorDbsReducer.dataDbsWP,
+  DbsMonitorDone: state.MonitorDbsReducer.dataDbsDoneWin,
+  DbsMonitorDoneWP: state.MonitorDbsReducer.dataDbsDoneWP,
+  DbsMonitorOgp: state.MonitorDbsReducer.dataDbsOgpWin,
+  DbsMonitorOgpWP: state.MonitorDbsReducer.dataDbsOgpWP,
+
+  //Monitor DGS
+  DgsMonitor: state.MonitorDgsReducer.dataDgsWin,
+  DgsMonitorWP: state.MonitorDgsReducer.dataDgsWp,
+  DgsMonitorDone: state.MonitorDgsReducer.dataDgsDoneWin,
+  DgsMonitorDoneWP: state.MonitorDgsReducer.dataDgsDoneWp,
+  DgsMonitorOgp: state.MonitorDgsReducer.dataDgsOgpWin,
+  DgsMonitorOgpWP: state.MonitorDgsReducer.dataDgsOgpWp,
 })
 
 export default connect(mapStateToProps)(DbsDetailScreens);
@@ -1197,6 +1555,17 @@ const styles = StyleSheet.create({
     justifyContent:'center',
     alignItems:'center'
   },
+  wrapperPresentase:{
+    flexDirection:'row',
+    justifyContent:'space-around',
+    alignSelf:'center',
+    alignItems:'center',
+    width:wp('22%'),
+  },
+  wrapperTextPresentase:{
+    justifyContent:'center',
+    alignSelf:'center'
+  },
   containerArrowSubmission2:{
     marginLeft:wp('.5'),
     marginRight:wp('.5'),
@@ -1211,10 +1580,11 @@ const styles = StyleSheet.create({
     alignItems:'center'
   },
   containerArrowWin2:{
-    marginLeft:wp('.5'),
-    marginRight:wp('.5'),
     height:hp('9%'), 
-    width:wp('13%'), 
+    width:wp('24%'), 
+    backgroundColor:'#dfdfdd',
+    justifyContent:'center',
+    alignItems:'center'
   },
   containerArrowBill:{
     height:hp('9%'), 

@@ -114,6 +114,80 @@ class Dashboard extends Component {
       type:'DETAIL_PROSPECT_DGS',
       payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/DGS/maindiv/DGS/mainseg/ALL/start_date/2018001/end_date/201811`)
     });
+
+    //MonitorKB
+    //EBIS
+    this.props.dispatch({
+      type: 'MONITOR_KB_EBIS',
+      payload: axios.get(`${url.API}/ebis_getwinsum/div/EBIS/treg/ALL/witel/ALL/startdate/201801/enddate/201811`)
+    })
+
+    //EBIS DONE
+    this.props.dispatch({
+      type: 'MONITOR_KB_EBIS_DONE',
+      payload: axios.get(`${url.API}/ebis_getKBstatesum/div/EBIS/treg/ALL/witel/ALL/startdate/201801/enddate/201811/state/DONE`)
+    })
+
+    //EBIS OGP
+    this.props.dispatch({
+      type: 'MONITOR_KB_EBIS_OGP',
+      payload: axios.get(`${url.API}/ebis_getKBstatesum/div/EBIS/treg`)
+    })
+
+    //DES
+    this.props.dispatch({
+      type: 'MONITOR_KB_DES',
+      payload: axios.get(`${url.API}/ebis_getwinsum/div/DES/treg/ALL/witel/ALL/startdate/201801/enddate/201811`)
+    })
+
+    //DES DONE
+    this.props.dispatch({
+      type: 'MONITOR_KB_DES_DONE',
+      payload: axios.get(`${url.API}/ebis_getKBstatesum/div/DES/treg/ALL/witel/ALL/startdate/201801/enddate/201811/state/DONE`)
+    })
+
+    //DES OGP
+    this.props.dispatch({
+      type: 'MONITOR_KB_DES_OGP',
+      payload: axios.get(`${url.API}/ebis_getKBstatesum/div/DES/treg`)
+    })
+
+     //DBS
+     this.props.dispatch({
+      type: 'MONITOR_KB_DBS',
+      payload: axios.get(`${url.API}/ebis_getwinsum/div/DBS/treg/ALL/witel/ALL/startdate/201801/enddate/201811`)
+    })
+
+    //DBS DONE
+    this.props.dispatch({
+      type: 'MONITOR_KB_DBS_DONE',
+      payload: axios.get(`${url.API}/ebis_getKBstatesum/div/DBS/treg/ALL/witel/ALL/startdate/201801/enddate/201811/state/DONE`)
+    })
+
+    //DES OGP
+    this.props.dispatch({
+      type: 'MONITOR_KB_DBS_OGP',
+      payload: axios.get(`${url.API}/ebis_getKBstatesum/div/DBS/treg`)
+    })
+
+    //DGS
+    this.props.dispatch({
+      type: 'MONITOR_KB_DGS',
+      payload: axios.get(`${url.API}/ebis_getwinsum/div/DGS/treg/ALL/witel/ALL/startdate/201801/enddate/201811`)
+    })
+
+    //DGS DONE
+    this.props.dispatch({
+      type: 'MONITOR_KB_DGS_DONE',
+      payload: axios.get(`${url.API}/ebis_getKBstatesum/div/DGS/treg/ALL/witel/ALL/startdate/201801/enddate/201811/state/DONE`)
+    })
+
+    //DGS OGP
+    this.props.dispatch({
+      type: 'MONITOR_KB_DGS_OGP',
+      payload: axios.get(`${url.API}/ebis_getKBstatesum/div/DGS/treg`)
+    })
+    
   }
 
   render() {
