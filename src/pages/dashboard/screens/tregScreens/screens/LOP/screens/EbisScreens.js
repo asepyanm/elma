@@ -44,23 +44,39 @@ class EbisScreens extends Component{
 
   renderFilterRegional(option){
     let dataFilter = option.value;
-
     this.setState({
       statusGetReg:true
     })
 
-    axios.get(`${url.API}/ebis_getwitel/reg/${dataFilter}`).then((res)=>{
-      console.log(res);
-      this.setState({
-        statusRegTreg:dataFilter,
-        statusGetReg:false,
-        dataRegionalWitel:res.data
+    if(dataFilter === 'All'){
+      this.props.dispatch({
+        type:'EBIS_HOME_TREG',
+        payload:axios.get(`${url.API}/ebis_getlopmainytd_treg/startdate/201801/enddate/201807/div/EBIS/witel/ALL/treg/ALL`)
       })
-    }).catch((err)=> {
+  
+      this.props.dispatch({
+        type:'EBIS_HOME_CURRENT_TREG',
+        payload:axios.get(`${url.API}/ebis_getlopmaincurrent_treg/witel/ALL/treg/ALL/div/EBIS`)
+      })
+
       this.setState({
+        dataRegionalWitel:[],
         statusGetReg:false
       })
-    })
+    } else {
+      axios.get(`${url.API}/ebis_getwitel/reg/${dataFilter}`).then((res)=>{
+        console.log(res);
+        this.setState({
+          statusRegTreg:dataFilter,
+          statusGetReg:false,
+          dataRegionalWitel:res.data
+        })
+      }).catch((err)=> {
+        this.setState({
+          statusGetReg:false
+        })
+      })
+    }
   }
 
   renderFilterData(option){
