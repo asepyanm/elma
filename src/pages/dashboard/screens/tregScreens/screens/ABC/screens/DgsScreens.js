@@ -9,14 +9,88 @@ import {
 } from 'react-native';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import {connect} from 'react-redux';
+import ModalSelector from 'react-native-modal-selector';
+import axios from 'axios';
 
+//global
+import url from '../../../../../../../config/api_service';
 class DgsScreens extends Component{
   constructor(props){
     super(props);
     this.state = {
       data:[],
+
+      //state pilihan regional
+      dataRegionalWitel:[],
+      statusGetReg:false,
+      statusRegTreg:''
     }
   }
+
+  componentWillMount(){
+    this.props.dispatch({
+      type:'DGS_ABC_TREG',
+      payload:axios.get(`${url.API}/ebis_getlopmainabc_treg/witel/ALL/treg/ALL/div/DGS`)
+    })
+
+    this.props.dispatch({
+      type:'DGS_CURRENT_ABC_TREG',
+      payload:axios.get(`${url.API}/ebis_getlopmaincurrentabc_treg/witel/ALL/treg/ALL/div/DGS`)
+    })
+  }
+
+  renderFilterRegional(option){
+    let dataFilter = option.value;
+    this.setState({
+      statusGetReg:true
+    })
+
+    if(dataFilter === 'All'){
+      this.props.dispatch({
+        type:'DGS_ABC_TREG',
+        payload:axios.get(`${url.API}/ebis_getlopmainabc_treg/witel/ALL/treg/ALL/div/DGS`)
+      })
+  
+      this.props.dispatch({
+        type:'DGS_CURRENT_ABC_TREG',
+        payload:axios.get(`${url.API}/ebis_getlopmaincurrentabc_treg/witel/ALL/treg/ALL/div/DGS`)
+      })
+
+      this.setState({
+        dataRegionalWitel:[],
+        statusGetReg:false
+      })
+    } else {
+      axios.get(`${url.API}/ebis_getwitel/reg/${dataFilter}`).then((res)=>{
+        console.log(res);
+        this.setState({
+          statusRegTreg:dataFilter,
+          statusGetReg:false,
+          dataRegionalWitel:res.data
+        })
+      }).catch((err)=> {
+        this.setState({
+          statusGetReg:false
+        })
+      })
+    }
+  }
+
+  renderFilterData(option){
+    const {statusRegTreg} = this.state;
+    let dataWitel = option.W1;
+
+    this.props.dispatch({
+      type:'DGS_ABC_TREG',
+      payload:axios.get(`${url.API}/ebis_getlopmainabc_treg/witel/${dataWitel}/treg/${statusRegTreg}/div/DGS`)
+    })
+
+    this.props.dispatch({
+      type:'DGS_CURRENT_ABC_TREG',
+      payload:axios.get(`${url.API}/ebis_getlopmaincurrentabc_treg/witel/${dataWitel}/treg/${statusRegTreg}/div/DGS`)
+    })
+  }
+  
   
   render() {
     var date = new Date().getDate();
@@ -26,20 +100,31 @@ class DgsScreens extends Component{
     var dateNow = `${date}-${month}-${year}`
 
     let index = 0;
-      const data = [
-          { key: index++, label: 'Jan 2018', value:'201801'},
-          { key: index++, label: 'Feb 2018', value:'201802'},
-          { key: index++, label: 'Mar 2018', value:'201803'},
-          { key: index++, label: 'Apr 2018', value:'201804'},
-          { key: index++, label: 'Mei 2018', value:'201805'},
-          { key: index++, label: 'Jun 2018', value:'201806'},
-          { key: index++, label: 'Jul 2018', value:'201807'},
-          { key: index++, label: 'Agu 2018', value:'201808'},
-          { key: index++, label: 'Sep 2018', value:'201809'},
-          { key: index++, label: 'Okt 2018', value:'201810'},
-          { key: index++, label: 'Nov 2018', value:'201811'},
-          { key: index++, label: 'Des 2018', value:'201812'},
-      ];
+    const data = [
+      { key: index++, label: 'Jan 2018', value:'201801'},
+      { key: index++, label: 'Feb 2018', value:'201802'},
+      { key: index++, label: 'Mar 2018', value:'201803'},
+      { key: index++, label: 'Apr 2018', value:'201804'},
+      { key: index++, label: 'Mei 2018', value:'201805'},
+      { key: index++, label: 'Jun 2018', value:'201806'},
+      { key: index++, label: 'Jul 2018', value:'201807'},
+      { key: index++, label: 'Agu 2018', value:'201808'},
+      { key: index++, label: 'Sep 2018', value:'201809'},
+      { key: index++, label: 'Okt 2018', value:'201810'},
+      { key: index++, label: 'Nov 2018', value:'201811'},
+      { key: index++, label: 'Des 2018', value:'201812'},
+    ];
+
+    const regional = [
+      { key: index++, label: 'All Regional', value:'All'},
+      { key: index++, label: 'Reg 1', value:'REG-1'},
+      { key: index++, label: 'Reg 2', value:'REG-2'},
+      { key: index++, label: 'Reg 3', value:'REG-3'},
+      { key: index++, label: 'Reg 4', value:'REG-4'},
+      { key: index++, label: 'Reg 5', value:'REG-5'},
+      { key: index++, label: 'Reg 6', value:'REG-6'},
+      { key: index++, label: 'Reg 7', value:'REG-7'},
+    ];
 
     //import image arrow
     const images = {
@@ -108,8 +193,44 @@ class DgsScreens extends Component{
       currentBIllcomRevenue,currentBillcomProject,currentBIllcomRevenue2,currentBIllcomRevenue3,currentBIllcomRevenue4,
     } = this.props;
 
+    const {dataRegionalWitel, statusGetReg} = this.state;
+
     return (
       <View style={styles.container}>
+        <View style={styles.wrapperPeriode}>
+          <View>
+            <Text style={styles.textPeriode}>Regional</Text>
+          </View>
+
+          <View style={[styles.wrapperModalPeriode,{}]}>
+            <View>
+              <ModalSelector
+                data={regional}
+                overlayStyle={{ backgroundColor: 'rgba(0,0,0,0.8)', justifyContent: 'flex-end' }}
+                selectTextStyle={{textAlign:'center', alignSelf:'center', alignItems:'center'}}
+                initValue="All Regional"
+                selectStyle={styles.modalPeriode}
+                onChange={(option)=> this.renderFilterRegional(option)} 
+              />
+            </View>
+            <View style={{alignSelf:'center', justifyContent:'center'}}>
+              <Text style={{fontSize:20, fontWeight:'bold'}}> - </Text>
+            </View>
+            <View>
+              <ModalSelector
+                data={dataRegionalWitel}
+                disabled={statusGetReg ? true : false}
+                overlayStyle={{ backgroundColor: 'rgba(0,0,0,0.8)', justifyContent: 'flex-end' }}
+                initValue={statusGetReg ? 'Loading...' : 'Pilih'}
+                labelExtractor={(data) => data.W2}
+                keyExtractor={(data)=> data.W1}
+                selectStyle={styles.modalPeriode}
+                onChange={(option)=> this.renderFilterData(option)} 
+              />
+            </View>
+          </View>
+        </View>
+
         <View style={styles.wrapperPeriode}>
           <View>
             <Text style={styles.textPeriode}>YTD Status per {dateNow}</Text>
@@ -793,71 +914,71 @@ class DgsScreens extends Component{
 }
 
 const mapStateToProps = (state) => ({
-  ebisProspectREVENUE:state.DGSReducerABC.ebisProspectREVENUE,
-  ebisProspectProject:state.DGSReducerABC.ebisProspectProject,
-  ebisProspectTargetA:state.DGSReducerABC.ebisProspectTargetA,
-  ebisProspectTargetB:state.DGSReducerABC.ebisProspectTargetB,
-  ebisProspectTargetC:state.DGSReducerABC.ebisProspectTargetC,
-  ebisProspectTargetO:state.DGSReducerABC.ebisProspectTargetO,
+  ebisProspectREVENUE:state.DgsTregReducerAbc.ebisProspectREVENUE,
+  ebisProspectProject:state.DgsTregReducerAbc.ebisProspectProject,
+  ebisProspectTargetA:state.DgsTregReducerAbc.ebisProspectTargetA,
+  ebisProspectTargetB:state.DgsTregReducerAbc.ebisProspectTargetB,
+  ebisProspectTargetC:state.DgsTregReducerAbc.ebisProspectTargetC,
+  ebisProspectTargetO:state.DgsTregReducerAbc.ebisProspectTargetO,
 
-  ebisSubmisionREVENUE:state.DGSReducerABC.ebisSubmisionREVENUE,
-  ebisSubmissionProject:state.DGSReducerABC.ebisSubmissionProject,
-  ebisSubmissionTargetA:state.DGSReducerABC.ebisSubmissionTargetA,
-  ebisSubmissionTargetB:state.DGSReducerABC.ebisSubmissionTargetB,
-  ebisSubmissionTargetC:state.DGSReducerABC.ebisSubmissionTargetC,
-  ebisSubmissionTargetO:state.DGSReducerABC.ebisSubmissionTargetO,
+  ebisSubmisionREVENUE:state.DgsTregReducerAbc.ebisSubmisionREVENUE,
+  ebisSubmissionProject:state.DgsTregReducerAbc.ebisSubmissionProject,
+  ebisSubmissionTargetA:state.DgsTregReducerAbc.ebisSubmissionTargetA,
+  ebisSubmissionTargetB:state.DgsTregReducerAbc.ebisSubmissionTargetB,
+  ebisSubmissionTargetC:state.DgsTregReducerAbc.ebisSubmissionTargetC,
+  ebisSubmissionTargetO:state.DgsTregReducerAbc.ebisSubmissionTargetO,
 
-  ebisWinREVENUE:state.DGSReducerABC.ebisWinREVENUE,
-  ebisWinProject:state.DGSReducerABC.ebisWinProject,
-  ebisWinTargetA:state.DGSReducerABC.ebisWinTargetA,
-  ebisWinTargetB:state.DGSReducerABC.ebisWinTargetB,
-  ebisWinTargetC:state.DGSReducerABC.ebisWinTargetC,
-  ebisWinTargetO:state.DGSReducerABC.ebisWinTargetO,
+  ebisWinREVENUE:state.DgsTregReducerAbc.ebisWinREVENUE,
+  ebisWinProject:state.DgsTregReducerAbc.ebisWinProject,
+  ebisWinTargetA:state.DgsTregReducerAbc.ebisWinTargetA,
+  ebisWinTargetB:state.DgsTregReducerAbc.ebisWinTargetB,
+  ebisWinTargetC:state.DgsTregReducerAbc.ebisWinTargetC,
+  ebisWinTargetO:state.DgsTregReducerAbc.ebisWinTargetO,
 
-  ebisBillcomREVENUE:state.DGSReducerABC.ebisBillcomREVENUE,
-  ebisBillcomeProject:state.DGSReducerABC.ebisBillcomeProject,
-  ebisBillcommTargetA:state.DGSReducerABC.ebisBillcommTargetA,
-  ebisBillcommTargetB:state.DGSReducerABC.ebisBillcommTargetB,
-  ebisBillcommTargetC:state.DGSReducerABC.ebisBillcommTargetC,
-  ebisBillcommTargetO:state.DGSReducerABC.ebisBillcommTargetO,
+  ebisBillcomREVENUE:state.DgsTregReducerAbc.ebisBillcomREVENUE,
+  ebisBillcomeProject:state.DgsTregReducerAbc.ebisBillcomeProject,
+  ebisBillcommTargetA:state.DgsTregReducerAbc.ebisBillcommTargetA,
+  ebisBillcommTargetB:state.DgsTregReducerAbc.ebisBillcommTargetB,
+  ebisBillcommTargetC:state.DgsTregReducerAbc.ebisBillcommTargetC,
+  ebisBillcommTargetO:state.DgsTregReducerAbc.ebisBillcommTargetO,
 
   //submission status
-  SubmissionWINRevenue:state.DGSReducerABC.SubmissionWINRevenue,
-  SubmissionWINRevenue2:state.DGSReducerABC.SubmissionWINRevenue2,
-  SubmissionWINRevenue3:state.DGSReducerABC.SubmissionWINRevenue3,
-  SubmissionWINRevenue4:state.DGSReducerABC.SubmissionWINRevenue4,
-  SubmissionWINProject:state.DGSReducerABC.SubmissionWINProject,
+  SubmissionWINRevenue:state.DgsTregReducerAbc.SubmissionWINRevenue,
+  SubmissionWINRevenue2:state.DgsTregReducerAbc.SubmissionWINRevenue2,
+  SubmissionWINRevenue3:state.DgsTregReducerAbc.SubmissionWINRevenue3,
+  SubmissionWINRevenue4:state.DgsTregReducerAbc.SubmissionWINRevenue4,
+  SubmissionWINProject:state.DgsTregReducerAbc.SubmissionWINProject,
 
-  SubmissionLOOSERevenue:state.DGSReducerABC.SubmissionLOOSERevenue,
-  SubmissionLOOSERevenue2:state.DGSReducerABC.SubmissionLOOSERevenue2,
-  SubmissionLOOSERevenue3:state.DGSReducerABC.SubmissionLOOSERevenue3,
-  SubmissionLOOSERevenue4:state.DGSReducerABC.SubmissionLOOSERevenue4,
-  SubmissionLooseProject:state.DGSReducerABC.SubmissionLooseProject,
+  SubmissionLOOSERevenue:state.DgsTregReducerAbc.SubmissionLOOSERevenue,
+  SubmissionLOOSERevenue2:state.DgsTregReducerAbc.SubmissionLOOSERevenue2,
+  SubmissionLOOSERevenue3:state.DgsTregReducerAbc.SubmissionLOOSERevenue3,
+  SubmissionLOOSERevenue4:state.DgsTregReducerAbc.SubmissionLOOSERevenue4,
+  SubmissionLooseProject:state.DgsTregReducerAbc.SubmissionLooseProject,
 
-  SubmissionWaitingRevenue:state.DGSReducerABC.SubmissionWaitingRevenue,
-  SubmissionWaitingRevenue2:state.DGSReducerABC.SubmissionWaitingRevenue2,
-  SubmissionWaitingRevenue3:state.DGSReducerABC.SubmissionWaitingRevenue3,
-  SubmissionWaitingRevenue4:state.DGSReducerABC.SubmissionWaitingRevenue4,
-  SubmissionWaitingProject:state.DGSReducerABC.SubmissionWaitingProject,
+  SubmissionWaitingRevenue:state.DgsTregReducerAbc.SubmissionWaitingRevenue,
+  SubmissionWaitingRevenue2:state.DgsTregReducerAbc.SubmissionWaitingRevenue2,
+  SubmissionWaitingRevenue3:state.DgsTregReducerAbc.SubmissionWaitingRevenue3,
+  SubmissionWaitingRevenue4:state.DgsTregReducerAbc.SubmissionWaitingRevenue4,
+  SubmissionWaitingProject:state.DgsTregReducerAbc.SubmissionWaitingProject,
 
-  SubmissionCancelRevenue:state.DGSReducerABC.SubmissionCancelRevenue,
-  SubmissionCancelRevenue2:state.DGSReducerABC.SubmissionCancelRevenue2,
-  SubmissionCancelRevenue3:state.DGSReducerABC.SubmissionCancelRevenue3,
-  SubmissionCancelRevenue4:state.DGSReducerABC.SubmissionCancelRevenue4,
-  SubmissionCancekProject:state.DGSReducerABC.SubmissionCancekProject,
+  SubmissionCancelRevenue:state.DgsTregReducerAbc.SubmissionCancelRevenue,
+  SubmissionCancelRevenue2:state.DgsTregReducerAbc.SubmissionCancelRevenue2,
+  SubmissionCancelRevenue3:state.DgsTregReducerAbc.SubmissionCancelRevenue3,
+  SubmissionCancelRevenue4:state.DgsTregReducerAbc.SubmissionCancelRevenue4,
+  SubmissionCancekProject:state.DgsTregReducerAbc.SubmissionCancekProject,
 
   //current status
-  currentProspectRevenue:state.DGSReducerABC.currentProspectRevenue,
-  currentProspectProject:state.DGSReducerABC.currentProspectProject,
+  currentProspectRevenue:state.DgsTregReducerAbc.currentProspectRevenue,
+  currentProspectProject:state.DgsTregReducerAbc.currentProspectProject,
 
-  currentSubmissionRevenue:state.DGSReducerABC.currentSubmissionRevenue,
-  currentSubmissionProject:state.DGSReducerABC.currentSubmissionProject,
+  currentSubmissionRevenue:state.DgsTregReducerAbc.currentSubmissionRevenue,
+  currentSubmissionProject:state.DgsTregReducerAbc.currentSubmissionProject,
 
-  currentWINRevenue:state.DGSReducerABC.currentWINRevenue,
-  currentWINProject:state.DGSReducerABC.currentWINProject,
+  currentWINRevenue:state.DgsTregReducerAbc.currentWINRevenue,
+  currentWINProject:state.DgsTregReducerAbc.currentWINProject,
 
-  currentBIllcomRevenue:state.DGSReducerABC.currentBIllcomRevenue,
-  currentBillcomProject:state.DGSReducerABC.currentBillcomProject,
+  currentBIllcomRevenue:state.DgsTregReducerAbc.currentBIllcomRevenue,
+  currentBillcomProject:state.DgsTregReducerAbc.currentBillcomProject,
 })
 
 export default connect(mapStateToProps)(DgsScreens);

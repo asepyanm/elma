@@ -9,13 +9,86 @@ import {
 } from 'react-native';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import {connect} from 'react-redux';
+import ModalSelector from 'react-native-modal-selector';
+import axios from 'axios';
 
+//global
+import url from '../../../../../../../config/api_service';
 class DbsScreens extends Component{
   constructor(props){
     super(props);
     this.state = {
       data:[],
+
+      //state pilihan regional
+      dataRegionalWitel:[],
+      statusGetReg:false,
+      statusRegTreg:''
     }
+  }
+
+  componentWillMount(){
+    this.props.dispatch({
+      type:'DBS_ABC_TREG',
+      payload:axios.get(`${url.API}/ebis_getlopmainabc_treg/witel/ALL/treg/ALL/div/DBS`)
+    })
+
+    this.props.dispatch({
+      type:'DBS_CURRENT_ABC_TREG',
+      payload:axios.get(`${url.API}/ebis_getlopmaincurrentabc_treg/witel/ALL/treg/ALL/div/DBS`)
+    })
+  }
+
+  renderFilterRegional(option){
+    let dataFilter = option.value;
+    this.setState({
+      statusGetReg:true
+    })
+
+    if(dataFilter === 'All'){
+      this.props.dispatch({
+        type:'DBS_ABC_TREG',
+        payload:axios.get(`${url.API}/ebis_getlopmainabc_treg/witel/ALL/treg/ALL/div/DBS`)
+      })
+  
+      this.props.dispatch({
+        type:'DBS_CURRENT_ABC_TREG',
+        payload:axios.get(`${url.API}/ebis_getlopmaincurrentabc_treg/witel/ALL/treg/ALL/div/DBS`)
+      })
+
+      this.setState({
+        dataRegionalWitel:[],
+        statusGetReg:false
+      })
+    } else {
+      axios.get(`${url.API}/ebis_getwitel/reg/${dataFilter}`).then((res)=>{
+        console.log(res);
+        this.setState({
+          statusRegTreg:dataFilter,
+          statusGetReg:false,
+          dataRegionalWitel:res.data
+        })
+      }).catch((err)=> {
+        this.setState({
+          statusGetReg:false
+        })
+      })
+    }
+  }
+
+  renderFilterData(option){
+    const {statusRegTreg} = this.state;
+    let dataWitel = option.W1;
+
+    this.props.dispatch({
+      type:'DBS_ABC_TREG',
+      payload:axios.get(`${url.API}/ebis_getlopmainabc_treg/witel/${dataWitel}/treg/${statusRegTreg}/div/DBS`)
+    })
+
+    this.props.dispatch({
+      type:'DBS_CURRENT_ABC_TREG',
+      payload:axios.get(`${url.API}/ebis_getlopmaincurrentabc_treg/witel/${dataWitel}/treg/${statusRegTreg}/div/DBS`)
+    })
   }
   
   render() {
@@ -26,20 +99,31 @@ class DbsScreens extends Component{
     var dateNow = `${date}-${month}-${year}`
 
     let index = 0;
-      const data = [
-          { key: index++, label: 'Jan 2018', value:'201801'},
-          { key: index++, label: 'Feb 2018', value:'201802'},
-          { key: index++, label: 'Mar 2018', value:'201803'},
-          { key: index++, label: 'Apr 2018', value:'201804'},
-          { key: index++, label: 'Mei 2018', value:'201805'},
-          { key: index++, label: 'Jun 2018', value:'201806'},
-          { key: index++, label: 'Jul 2018', value:'201807'},
-          { key: index++, label: 'Agu 2018', value:'201808'},
-          { key: index++, label: 'Sep 2018', value:'201809'},
-          { key: index++, label: 'Okt 2018', value:'201810'},
-          { key: index++, label: 'Nov 2018', value:'201811'},
-          { key: index++, label: 'Des 2018', value:'201812'},
-      ];
+    const data = [
+      { key: index++, label: 'Jan 2018', value:'201801'},
+      { key: index++, label: 'Feb 2018', value:'201802'},
+      { key: index++, label: 'Mar 2018', value:'201803'},
+      { key: index++, label: 'Apr 2018', value:'201804'},
+      { key: index++, label: 'Mei 2018', value:'201805'},
+      { key: index++, label: 'Jun 2018', value:'201806'},
+      { key: index++, label: 'Jul 2018', value:'201807'},
+      { key: index++, label: 'Agu 2018', value:'201808'},
+      { key: index++, label: 'Sep 2018', value:'201809'},
+      { key: index++, label: 'Okt 2018', value:'201810'},
+      { key: index++, label: 'Nov 2018', value:'201811'},
+      { key: index++, label: 'Des 2018', value:'201812'},
+    ];
+
+    const regional = [
+      { key: index++, label: 'All Regional', value:'All'},
+      { key: index++, label: 'Reg 1', value:'REG-1'},
+      { key: index++, label: 'Reg 2', value:'REG-2'},
+      { key: index++, label: 'Reg 3', value:'REG-3'},
+      { key: index++, label: 'Reg 4', value:'REG-4'},
+      { key: index++, label: 'Reg 5', value:'REG-5'},
+      { key: index++, label: 'Reg 6', value:'REG-6'},
+      { key: index++, label: 'Reg 7', value:'REG-7'},
+    ];
 
     //import image arrow
     const images = {
@@ -108,8 +192,44 @@ class DbsScreens extends Component{
       currentBIllcomRevenue,currentBillcomProject,currentBIllcomRevenue2,currentBIllcomRevenue3,currentBIllcomRevenue4,
     } = this.props;
 
+    const {dataRegionalWitel, statusGetReg} = this.state;
+
     return (
       <View style={styles.container}>
+        <View style={styles.wrapperPeriode}>
+          <View>
+            <Text style={styles.textPeriode}>Regional</Text>
+          </View>
+
+          <View style={[styles.wrapperModalPeriode,{}]}>
+            <View>
+              <ModalSelector
+                data={regional}
+                overlayStyle={{ backgroundColor: 'rgba(0,0,0,0.8)', justifyContent: 'flex-end' }}
+                selectTextStyle={{textAlign:'center', alignSelf:'center', alignItems:'center'}}
+                initValue="All Regional"
+                selectStyle={styles.modalPeriode}
+                onChange={(option)=> this.renderFilterRegional(option)} 
+              />
+            </View>
+            <View style={{alignSelf:'center', justifyContent:'center'}}>
+              <Text style={{fontSize:20, fontWeight:'bold'}}> - </Text>
+            </View>
+            <View>
+              <ModalSelector
+                data={dataRegionalWitel}
+                disabled={statusGetReg ? true : false}
+                overlayStyle={{ backgroundColor: 'rgba(0,0,0,0.8)', justifyContent: 'flex-end' }}
+                initValue={statusGetReg ? 'Loading...' : 'Pilih'}
+                labelExtractor={(data) => data.W2}
+                keyExtractor={(data)=> data.W1}
+                selectStyle={styles.modalPeriode}
+                onChange={(option)=> this.renderFilterData(option)} 
+              />
+            </View>
+          </View>
+        </View>
+
         <View style={styles.wrapperPeriode}>
           <View>
             <Text style={styles.textPeriode}>YTD Status per {dateNow}</Text>
@@ -793,71 +913,71 @@ class DbsScreens extends Component{
 }
 
 const mapStateToProps = (state) => ({
-  ebisProspectREVENUE:state.DBSReducerABC.ebisProspectREVENUE,
-  ebisProspectProject:state.DBSReducerABC.ebisProspectProject,
-  ebisProspectTargetA:state.DBSReducerABC.ebisProspectTargetA,
-  ebisProspectTargetB:state.DBSReducerABC.ebisProspectTargetB,
-  ebisProspectTargetC:state.DBSReducerABC.ebisProspectTargetC,
-  ebisProspectTargetO:state.DBSReducerABC.ebisProspectTargetO,
+  ebisProspectREVENUE:state.DbsTregReducerAbc.ebisProspectREVENUE,
+  ebisProspectProject:state.DbsTregReducerAbc.ebisProspectProject,
+  ebisProspectTargetA:state.DbsTregReducerAbc.ebisProspectTargetA,
+  ebisProspectTargetB:state.DbsTregReducerAbc.ebisProspectTargetB,
+  ebisProspectTargetC:state.DbsTregReducerAbc.ebisProspectTargetC,
+  ebisProspectTargetO:state.DbsTregReducerAbc.ebisProspectTargetO,
 
-  ebisSubmisionREVENUE:state.DBSReducerABC.ebisSubmisionREVENUE,
-  ebisSubmissionProject:state.DBSReducerABC.ebisSubmissionProject,
-  ebisSubmissionTargetA:state.DBSReducerABC.ebisSubmissionTargetA,
-  ebisSubmissionTargetB:state.DBSReducerABC.ebisSubmissionTargetB,
-  ebisSubmissionTargetC:state.DBSReducerABC.ebisSubmissionTargetC,
-  ebisSubmissionTargetO:state.DBSReducerABC.ebisSubmissionTargetO,
+  ebisSubmisionREVENUE:state.DbsTregReducerAbc.ebisSubmisionREVENUE,
+  ebisSubmissionProject:state.DbsTregReducerAbc.ebisSubmissionProject,
+  ebisSubmissionTargetA:state.DbsTregReducerAbc.ebisSubmissionTargetA,
+  ebisSubmissionTargetB:state.DbsTregReducerAbc.ebisSubmissionTargetB,
+  ebisSubmissionTargetC:state.DbsTregReducerAbc.ebisSubmissionTargetC,
+  ebisSubmissionTargetO:state.DbsTregReducerAbc.ebisSubmissionTargetO,
 
-  ebisWinREVENUE:state.DBSReducerABC.ebisWinREVENUE,
-  ebisWinProject:state.DBSReducerABC.ebisWinProject,
-  ebisWinTargetA:state.DBSReducerABC.ebisWinTargetA,
-  ebisWinTargetB:state.DBSReducerABC.ebisWinTargetB,
-  ebisWinTargetC:state.DBSReducerABC.ebisWinTargetC,
-  ebisWinTargetO:state.DBSReducerABC.ebisWinTargetO,
+  ebisWinREVENUE:state.DbsTregReducerAbc.ebisWinREVENUE,
+  ebisWinProject:state.DbsTregReducerAbc.ebisWinProject,
+  ebisWinTargetA:state.DbsTregReducerAbc.ebisWinTargetA,
+  ebisWinTargetB:state.DbsTregReducerAbc.ebisWinTargetB,
+  ebisWinTargetC:state.DbsTregReducerAbc.ebisWinTargetC,
+  ebisWinTargetO:state.DbsTregReducerAbc.ebisWinTargetO,
 
-  ebisBillcomREVENUE:state.DBSReducerABC.ebisBillcomREVENUE,
-  ebisBillcomeProject:state.DBSReducerABC.ebisBillcomeProject,
-  ebisBillcommTargetA:state.DBSReducerABC.ebisBillcommTargetA,
-  ebisBillcommTargetB:state.DBSReducerABC.ebisBillcommTargetB,
-  ebisBillcommTargetC:state.DBSReducerABC.ebisBillcommTargetC,
-  ebisBillcommTargetO:state.DBSReducerABC.ebisBillcommTargetO,
+  ebisBillcomREVENUE:state.DbsTregReducerAbc.ebisBillcomREVENUE,
+  ebisBillcomeProject:state.DbsTregReducerAbc.ebisBillcomeProject,
+  ebisBillcommTargetA:state.DbsTregReducerAbc.ebisBillcommTargetA,
+  ebisBillcommTargetB:state.DbsTregReducerAbc.ebisBillcommTargetB,
+  ebisBillcommTargetC:state.DbsTregReducerAbc.ebisBillcommTargetC,
+  ebisBillcommTargetO:state.DbsTregReducerAbc.ebisBillcommTargetO,
 
   //submission status
-  SubmissionWINRevenue:state.DBSReducerABC.SubmissionWINRevenue,
-  SubmissionWINRevenue2:state.DBSReducerABC.SubmissionWINRevenue2,
-  SubmissionWINRevenue3:state.DBSReducerABC.SubmissionWINRevenue3,
-  SubmissionWINRevenue4:state.DBSReducerABC.SubmissionWINRevenue4,
-  SubmissionWINProject:state.DBSReducerABC.SubmissionWINProject,
+  SubmissionWINRevenue:state.DbsTregReducerAbc.SubmissionWINRevenue,
+  SubmissionWINRevenue2:state.DbsTregReducerAbc.SubmissionWINRevenue2,
+  SubmissionWINRevenue3:state.DbsTregReducerAbc.SubmissionWINRevenue3,
+  SubmissionWINRevenue4:state.DbsTregReducerAbc.SubmissionWINRevenue4,
+  SubmissionWINProject:state.DbsTregReducerAbc.SubmissionWINProject,
 
-  SubmissionLOOSERevenue:state.DBSReducerABC.SubmissionLOOSERevenue,
-  SubmissionLOOSERevenue2:state.DBSReducerABC.SubmissionLOOSERevenue2,
-  SubmissionLOOSERevenue3:state.DBSReducerABC.SubmissionLOOSERevenue3,
-  SubmissionLOOSERevenue4:state.DBSReducerABC.SubmissionLOOSERevenue4,
-  SubmissionLooseProject:state.DBSReducerABC.SubmissionLooseProject,
+  SubmissionLOOSERevenue:state.DbsTregReducerAbc.SubmissionLOOSERevenue,
+  SubmissionLOOSERevenue2:state.DbsTregReducerAbc.SubmissionLOOSERevenue2,
+  SubmissionLOOSERevenue3:state.DbsTregReducerAbc.SubmissionLOOSERevenue3,
+  SubmissionLOOSERevenue4:state.DbsTregReducerAbc.SubmissionLOOSERevenue4,
+  SubmissionLooseProject:state.DbsTregReducerAbc.SubmissionLooseProject,
 
-  SubmissionWaitingRevenue:state.DBSReducerABC.SubmissionWaitingRevenue,
-  SubmissionWaitingRevenue2:state.DBSReducerABC.SubmissionWaitingRevenue2,
-  SubmissionWaitingRevenue3:state.DBSReducerABC.SubmissionWaitingRevenue3,
-  SubmissionWaitingRevenue4:state.DBSReducerABC.SubmissionWaitingRevenue4,
-  SubmissionWaitingProject:state.DBSReducerABC.SubmissionWaitingProject,
+  SubmissionWaitingRevenue:state.DbsTregReducerAbc.SubmissionWaitingRevenue,
+  SubmissionWaitingRevenue2:state.DbsTregReducerAbc.SubmissionWaitingRevenue2,
+  SubmissionWaitingRevenue3:state.DbsTregReducerAbc.SubmissionWaitingRevenue3,
+  SubmissionWaitingRevenue4:state.DbsTregReducerAbc.SubmissionWaitingRevenue4,
+  SubmissionWaitingProject:state.DbsTregReducerAbc.SubmissionWaitingProject,
 
-  SubmissionCancelRevenue:state.DBSReducerABC.SubmissionCancelRevenue,
-  SubmissionCancelRevenue2:state.DBSReducerABC.SubmissionCancelRevenue2,
-  SubmissionCancelRevenue3:state.DBSReducerABC.SubmissionCancelRevenue3,
-  SubmissionCancelRevenue4:state.DBSReducerABC.SubmissionCancelRevenue4,
-  SubmissionCancekProject:state.DBSReducerABC.SubmissionCancekProject,
+  SubmissionCancelRevenue:state.DbsTregReducerAbc.SubmissionCancelRevenue,
+  SubmissionCancelRevenue2:state.DbsTregReducerAbc.SubmissionCancelRevenue2,
+  SubmissionCancelRevenue3:state.DbsTregReducerAbc.SubmissionCancelRevenue3,
+  SubmissionCancelRevenue4:state.DbsTregReducerAbc.SubmissionCancelRevenue4,
+  SubmissionCancekProject:state.DbsTregReducerAbc.SubmissionCancekProject,
 
   //current status
-  currentProspectRevenue:state.DBSReducerABC.currentProspectRevenue,
-  currentProspectProject:state.DBSReducerABC.currentProspectProject,
+  currentProspectRevenue:state.DbsTregReducerAbc.currentProspectRevenue,
+  currentProspectProject:state.DbsTregReducerAbc.currentProspectProject,
 
-  currentSubmissionRevenue:state.DBSReducerABC.currentSubmissionRevenue,
-  currentSubmissionProject:state.DBSReducerABC.currentSubmissionProject,
+  currentSubmissionRevenue:state.DbsTregReducerAbc.currentSubmissionRevenue,
+  currentSubmissionProject:state.DbsTregReducerAbc.currentSubmissionProject,
 
-  currentWINRevenue:state.DBSReducerABC.currentWINRevenue,
-  currentWINProject:state.DBSReducerABC.currentWINProject,
+  currentWINRevenue:state.DbsTregReducerAbc.currentWINRevenue,
+  currentWINProject:state.DbsTregReducerAbc.currentWINProject,
 
-  currentBIllcomRevenue:state.DBSReducerABC.currentBIllcomRevenue,
-  currentBillcomProject:state.DBSReducerABC.currentBillcomProject,
+  currentBIllcomRevenue:state.DbsTregReducerAbc.currentBIllcomRevenue,
+  currentBillcomProject:state.DbsTregReducerAbc.currentBillcomProject,
 })
 
 export default connect(mapStateToProps)(DbsScreens);

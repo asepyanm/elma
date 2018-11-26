@@ -9,14 +9,88 @@ import {
 } from 'react-native';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import {connect} from 'react-redux';
+import ModalSelector from 'react-native-modal-selector';
+import axios from 'axios';
 
+//global
+import url from '../../../../../../../config/api_service';
 class DesScreens extends Component{
   constructor(props){
     super(props);
     this.state = {
       data:[],
+
+      //state pilihan regional
+      dataRegionalWitel:[],
+      statusGetReg:false,
+      statusRegTreg:''
     }
   }
+
+  componentWillMount(){
+    this.props.dispatch({
+      type:'DES_ABC_TREG',
+      payload:axios.get(`${url.API}/ebis_getlopmainabc_treg/witel/ALL/treg/ALL/div/DES`)
+    })
+
+    this.props.dispatch({
+      type:'DES_CURRENT_ABC_TREG',
+      payload:axios.get(`${url.API}/ebis_getlopmaincurrentabc_treg/witel/ALL/treg/ALL/div/DES`)
+    })
+  }
+
+  renderFilterRegional(option){
+    let dataFilter = option.value;
+    this.setState({
+      statusGetReg:true
+    })
+
+    if(dataFilter === 'All'){
+      this.props.dispatch({
+        type:'DES_ABC_TREG',
+        payload:axios.get(`${url.API}/ebis_getlopmainabc_treg/witel/ALL/treg/ALL/div/DES`)
+      })
+  
+      this.props.dispatch({
+        type:'DES_CURRENT_ABC_TREG',
+        payload:axios.get(`${url.API}/ebis_getlopmaincurrentabc_treg/witel/ALL/treg/ALL/div/DES`)
+      })
+
+      this.setState({
+        dataRegionalWitel:[],
+        statusGetReg:false
+      })
+    } else {
+      axios.get(`${url.API}/ebis_getwitel/reg/${dataFilter}`).then((res)=>{
+        console.log(res);
+        this.setState({
+          statusRegTreg:dataFilter,
+          statusGetReg:false,
+          dataRegionalWitel:res.data
+        })
+      }).catch((err)=> {
+        this.setState({
+          statusGetReg:false
+        })
+      })
+    }
+  }
+
+  renderFilterData(option){
+    const {statusRegTreg} = this.state;
+    let dataWitel = option.W1;
+
+    this.props.dispatch({
+      type:'DES_ABC_TREG',
+      payload:axios.get(`${url.API}/ebis_getlopmainabc_treg/witel/${dataWitel}/treg/${statusRegTreg}/div/DES`)
+    })
+
+    this.props.dispatch({
+      type:'DES_CURRENT_ABC_TREG',
+      payload:axios.get(`${url.API}/ebis_getlopmaincurrentabc_treg/witel/${dataWitel}/treg/${statusRegTreg}/div/DES`)
+    })
+  }
+  
   
   render() {
     var date = new Date().getDate();
@@ -26,20 +100,31 @@ class DesScreens extends Component{
     var dateNow = `${date}-${month}-${year}`
 
     let index = 0;
-      const data = [
-          { key: index++, label: 'Jan 2018', value:'201801'},
-          { key: index++, label: 'Feb 2018', value:'201802'},
-          { key: index++, label: 'Mar 2018', value:'201803'},
-          { key: index++, label: 'Apr 2018', value:'201804'},
-          { key: index++, label: 'Mei 2018', value:'201805'},
-          { key: index++, label: 'Jun 2018', value:'201806'},
-          { key: index++, label: 'Jul 2018', value:'201807'},
-          { key: index++, label: 'Agu 2018', value:'201808'},
-          { key: index++, label: 'Sep 2018', value:'201809'},
-          { key: index++, label: 'Okt 2018', value:'201810'},
-          { key: index++, label: 'Nov 2018', value:'201811'},
-          { key: index++, label: 'Des 2018', value:'201812'},
-      ];
+    const data = [
+      { key: index++, label: 'Jan 2018', value:'201801'},
+      { key: index++, label: 'Feb 2018', value:'201802'},
+      { key: index++, label: 'Mar 2018', value:'201803'},
+      { key: index++, label: 'Apr 2018', value:'201804'},
+      { key: index++, label: 'Mei 2018', value:'201805'},
+      { key: index++, label: 'Jun 2018', value:'201806'},
+      { key: index++, label: 'Jul 2018', value:'201807'},
+      { key: index++, label: 'Agu 2018', value:'201808'},
+      { key: index++, label: 'Sep 2018', value:'201809'},
+      { key: index++, label: 'Okt 2018', value:'201810'},
+      { key: index++, label: 'Nov 2018', value:'201811'},
+      { key: index++, label: 'Des 2018', value:'201812'},
+    ];
+
+    const regional = [
+      { key: index++, label: 'All Regional', value:'All'},
+      { key: index++, label: 'Reg 1', value:'REG-1'},
+      { key: index++, label: 'Reg 2', value:'REG-2'},
+      { key: index++, label: 'Reg 3', value:'REG-3'},
+      { key: index++, label: 'Reg 4', value:'REG-4'},
+      { key: index++, label: 'Reg 5', value:'REG-5'},
+      { key: index++, label: 'Reg 6', value:'REG-6'},
+      { key: index++, label: 'Reg 7', value:'REG-7'},
+    ];
 
     //import image arrow
     const images = {
@@ -108,8 +193,44 @@ class DesScreens extends Component{
       currentBIllcomRevenue,currentBillcomProject,currentBIllcomRevenue2,currentBIllcomRevenue3,currentBIllcomRevenue4,
     } = this.props;
 
+    const {dataRegionalWitel, statusGetReg} = this.state;
+
     return (
       <View style={styles.container}>
+        <View style={styles.wrapperPeriode}>
+          <View>
+            <Text style={styles.textPeriode}>Regional</Text>
+          </View>
+
+          <View style={[styles.wrapperModalPeriode,{}]}>
+            <View>
+              <ModalSelector
+                data={regional}
+                overlayStyle={{ backgroundColor: 'rgba(0,0,0,0.8)', justifyContent: 'flex-end' }}
+                selectTextStyle={{textAlign:'center', alignSelf:'center', alignItems:'center'}}
+                initValue="All Regional"
+                selectStyle={styles.modalPeriode}
+                onChange={(option)=> this.renderFilterRegional(option)} 
+              />
+            </View>
+            <View style={{alignSelf:'center', justifyContent:'center'}}>
+              <Text style={{fontSize:20, fontWeight:'bold'}}> - </Text>
+            </View>
+            <View>
+              <ModalSelector
+                data={dataRegionalWitel}
+                disabled={statusGetReg ? true : false}
+                overlayStyle={{ backgroundColor: 'rgba(0,0,0,0.8)', justifyContent: 'flex-end' }}
+                initValue={statusGetReg ? 'Loading...' : 'Pilih'}
+                labelExtractor={(data) => data.W2}
+                keyExtractor={(data)=> data.W1}
+                selectStyle={styles.modalPeriode}
+                onChange={(option)=> this.renderFilterData(option)} 
+              />
+            </View>
+          </View>
+        </View>
+
         <View style={styles.wrapperPeriode}>
           <View>
             <Text style={styles.textPeriode}>YTD Status per {dateNow}</Text>
@@ -793,71 +914,71 @@ class DesScreens extends Component{
 }
 
 const mapStateToProps = (state) => ({
-  ebisProspectREVENUE:state.DESReducerABC.ebisProspectREVENUE,
-  ebisProspectProject:state.DESReducerABC.ebisProspectProject,
-  ebisProspectTargetA:state.DESReducerABC.ebisProspectTargetA,
-  ebisProspectTargetB:state.DESReducerABC.ebisProspectTargetB,
-  ebisProspectTargetC:state.DESReducerABC.ebisProspectTargetC,
-  ebisProspectTargetO:state.DESReducerABC.ebisProspectTargetO,
+  ebisProspectREVENUE:state.DesTregReducerAbc.ebisProspectREVENUE,
+  ebisProspectProject:state.DesTregReducerAbc.ebisProspectProject,
+  ebisProspectTargetA:state.DesTregReducerAbc.ebisProspectTargetA,
+  ebisProspectTargetB:state.DesTregReducerAbc.ebisProspectTargetB,
+  ebisProspectTargetC:state.DesTregReducerAbc.ebisProspectTargetC,
+  ebisProspectTargetO:state.DesTregReducerAbc.ebisProspectTargetO,
 
-  ebisSubmisionREVENUE:state.DESReducerABC.ebisSubmisionREVENUE,
-  ebisSubmissionProject:state.DESReducerABC.ebisSubmissionProject,
-  ebisSubmissionTargetA:state.DESReducerABC.ebisSubmissionTargetA,
-  ebisSubmissionTargetB:state.DESReducerABC.ebisSubmissionTargetB,
-  ebisSubmissionTargetC:state.DESReducerABC.ebisSubmissionTargetC,
-  ebisSubmissionTargetO:state.DESReducerABC.ebisSubmissionTargetO,
+  ebisSubmisionREVENUE:state.DesTregReducerAbc.ebisSubmisionREVENUE,
+  ebisSubmissionProject:state.DesTregReducerAbc.ebisSubmissionProject,
+  ebisSubmissionTargetA:state.DesTregReducerAbc.ebisSubmissionTargetA,
+  ebisSubmissionTargetB:state.DesTregReducerAbc.ebisSubmissionTargetB,
+  ebisSubmissionTargetC:state.DesTregReducerAbc.ebisSubmissionTargetC,
+  ebisSubmissionTargetO:state.DesTregReducerAbc.ebisSubmissionTargetO,
 
-  ebisWinREVENUE:state.DESReducerABC.ebisWinREVENUE,
-  ebisWinProject:state.DESReducerABC.ebisWinProject,
-  ebisWinTargetA:state.DESReducerABC.ebisWinTargetA,
-  ebisWinTargetB:state.DESReducerABC.ebisWinTargetB,
-  ebisWinTargetC:state.DESReducerABC.ebisWinTargetC,
-  ebisWinTargetO:state.DESReducerABC.ebisWinTargetO,
+  ebisWinREVENUE:state.DesTregReducerAbc.ebisWinREVENUE,
+  ebisWinProject:state.DesTregReducerAbc.ebisWinProject,
+  ebisWinTargetA:state.DesTregReducerAbc.ebisWinTargetA,
+  ebisWinTargetB:state.DesTregReducerAbc.ebisWinTargetB,
+  ebisWinTargetC:state.DesTregReducerAbc.ebisWinTargetC,
+  ebisWinTargetO:state.DesTregReducerAbc.ebisWinTargetO,
 
-  ebisBillcomREVENUE:state.DESReducerABC.ebisBillcomREVENUE,
-  ebisBillcomeProject:state.DESReducerABC.ebisBillcomeProject,
-  ebisBillcommTargetA:state.DESReducerABC.ebisBillcommTargetA,
-  ebisBillcommTargetB:state.DESReducerABC.ebisBillcommTargetB,
-  ebisBillcommTargetC:state.DESReducerABC.ebisBillcommTargetC,
-  ebisBillcommTargetO:state.DESReducerABC.ebisBillcommTargetO,
+  ebisBillcomREVENUE:state.DesTregReducerAbc.ebisBillcomREVENUE,
+  ebisBillcomeProject:state.DesTregReducerAbc.ebisBillcomeProject,
+  ebisBillcommTargetA:state.DesTregReducerAbc.ebisBillcommTargetA,
+  ebisBillcommTargetB:state.DesTregReducerAbc.ebisBillcommTargetB,
+  ebisBillcommTargetC:state.DesTregReducerAbc.ebisBillcommTargetC,
+  ebisBillcommTargetO:state.DesTregReducerAbc.ebisBillcommTargetO,
 
   //submission status
-  SubmissionWINRevenue:state.DESReducerABC.SubmissionWINRevenue,
-  SubmissionWINRevenue2:state.DESReducerABC.SubmissionWINRevenue2,
-  SubmissionWINRevenue3:state.DESReducerABC.SubmissionWINRevenue3,
-  SubmissionWINRevenue4:state.DESReducerABC.SubmissionWINRevenue4,
-  SubmissionWINProject:state.DESReducerABC.SubmissionWINProject,
+  SubmissionWINRevenue:state.DesTregReducerAbc.SubmissionWINRevenue,
+  SubmissionWINRevenue2:state.DesTregReducerAbc.SubmissionWINRevenue2,
+  SubmissionWINRevenue3:state.DesTregReducerAbc.SubmissionWINRevenue3,
+  SubmissionWINRevenue4:state.DesTregReducerAbc.SubmissionWINRevenue4,
+  SubmissionWINProject:state.DesTregReducerAbc.SubmissionWINProject,
 
-  SubmissionLOOSERevenue:state.DESReducerABC.SubmissionLOOSERevenue,
-  SubmissionLOOSERevenue2:state.DESReducerABC.SubmissionLOOSERevenue2,
-  SubmissionLOOSERevenue3:state.DESReducerABC.SubmissionLOOSERevenue3,
-  SubmissionLOOSERevenue4:state.DESReducerABC.SubmissionLOOSERevenue4,
-  SubmissionLooseProject:state.DESReducerABC.SubmissionLooseProject,
+  SubmissionLOOSERevenue:state.DesTregReducerAbc.SubmissionLOOSERevenue,
+  SubmissionLOOSERevenue2:state.DesTregReducerAbc.SubmissionLOOSERevenue2,
+  SubmissionLOOSERevenue3:state.DesTregReducerAbc.SubmissionLOOSERevenue3,
+  SubmissionLOOSERevenue4:state.DesTregReducerAbc.SubmissionLOOSERevenue4,
+  SubmissionLooseProject:state.DesTregReducerAbc.SubmissionLooseProject,
 
-  SubmissionWaitingRevenue:state.DESReducerABC.SubmissionWaitingRevenue,
-  SubmissionWaitingRevenue2:state.DESReducerABC.SubmissionWaitingRevenue2,
-  SubmissionWaitingRevenue3:state.DESReducerABC.SubmissionWaitingRevenue3,
-  SubmissionWaitingRevenue4:state.DESReducerABC.SubmissionWaitingRevenue4,
-  SubmissionWaitingProject:state.DESReducerABC.SubmissionWaitingProject,
+  SubmissionWaitingRevenue:state.DesTregReducerAbc.SubmissionWaitingRevenue,
+  SubmissionWaitingRevenue2:state.DesTregReducerAbc.SubmissionWaitingRevenue2,
+  SubmissionWaitingRevenue3:state.DesTregReducerAbc.SubmissionWaitingRevenue3,
+  SubmissionWaitingRevenue4:state.DesTregReducerAbc.SubmissionWaitingRevenue4,
+  SubmissionWaitingProject:state.DesTregReducerAbc.SubmissionWaitingProject,
 
-  SubmissionCancelRevenue:state.DESReducerABC.SubmissionCancelRevenue,
-  SubmissionCancelRevenue2:state.DESReducerABC.SubmissionCancelRevenue2,
-  SubmissionCancelRevenue3:state.DESReducerABC.SubmissionCancelRevenue3,
-  SubmissionCancelRevenue4:state.DESReducerABC.SubmissionCancelRevenue4,
-  SubmissionCancekProject:state.DESReducerABC.SubmissionCancekProject,
+  SubmissionCancelRevenue:state.DesTregReducerAbc.SubmissionCancelRevenue,
+  SubmissionCancelRevenue2:state.DesTregReducerAbc.SubmissionCancelRevenue2,
+  SubmissionCancelRevenue3:state.DesTregReducerAbc.SubmissionCancelRevenue3,
+  SubmissionCancelRevenue4:state.DesTregReducerAbc.SubmissionCancelRevenue4,
+  SubmissionCancekProject:state.DesTregReducerAbc.SubmissionCancekProject,
 
   //current status
-  currentProspectRevenue:state.DESReducerABC.currentProspectRevenue,
-  currentProspectProject:state.DESReducerABC.currentProspectProject,
+  currentProspectRevenue:state.DesTregReducerAbc.currentProspectRevenue,
+  currentProspectProject:state.DesTregReducerAbc.currentProspectProject,
 
-  currentSubmissionRevenue:state.DESReducerABC.currentSubmissionRevenue,
-  currentSubmissionProject:state.DESReducerABC.currentSubmissionProject,
+  currentSubmissionRevenue:state.DesTregReducerAbc.currentSubmissionRevenue,
+  currentSubmissionProject:state.DesTregReducerAbc.currentSubmissionProject,
 
-  currentWINRevenue:state.DESReducerABC.currentWINRevenue,
-  currentWINProject:state.DESReducerABC.currentWINProject,
+  currentWINRevenue:state.DesTregReducerAbc.currentWINRevenue,
+  currentWINProject:state.DesTregReducerAbc.currentWINProject,
 
-  currentBIllcomRevenue:state.DESReducerABC.currentBIllcomRevenue,
-  currentBillcomProject:state.DESReducerABC.currentBillcomProject,
+  currentBIllcomRevenue:state.DesTregReducerAbc.currentBIllcomRevenue,
+  currentBillcomProject:state.DesTregReducerAbc.currentBillcomProject,
 })
 
 export default connect(mapStateToProps)(DesScreens);

@@ -81,7 +81,7 @@ class EbisScreens extends Component{
 
   renderFilterData(option){
     const {statusRegTreg} = this.state;
-    let dataWitel = option.W2;
+    let dataWitel = option.W1;
 
     this.props.dispatch({
       type:'EBIS_HOME_TREG',

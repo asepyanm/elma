@@ -29,22 +29,23 @@ import DesDetailReducer from '../pages/dashboard/reducer/reducerLOP/detailReduce
 import DbsDetailReducer from '../pages/dashboard/reducer/reducerLOP/detailReducer/reducerDBS/reducerDetailDbs';
 import DgsDetailReducer from '../pages/dashboard/reducer/reducerLOP/detailReducer/reducerDGS/reducerDetailDgs';
 
-<<<<<<< HEAD
 //monitor reducer
 import MonitorEbisReducer from '../pages/dashboard/reducer/reducerLOP/monitorReducer/monitorKB/reducerEBIS/reducerEbis';
 import MonitorDesReducer from '../pages/dashboard/reducer/reducerLOP/monitorReducer/monitorKB/reducerDES/reducerDes';
 import MonitorDbsReducer from '../pages/dashboard/reducer/reducerLOP/monitorReducer/monitorKB/reducerDBS/reducerDBS';
 import MonitorDgsReducer from '../pages/dashboard/reducer/reducerLOP/monitorReducer/monitorKB/reducerDGS/reducerDGS';
-=======
-//reducer treg
+
+//reducer treg LOP
 import EbisTregReducer from '../pages/dashboard/screens/tregScreens/screens/LOP/screens/reducer/reducerEbisTreg';
-<<<<<<< HEAD
->>>>>>> fix treg EBIS
-=======
 import DesTregReducer from '../pages/dashboard/screens/tregScreens/screens/LOP/screens/reducer/reducerDesTreg';
 import DbsTregReducer from '../pages/dashboard/screens/tregScreens/screens/LOP/screens/reducer/reducerDbsTreg';
 import DgsTregReducer from '../pages/dashboard/screens/tregScreens/screens/LOP/screens/reducer/reducerDgsTreg';
->>>>>>> fix treg lop screen
+
+//reducer treg ABC
+import EbisTregReducerAbc from '../pages/dashboard/screens/tregScreens/screens/ABC/screens/reducer/reducerEbisTregAbc';
+import DesTregReducerAbc from '../pages/dashboard/screens/tregScreens/screens/ABC/screens/reducer/reducerDesTregAbc';
+import DbsTregReducerAbc from '../pages/dashboard/screens/tregScreens/screens/ABC/screens/reducer/reducerDbsTregAbc';
+import DgsTregReducerAbc from '../pages/dashboard/screens/tregScreens/screens/ABC/screens/reducer/reducerDgsTregAbc';
 
 //config persist
 const config1 = {
@@ -81,12 +82,18 @@ const rootReducer = combineReducers({
   MonitorDesReducer,
   MonitorDbsReducer,
   MonitorDgsReducer,
-  
-  //reducer treg
+
+  //reducer treg LOP
   EbisTregReducer,
   DesTregReducer,
   DbsTregReducer,
-  DgsTregReducer
+  DgsTregReducer,
+
+  //reducer treg ABC
+  EbisTregReducerAbc,
+  DesTregReducerAbc,
+  DbsTregReducerAbc,
+  DgsTregReducerAbc
 });
 
 const middlewares = applyMiddleware( 

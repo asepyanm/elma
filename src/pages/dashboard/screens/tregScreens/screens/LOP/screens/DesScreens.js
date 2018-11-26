@@ -80,7 +80,7 @@ class DesScreens extends Component{
 
   renderFilterData(option){
     const {statusRegTreg} = this.state;
-    let dataWitel = option.W2;
+    let dataWitel = option.W1;
 
     this.props.dispatch({
       type:'DES_HOME_TREG',
