@@ -35,6 +35,18 @@ import MonitorDesReducer from '../pages/dashboard/reducer/reducerLOP/monitorRedu
 import MonitorDbsReducer from '../pages/dashboard/reducer/reducerLOP/monitorReducer/monitorKB/reducerDBS/reducerDBS';
 import MonitorDgsReducer from '../pages/dashboard/reducer/reducerLOP/monitorReducer/monitorKB/reducerDGS/reducerDGS';
 
+//reducer treg LOP
+import EbisTregReducer from '../pages/dashboard/screens/tregScreens/screens/LOP/screens/reducer/reducerEbisTreg';
+import DesTregReducer from '../pages/dashboard/screens/tregScreens/screens/LOP/screens/reducer/reducerDesTreg';
+import DbsTregReducer from '../pages/dashboard/screens/tregScreens/screens/LOP/screens/reducer/reducerDbsTreg';
+import DgsTregReducer from '../pages/dashboard/screens/tregScreens/screens/LOP/screens/reducer/reducerDgsTreg';
+
+//reducer treg ABC
+import EbisTregReducerAbc from '../pages/dashboard/screens/tregScreens/screens/ABC/screens/reducer/reducerEbisTregAbc';
+import DesTregReducerAbc from '../pages/dashboard/screens/tregScreens/screens/ABC/screens/reducer/reducerDesTregAbc';
+import DbsTregReducerAbc from '../pages/dashboard/screens/tregScreens/screens/ABC/screens/reducer/reducerDbsTregAbc';
+import DgsTregReducerAbc from '../pages/dashboard/screens/tregScreens/screens/ABC/screens/reducer/reducerDgsTregAbc';
+
 //config persist
 const config1 = {
   key: "primary",
@@ -69,7 +81,19 @@ const rootReducer = combineReducers({
   MonitorEbisReducer,
   MonitorDesReducer,
   MonitorDbsReducer,
-  MonitorDgsReducer
+  MonitorDgsReducer,
+
+  //reducer treg LOP
+  EbisTregReducer,
+  DesTregReducer,
+  DbsTregReducer,
+  DgsTregReducer,
+
+  //reducer treg ABC
+  EbisTregReducerAbc,
+  DesTregReducerAbc,
+  DbsTregReducerAbc,
+  DgsTregReducerAbc
 });
 
 const middlewares = applyMiddleware( 
