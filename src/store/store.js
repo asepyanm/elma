@@ -38,7 +38,13 @@ import MonitorDgsReducer from '../pages/dashboard/reducer/reducerLOP/monitorRedu
 =======
 //reducer treg
 import EbisTregReducer from '../pages/dashboard/screens/tregScreens/screens/LOP/screens/reducer/reducerEbisTreg';
+<<<<<<< HEAD
 >>>>>>> fix treg EBIS
+=======
+import DesTregReducer from '../pages/dashboard/screens/tregScreens/screens/LOP/screens/reducer/reducerDesTreg';
+import DbsTregReducer from '../pages/dashboard/screens/tregScreens/screens/LOP/screens/reducer/reducerDbsTreg';
+import DgsTregReducer from '../pages/dashboard/screens/tregScreens/screens/LOP/screens/reducer/reducerDgsTreg';
+>>>>>>> fix treg lop screen
 
 //config persist
 const config1 = {
@@ -75,6 +81,12 @@ const rootReducer = combineReducers({
   MonitorDesReducer,
   MonitorDbsReducer,
   MonitorDgsReducer,
+  
+  //reducer treg
+  EbisTregReducer,
+  DesTregReducer,
+  DbsTregReducer,
+  DgsTregReducer
 });
 
 const middlewares = applyMiddleware( 

@@ -127,7 +127,7 @@ class EbisScreens extends Component{
       { key: index++, label: 'Reg 5', value:'REG-5'},
       { key: index++, label: 'Reg 6', value:'REG-6'},
       { key: index++, label: 'Reg 7', value:'REG-7'},
-  ];
+    ];
 
     //import image arrow
     const images = {
