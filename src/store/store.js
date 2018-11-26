@@ -29,11 +29,16 @@ import DesDetailReducer from '../pages/dashboard/reducer/reducerLOP/detailReduce
 import DbsDetailReducer from '../pages/dashboard/reducer/reducerLOP/detailReducer/reducerDBS/reducerDetailDbs';
 import DgsDetailReducer from '../pages/dashboard/reducer/reducerLOP/detailReducer/reducerDGS/reducerDetailDgs';
 
+<<<<<<< HEAD
 //monitor reducer
 import MonitorEbisReducer from '../pages/dashboard/reducer/reducerLOP/monitorReducer/monitorKB/reducerEBIS/reducerEbis';
 import MonitorDesReducer from '../pages/dashboard/reducer/reducerLOP/monitorReducer/monitorKB/reducerDES/reducerDes';
 import MonitorDbsReducer from '../pages/dashboard/reducer/reducerLOP/monitorReducer/monitorKB/reducerDBS/reducerDBS';
 import MonitorDgsReducer from '../pages/dashboard/reducer/reducerLOP/monitorReducer/monitorKB/reducerDGS/reducerDGS';
+=======
+//reducer treg
+import EbisTregReducer from '../pages/dashboard/screens/tregScreens/screens/LOP/screens/reducer/reducerEbisTreg';
+>>>>>>> fix treg EBIS
 
 //config persist
 const config1 = {
@@ -69,7 +74,7 @@ const rootReducer = combineReducers({
   MonitorEbisReducer,
   MonitorDesReducer,
   MonitorDbsReducer,
-  MonitorDgsReducer
+  MonitorDgsReducer,
 });
 
 const middlewares = applyMiddleware( 
