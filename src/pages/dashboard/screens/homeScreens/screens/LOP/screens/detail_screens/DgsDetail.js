@@ -24,6 +24,7 @@ class DbsDetailScreens extends Component{
   constructor(props){
     super(props);
     this.state = {
+
       //modal
       visibleModal:false,
       loaderTampilDetail:false,
