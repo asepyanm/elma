@@ -127,6 +127,61 @@ const DbsTregReducer = (state = initialState, action) => {
         currentBillcomProject:parseInt(action.payload.data[0].lop_04_2),
       }
     break;
+
+    //------------------------------------------------------filter periode
+
+    case 'DBS_HOME_TREG_PERIODE_REJECTED':
+      return{
+        ...state, 
+        statusErrorFrom:false,
+      }
+    break;
+    
+    case 'DBS_HOME_TREG_PERIODE_PENDING':
+      return{
+        ...state, 
+      }
+    break;
+
+    case 'DBS_HOME_TREG_PERIODE_FULFILLED':
+      return {
+        ...state, 
+
+        ebisProspectREVENUE:parseInt(action.payload.data[0].lop_11_1),
+        ebisProspectProject:parseInt(action.payload.data[0].lop_11_2),
+        ebisProspectTarget:parseInt(action.payload.data[0].lop_11_3),
+
+        ebisSubmisionREVENUE:parseInt(action.payload.data[0].lop_11_6),
+        ebisSubmissionProject:parseInt(action.payload.data[0].lop_12_1),
+        ebisSubmissionTarget:parseInt(action.payload.data[0].lop_12_2),
+
+        ebisWinREVENUE:parseInt(action.payload.data[0].lop_12_3),
+        ebisWinProject:parseInt(action.payload.data[0].lop_12_6),
+        ebisWinTarget:parseInt(action.payload.data[0].lop_13_1),
+
+        ebisBillcomREVENUE:parseInt(action.payload.data[0].lop_13_2),
+        ebisBillcomeProject:parseInt(action.payload.data[0].lop_13_3),
+        ebisBillcommTarget:parseInt(action.payload.data[0].lop_13_6),
+
+        ProspectREVENUE:parseInt(action.payload.data[0].lop_14_1),
+        ProspectProject:parseInt(action.payload.data[0].lop_14_2),
+        ProspectTarget:parseInt(action.payload.data[0].lop_14_3),
+        ProspectREVENUE2:parseInt(action.payload.data[0].lop_14_6),
+
+        //submission status
+        SubmissionWINRevenue:parseInt(action.payload.data[0].lop_21_1),
+        SubmissionWINProject:parseInt(action.payload.data[0].lop_21_2),
+
+        SubmissionLOOSERevenue:parseInt(action.payload.data[0].lop_22_1),
+        SubmissionLooseProject:parseInt(action.payload.data[0].lop_22_2),
+
+        SubmissionWaitingRevenue:parseInt(action.payload.data[0].lop_23_1),
+        SubmissionWaitingProject:parseInt(action.payload.data[0].lop_23_2),
+
+        SubmissionCancelRevenue:parseInt(action.payload.data[0].lop_24_1),
+        SubmissionCancekProject:parseInt(action.payload.data[0].lop_24_2),
+      }
+    break;
     
     default:
       return state;

@@ -26,14 +26,25 @@ class EbisScreens extends Component{
       //state pilihan regional
       dataRegionalWitel:[],
       statusGetReg:false,
-      statusRegTreg:''
+      statusRegTreg:'',
+
+      //get date
+      date:''
     }
   }
 
   componentWillMount(){
+    var month = new Date().getMonth() + 1;
+    var year = new Date().getFullYear();
+    var date = `${year}${month}`
+
+    this.setState({
+      date:date
+    })
+
     this.props.dispatch({
       type:'EBIS_HOME_TREG',
-      payload:axios.get(`${url.API}/ebis_getlopmainytd_treg/startdate/201801/enddate/201807/div/EBIS/witel/ALL/treg/ALL`)
+      payload:axios.get(`${url.API}/ebis_getlopmainytd_treg/startdate/${year}01/enddate/${date}/div/EBIS/witel/ALL/treg/ALL`)
     })
 
     this.props.dispatch({
@@ -42,26 +53,39 @@ class EbisScreens extends Component{
     })
   }
 
+  filterPeriode(data){
+    this.setState({
+      date:data.value
+    })
+
+    this.props.dispatch({
+      type:'EBIS_HOME_TREG_PERIODE',
+      payload:axios.get(`${url.API}/ebis_getlopmainytd_treg/startdate/${data.value}/enddate/${data.value}${data.value}/div/EBIS/witel/ALL/treg/ALL`)
+    });
+  }
+
   renderFilterRegional(option){
+    const {date} = this.state;
+
     let dataFilter = option.value;
     this.setState({
       statusGetReg:true
     })
 
     if(dataFilter === 'All'){
+      this.setState({
+        dataRegionalWitel:[],
+        statusGetReg:false
+      })
+      
       this.props.dispatch({
         type:'EBIS_HOME_TREG',
-        payload:axios.get(`${url.API}/ebis_getlopmainytd_treg/startdate/201801/enddate/201807/div/EBIS/witel/ALL/treg/ALL`)
+        payload:axios.get(`${url.API}/ebis_getlopmainytd_treg/startdate/${date}/enddate/${date}/div/EBIS/witel/ALL/treg/ALL`)
       })
   
       this.props.dispatch({
         type:'EBIS_HOME_CURRENT_TREG',
         payload:axios.get(`${url.API}/ebis_getlopmaincurrent_treg/witel/ALL/treg/ALL/div/EBIS`)
-      })
-
-      this.setState({
-        dataRegionalWitel:[],
-        statusGetReg:false
       })
     } else {
       axios.get(`${url.API}/ebis_getwitel/reg/${dataFilter}`).then((res)=>{
@@ -80,12 +104,12 @@ class EbisScreens extends Component{
   }
 
   renderFilterData(option){
-    const {statusRegTreg} = this.state;
+    const {statusRegTreg, date} = this.state;
     let dataWitel = option.W1;
 
     this.props.dispatch({
       type:'EBIS_HOME_TREG',
-      payload:axios.get(`${url.API}/ebis_getlopmainytd_treg/startdate/201801/enddate/201807/div/EBIS/witel/${dataWitel}/treg/${statusRegTreg}`)
+      payload:axios.get(`${url.API}/ebis_getlopmainytd_treg/startdate/${date}/enddate/${date}/div/EBIS/witel/${dataWitel}/treg/${statusRegTreg}`)
     })
 
     this.props.dispatch({
@@ -104,18 +128,18 @@ class EbisScreens extends Component{
     let index = 0;
 
     const data = [
-      { key: index++, label: 'Jan 2018', value:'201801'},
-      { key: index++, label: 'Feb 2018', value:'201802'},
-      { key: index++, label: 'Mar 2018', value:'201803'},
-      { key: index++, label: 'Apr 2018', value:'201804'},
-      { key: index++, label: 'Mei 2018', value:'201805'},
-      { key: index++, label: 'Jun 2018', value:'201806'},
-      { key: index++, label: 'Jul 2018', value:'201807'},
-      { key: index++, label: 'Agu 2018', value:'201808'},
-      { key: index++, label: 'Sep 2018', value:'201809'},
-      { key: index++, label: 'Okt 2018', value:'201810'},
-      { key: index++, label: 'Nov 2018', value:'201811'},
-      { key: index++, label: 'Des 2018', value:'201812'},
+      { key: index++, label: `${year}-01`, value:`${year}01`},
+      { key: index++, label: `${year}-02`, value:`${year}02`},
+      { key: index++, label: `${year}-03`, value:`${year}03`},
+      { key: index++, label: `${year}-04`, value:`${year}04`},
+      { key: index++, label: `${year}-05`, value:`${year}05`},
+      { key: index++, label: `${year}-06`, value:`${year}06`},
+      { key: index++, label: `${year}-07`, value:`${year}07`},
+      { key: index++, label: `${year}-08`, value:`${year}08`},
+      { key: index++, label: `${year}-09`, value:`${year}09`},
+      { key: index++, label: `${year}-10`, value:`${year}10`},
+      { key: index++, label: `${year}-11`, value:`${year}11`},
+      { key: index++, label: `${year}-12`, value:`${year}12`},
     ];
 
     const regional = [
@@ -263,9 +287,9 @@ class EbisScreens extends Component{
                 overlayStyle={{ backgroundColor: 'rgba(0,0,0,0.8)', justifyContent: 'flex-end' }}                
                 cancelText={'Batal'}
                 selectTextStyle={{textAlign:'center', alignSelf:'center', alignItems:'center'}}
-                initValue="2018-01"
+                initValue={`${year}-01`}
                 selectStyle={styles.modalPeriode}
-                // onChange={(option)=>{ alert(`${option.label} (${option.key}) nom nom nom`) }} 
+                onChange={(data)=> this.filterPeriode(data)} 
               />
             </View>
             <View style={{alignSelf:'center', justifyContent:'center'}}>
@@ -278,7 +302,7 @@ class EbisScreens extends Component{
                 cancelText={'Batal'}
                 initValue={`${year}-${month}`}
                 selectStyle={styles.modalPeriode}
-                // onChange={(option)=>{ alert(`${option.label} (${option.key}) nom nom nom`) }} 
+                onChange={(data)=> this.filterPeriode(data)} 
               />
             </View>
           </View>
