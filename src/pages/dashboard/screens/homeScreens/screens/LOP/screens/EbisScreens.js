@@ -11,7 +11,10 @@ import {
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import ModalSelector from 'react-native-modal-selector';
 import {connect} from 'react-redux';
+import axios from 'axios';
 
+//global
+import url from '../../../../../../../config/api_service';
 
 class EbisScreens extends Component{
   constructor(props){
@@ -19,6 +22,13 @@ class EbisScreens extends Component{
     this.state = {
       data:[],
     }
+  }
+
+  filterPeriode(data){
+    this.props.dispatch({
+      type:'EBIS_HOME_FILTER_PERIODE',
+      payload:axios.get(`${url.API}/ebis_getlopmain_ytd/div/EBIS/date1/${data.value}/date2/${data.value}`)
+    });
   }
   
   render() {
@@ -29,20 +39,20 @@ class EbisScreens extends Component{
     var dateNow = `${date}-${month}-${year}`
 
     let index = 0;
-      const data = [
-          { key: index++, label: 'Jan 2018', value:'201801'},
-          { key: index++, label: 'Feb 2018', value:'201802'},
-          { key: index++, label: 'Mar 2018', value:'201803'},
-          { key: index++, label: 'Apr 2018', value:'201804'},
-          { key: index++, label: 'Mei 2018', value:'201805'},
-          { key: index++, label: 'Jun 2018', value:'201806'},
-          { key: index++, label: 'Jul 2018', value:'201807'},
-          { key: index++, label: 'Agu 2018', value:'201808'},
-          { key: index++, label: 'Sep 2018', value:'201809'},
-          { key: index++, label: 'Okt 2018', value:'201810'},
-          { key: index++, label: 'Nov 2018', value:'201811'},
-          { key: index++, label: 'Des 2018', value:'201812'},
-      ];
+    const data = [
+      { key: index++, label: `${year}-01`, value:`${year}01`},
+      { key: index++, label: `${year}-02`, value:`${year}02`},
+      { key: index++, label: `${year}-03`, value:`${year}03`},
+      { key: index++, label: `${year}-04`, value:`${year}04`},
+      { key: index++, label: `${year}-05`, value:`${year}05`},
+      { key: index++, label: `${year}-06`, value:`${year}06`},
+      { key: index++, label: `${year}-07`, value:`${year}07`},
+      { key: index++, label: `${year}-08`, value:`${year}08`},
+      { key: index++, label: `${year}-09`, value:`${year}09`},
+      { key: index++, label: `${year}-10`, value:`${year}10`},
+      { key: index++, label: `${year}-11`, value:`${year}11`},
+      { key: index++, label: `${year}-12`, value:`${year}12`},
+    ];
 
     //import image arrow
     const images = {
@@ -139,9 +149,9 @@ class EbisScreens extends Component{
               <ModalSelector
                 data={data}
                 selectTextStyle={{textAlign:'center', alignSelf:'center', alignItems:'center'}}
-                initValue="2018-01"
+                initValue={`${year}-01`}
                 selectStyle={styles.modalPeriode}
-                // onChange={(option)=>{ alert(`${option.label} (${option.key}) nom nom nom`) }} 
+                onChange={(data)=> this.filterPeriode(data)} 
               />
             </View>
             <View>
@@ -152,7 +162,7 @@ class EbisScreens extends Component{
                 data={data}
                 initValue={`${year}-${month}`}
                 selectStyle={styles.modalPeriode}
-                // onChange={(option)=>{ alert(`${option.label} (${option.key}) nom nom nom`) }} 
+                onChange={(data)=> this.filterPeriode(data)} 
               />
             </View>
           </View>
@@ -166,7 +176,7 @@ class EbisScreens extends Component{
               resizeMode={'stretch'}
             />
 
-            <TouchableOpacity onPress={() => navigation.navigate('EbisDetailLOP', {namaDetail:`PROSPECT`})} style={styles.containerArrowProspect} underlayColor="#ffffff00">
+            <TouchableOpacity onPress={() => navigation.navigate('EbisDetailLOP')} style={styles.containerArrowProspect} underlayColor="#ffffff00">
               <Text style={styles.textJudul}>PROSPECT</Text>
               <Text style={styles.textIsi}>{ebisProspectREVENUE}M</Text>
               <Text style={styles.textKeterangan}>per {ebisProspectProject} Project</Text>

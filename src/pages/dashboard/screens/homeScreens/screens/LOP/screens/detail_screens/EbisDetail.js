@@ -23,10 +23,8 @@ import url from '../../../../../../../../config/api_service';
 class EbisDetailScreens extends Component{
   constructor(props){
     super(props);
-    const { params } = this.props.navigation.state;
     this.state = {
       //data status
-      namaParameter :params.namaDetail,
 
       //modal
       visibleModal:false,
@@ -45,19 +43,19 @@ class EbisDetailScreens extends Component{
     //get data ALL
     this.props.dispatch({
       type:'DETAIL_PROSPECT_EBIS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/${this.state.namaParameter}/div/EBIS/maindiv/DES/mainseg/ALL/start_date/2018001/end_date/201811`)
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/EBIS/maindiv/DES/mainseg/ALL/start_date/2018001/end_date/201811`)
     });
     this.props.dispatch({
       type:'DETAIL_PROSPECT_DES',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/${this.state.namaParameter}/div/DES/maindiv/DES/mainseg/ALL/start_date/2018001/end_date/201811`)
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/DES/maindiv/DES/mainseg/ALL/start_date/2018001/end_date/201811`)
     });
     this.props.dispatch({
       type:'DETAIL_PROSPECT_DBS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/${this.state.namaParameter}/div/DBS/maindiv/DBS/mainseg/ALL/start_date/2018001/end_date/201811`)
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/DBS/maindiv/DBS/mainseg/ALL/start_date/2018001/end_date/201811`)
     });
     this.props.dispatch({
       type:'DETAIL_PROSPECT_DGS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/${this.state.namaParameter}/div/DGS/maindiv/DGS/mainseg/ALL/start_date/2018001/end_date/201811`)
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/DGS/maindiv/DGS/mainseg/ALL/start_date/2018001/end_date/201811`)
     });
 
     //get data detail SUBS
