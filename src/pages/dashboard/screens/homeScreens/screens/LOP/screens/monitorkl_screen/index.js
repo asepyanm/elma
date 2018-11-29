@@ -20,7 +20,7 @@ import axios from 'axios';
 import renderIf from '../../../../../../../components/renderIf';
 import url from '../../../../../../../../config/api_service';
 
-class MonitorKB extends Component {
+class MonitorKL extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -52,7 +52,6 @@ class MonitorKB extends Component {
   //     alert(err)
   //   })
   // }
-  
   buttonAll() {
     if (this.state.statusAll === false) {
       this.setState({
@@ -355,7 +354,7 @@ class MonitorKB extends Component {
                   resizeMode={'stretch'}
                 />
 
-                <TouchableOpacity style={styles.containerArrowWin2} onPress={() => navigation.navigate('DetailMonitorDone')}>
+                <TouchableOpacity style={styles.containerArrowWin2} onPress={() => navigation.navigate('DetailMonitorDoneKL')}>
                   <Text style={styles.textJudul}>Done KB</Text>
                   <Text style={styles.textIsi}>{ebisMonitorDone}M</Text>
                   <Text style={styles.textKeterangan}>per {ebisMonitorDoneWP} Project</Text>
@@ -392,7 +391,7 @@ class MonitorKB extends Component {
                   resizeMode={'stretch'}
                 />
 
-                <TouchableOpacity style={styles.containerArrowWin2} onPress={() => navigation.navigate('DetailMonitorOgp')}>
+                <TouchableOpacity style={styles.containerArrowWin2} onPress={() => navigation.navigate('DetailMonitorOgpKL')}>
                   <Text style={styles.textJudul}>OGP KB</Text>
                   <Text style={styles.textIsi}>{ebisMonitorOgp}M</Text>
                   <Text style={styles.textKeterangan}>per {ebisMonitorOgpWP} Project</Text>
@@ -417,8 +416,8 @@ class MonitorKB extends Component {
                 </View>
 
                 <View>
-                  <Text style={styles.textIsi}>{item[0].REVENUE}M</Text>
-                  <Text style={styles.textKeterangan}>per {item[0].PROJECT} Project</Text>
+                  <Text style={styles.textIsi}>M</Text>
+                  <Text style={styles.textKeterangan}>perProject</Text>
                 </View>
 
               </View>
@@ -429,8 +428,8 @@ class MonitorKB extends Component {
                 </View>
 
                 <View>
-                  <Text style={styles.textIsi}>{item[1].REVENUE}M</Text>
-                  <Text style={styles.textKeterangan}>per {item[1].PROJECT} Project</Text>
+                  <Text style={styles.textIsi}>M</Text>
+                  <Text style={styles.textKeterangan}>per Project</Text>
                 </View>
 
               </View>
@@ -441,8 +440,8 @@ class MonitorKB extends Component {
                 </View>
 
                 <View>
-                  <Text style={styles.textIsi}>{item[2].REVENUE}M</Text>
-                  <Text style={styles.textKeterangan}>per {item[2].PROJECT} Project</Text>
+                  <Text style={styles.textIsi}>M</Text>
+                  <Text style={styles.textKeterangan}>per Project</Text>
                 </View>
 
               </View>
@@ -666,7 +665,7 @@ class MonitorKB extends Component {
                   resizeMode={'stretch'}
                 />
 
-                <TouchableOpacity style={styles.containerArrowWin2} onPress={() => navigation.navigate('DetailMonitorDone')}>
+                <TouchableOpacity style={styles.containerArrowWin2} onPress={() => navigation.navigate('DetailMonitorDoneKL')}>
                   <Text style={styles.textJudul}>Done KB</Text>
                   <Text style={styles.textIsi}>{DesMonitorDone}M</Text>
                   <Text style={styles.textKeterangan}>per {DesMonitorDoneWP} Project</Text>
@@ -703,7 +702,7 @@ class MonitorKB extends Component {
                   resizeMode={'stretch'}
                 />
 
-                <TouchableOpacity style={styles.containerArrowWin2} onPress={() => navigation.navigate('DetailMonitorOgp')}>
+                <TouchableOpacity style={styles.containerArrowWin2} onPress={() => navigation.navigate('DetailMonitorOgpKL')}>
                   <Text style={styles.textJudul}>OGP KB</Text>
                   <Text style={styles.textIsi}>{DesMonitorOgp}M</Text>
                   <Text style={styles.textKeterangan}>per {DesMonitorOgpWP} Project</Text>
@@ -729,7 +728,7 @@ class MonitorKB extends Component {
 
                 <View>
                   <Text style={styles.textIsi}>M</Text>
-                  <Text style={styles.textKeterangan}>per  Project</Text>
+                  <Text style={styles.textKeterangan}>per Project</Text>
                 </View>
 
               </View>
@@ -741,7 +740,7 @@ class MonitorKB extends Component {
 
                 <View>
                   <Text style={styles.textIsi}>M</Text>
-                  <Text style={styles.textKeterangan}>per Project</Text>
+                  <Text style={styles.textKeterangan}>per  Project</Text>
                 </View>
 
               </View>
@@ -753,7 +752,7 @@ class MonitorKB extends Component {
 
                 <View>
                   <Text style={styles.textIsi}>M</Text>
-                  <Text style={styles.textKeterangan}>per Project</Text>
+                  <Text style={styles.textKeterangan}>pe Project</Text>
                 </View>
 
               </View>
@@ -977,7 +976,7 @@ class MonitorKB extends Component {
                   resizeMode={'stretch'}
                 />
 
-                <TouchableOpacity style={styles.containerArrowWin2} onPress={() => navigation.navigate('DetailMonitorDone')}>
+                <TouchableOpacity style={styles.containerArrowWin2} onPress={() => navigation.navigate('DetailMonitorDoneKL')}>
                   <Text style={styles.textJudul}>Done KB</Text>
                   <Text style={styles.textIsi}>{DbsMonitorDone}M</Text>
                   <Text style={styles.textKeterangan}>per {DbsMonitorDoneWP} Project</Text>
@@ -1014,7 +1013,7 @@ class MonitorKB extends Component {
                   resizeMode={'stretch'}
                 />
 
-                <TouchableOpacity style={styles.containerArrowWin2} onPress={() => navigation.navigate('DetailMonitorOgp')}>
+                <TouchableOpacity style={styles.containerArrowWin2} onPress={() => navigation.navigate('DetailMonitorOgpKL')}>
                   <Text style={styles.textJudul}>OGP KB</Text>
                   <Text style={styles.textIsi}>{DbsMonitorOgp}M</Text>
                   <Text style={styles.textKeterangan}>per {DbsMonitorOgpWP} Project</Text>
@@ -1052,7 +1051,7 @@ class MonitorKB extends Component {
 
                 <View>
                   <Text style={styles.textIsi}>M</Text>
-                  <Text style={styles.textKeterangan}>per  Project</Text>
+                  <Text style={styles.textKeterangan}>per Project</Text>
                 </View>
 
               </View>
@@ -1064,7 +1063,7 @@ class MonitorKB extends Component {
 
                 <View>
                   <Text style={styles.textIsi}>M</Text>
-                  <Text style={styles.textKeterangan}>per  Project</Text>
+                  <Text style={styles.textKeterangan}>per Project</Text>
                 </View>
 
               </View>
@@ -1288,7 +1287,7 @@ class MonitorKB extends Component {
                   resizeMode={'stretch'}
                 />
 
-                <TouchableOpacity style={styles.containerArrowWin2} onPress={() => navigation.navigate('DetailMonitorDone')}>
+                <TouchableOpacity style={styles.containerArrowWin2} onPress={() => navigation.navigate('DetailMonitorDoneKL')}>
                   <Text style={styles.textJudul}>Done KB</Text>
                   <Text style={styles.textIsi}>{DgsMonitorDone}M</Text>
                   <Text style={styles.textKeterangan}>per {DgsMonitorDoneWP} Project</Text>
@@ -1325,7 +1324,7 @@ class MonitorKB extends Component {
                   resizeMode={'stretch'}
                 />
 
-                <TouchableOpacity style={styles.containerArrowWin2} onPress={() => navigation.navigate('DetailMonitorOgp')}>
+                <TouchableOpacity style={styles.containerArrowWin2} onPress={() => navigation.navigate('DetailMonitorOgpKL')}>
                   <Text style={styles.textJudul}>OGP KB</Text>
                   <Text style={styles.textIsi}>{DgsMonitorOgp}M</Text>
                   <Text style={styles.textKeterangan}>per {DgsMonitorOgpWP} Project</Text>
@@ -1351,7 +1350,7 @@ class MonitorKB extends Component {
 
                 <View>
                   <Text style={styles.textIsi}>M</Text>
-                  <Text style={styles.textKeterangan}>per  Project</Text>
+                  <Text style={styles.textKeterangan}>per Project</Text>
                 </View>
 
               </View>
@@ -1428,7 +1427,7 @@ class MonitorKB extends Component {
             </Button>
           </Left>
           <Body>
-            <Title style={{ color: '#FFF' }}>Monitor KB</Title>
+            <Title style={{ color: '#FFF' }}>Monitor KL</Title>
           </Body>
           <Right />
         </Header>
@@ -1455,10 +1454,10 @@ class MonitorKB extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  data: state.MonitorEbisReducer.dataOgp,
-  dataDesOgp: state.MonitorDesReducer.dataOgpDes,
-  dataDbsOgp: state.MonitorDbsReducer.dataOgpDbs,
-  dataDgsOgp: state.MonitorDgsReducer.dataOgpDgs,
+  data: state.MonitorEbisReducerKL.dataOgp,
+  dataDesOgp: state.MonitorDesReducerKL.dataOgpDes,
+  dataDbsOgp: state.MonitorDbsReducerKL.dataOgpDbs,
+  dataDgsOgp: state.MonitorDgsReducerKL.dataOgpDgs,
 
   //EBIS
   ebisProspectREVENUE: state.EbisReducer.ebisWinREVENUE,
@@ -1487,39 +1486,39 @@ const mapStateToProps = (state) => ({
   dataMitra4: state.DgsDetailReducer.dataMitra,
 
   //MonitorEBIS
-  ebisMonitor: state.MonitorEbisReducer.dataEbisWin,
-  ebisMonitorWP: state.MonitorEbisReducer.dataEbisWP,
-  ebisMonitorDone: state.MonitorEbisReducer.dataEbisDoneWin,
-  ebisMonitorDoneWP: state.MonitorEbisReducer.dataEbisDoneWP,
-  ebisMonitorOgp: state.MonitorEbisReducer.dataEbisOgpWin,
-  ebisMonitorOgpWP: state.MonitorEbisReducer.dataEbisOgpWP,
+  ebisMonitor: state.MonitorEbisReducerKL.dataEbisWin,
+  ebisMonitorWP: state.MonitorEbisReducerKL.dataEbisWP,
+  ebisMonitorDone: state.MonitorEbisReducerKL.dataEbisDoneWin,
+  ebisMonitorDoneWP: state.MonitorEbisReducerKL.dataEbisDoneWP,
+  ebisMonitorOgp: state.MonitorEbisReducerKL.dataEbisOgpWin,
+  ebisMonitorOgpWP: state.MonitorEbisReducerKL.dataEbisOgpWP,
 
   //MonitorDES
-  DesMonitor: state.MonitorDesReducer.dataDesWin,
-  DesMonitorWP: state.MonitorDesReducer.dataDesWP,
-  DesMonitorDone: state.MonitorDesReducer.dataDesDoneWin,
-  DesMonitorDoneWP: state.MonitorDesReducer.dataDesDoneWP,
-  DesMonitorOgp: state.MonitorDesReducer.dataDesOgpWin,
-  DesMonitorOgpWP: state.MonitorDesReducer.dataDesOgpWP,
+  DesMonitor: state.MonitorDesReducerKL.dataDesWin,
+  DesMonitorWP: state.MonitorDesReducerKL.dataDesWP,
+  DesMonitorDone: state.MonitorDesReducerKL.dataDesDoneWin,
+  DesMonitorDoneWP: state.MonitorDesReducerKL.dataDesDoneWP,
+  DesMonitorOgp: state.MonitorDesReducerKL.dataDesOgpWin,
+  DesMonitorOgpWP: state.MonitorDesReducerKL.dataDesOgpWP,
 
   //MonitorDBS
-  DbsMonitor: state.MonitorDbsReducer.dataDbsWin,
-  DbsMonitorWP: state.MonitorDbsReducer.dataDbsWP,
-  DbsMonitorDone: state.MonitorDbsReducer.dataDbsDoneWin,
-  DbsMonitorDoneWP: state.MonitorDbsReducer.dataDbsDoneWP,
-  DbsMonitorOgp: state.MonitorDbsReducer.dataDbsOgpWin,
-  DbsMonitorOgpWP: state.MonitorDbsReducer.dataDbsOgpWP,
+  DbsMonitor: state.MonitorDbsReducerKL.dataDbsWin,
+  DbsMonitorWP: state.MonitorDbsReducerKL.dataDbsWP,
+  DbsMonitorDone: state.MonitorDbsReducerKL.dataDbsDoneWin,
+  DbsMonitorDoneWP: state.MonitorDbsReducerKL.dataDbsDoneWP,
+  DbsMonitorOgp: state.MonitorDbsReducerKL.dataDbsOgpWin,
+  DbsMonitorOgpWP: state.MonitorDbsReducerKL.dataDbsOgpWP,
 
   //Monitor DGS
-  DgsMonitor: state.MonitorDgsReducer.dataDgsWin,
-  DgsMonitorWP: state.MonitorDgsReducer.dataDgsWP,
-  DgsMonitorDone: state.MonitorDgsReducer.dataDgsDoneWin,
-  DgsMonitorDoneWP: state.MonitorDgsReducer.dataDgsDoneWP,
-  DgsMonitorOgp: state.MonitorDgsReducer.dataDgsOgpWin,
-  DgsMonitorOgpWP: state.MonitorDgsReducer.dataDgsOgpWP,
+  DgsMonitor: state.MonitorDgsReducerKL.dataDgsWin,
+  DgsMonitorWP: state.MonitorDgsReducerKL.dataDgsWP,
+  DgsMonitorDone: state.MonitorDgsReducerKL.dataDgsDoneWin,
+  DgsMonitorDoneWP: state.MonitorDgsReducerKL.dataDgsDoneWP,
+  DgsMonitorOgp: state.MonitorDgsReducerKL.dataDgsOgpWin,
+  DgsMonitorOgpWP: state.MonitorDgsReducerKL.dataDgsOgpWP,
 })
 
-export default connect(mapStateToProps)(MonitorKB);
+export default connect(mapStateToProps)(MonitorKL);
 
 const styles = StyleSheet.create({
   container: {

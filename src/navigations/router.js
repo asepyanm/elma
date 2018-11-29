@@ -19,6 +19,13 @@ import DgsDetailScreen from '../pages/dashboard/screens/homeScreens/screens/LOP/
 
 //monitor_kb LOP
 import MonitorKB from '../pages/dashboard/screens/homeScreens/screens/LOP/screens/monitorkb_screen/index.js';
+import DetailMonitorDone from '../pages/dashboard/screens/homeScreens/screens/LOP/screens/monitorkb_screen/detailMonitor';
+import DetailMonitorOgp from '../pages/dashboard/screens/homeScreens/screens/LOP/screens/monitorkb_screen/detailMonitorOgp';
+
+//monitor_kl LOP
+import MonitorKL from '../pages/dashboard/screens/homeScreens/screens/LOP/screens/monitorkl_screen/index.js';
+import DetailMonitorDoneKL from '../pages/dashboard/screens/homeScreens/screens/LOP/screens/monitorkl_screen/detailMonitor';
+import DetailMonitorOgpKL from '../pages/dashboard/screens/homeScreens/screens/LOP/screens/monitorkl_screen/detailMonitorOgp';
 
 const noTransitionConfig = () => ({
   transitionSpec: {
@@ -59,6 +66,36 @@ const navigator = StackNavigator({
   },
   MonitorKB: {
     screen: MonitorKB,
+    navigationOptions: {
+      header: null
+    }
+  },
+  DetailMonitorDone: {
+    screen: DetailMonitorDone,
+    navigationOptions: {
+      header: null
+    }
+  },
+  DetailMonitorOgp: {
+    screen: DetailMonitorOgp,
+    navigationOptions: {
+      header: null
+    }
+  },
+  MonitorKL: {
+    screen: MonitorKL,
+    navigationOptions: {
+      header: null
+    }
+  },
+  DetailMonitorDoneKL: {
+    screen: DetailMonitorDoneKL,
+    navigationOptions: {
+      header: null
+    }
+  },
+  DetailMonitorOgpKL: {
+    screen: DetailMonitorOgpKL,
     navigationOptions: {
       header: null
     }

@@ -35,6 +35,12 @@ import MonitorDesReducer from '../pages/dashboard/reducer/reducerLOP/monitorRedu
 import MonitorDbsReducer from '../pages/dashboard/reducer/reducerLOP/monitorReducer/monitorKB/reducerDBS/reducerDBS';
 import MonitorDgsReducer from '../pages/dashboard/reducer/reducerLOP/monitorReducer/monitorKB/reducerDGS/reducerDGS';
 
+//monitor reducer kl
+import MonitorEbisReducerKL from '../pages/dashboard/reducer/reducerLOP/monitorReducer/monitorKL/reducerEBIS/reducerEbis';
+import MonitorDesReducerKL from '../pages/dashboard/reducer/reducerLOP/monitorReducer/monitorKL/reducerDES/reducerDes';
+import MonitorDbsReducerKL from '../pages/dashboard/reducer/reducerLOP/monitorReducer/monitorKL/reducerDBS/reducerDBS';
+import MonitorDgsReducerKL from '../pages/dashboard/reducer/reducerLOP/monitorReducer/monitorKL/reducerDGS/reducerDGS';
+
 //config persist
 const config1 = {
   key: "primary",
@@ -65,11 +71,17 @@ const rootReducer = combineReducers({
   DbsDetailReducer,
   DgsDetailReducer,
 
-  //monitor reducer
+  //monitor reducer kb
   MonitorEbisReducer,
   MonitorDesReducer,
   MonitorDbsReducer,
-  MonitorDgsReducer
+  MonitorDgsReducer,
+
+  //monitor reducer kl
+  MonitorEbisReducerKL,
+  MonitorDesReducerKL,
+  MonitorDbsReducerKL,
+  MonitorDgsReducerKL
 });
 
 const middlewares = applyMiddleware( 

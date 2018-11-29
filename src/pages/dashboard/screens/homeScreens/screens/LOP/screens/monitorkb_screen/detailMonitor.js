@@ -20,7 +20,7 @@ import axios from 'axios';
 import renderIf from '../../../../../../../components/renderIf';
 import url from '../../../../../../../../config/api_service';
 
-class DbsDetailScreens extends Component{
+class detailMonitor extends Component{
   constructor(props){
     super(props);
     this.state = {
@@ -30,6 +30,7 @@ class DbsDetailScreens extends Component{
       dataTampung:[],
 
       data:[],
+      pressed: false,
       statusAll:false, 
       statusSubs:true,
       statusMitra:true,
@@ -42,7 +43,7 @@ class DbsDetailScreens extends Component{
       visibleModal: !this.state.visibleModal,
       loaderTampilDetail:true
     })
-    axios.get(`${url.API}/ebis_getstage5/stage/WIN/div/DBS/maindiv/DBS/mainseg/ALL/nmitra/${item}/start_date/201801/end_date/201811`).then((res) => {
+    axios.get(`${url.API}/ebis_getkbproject/div/EBIS/treg/ALL/witel/ALL/startdate/201801/enddate/201811/state/DONE/mitra/${item}`).then((res) => {
       this.setState({dataTampung:res.data, loaderTampilDetail:false });
     }).catch((err) => {
       this.setState({
@@ -51,6 +52,52 @@ class DbsDetailScreens extends Component{
       alert(err)
     })
   }
+
+  _toggleModalDes(item){
+    this.setState({
+      visibleModal: !this.state.visibleModal,
+      loaderTampilDetail:true
+    })
+    axios.get(`${url.API}/ebis_getkbproject/div/DES/treg/ALL/witel/ALL/startdate/201801/enddate/201811/state/DONE/mitra/${item}`).then((res) => {
+      this.setState({dataTampung:res.data, loaderTampilDetail:false });
+    }).catch((err) => {
+      this.setState({
+        loaderTampilDetail:false
+      })
+      alert(err)
+    })
+  }
+
+  _toggleModalDbs(item){
+    this.setState({
+      visibleModal: !this.state.visibleModal,
+      loaderTampilDetail:true
+    })
+    axios.get(`${url.API}/ebis_getkbproject/div/DBS/treg/ALL/witel/ALL/startdate/201801/enddate/201811/state/DONE/mitra/${item}`).then((res) => {
+      this.setState({dataTampung:res.data, loaderTampilDetail:false });
+    }).catch((err) => {
+      this.setState({
+        loaderTampilDetail:false
+      })
+      alert(err)
+    })
+  }
+
+  _toggleModalDgs(item){
+    this.setState({
+      visibleModal: !this.state.visibleModal,
+      loaderTampilDetail:true
+    })
+    axios.get(`${url.API}/ebis_getkbproject/div/DGS/treg/ALL/witel/ALL/startdate/201801/enddate/201811/state/DONE/mitra/${item}`).then((res) => {
+      this.setState({dataTampung:res.data, loaderTampilDetail:false });
+    }).catch((err) => {
+      this.setState({
+        loaderTampilDetail:false
+      })
+      alert(err)
+    })
+  }
+
   buttonAll(){
     if(this.state.statusAll === false){
       this.setState({
@@ -65,6 +112,7 @@ class DbsDetailScreens extends Component{
       })
     }  
   }
+
   buttonSubs(){
     if(this.state.statusSubs === false){
       this.setState({
@@ -108,8 +156,9 @@ class DbsDetailScreens extends Component{
       })
     }
   }
+
   renderModalContent(){
-    const {dataTampung, loaderTampilDetail} = this.state;
+    const {dataTampung, loaderTampilDetail, pressed} = this.state;
     return(
       <View style={styles.modalContent}>
         {
@@ -121,30 +170,40 @@ class DbsDetailScreens extends Component{
           <FlatList
             data={dataTampung}
             ListHeaderComponent={() => (
-              <View style={styles.wrapperHeaderContent}>
-                <View style={{width:wp('35%')}}>
-                  <Text style={{textAlign:'center', color:'#FFF', fontSize:12}}>Nama CC</Text>
-                </View>
-                <View style={{width:wp('35%')}}>
-                  <Text style={{textAlign:'center', color:'#FFF', fontSize:12}}>Nama Project</Text>
-                </View>
-                <View style={{width:wp('10%'), alignItems:'center', justifyContent:'center'}}>
-                  <Text style={{textAlign:'center', color:'#FFF', fontSize:12}}>Nilai</Text>
-                </View>
+              <View>
+                {
+                  pressed === false ?
+                  <View style={styles.wrapperHeaderContent}>
+                    <View style={{width:wp('35%')}}>
+                      <Text style={{textAlign:'center', color:'#FFF', fontSize:12}}>Nama CC</Text>
+                    </View>
+                    <View style={{width:wp('35%')}}>
+                      <Text style={{textAlign:'center', color:'#FFF', fontSize:12}}>Nama Project</Text>
+                    </View>
+                    <View style={{width:wp('10%'), alignItems:'center', justifyContent:'center'}}>
+                      <Text style={{textAlign:'center', color:'#FFF', fontSize:12}}>Nilai</Text>
+                    </View>
+                  </View> : null
+                }
               </View>
             )}
             keyExtractor={(item, index) => index.toString()}
             renderItem={({ item }) => (
-              <View style={styles.containerDetailData}> 
-                <View style={{width:wp('35%'), alignSelf:'center', justifyContent:'center'}}>
-                  <Text style={{fontSize:10}}>{item.stage_06}</Text>
-                </View>
-                <View style={{width:wp('35%'), alignSelf:'center', justifyContent:'center'}}>
-                  <Text style={{fontSize:10}}>{item.stage_07}</Text>
-                </View>
-                <View style={{width:wp('10%'), alignSelf:'center', justifyContent:'center', alignItems:'center'}}>
-                  <Text style={{textAlign:'center', fontSize:10}}>{parseFloat(item.stage_10)}M</Text>                    
-                </View>
+              <View>
+                {
+                  pressed === false ?
+                  <TouchableOpacity style={styles.containerDetailData} onPress={() => this.setState({ pressed : true })}> 
+                    <View style={{width:wp('35%'), alignSelf:'center', justifyContent:'center'}}>
+                      <Text style={{fontSize:10}}>{item.NAMACC}</Text>
+                    </View>
+                    <View style={{width:wp('35%'), alignSelf:'center', justifyContent:'center'}}>
+                      <Text style={{fontSize:10}}>{item.NAMAPROJECT}</Text>
+                    </View>
+                    <View style={{width:wp('10%'), alignSelf:'center', justifyContent:'center', alignItems:'center'}}>
+                      <Text style={{textAlign:'center', fontSize:10}}>{parseFloat(item.REVENUE)}M</Text>                    
+                    </View>
+                  </TouchableOpacity> : null
+                }
               </View>
             )}
             style={{height:hp('80%'), marginBottom:hp('2%')}}
@@ -198,7 +257,7 @@ class DbsDetailScreens extends Component{
 
     const{
       //prospect
-      ebisProspectREVENUE,ebisProspectProject,dataMitra,
+      ebisProspectREVENUE,ebisProspectProject,dataMitra, EbisDetailDone
     } = this.props;
 
     const {statusAll, statusSubs, statusMitra, statusTelkom} = this.state;
@@ -292,23 +351,11 @@ class DbsDetailScreens extends Component{
             }
           </TouchableOpacity>
         </View>
-
-        <View style={styles.buttonTab}>
-          <TouchableOpacity style={styles.buttonTabStyle} onPress={() => this.props.navigation.navigate('MonitorKB')}>
-            <Text>Monitor KB</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.buttonTabStyle} onPress={() => this.props.navigation.navigate("MonitorKL")}>
-            <Text>Monitor KL</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.buttonTabStyle}>
-            <Text>Monitor Delivery</Text>
-          </TouchableOpacity>
-        </View>
         
         <View style={styles.wrapperHeaderContent}>
           <View style={{width:wp('70%')}}>
             {renderIf(!statusAll)(
-              <Text style={{textAlign:'center', color:'#FFF'}}>ALL</Text>              
+              <Text style={{textAlign:'center', color:'#FFF'}}>NAMA</Text>              
             )}
 
             {renderIf(!statusSubs)(
@@ -333,7 +380,7 @@ class DbsDetailScreens extends Component{
             {renderIf(!statusAll)(
               <View>
                 <FlatList
-                  data={dataMitra}
+                  data={EbisDetailDone}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={({ item }) => (
                     <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModal(item.MITRA)}> 
@@ -341,12 +388,17 @@ class DbsDetailScreens extends Component{
                         <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
                       </View>
                       <View style={{width:wp('65%')}}>
-                        <Text>{item.MITRA}</Text>
+                        <Text>{item.NAMACC}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center'}}>{item.jumlah}M</Text>                    
+                        <Text style={{textAlign:'center'}}>{item.REVENUE}M</Text>                    
                       </View>
                     </TouchableOpacity>
+                  )}
+                  ListEmptyComponent={() => (
+                    <View style={{ alignItems : "center", justifyContent: 'center'}}>
+                      <Text>Tidak ada data</Text>
+                    </View>
                   )}
                 />
                 <Modal 
@@ -421,7 +473,7 @@ class DbsDetailScreens extends Component{
 
     const{
       //prospect
-      ebisProspectREVENUE2,ebisProspectProject2,dataMitra2,
+      ebisProspectREVENUE2,ebisProspectProject2,dataMitra2, DesDetailDone
     } = this.props;
 
     const {statusAll, statusSubs, statusMitra, statusTelkom} = this.state;
@@ -515,23 +567,11 @@ class DbsDetailScreens extends Component{
             }
           </TouchableOpacity>
         </View>
-
-        <View style={styles.buttonTab}>
-          <TouchableOpacity style={styles.buttonTabStyle} onPress={() => this.props.navigation.navigate('MonitorKB')}>
-            <Text>Monitor KB</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.buttonTabStyle} onPress={() => this.props.navigation.navigate('MonitorKL')}>
-            <Text>Monitor KL</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.buttonTabStyle}>
-            <Text>Monitor Delivery</Text>
-          </TouchableOpacity>
-        </View>
         
         <View style={styles.wrapperHeaderContent}>
           <View style={{width:wp('70%')}}>
             {renderIf(!statusAll)(
-              <Text style={{textAlign:'center', color:'#FFF'}}>ALL</Text>              
+              <Text style={{textAlign:'center', color:'#FFF'}}>NAMA</Text>              
             )}
 
             {renderIf(!statusSubs)(
@@ -556,20 +596,25 @@ class DbsDetailScreens extends Component{
             {renderIf(!statusAll)(
               <View>
                 <FlatList
-                  data={dataMitra2}
+                  data={DesDetailDone}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModal(item.MITRA)}> 
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModalDes(item.NAMACC)}> 
                       <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
                         <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
                       </View>
                       <View style={{width:wp('65%')}}>
-                        <Text>{item.MITRA}</Text>
+                        <Text>{item.NAMACC}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center'}}>{item.jumlah}M</Text>                    
+                        <Text style={{textAlign:'center'}}>{item.REVENUE}M</Text>                    
                       </View>
                     </TouchableOpacity>
+                  )}
+                  ListEmptyComponent={() => (
+                    <View style={{ alignItems : "center", justifyContent: 'center'}}>
+                      <Text>Tidak ada data</Text>
+                    </View>
                   )}
                 />
                 <Modal 
@@ -644,7 +689,7 @@ class DbsDetailScreens extends Component{
 
     const{
       //prospect
-      ebisProspectREVENUE3,ebisProspectProject3,dataMitra3,
+      ebisProspectREVENUE3,ebisProspectProject3,dataMitra3, DbsDetailDone
     } = this.props;
 
     const {statusAll, statusSubs, statusMitra, statusTelkom} = this.state;
@@ -738,23 +783,11 @@ class DbsDetailScreens extends Component{
             }
           </TouchableOpacity>
         </View>
-
-        <View style={styles.buttonTab}>
-          <TouchableOpacity style={styles.buttonTabStyle} onPress={() => this.props.navigation.navigate('MonitorKB')}>
-            <Text>Monitor KB</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.buttonTabStyle} onPress={() => this.props.navigation.navigate('MonitorKL')}>
-            <Text>Monitor KL</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.buttonTabStyle}>
-            <Text>Monitor Delivery</Text>
-          </TouchableOpacity>
-        </View>
         
         <View style={styles.wrapperHeaderContent}>
           <View style={{width:wp('70%')}}>
             {renderIf(!statusAll)(
-              <Text style={{textAlign:'center', color:'#FFF'}}>ALL</Text>              
+              <Text style={{textAlign:'center', color:'#FFF'}}>NAMA</Text>              
             )}
 
             {renderIf(!statusSubs)(
@@ -779,20 +812,25 @@ class DbsDetailScreens extends Component{
             {renderIf(!statusAll)(
               <View>
                 <FlatList
-                  data={dataMitra3}
+                  data={DbsDetailDone}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModal(item.MITRA)}> 
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModalDbs(item.NAMACC)}> 
                       <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
                         <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
                       </View>
                       <View style={{width:wp('65%')}}>
-                        <Text>{item.MITRA}</Text>
+                        <Text>{item.NAMACC}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center'}}>{item.jumlah}M</Text>                    
+                        <Text style={{textAlign:'center'}}>{item.REVENUE}M</Text>                    
                       </View>
                     </TouchableOpacity>
+                  )}
+                  ListEmptyComponent={() => (
+                    <View style={{ alignItems : "center", justifyContent: 'center'}}>
+                      <Text>Tidak ada data</Text>
+                    </View>
                   )}
                 />
                 <Modal 
@@ -867,7 +905,7 @@ class DbsDetailScreens extends Component{
 
     const{
       //prospect
-      ebisProspectREVENUE4,ebisProspectProject4,dataMitra4,
+      ebisProspectREVENUE4,ebisProspectProject4,dataMitra4, DgsDetailDone
     } = this.props;
 
     const {statusAll, statusSubs, statusMitra, statusTelkom} = this.state;
@@ -961,23 +999,11 @@ class DbsDetailScreens extends Component{
             }
           </TouchableOpacity>
         </View>
-
-        <View style={styles.buttonTab}>
-          <TouchableOpacity style={styles.buttonTabStyle} onPress={() => this.props.navigation.navigate('MonitorKB')}>
-            <Text>Monitor KB</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.buttonTabStyle} onPress={() => this.props.navigation.navigate('MonitorKL')}>
-            <Text>Monitor KL</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.buttonTabStyle}>
-            <Text>Monitor Delivery</Text>
-          </TouchableOpacity>
-        </View>
         
         <View style={styles.wrapperHeaderContent}>
           <View style={{width:wp('70%')}}>
             {renderIf(!statusAll)(
-              <Text style={{textAlign:'center', color:'#FFF'}}>ALL</Text>              
+              <Text style={{textAlign:'center', color:'#FFF'}}>NAMA</Text>              
             )}
 
             {renderIf(!statusSubs)(
@@ -1002,20 +1028,25 @@ class DbsDetailScreens extends Component{
             {renderIf(!statusAll)(
               <View>
                 <FlatList
-                  data={dataMitra4}
+                  data={DgsDetailDone}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModal(item.MITRA)}> 
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModalDgs(item.NAMACC)}> 
                       <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
                         <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
                       </View>
                       <View style={{width:wp('65%')}}>
-                        <Text>{item.MITRA}</Text>
+                        <Text>{item.NAMACC}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center'}}>{item.jumlah}M</Text>                    
+                        <Text style={{textAlign:'center'}}>{item.REVENUE}M</Text>                    
                       </View>
                     </TouchableOpacity>
+                  )}
+                  ListEmptyComponent={() => (
+                    <View style={{ alignItems : "center", justifyContent: 'center'}}>
+                      <Text>Tidak ada data</Text>
+                    </View>
                   )}
                 />
                 <Modal 
@@ -1072,7 +1103,7 @@ class DbsDetailScreens extends Component{
             </Button>
           </Left>
           <Body>
-            <Title style={{color:'#FFF'}}>Detail Screen</Title>
+            <Title style={{color:'#FFF'}}>Detail Done KB</Title>
           </Body>
           <Right/>
         </Header>
@@ -1124,9 +1155,15 @@ const mapStateToProps = (state) => ({
   dataMitra2:state.DesDetailReducer.dataMitra,
   dataMitra3:state.DbsDetailReducer.dataMitra,
   dataMitra4:state.DgsDetailReducer.dataMitra,
+
+  //detail done
+  EbisDetailDone: state.MonitorEbisReducer.detailDone,
+  DgsDetailDone: state.MonitorDgsReducer.detailDoneDgs,
+  DbsDetailDone: state.MonitorDbsReducer.detailDoneDbs,
+  DesDetailDone: state.MonitorDesReducer.detailDoneDes
 })
 
-export default connect(mapStateToProps)(DbsDetailScreens);
+export default connect(mapStateToProps)(detailMonitor);
 
 const styles = StyleSheet.create({
   container: {

@@ -12,21 +12,21 @@ const initialState = {
     detailOgpDes: []
   };
   
-  const MonitorDesReducer = (state = initialState, action) => {
+  const MonitorDesReducerKL = (state = initialState, action) => {
     switch (action.type) {
-      case 'MONITOR_KB_DES_REJECTED':
+      case 'MONITOR_KL_DES_REJECTED':
         return{
           ...state, 
         }
       break;
       
-      case 'MONITOR_KB_DES_PENDING':
+      case 'MONITOR_KL_DES_PENDING':
         return{
           ...state, 
         }
       break;
   
-      case 'MONITOR_KB_DES_FULFILLED':
+      case 'MONITOR_KL_DES_FULFILLED':
         return{
           ...state, 
           //Current status
@@ -35,19 +35,19 @@ const initialState = {
         }
       break;
 
-      case 'MONITOR_KB_DES_DONE_REJECTED':
+      case 'MONITOR_KL_DES_DONE_REJECTED':
         return{
           ...state, 
         }
       break;
       
-      case 'MONITOR_KB_DES_DONE_PENDING':
+      case 'MONITOR_KL_DES_DONE_PENDING':
         return{
           ...state, 
         }
       break;
   
-      case 'MONITOR_KB_DES_DONE_FULFILLED':
+      case 'MONITOR_KL_DES_DONE_FULFILLED':
         return{
           ...state, 
           //Current status
@@ -56,19 +56,19 @@ const initialState = {
         }
       break;
 
-      case 'MONITOR_KB_DES_OGP_REJECTED':
+      case 'MONITOR_KL_DES_OGP_REJECTED':
         return{
           ...state, 
         }
       break;
       
-      case 'MONITOR_KB_DES_OGP_PENDING':
+      case 'MONITOR_KL_DES_OGP_PENDING':
         return{
           ...state, 
         }
       break;
   
-      case 'MONITOR_KB_DES_OGP_FULFILLED':
+      case 'MONITOR_KL_DES_OGP_FULFILLED':
         return{
           ...state, 
           //Current status
@@ -77,19 +77,19 @@ const initialState = {
         }
       break;
 
-      case 'MONITOR_KB_DES_OGP_DATA_REJECTED':
+      case 'MONITOR_KL_DES_OGP_DATA_REJECTED':
         return{
           ...state, 
         }
       break;
       
-      case 'MONITOR_KB_DES_OGP_DATA_PENDING':
+      case 'MONITOR_KL_DES_OGP_DATA_PENDING':
         return{
           ...state, 
         }
       break;
   
-      case 'MONITOR_KB_DES_OGP_DATA_FULFILLED':
+      case 'MONITOR_KL_DES_OGP_DATA_FULFILLED':
         return{
           ...state, 
           //Current status
@@ -97,19 +97,19 @@ const initialState = {
         }
       break;
 
-      case 'MONITOR_KB_DES_DETAIL_DONE_REJECTED':
+      case 'MONITOR_KL_DES_DETAIL_DONE_REJECTED':
         return{
           ...state, 
         }
       break;
       
-      case 'MONITOR_KB_DES_DETAIL_DONE_PENDING':
+      case 'MONITOR_KL_DES_DETAIL_DONE_PENDING':
         return{
           ...state, 
         }
       break;
   
-      case 'MONITOR_KB_DES_DETAIL_DONE_FULFILLED':
+      case 'MONITOR_KL_DES_DETAIL_DONE_FULFILLED':
         return{
           ...state, 
           //Current status
@@ -117,19 +117,19 @@ const initialState = {
         }
       break;
 
-      case 'MONITOR_KB_DES_DETAIL_OGP_REJECTED':
+      case 'MONITOR_KL_DES_DETAIL_OGP_REJECTED':
       return{
         ...state, 
       }
      break;
     
-      case 'MONITOR_KB_DES_DETAIL_OGP_PENDING':
+      case 'MONITOR_KL_DES_DETAIL_OGP_PENDING':
       return{
         ...state, 
         }
       break;
 
-    case 'MONITOR_KB_DES_DETAIL_OGP_FULFILLED':
+    case 'MONITOR_KL_DES_DETAIL_OGP_FULFILLED':
       return{
         ...state, 
         //Current status
@@ -142,4 +142,4 @@ const initialState = {
     }
   };
   
-  export default MonitorDesReducer;
+  export default MonitorDesReducerKL;

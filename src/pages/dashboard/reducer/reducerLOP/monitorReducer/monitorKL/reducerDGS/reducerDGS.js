@@ -12,21 +12,21 @@ const initialState = {
     detailOgpDgs: []
   };
   
-  const MonitorDgsReducer = (state = initialState, action) => {
+  const MonitorDgsReducerKL = (state = initialState, action) => {
     switch (action.type) {
-      case 'MONITOR_KB_DGS_REJECTED':
+      case 'MONITOR_KL_DGS_REJECTED':
         return{
           ...state, 
         }
       break;
       
-      case 'MONITOR_KB_DGS_PENDING':
+      case 'MONITOR_KL_DGS_PENDING':
         return{
           ...state, 
         }
       break;
   
-      case 'MONITOR_KB_DGS_FULFILLED':
+      case 'MONITOR_KL_DGS_FULFILLED':
         return{
           ...state, 
           //Current status
@@ -35,19 +35,19 @@ const initialState = {
         }
       break;
 
-      case 'MONITOR_KB_DGS_DONE_REJECTED':
+      case 'MONITOR_KL_DGS_DONE_REJECTED':
         return{
           ...state, 
         }
       break;
       
-      case 'MONITOR_KB_DGS_DONE_PENDING':
+      case 'MONITOR_KL_DGS_DONE_PENDING':
         return{
           ...state, 
         }
       break;
   
-      case 'MONITOR_KB_DGS_DONE_FULFILLED':
+      case 'MONITOR_KL_DGS_DONE_FULFILLED':
         return{
           ...state, 
           //Current status
@@ -56,19 +56,19 @@ const initialState = {
         }
       break;
 
-      case 'MONITOR_KB_DGS_OGP_REJECTED':
+      case 'MONITOR_KL_DGS_OGP_REJECTED':
         return{
           ...state, 
         }
       break;
       
-      case 'MONITOR_KB_DGS_OGP_PENDING':
+      case 'MONITOR_KL_DGS_OGP_PENDING':
         return{
           ...state, 
         }
       break;
   
-      case 'MONITOR_KB_DGS_OGP_FULFILLED':
+      case 'MONITOR_KL_DGS_OGP_FULFILLED':
         return{
           ...state, 
           //Current status
@@ -77,19 +77,19 @@ const initialState = {
         }
       break;
 
-      case 'MONITOR_KB_DGS_OGP_DATA_REJECTED':
+      case 'MONITOR_KL_DGS_OGP_DATA_REJECTED':
         return{
           ...state, 
         }
       break;
       
-      case 'MONITOR_KB_DGS_OGP_DATA_PENDING':
+      case 'MONITOR_KL_DGS_OGP_DATA_PENDING':
         return{
           ...state, 
         }
       break;
   
-      case 'MONITOR_KB_DGS_OGP_DATA_FULFILLED':
+      case 'MONITOR_KL_DGS_OGP_DATA_FULFILLED':
         return{
           ...state, 
           //Current status
@@ -97,19 +97,19 @@ const initialState = {
         }
       break;
 
-      case 'MONITOR_KB_DGS_DETAIL_DONE_REJECTED':
+      case 'MONITOR_KL_DGS_DETAIL_DONE_REJECTED':
         return{
           ...state, 
         }
       break;
       
-      case 'MONITOR_KB_DGS_DETAIL_DONE_PENDING':
+      case 'MONITOR_KL_DGS_DETAIL_DONE_PENDING':
         return{
           ...state, 
         }
       break;
   
-      case 'MONITOR_KB_DGS_DETAIL_DONE_FULFILLED':
+      case 'MONITOR_KL_DGS_DETAIL_DONE_FULFILLED':
         return{
           ...state, 
           //Current status
@@ -117,19 +117,19 @@ const initialState = {
         }
       break;
 
-      case 'MONITOR_KB_DGS_DETAIL_OGP_REJECTED':
+      case 'MONITOR_KL_DGS_DETAIL_OGP_REJECTED':
       return{
         ...state, 
       }
      break;
     
-      case 'MONITOR_KB_DGS_DETAIL_OGP_PENDING':
+      case 'MONITOR_KL_DGS_DETAIL_OGP_PENDING':
       return{
         ...state, 
         }
       break;
 
-    case 'MONITOR_KB_DGS_DETAIL_OGP_FULFILLED':
+    case 'MONITOR_KL_DGS_DETAIL_OGP_FULFILLED':
       return{
         ...state, 
         //Current status
@@ -142,4 +142,4 @@ const initialState = {
     }
   };
   
-  export default MonitorDgsReducer;
+  export default MonitorDgsReducerKL;
