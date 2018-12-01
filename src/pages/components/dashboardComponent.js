@@ -40,7 +40,7 @@ class ComponentDashboard extends Component {
         return (<Chat/>);
       break;
       case 'treg':
-        return (<TReg/>);
+        return (<TReg navigation={this.props.navigation}/>);
       break;
       default:
     }

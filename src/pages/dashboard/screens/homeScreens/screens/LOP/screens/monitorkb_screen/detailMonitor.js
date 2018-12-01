@@ -41,7 +41,8 @@ class detailMonitor extends Component{
   _toggleModal(item){
     this.setState({
       visibleModal: !this.state.visibleModal,
-      loaderTampilDetail:true
+      loaderTampilDetail:true,
+      pressed: false
     })
     axios.get(`${url.API}/ebis_getkbproject/div/EBIS/treg/ALL/witel/ALL/startdate/201801/enddate/201811/state/DONE/mitra/${item}`).then((res) => {
       this.setState({dataTampung:res.data, loaderTampilDetail:false });
@@ -56,7 +57,8 @@ class detailMonitor extends Component{
   _toggleModalDes(item){
     this.setState({
       visibleModal: !this.state.visibleModal,
-      loaderTampilDetail:true
+      loaderTampilDetail:true,
+      pressed: false,
     })
     axios.get(`${url.API}/ebis_getkbproject/div/DES/treg/ALL/witel/ALL/startdate/201801/enddate/201811/state/DONE/mitra/${item}`).then((res) => {
       this.setState({dataTampung:res.data, loaderTampilDetail:false });
@@ -71,7 +73,8 @@ class detailMonitor extends Component{
   _toggleModalDbs(item){
     this.setState({
       visibleModal: !this.state.visibleModal,
-      loaderTampilDetail:true
+      loaderTampilDetail:true,
+      pressed: false
     })
     axios.get(`${url.API}/ebis_getkbproject/div/DBS/treg/ALL/witel/ALL/startdate/201801/enddate/201811/state/DONE/mitra/${item}`).then((res) => {
       this.setState({dataTampung:res.data, loaderTampilDetail:false });
@@ -86,7 +89,8 @@ class detailMonitor extends Component{
   _toggleModalDgs(item){
     this.setState({
       visibleModal: !this.state.visibleModal,
-      loaderTampilDetail:true
+      loaderTampilDetail:true,
+      pressed: false
     })
     axios.get(`${url.API}/ebis_getkbproject/div/DGS/treg/ALL/witel/ALL/startdate/201801/enddate/201811/state/DONE/mitra/${item}`).then((res) => {
       this.setState({dataTampung:res.data, loaderTampilDetail:false });
@@ -383,7 +387,7 @@ class detailMonitor extends Component{
                   data={EbisDetailDone}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModal(item.MITRA)}> 
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModal(item.NAMACC)}> 
                       <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
                         <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
                       </View>

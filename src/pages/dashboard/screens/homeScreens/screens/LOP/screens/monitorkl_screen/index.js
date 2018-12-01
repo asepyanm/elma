@@ -355,7 +355,7 @@ class MonitorKL extends Component {
                 />
 
                 <TouchableOpacity style={styles.containerArrowWin2} onPress={() => navigation.navigate('DetailMonitorDoneKL')}>
-                  <Text style={styles.textJudul}>Done KB</Text>
+                  <Text style={styles.textJudul}>Done KL</Text>
                   <Text style={styles.textIsi}>{ebisMonitorDone}M</Text>
                   <Text style={styles.textKeterangan}>per {ebisMonitorDoneWP} Project</Text>
                 </TouchableOpacity>
@@ -392,7 +392,7 @@ class MonitorKL extends Component {
                 />
 
                 <TouchableOpacity style={styles.containerArrowWin2} onPress={() => navigation.navigate('DetailMonitorOgpKL')}>
-                  <Text style={styles.textJudul}>OGP KB</Text>
+                  <Text style={styles.textJudul}>OGP KL</Text>
                   <Text style={styles.textIsi}>{ebisMonitorOgp}M</Text>
                   <Text style={styles.textKeterangan}>per {ebisMonitorOgpWP} Project</Text>
                 </TouchableOpacity>
@@ -412,7 +412,7 @@ class MonitorKL extends Component {
 
               <View style={{ flexDirection: 'row', margin: hp('2%'), justifyContent: 'space-between' }}>
                 <View style={{ marginBottom: hp('2%') }}>
-                  <Text style={[styles.textJudul, { marginBottom: 20, alignItems: 'center' }]}>Progress OGP KB &#60; 3 Hari</Text>
+                  <Text style={[styles.textJudul, { marginBottom: 20, alignItems: 'center' }]}>Progress OGP KL &#60; 3 Hari</Text>
                 </View>
 
                 <View>
@@ -424,7 +424,7 @@ class MonitorKL extends Component {
 
               <View style={{ flexDirection: 'row', margin: hp('2%'), justifyContent: 'space-between' }}>
                 <View style={{ marginBottom: hp('2%') }}>
-                  <Text style={[styles.textJudul, { marginBottom: 20, alignItems: 'center' }]}>Progress OGP KB &#60; 7 Hari</Text>
+                  <Text style={[styles.textJudul, { marginBottom: 20, alignItems: 'center' }]}>Progress OGP KL &#60; 7 Hari</Text>
                 </View>
 
                 <View>
@@ -436,7 +436,7 @@ class MonitorKL extends Component {
 
               <View style={{ flexDirection: 'row', margin: hp('2%'), justifyContent: 'space-between' }}>
                 <View style={{ marginBottom: hp('2%') }}>
-                  <Text style={[styles.textJudul, { marginBottom: 20, alignItems: 'center' }]}>Progress OGP KB &#62; 7 Hari</Text>
+                  <Text style={[styles.textJudul, { marginBottom: 20, alignItems: 'center' }]}>Progress OGP KL &#62; 7 Hari</Text>
                 </View>
 
                 <View>
@@ -666,7 +666,7 @@ class MonitorKL extends Component {
                 />
 
                 <TouchableOpacity style={styles.containerArrowWin2} onPress={() => navigation.navigate('DetailMonitorDoneKL')}>
-                  <Text style={styles.textJudul}>Done KB</Text>
+                  <Text style={styles.textJudul}>Done KL</Text>
                   <Text style={styles.textIsi}>{DesMonitorDone}M</Text>
                   <Text style={styles.textKeterangan}>per {DesMonitorDoneWP} Project</Text>
                 </TouchableOpacity>
@@ -703,7 +703,7 @@ class MonitorKL extends Component {
                 />
 
                 <TouchableOpacity style={styles.containerArrowWin2} onPress={() => navigation.navigate('DetailMonitorOgpKL')}>
-                  <Text style={styles.textJudul}>OGP KB</Text>
+                  <Text style={styles.textJudul}>OGP KL</Text>
                   <Text style={styles.textIsi}>{DesMonitorOgp}M</Text>
                   <Text style={styles.textKeterangan}>per {DesMonitorOgpWP} Project</Text>
                 </TouchableOpacity>
@@ -723,7 +723,7 @@ class MonitorKL extends Component {
 
               <View style={{ flexDirection: 'row', margin: hp('2%'), justifyContent: 'space-between' }}>
                 <View style={{ marginBottom: hp('2%') }}>
-                  <Text style={[styles.textJudul, { marginBottom: 20, alignItems: 'center' }]}>Progress OGP KB &#60; 3 Hari</Text>
+                  <Text style={[styles.textJudul, { marginBottom: 20, alignItems: 'center' }]}>Progress OGP KL &#60; 3 Hari</Text>
                 </View>
 
                 <View>
@@ -735,7 +735,7 @@ class MonitorKL extends Component {
 
               <View style={{ flexDirection: 'row', margin: hp('2%'), justifyContent: 'space-between' }}>
                 <View style={{ marginBottom: hp('2%') }}>
-                  <Text style={[styles.textJudul, { marginBottom: 20, alignItems: 'center' }]}>Progress OGP KB &#60; 7 Hari</Text>
+                  <Text style={[styles.textJudul, { marginBottom: 20, alignItems: 'center' }]}>Progress OGP KL &#60; 7 Hari</Text>
                 </View>
 
                 <View>
@@ -747,7 +747,7 @@ class MonitorKL extends Component {
 
               <View style={{ flexDirection: 'row', margin: hp('2%'), justifyContent: 'space-between' }}>
                 <View style={{ marginBottom: hp('2%') }}>
-                  <Text style={[styles.textJudul, { marginBottom: 20, alignItems: 'center' }]}>Progress OGP KB &#62; 7 Hari</Text>
+                  <Text style={[styles.textJudul, { marginBottom: 20, alignItems: 'center' }]}>Progress OGP KL &#62; 7 Hari</Text>
                 </View>
 
                 <View>
@@ -977,7 +977,7 @@ class MonitorKL extends Component {
                 />
 
                 <TouchableOpacity style={styles.containerArrowWin2} onPress={() => navigation.navigate('DetailMonitorDoneKL')}>
-                  <Text style={styles.textJudul}>Done KB</Text>
+                  <Text style={styles.textJudul}>Done KL</Text>
                   <Text style={styles.textIsi}>{DbsMonitorDone}M</Text>
                   <Text style={styles.textKeterangan}>per {DbsMonitorDoneWP} Project</Text>
                 </TouchableOpacity>
@@ -1014,7 +1014,7 @@ class MonitorKL extends Component {
                 />
 
                 <TouchableOpacity style={styles.containerArrowWin2} onPress={() => navigation.navigate('DetailMonitorOgpKL')}>
-                  <Text style={styles.textJudul}>OGP KB</Text>
+                  <Text style={styles.textJudul}>OGP KL</Text>
                   <Text style={styles.textIsi}>{DbsMonitorOgp}M</Text>
                   <Text style={styles.textKeterangan}>per {DbsMonitorOgpWP} Project</Text>
                 </TouchableOpacity>
@@ -1034,7 +1034,7 @@ class MonitorKL extends Component {
 
               <View style={{ flexDirection: 'row', margin: hp('2%'), justifyContent: 'space-between' }}>
                 <View style={{ marginBottom: hp('2%') }}>
-                  <Text style={[styles.textJudul, { marginBottom: 20, alignItems: 'center' }]}>Progress OGP KB &#60; 3 Hari</Text>
+                  <Text style={[styles.textJudul, { marginBottom: 20, alignItems: 'center' }]}>Progress OGP KL &#60; 3 Hari</Text>
                 </View>
 
                 <View>
@@ -1046,7 +1046,7 @@ class MonitorKL extends Component {
 
               <View style={{ flexDirection: 'row', margin: hp('2%'), justifyContent: 'space-between' }}>
                 <View style={{ marginBottom: hp('2%') }}>
-                  <Text style={[styles.textJudul, { marginBottom: 20, alignItems: 'center' }]}>Progress OGP KB &#60; 7 Hari</Text>
+                  <Text style={[styles.textJudul, { marginBottom: 20, alignItems: 'center' }]}>Progress OGP KL &#60; 7 Hari</Text>
                 </View>
 
                 <View>
@@ -1058,7 +1058,7 @@ class MonitorKL extends Component {
 
               <View style={{ flexDirection: 'row', margin: hp('2%'), justifyContent: 'space-between' }}>
                 <View style={{ marginBottom: hp('2%') }}>
-                  <Text style={[styles.textJudul, { marginBottom: 20, alignItems: 'center' }]}>Progress OGP KB &#62; 7 Hari</Text>
+                  <Text style={[styles.textJudul, { marginBottom: 20, alignItems: 'center' }]}>Progress OGP KL &#62; 7 Hari</Text>
                 </View>
 
                 <View>
@@ -1288,7 +1288,7 @@ class MonitorKL extends Component {
                 />
 
                 <TouchableOpacity style={styles.containerArrowWin2} onPress={() => navigation.navigate('DetailMonitorDoneKL')}>
-                  <Text style={styles.textJudul}>Done KB</Text>
+                  <Text style={styles.textJudul}>Done KL</Text>
                   <Text style={styles.textIsi}>{DgsMonitorDone}M</Text>
                   <Text style={styles.textKeterangan}>per {DgsMonitorDoneWP} Project</Text>
                 </TouchableOpacity>
@@ -1325,7 +1325,7 @@ class MonitorKL extends Component {
                 />
 
                 <TouchableOpacity style={styles.containerArrowWin2} onPress={() => navigation.navigate('DetailMonitorOgpKL')}>
-                  <Text style={styles.textJudul}>OGP KB</Text>
+                  <Text style={styles.textJudul}>OGP KL</Text>
                   <Text style={styles.textIsi}>{DgsMonitorOgp}M</Text>
                   <Text style={styles.textKeterangan}>per {DgsMonitorOgpWP} Project</Text>
                 </TouchableOpacity>
@@ -1345,7 +1345,7 @@ class MonitorKL extends Component {
 
               <View style={{ flexDirection: 'row', margin: hp('2%'), justifyContent: 'space-between' }}>
                 <View style={{ marginBottom: hp('2%') }}>
-                  <Text style={[styles.textJudul, { marginBottom: 20, alignItems: 'center' }]}>Progress OGP KB &#60; 3 Hari</Text>
+                  <Text style={[styles.textJudul, { marginBottom: 20, alignItems: 'center' }]}>Progress OGP KL &#60; 3 Hari</Text>
                 </View>
 
                 <View>
@@ -1357,7 +1357,7 @@ class MonitorKL extends Component {
 
               <View style={{ flexDirection: 'row', margin: hp('2%'), justifyContent: 'space-between' }}>
                 <View style={{ marginBottom: hp('2%') }}>
-                  <Text style={[styles.textJudul, { marginBottom: 20, alignItems: 'center' }]}>Progress OGP KB &#60; 7 Hari</Text>
+                  <Text style={[styles.textJudul, { marginBottom: 20, alignItems: 'center' }]}>Progress OGP KL &#60; 7 Hari</Text>
                 </View>
 
                 <View>
@@ -1369,7 +1369,7 @@ class MonitorKL extends Component {
 
               <View style={{ flexDirection: 'row', margin: hp('2%'), justifyContent: 'space-between' }}>
                 <View style={{ marginBottom: hp('2%') }}>
-                  <Text style={[styles.textJudul, { marginBottom: 20, alignItems: 'center' }]}>Progress OGP KB &#62; 7 Hari</Text>
+                  <Text style={[styles.textJudul, { marginBottom: 20, alignItems: 'center' }]}>Progress OGP KL &#62; 7 Hari</Text>
                 </View>
 
                 <View>

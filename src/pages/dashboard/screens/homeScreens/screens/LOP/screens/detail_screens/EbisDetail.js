@@ -24,6 +24,8 @@ class EbisDetailScreens extends Component{
   constructor(props){
     super(props);
     this.state = {
+      //data status
+
       //modal
       visibleModal:false,
       loaderTampilDetail:false,
@@ -37,6 +39,81 @@ class EbisDetailScreens extends Component{
     }
   }
 
+  componentWillMount(){
+    //get data ALL
+    this.props.dispatch({
+      type:'DETAIL_PROSPECT_EBIS',
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/EBIS/maindiv/DES/mainseg/ALL/start_date/2018001/end_date/201811`)
+    });
+    this.props.dispatch({
+      type:'DETAIL_PROSPECT_DES',
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/DES/maindiv/DES/mainseg/ALL/start_date/2018001/end_date/201811`)
+    });
+    this.props.dispatch({
+      type:'DETAIL_PROSPECT_DBS',
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/DBS/maindiv/DBS/mainseg/ALL/start_date/2018001/end_date/201811`)
+    });
+    this.props.dispatch({
+      type:'DETAIL_PROSPECT_DGS',
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/DGS/maindiv/DGS/mainseg/ALL/start_date/2018001/end_date/201811`)
+    });
+
+    //get data detail SUBS
+    this.props.dispatch({
+      type:'DETAIL_SUBS_PROSPECT_EBIS',
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/EBIS/maindiv/DES/mainseg/ALL/start_date/2018001/end_date/201807/mitra/CFU`)
+    });
+    this.props.dispatch({
+      type:'DETAIL_SUBS_PROSPECT_DES',
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/DES/maindiv/DES/mainseg/ALL/start_date/2018001/end_date/201807/mitra/CFU`)
+    });
+    this.props.dispatch({
+      type:'DETAIL_SUBS_PROSPECT_DBS',
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/DBS/maindiv/DBS/mainseg/ALL/start_date/2018001/end_date/201807/mitra/CFU`)
+    });
+    this.props.dispatch({
+      type:'DETAIL_SUBS_PROSPECT_DGS',
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/DGS/maindiv/DGS/mainseg/ALL/start_date/2018001/end_date/201807/mitra/CFU`)
+    });
+
+    //get data detail MITRA
+    this.props.dispatch({
+      type:'DETAIL_MITRA_PROSPECT_EBIS',
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/EBIS/maindiv/DES/mainseg/ALL/start_date/2018001/end_date/201807/mitra/MITRA`)
+    });
+    this.props.dispatch({
+      type:'DETAIL_MITRA_PROSPECT_DES',
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/DES/maindiv/DES/mainseg/ALL/start_date/2018001/end_date/201807/mitra/MITRA`)
+    });
+    this.props.dispatch({
+      type:'DETAIL_MITRA_PROSPECT_DBS',
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/DBS/maindiv/DBS/mainseg/ALL/start_date/2018001/end_date/201807/mitra/MITRA`)
+    });
+    this.props.dispatch({
+      type:'DETAIL_MITRA_PROSPECT_DGS',
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/DGS/maindiv/DGS/mainseg/ALL/start_date/2018001/end_date/201807/mitra/MITRA`)
+    });
+    
+    //get data detail TELKOM
+    this.props.dispatch({
+      type:'DETAIL_TELKOM_PROSPECT_EBIS',
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/EBIS/maindiv/DES/mainseg/ALL/start_date/2018001/end_date/201807/mitra/TELKOM`)
+    });
+    this.props.dispatch({
+      type:'DETAIL_TELKOM_PROSPECT_DES',
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/DES/maindiv/DES/mainseg/ALL/start_date/2018001/end_date/201807/mitra/TELKOM`)
+    });
+    this.props.dispatch({
+      type:'DETAIL_TELKOM_PROSPECT_DBS',
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/DBS/maindiv/DBS/mainseg/ALL/start_date/2018001/end_date/201807/mitra/TELKOM`)
+    });
+    this.props.dispatch({
+      type:'DETAIL_TELKOM_PROSPECT_DGS',
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/DGS/maindiv/DGS/mainseg/ALL/start_date/2018001/end_date/201807/mitra/TELKOM`)
+    });
+  }
+
+  //pop up and detail button ALL
   _toggleModal(item){
     this.setState({
       visibleModal: !this.state.visibleModal,
@@ -51,72 +128,15 @@ class EbisDetailScreens extends Component{
       alert(err)
     })
   }
-  buttonAll(){
-    if(this.state.statusAll === false){
-      this.setState({
-        statusAll:false
-      })
-    } else {
-      this.setState({
-        statusAll:!this.state.statusAll,
-        statusTelkom:true, 
-        statusSubs:true,
-        statusMitra:true,
-      })
-    }  
-  }
-  buttonSubs(){
-    if(this.state.statusSubs === false){
-      this.setState({
-        statusSubs:false
-      })
-    } else {
-      this.setState({
-        statusSubs:!this.state.statusSubs,
-        statusAll:true, 
-        statusMitra:true,
-        statusTelkom:true,
-      })
-    }
-  }
-
-  buttonMitra(){
-    if(this.state.statusMitra === false){
-      this.setState({
-        statusMitra:false
-      })
-    } else {
-      this.setState({
-        statusMitra:!this.state.statusMitra,
-        statusAll:true, 
-        statusSubs:true,
-        statusTelkom:true,
-      })
-    }
-  }
-  buttonTelkom(){
-    if(this.state.statusTelkom === false){
-      this.setState({
-        statusTelkom:false
-      })
-    } else {
-      this.setState({
-        statusTelkom:!this.state.statusTelkom,
-        statusAll:true, 
-        statusSubs:true,
-        statusMitra:true,
-      })
-    }
-  }
   renderModalContent(){
     const {dataTampung, loaderTampilDetail} = this.state;
     return(
       <View style={styles.modalContent}>
         {
         loaderTampilDetail 
-            ?
+          ?
         <ActivityIndicator size={'large'} color={'#000'} style={{margin:hp('5%')}}/>
-            :
+          :
         <View style={{width:wp('85%')}}>
           <FlatList
             data={dataTampung}
@@ -155,8 +175,73 @@ class EbisDetailScreens extends Component{
         </View>
         }
       </View>
-  )};
+    )
+  };
+  buttonAll(){
+    if(this.state.statusAll === false){
+      this.setState({
+        statusAll:false
+      })
+    } else {
+      this.setState({
+        statusAll:!this.state.statusAll,
+        statusTelkom:true, 
+        statusSubs:true,
+        statusMitra:true,
+      })
+    }  
+  }
+
+  _toggleModalSubs(item){
+    null
+  }
+  buttonSubs(){
+    if(this.state.statusSubs === false){
+      this.setState({
+        statusSubs:false
+      })
+    } else {
+      this.setState({
+        statusSubs:!this.state.statusSubs,
+        statusAll:true, 
+        statusMitra:true,
+        statusTelkom:true,
+      })
+    }
+  }
+
+  buttonMitra(){
+    if(this.state.statusMitra === false){
+      this.setState({
+        statusMitra:false
+      })
+    } else {
+      this.setState({
+        statusMitra:!this.state.statusMitra,
+        statusAll:true, 
+        statusSubs:true,
+        statusTelkom:true,
+      })
+    }
+  }
+
+  buttonTelkom(){
+    if(this.state.statusTelkom === false){
+      this.setState({
+        statusTelkom:false
+      })
+    } else {
+      this.setState({
+        statusTelkom:!this.state.statusTelkom,
+        statusAll:true, 
+        statusSubs:true,
+        statusMitra:true,
+      })
+    }
+  }
   
+
+  //screen detail
   EbisScreen(){
     //import image arrow
     const images = {
@@ -198,7 +283,7 @@ class EbisDetailScreens extends Component{
 
     const{
       //prospect
-      ebisProspectREVENUE,ebisProspectProject,dataMitra,
+      ebisProspectREVENUE,ebisProspectProject,dataAll,dataSubs,dataMitra,dataTelkom
     } = this.props;
 
     const {statusAll, statusSubs, statusMitra, statusTelkom} = this.state;
@@ -321,7 +406,7 @@ class EbisDetailScreens extends Component{
             {renderIf(!statusAll)(
               <View>
                 <FlatList
-                  data={dataMitra}
+                  data={dataAll}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={({ item }) => (
                     <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModal(item.MITRA)}> 
@@ -346,21 +431,84 @@ class EbisDetailScreens extends Component{
             )}
 
             {renderIf(!statusSubs)(
-              <Text>
-                Status Subs
-              </Text>
+              <View>
+                <FlatList
+                  data={dataSubs}
+                  keyExtractor={(item, index) => index.toString()}
+                  renderItem={({ item }) => (
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModalSubs(item.MITRA)}> 
+                      <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
+                        <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
+                      </View>
+                      <View style={{width:wp('65%')}}>
+                        <Text>{item.MITRA}</Text>
+                      </View>
+                      <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
+                        <Text style={{textAlign:'center'}}>{item.jumlah}M</Text>                    
+                      </View>
+                    </TouchableOpacity>
+                  )}
+                />
+                {/* <Modal 
+                  isVisible={this.state.visibleModal === true}
+                  onBackdropPress={() => this.setState({ visibleModal: false })}>
+                  {this.renderModalContentSubs()}
+                </Modal> */}
+              </View>
             )}
 
             {renderIf(!statusMitra)(
-              <Text>
-                Status Mitra
-              </Text>
+              <View>
+                <FlatList
+                  data={dataMitra}
+                  keyExtractor={(item, index) => index.toString()}
+                  renderItem={({ item }) => (
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModalSubs(item.MITRA)}> 
+                      <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
+                        <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
+                      </View>
+                      <View style={{width:wp('65%')}}>
+                        <Text>{item.MITRA}</Text>
+                      </View>
+                      <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
+                        <Text style={{textAlign:'center'}}>{item.jumlah}M</Text>                    
+                      </View>
+                    </TouchableOpacity>
+                  )}
+                />
+                {/* <Modal 
+                  isVisible={this.state.visibleModal === true}
+                  onBackdropPress={() => this.setState({ visibleModal: false })}>
+                  {this.renderModalContentSubs()}
+                </Modal> */}
+              </View>
             )}
 
             {renderIf(!statusTelkom)(
-              <Text>
-                Status Telkom
-              </Text>
+              <View>
+                <FlatList
+                  data={dataTelkom}
+                  keyExtractor={(item, index) => index.toString()}
+                  renderItem={({ item }) => (
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModalSubs(item.MITRA)}> 
+                      <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
+                        <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
+                      </View>
+                      <View style={{width:wp('65%')}}>
+                        <Text>{item.MITRA}</Text>
+                      </View>
+                      <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
+                        <Text style={{textAlign:'center'}}>{item.jumlah}M</Text>                    
+                      </View>
+                    </TouchableOpacity>
+                  )}
+                />
+                {/* <Modal 
+                  isVisible={this.state.visibleModal === true}
+                  onBackdropPress={() => this.setState({ visibleModal: false })}>
+                  {this.renderModalContentSubs()}
+                </Modal> */}
+              </View>
             )}
           </Content>
         {/* </ScrollView> */}
@@ -409,7 +557,7 @@ class EbisDetailScreens extends Component{
 
     const{
       //prospect
-      ebisProspectREVENUE2,ebisProspectProject2,dataMitra2,
+      ebisProspectREVENUE2,ebisProspectProject2,dataAll2,dataSubs2,dataMitra2,dataTelkom2
     } = this.props;
 
     const {statusAll, statusSubs, statusMitra, statusTelkom} = this.state;
@@ -532,7 +680,7 @@ class EbisDetailScreens extends Component{
             {renderIf(!statusAll)(
               <View>
                 <FlatList
-                  data={dataMitra2}
+                  data={dataAll2}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={({ item }) => (
                     <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModal(item.MITRA)}> 
@@ -557,21 +705,84 @@ class EbisDetailScreens extends Component{
             )}
 
             {renderIf(!statusSubs)(
-              <Text>
-                Status Subs
-              </Text>
+              <View>
+                <FlatList
+                  data={dataSubs2}
+                  keyExtractor={(item, index) => index.toString()}
+                  renderItem={({ item }) => (
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModalSubs(item.MITRA)}> 
+                      <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
+                        <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
+                      </View>
+                      <View style={{width:wp('65%')}}>
+                        <Text>{item.MITRA}</Text>
+                      </View>
+                      <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
+                        <Text style={{textAlign:'center'}}>{item.jumlah}M</Text>                    
+                      </View>
+                    </TouchableOpacity>
+                  )}
+                />
+                {/* <Modal 
+                  isVisible={this.state.visibleModal === true}
+                  onBackdropPress={() => this.setState({ visibleModal: false })}>
+                  {this.renderModalContentSubs()}
+                </Modal> */}
+              </View>
             )}
 
             {renderIf(!statusMitra)(
-              <Text>
-                Status Mitra
-              </Text>
+             <View>
+              <FlatList
+                data={dataMitra2}
+                keyExtractor={(item, index) => index.toString()}
+                renderItem={({ item }) => (
+                  <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModalSubs(item.MITRA)}> 
+                    <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
+                      <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
+                    </View>
+                    <View style={{width:wp('65%')}}>
+                      <Text>{item.MITRA}</Text>
+                    </View>
+                    <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
+                      <Text style={{textAlign:'center'}}>{item.jumlah}M</Text>                    
+                    </View>
+                  </TouchableOpacity>
+                )}
+              />
+              {/* <Modal 
+                isVisible={this.state.visibleModal === true}
+                onBackdropPress={() => this.setState({ visibleModal: false })}>
+                {this.renderModalContentSubs()}
+              </Modal> */}
+            </View>
             )}
 
             {renderIf(!statusTelkom)(
-              <Text>
-                Status Telkom
-              </Text>
+             <View>
+              <FlatList
+                data={dataTelkom2}
+                keyExtractor={(item, index) => index.toString()}
+                renderItem={({ item }) => (
+                  <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModalSubs(item.MITRA)}> 
+                    <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
+                      <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
+                    </View>
+                    <View style={{width:wp('65%')}}>
+                      <Text>{item.MITRA}</Text>
+                    </View>
+                    <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
+                      <Text style={{textAlign:'center'}}>{item.jumlah}M</Text>                    
+                    </View>
+                  </TouchableOpacity>
+                )}
+              />
+              {/* <Modal 
+                isVisible={this.state.visibleModal === true}
+                onBackdropPress={() => this.setState({ visibleModal: false })}>
+                {this.renderModalContentSubs()}
+              </Modal> */}
+            </View>
             )}
           </Content>
         {/* </ScrollView> */}
@@ -620,7 +831,7 @@ class EbisDetailScreens extends Component{
 
     const{
       //prospect
-      ebisProspectREVENUE3,ebisProspectProject3,dataMitra3,
+      ebisProspectREVENUE3,ebisProspectProject3,dataAll3,dataSubs3,dataMitra3,dataTelkom3
     } = this.props;
 
     const {statusAll, statusSubs, statusMitra, statusTelkom} = this.state;
@@ -743,7 +954,7 @@ class EbisDetailScreens extends Component{
             {renderIf(!statusAll)(
               <View>
                 <FlatList
-                  data={dataMitra3}
+                  data={dataAll3}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={({ item }) => (
                     <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModal(item.MITRA)}> 
@@ -768,21 +979,84 @@ class EbisDetailScreens extends Component{
             )}
 
             {renderIf(!statusSubs)(
-              <Text>
-                Status Subs
-              </Text>
+              <View>
+                <FlatList
+                  data={dataSubs3}
+                  keyExtractor={(item, index) => index.toString()}
+                  renderItem={({ item }) => (
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModalSubs(item.MITRA)}> 
+                      <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
+                        <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
+                      </View>
+                      <View style={{width:wp('65%')}}>
+                        <Text>{item.MITRA}</Text>
+                      </View>
+                      <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
+                        <Text style={{textAlign:'center'}}>{item.jumlah}M</Text>                    
+                      </View>
+                    </TouchableOpacity>
+                  )}
+                />
+                {/* <Modal 
+                  isVisible={this.state.visibleModal === true}
+                  onBackdropPress={() => this.setState({ visibleModal: false })}>
+                  {this.renderModalContentSubs()}
+                </Modal> */}
+              </View>
             )}
 
             {renderIf(!statusMitra)(
-              <Text>
-                Status Mitra
-              </Text>
+              <View>
+                <FlatList
+                  data={dataMitra3}
+                  keyExtractor={(item, index) => index.toString()}
+                  renderItem={({ item }) => (
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModalSubs(item.MITRA)}> 
+                      <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
+                        <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
+                      </View>
+                      <View style={{width:wp('65%')}}>
+                        <Text>{item.MITRA}</Text>
+                      </View>
+                      <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
+                        <Text style={{textAlign:'center'}}>{item.jumlah}M</Text>                    
+                      </View>
+                    </TouchableOpacity>
+                  )}
+                />
+                {/* <Modal 
+                  isVisible={this.state.visibleModal === true}
+                  onBackdropPress={() => this.setState({ visibleModal: false })}>
+                  {this.renderModalContentSubs()}
+                </Modal> */}
+              </View>
             )}
 
             {renderIf(!statusTelkom)(
-              <Text>
-                Status Telkom
-              </Text>
+              <View>
+                <FlatList
+                  data={dataTelkom3}
+                  keyExtractor={(item, index) => index.toString()}
+                  renderItem={({ item }) => (
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModalSubs(item.MITRA)}> 
+                      <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
+                        <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
+                      </View>
+                      <View style={{width:wp('65%')}}>
+                        <Text>{item.MITRA}</Text>
+                      </View>
+                      <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
+                        <Text style={{textAlign:'center'}}>{item.jumlah}M</Text>                    
+                      </View>
+                    </TouchableOpacity>
+                  )}
+                />
+                {/* <Modal 
+                  isVisible={this.state.visibleModal === true}
+                  onBackdropPress={() => this.setState({ visibleModal: false })}>
+                  {this.renderModalContentSubs()}
+                </Modal> */}
+              </View>
             )}
           </Content>
         {/* </ScrollView> */}
@@ -831,7 +1105,7 @@ class EbisDetailScreens extends Component{
 
     const{
       //prospect
-      ebisProspectREVENUE4,ebisProspectProject4,dataMitra4,
+      ebisProspectREVENUE4,ebisProspectProject4,dataAll4,dataSubs4,dataMitra4,dataTelkom4
     } = this.props;
 
     const {statusAll, statusSubs, statusMitra, statusTelkom} = this.state;
@@ -954,7 +1228,7 @@ class EbisDetailScreens extends Component{
             {renderIf(!statusAll)(
               <View>
                 <FlatList
-                  data={dataMitra4}
+                  data={dataAll4}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={({ item }) => (
                     <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModal(item.MITRA)}> 
@@ -979,28 +1253,90 @@ class EbisDetailScreens extends Component{
             )}
 
             {renderIf(!statusSubs)(
-              <Text>
-                Status Subs
-              </Text>
+              <View>
+                <FlatList
+                  data={dataSubs4}
+                  keyExtractor={(item, index) => index.toString()}
+                  renderItem={({ item }) => (
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModalSubs(item.MITRA)}> 
+                      <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
+                        <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
+                      </View>
+                      <View style={{width:wp('65%')}}>
+                        <Text>{item.MITRA}</Text>
+                      </View>
+                      <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
+                        <Text style={{textAlign:'center'}}>{item.jumlah}M</Text>                    
+                      </View>
+                    </TouchableOpacity>
+                  )}
+                />
+                {/* <Modal 
+                  isVisible={this.state.visibleModal === true}
+                  onBackdropPress={() => this.setState({ visibleModal: false })}>
+                  {this.renderModalContentSubs()}
+                </Modal> */}
+              </View>
             )}
 
             {renderIf(!statusMitra)(
-              <Text>
-                Status Mitra
-              </Text>
+              <View>
+                <FlatList
+                  data={dataMitra4}
+                  keyExtractor={(item, index) => index.toString()}
+                  renderItem={({ item }) => (
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModalSubs(item.MITRA)}> 
+                      <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
+                        <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
+                      </View>
+                      <View style={{width:wp('65%')}}>
+                        <Text>{item.MITRA}</Text>
+                      </View>
+                      <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
+                        <Text style={{textAlign:'center'}}>{item.jumlah}M</Text>                    
+                      </View>
+                    </TouchableOpacity>
+                  )}
+                />
+                {/* <Modal 
+                  isVisible={this.state.visibleModal === true}
+                  onBackdropPress={() => this.setState({ visibleModal: false })}>
+                  {this.renderModalContentSubs()}
+                </Modal> */}
+              </View>
             )}
 
             {renderIf(!statusTelkom)(
-              <Text>
-                Status Telkom
-              </Text>
+              <View>
+                <FlatList
+                  data={dataTelkom4}
+                  keyExtractor={(item, index) => index.toString()}
+                  renderItem={({ item }) => (
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModalSubs(item.MITRA)}> 
+                      <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
+                        <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
+                      </View>
+                      <View style={{width:wp('65%')}}>
+                        <Text>{item.MITRA}</Text>
+                      </View>
+                      <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
+                        <Text style={{textAlign:'center'}}>{item.jumlah}M</Text>                    
+                      </View>
+                    </TouchableOpacity>
+                  )}
+                />
+                {/* <Modal 
+                  isVisible={this.state.visibleModal === true}
+                  onBackdropPress={() => this.setState({ visibleModal: false })}>
+                  {this.renderModalContentSubs()}
+                </Modal> */}
+              </View>
             )}
           </Content>
         {/* </ScrollView> */}
       </View>
     )
   }
-
 
   
   render() {
@@ -1071,11 +1407,29 @@ const mapStateToProps = (state) => ({
   ebisProspectProject4:state.DgsReducer.ebisProspectProject,
   ebisProspectTarget4:state.DgsReducer.ebisProspectTarget,
 
-  //data Mitra
+  //data All
+  dataAll:state.EbisDetailReducer.dataAll,
+  dataAll2:state.DesDetailReducer.dataAll,
+  dataAll3:state.DbsDetailReducer.dataAll,
+  dataAll4:state.DgsDetailReducer.dataAll,
+
+  //data subs
+  dataSubs:state.EbisDetailReducer.dataSubs,
+  dataSubs2:state.DesDetailReducer.dataSubs,
+  dataSubs3:state.DbsDetailReducer.dataSubs,
+  dataSubs4:state.DgsDetailReducer.dataSubs,
+
+  //data mitra
   dataMitra:state.EbisDetailReducer.dataMitra,
   dataMitra2:state.DesDetailReducer.dataMitra,
   dataMitra3:state.DbsDetailReducer.dataMitra,
   dataMitra4:state.DgsDetailReducer.dataMitra,
+
+  //data telkom
+  dataTelkom:state.EbisDetailReducer.dataTelkom,
+  dataTelkom2:state.DesDetailReducer.dataTelkom,
+  dataTelkom3:state.DbsDetailReducer.dataTelkom,
+  dataTelkom4:state.DgsDetailReducer.dataTelkom,
 })
 
 export default connect(mapStateToProps)(EbisDetailScreens);

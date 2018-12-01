@@ -94,27 +94,6 @@ class Dashboard extends Component {
       payload:axios.get(`${url.API}/ebis_getabcmain_current/div/DGS`)
     });
 
-    //get data detail
-    this.props.dispatch({
-      type:'DETAIL_PROSPECT_EBIS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/DES/maindiv/DES/mainseg/ALL/start_date/2018001/end_date/201811`)
-    });
-
-    this.props.dispatch({
-      type:'DETAIL_PROSPECT_DES',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/DES/maindiv/DES/mainseg/ALL/start_date/2018001/end_date/201811`)
-    });
-
-    this.props.dispatch({
-      type:'DETAIL_PROSPECT_DBS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/DBS/maindiv/DBS/mainseg/ALL/start_date/2018001/end_date/201811`)
-    });
-
-    this.props.dispatch({
-      type:'DETAIL_PROSPECT_DGS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/DGS/maindiv/DGS/mainseg/ALL/start_date/2018001/end_date/201811`)
-    });
-
     //MonitorKB
     //EBIS
     this.props.dispatch({
@@ -288,13 +267,13 @@ class Dashboard extends Component {
     //EBIS DETAIL DONE
     this.props.dispatch({
       type: 'MONITOR_KL_EBIS_DETAIL_DONE',
-      payload: axios.get(`${url.API}/ebis_getkbcc/div/EBIS/treg/ALL/witel/ALL/startdate/201801/enddate/201811/state/DONE`)
+      payload: axios.get(`${url.API}/ebis_getklcc/div/EBIS/treg/ALL/witel/ALL/startdate/201801/enddate/201811/state/DONE/nmitra/ALL/nmitra/ALL`)
     })
 
     //EBIS DETAIL OGP
     this.props.dispatch({
       type: 'MONITOR_KL_EBIS_DETAIL_OGP',
-      payload: axios.get(`${url.API}/ebis_getkbcc/div/EBIS/treg/ALL/witel/ALL/startdate/201801/enddate/201811/state/OGP`)
+      payload: axios.get(`${url.API}/ebis_getklcc/div/EBIS/treg/ALL/witel/ALL/startdate/201801/enddate/201811/state/OGP/nmitra/ALL/nmitra/ALL`)
     })
 
     //DES
@@ -324,13 +303,13 @@ class Dashboard extends Component {
     //DES DETAIL DONE
     this.props.dispatch({
       type: 'MONITOR_KL_DES_DETAIL_DONE',
-      payload: axios.get(`${url.API}/ebis_getkbcc/div/DES/treg/ALL/witel/ALL/startdate/201801/enddate/201811/state/DONE`)
+      payload: axios.get(`${url.API}/ebis_getklcc/div/DES/treg/ALL/witel/ALL/startdate/201801/enddate/201811/state/DONE/nmitra/ALL/nmitra/ALL`)
     })
 
     //DES DETAIL OGP
     this.props.dispatch({
       type: 'MONITOR_KL_DES_DETAIL_OGP',
-      payload: axios.get(`${url.API}/ebis_getkbcc/div/DES/treg/ALL/witel/ALL/startdate/201801/enddate/201811/state/OGP`)
+      payload: axios.get(`${url.API}/ebis_getklcc/div/DES/treg/ALL/witel/ALL/startdate/201801/enddate/201811/state/OGP/nmitra/ALL/nmitra/ALL`)
     })
 
      //DBS
@@ -360,13 +339,13 @@ class Dashboard extends Component {
     //DBS DETAIL DONE
     this.props.dispatch({
       type: 'MONITOR_KL_DBS_DETAIL_DONE',
-      payload: axios.get(`${url.API}/ebis_getkbcc/div/DBS/treg/ALL/witel/ALL/startdate/201801/enddate/201811/state/DONE`)
+      payload: axios.get(`${url.API}/ebis_getklcc/div/DBS/treg/ALL/witel/ALL/startdate/201801/enddate/201811/state/DONE/nmitra/ALL/nmitra/ALL`)
     })
 
     //DBS DETAIL OGP
     this.props.dispatch({
       type: 'MONITOR_KL_DBS_DETAIL_OGP',
-      payload: axios.get(`${url.API}/ebis_getkbcc/div/DBS/treg/ALL/witel/ALL/startdate/201801/enddate/201811/state/OGP`)
+      payload: axios.get(`${url.API}/ebis_getklcc/div/DBS/treg/ALL/witel/ALL/startdate/201801/enddate/201811/state/OGP/nmitra/ALL/nmitra/ALL`)
     })
 
     //DGS
@@ -396,13 +375,13 @@ class Dashboard extends Component {
     //DGS DETAIL DONE
     this.props.dispatch({
       type: 'MONITOR_KL_DGS_DETAIL_DONE',
-      payload: axios.get(`${url.API}/ebis_getkbcc/div/DGS/treg/ALL/witel/ALL/startdate/201801/enddate/201811/state/DONE`)
+      payload: axios.get(`${url.API}/ebis_getklcc/div/DGS/treg/ALL/witel/ALL/startdate/201801/enddate/201811/state/DONE/nmitra/ALL/nmitra/ALL`)
     })
 
     //DGS DETAIL OGP
     this.props.dispatch({
       type: 'MONITOR_KL_DGS_DETAIL_OGP',
-      payload: axios.get(`${url.API}/ebis_getkbcc/div/DGS/treg/ALL/witel/ALL/startdate/201801/enddate/201811/state/OGP`)
+      payload: axios.get(`${url.API}/ebis_getklcc/div/DGS/treg/ALL/witel/ALL/startdate/201801/enddate/201811/state/OGP/nmitra/ALL/nmitra/ALL`)
     })
     
   }

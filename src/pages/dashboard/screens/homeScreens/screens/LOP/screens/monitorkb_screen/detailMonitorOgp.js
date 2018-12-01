@@ -28,7 +28,7 @@ class detailMonitorOgp extends Component {
       visibleModal: false,
       loaderTampilDetail: false,
       dataTampung: [],
-      OgpData: [],
+      OgpData: {},
       data: [],
       pressed: false,
       statusAll: false,
@@ -41,7 +41,8 @@ class detailMonitorOgp extends Component {
   _toggleModalEbis(item) {
     this.setState({
       visibleModal: !this.state.visibleModal,
-      loaderTampilDetail: true
+      loaderTampilDetail: true,
+      pressed: false
     })
     axios.get(`${url.API}/ebis_getkbproject/div/EBIS/treg/ALL/witel/ALL/startdate/201801/enddate/201811/state/OGP/mitra/${item}`).then((res) => {
       this.setState({ dataTampung: res.data, loaderTampilDetail: false });
@@ -56,7 +57,8 @@ class detailMonitorOgp extends Component {
   _toggleModalDes(item) {
     this.setState({
       visibleModal: !this.state.visibleModal,
-      loaderTampilDetail: true
+      loaderTampilDetail: true,
+      pressed: false
     })
     axios.get(`${url.API}/ebis_getkbproject/div/DES/treg/ALL/witel/ALL/startdate/201801/enddate/201811/state/OGP/mitra/${item}`).then((res) => {
       this.setState({ dataTampung: res.data, loaderTampilDetail: false });
@@ -71,7 +73,8 @@ class detailMonitorOgp extends Component {
   _toggleModalDbs(item) {
     this.setState({
       visibleModal: !this.state.visibleModal,
-      loaderTampilDetail: true
+      loaderTampilDetail: true,
+      pressed: false
     })
     axios.get(`${url.API}/ebis_getkbproject/div/DBS/treg/ALL/witel/ALL/startdate/201801/enddate/201811/state/OGP/mitra/${item}`).then((res) => {
       this.setState({ dataTampung: res.data, loaderTampilDetail: false });
@@ -86,7 +89,8 @@ class detailMonitorOgp extends Component {
   _toggleModal(item) {
     this.setState({
       visibleModal: !this.state.visibleModal,
-      loaderTampilDetail: true
+      loaderTampilDetail: true,
+      pressed: false
     })
     axios.get(`${url.API}/ebis_getkbproject/div/DGS/treg/ALL/witel/ALL/startdate/201801/enddate/201811/state/OGP/mitra/${item}`).then((res) => {
       this.setState({ dataTampung: res.data, loaderTampilDetail: false });
@@ -100,6 +104,7 @@ class detailMonitorOgp extends Component {
 
   _onDataPress(level, mitra, id) {
     this.setState({
+      visibleModal: true,
       pressed: true,
       loaderTampilDetail: true
     })
@@ -171,27 +176,31 @@ class detailMonitorOgp extends Component {
     }
   }
 
-  renderDataDetail({ item }) {
+  renderDataDetail() {
+    const { OgpData, dataTampung, loaderTampilDetail } = this.state;
     return (
-      <View>
-        <View style={{ flexDirection: 'row' }}>
-          <Text style={{ fontSize: 10 }}>{item.NAMAPROJECT}</Text>
-        </View>
-        <View style={{ flexDirection: 'row' }}>
-          <Text style={{ fontSize: 10 }}>{item.NAMACC}</Text>
-        </View>
-        <View style={{ flexDirection: 'row' }}>
-          <Text style={{ fontSize: 10 }}>{item.NAMACC}</Text>
-        </View>
-        <View style={{ flexDirection: 'row' }}>
-          <Text style={{ fontSize: 10 }}>{item.NAMACC}</Text>
-        </View>
-        <View style={{ flexDirection: 'row' }}>
-          <Text style={{ fontSize: 10 }}>{item.NAMACC}</Text>
-        </View>
-        <View style={{ flexDirection: 'row' }}>
-          <Text style={{ fontSize: 10 }}>{item.NAMACC}</Text>
-        </View>
+      <View style={{ backgroundColor: "white", alignItems: "center",  borderRadius: 4, borderColor: "rgba(0, 0, 0, 0.1)"}}>
+        {
+          loaderTampilDetail
+            ?
+            <ActivityIndicator size={'large'} color={'#000'} style={{ margin: hp('5%') }} />
+            :
+            <View style={{ height: hp('90%'), width: wp('85%') }}>
+              <View style={{ width: wp('45%'), marginTop: hp('2%') }}>
+                  <Text style={{ fontSize: 10 }}>a. Nama Project</Text>
+                  <Text style={{ fontSize: 10 }}>{OgpData.NAMAPROJECT}</Text>
+              </View>
+              <View style={{ width: wp('45%'), marginTop: hp('2%') }}>
+                  <Text style={{ fontSize: 10 }}>b. Nama CC</Text>
+                  <Text style={{ fontSize: 10 }}>{OgpData.NAMAPROJECT}</Text>
+              </View>
+              <View style={{ position: 'absolute', bottom: 0 }}>
+              <TouchableOpacity onPress={() => this.setState({ visibleModal: !this.state.visibleModal })} style={{ height: hp('5%'), backgroundColor: '#e74c3c', width: wp('85%'), alignItems: 'center', padding: hp('1%'), borderRadius: 5, marginBottom: hp('2%') }}>
+                <Text style={{ color: '#FFF' }}>Tutup</Text>
+              </TouchableOpacity>
+              </View>
+            </View>
+        }
       </View>
     )
   }
@@ -210,73 +219,33 @@ class detailMonitorOgp extends Component {
                 data={dataTampung}
                 ListHeaderComponent={() => (
                   <View>
-                    {
-                      pressed == false ?
-                        <View style={styles.wrapperHeaderContent}>
-                          <View style={{ width: wp('35%') }}>
-                            <Text style={{ textAlign: 'center', color: '#FFF', fontSize: 12 }}>Nama CC</Text>
-                          </View>
-                          <View style={{ width: wp('35%') }}>
-                            <Text style={{ textAlign: 'center', color: '#FFF', fontSize: 12 }}>Nama Project</Text>
-                          </View>
-                          <View style={{ width: wp('10%'), alignItems: 'center', justifyContent: 'center' }}>
-                            <Text style={{ textAlign: 'center', color: '#FFF', fontSize: 12 }}>Nilai</Text>
-                          </View>
-                        </View> : null
-                    }
+                    <View style={styles.wrapperHeaderContent}>
+                      <View style={{ width: wp('35%') }}>
+                        <Text style={{ textAlign: 'center', color: '#FFF', fontSize: 12 }}>Nama CC</Text>
+                      </View>
+                      <View style={{ width: wp('35%') }}>
+                        <Text style={{ textAlign: 'center', color: '#FFF', fontSize: 12 }}>Nama Project</Text>
+                      </View>
+                      <View style={{ width: wp('10%'), alignItems: 'center', justifyContent: 'center' }}>
+                        <Text style={{ textAlign: 'center', color: '#FFF', fontSize: 12 }}>Nilai</Text>
+                      </View>
+                    </View>
                   </View>
                 )}
                 keyExtractor={(item, index) => index.toString()}
                 renderItem={({ item }) => (
                   <View>
-                    {
-                      pressed == false ?
-                        <TouchableOpacity style={styles.containerDetailData} onPress={this._onDataPress.bind(this, { level: item.DIVISI, mitra: item.MITRA, id: item.LOPID })}>
-                          <View style={{ width: wp('35%'), alignSelf: 'center', justifyContent: 'center' }}>
-                            <Text style={{ fontSize: 10 }}>{item.NAMACC}</Text>
-                          </View>
-                          <View style={{ width: wp('35%'), alignSelf: 'center', justifyContent: 'center' }}>
-                            <Text style={{ fontSize: 10 }}>{item.NAMAPROJECT}</Text>
-                          </View>
-                          <View style={{ width: wp('10%'), alignSelf: 'center', justifyContent: 'center', alignItems: 'center' }}>
-                            <Text style={{ textAlign: 'center', fontSize: 10 }}>{parseFloat(item.REVENUE)}M</Text>
-                          </View>
-                        </TouchableOpacity> :
-                        <FlatList
-                          data={OgpData}
-                          style={{ flexDirection: 'row' }}
-                          extraData={this.state}
-                          keyExtractor={(item, index) => index.toString()}
-                          ListHeaderComponent={() => (
-                            <View>
-                              <View style={{ flexDirection: "column" }}>
-                                <Text style={{ fontSize: 10 }}>a. Nama Project : </Text>
-                              </View>
-                              <View style={{ flexDirection: 'row' }}>
-                                <Text style={{ fontSize: 10 }}>b. Nama CC : </Text>
-                              </View>
-                              <View style={{ flexDirection: 'row' }}>
-                                <Text style={{ fontSize: 10 }}>c. Nilai Project : </Text>
-                              </View>
-                              <View style={{ flexDirection: 'row' }}>
-                                <Text style={{ fontSize: 10 }}>d. Lama Kontrak : </Text>
-                              </View>
-                              <View style={{ flexDirection: 'row' }}>
-                                <Text style={{ fontSize: 10 }}>e. Divisi : </Text>
-                              </View>
-                              <View style={{ flexDirection: 'row' }}>
-                                <Text style={{ fontSize: 10 }}>f. Segmen : </Text>
-                              </View>
-                            </View>
-                          )}
-                          renderItem={this.renderDataDetail.bind(this)}
-                          ListEmptyComponent={() => (
-                            <View style={{ alignItems: "center", justifyContent: 'center' }}>
-                              <Text>Tidak ada data</Text>
-                            </View>
-                          )}
-                        />
-                    }
+                    <TouchableOpacity style={styles.containerDetailData} onPress={this._onDataPress.bind(this, { level: item.DIVISI, mitra: item.MITRA, id: item.LOPID })}>
+                      <View style={{ width: wp('35%'), alignSelf: 'center', justifyContent: 'center' }}>
+                        <Text style={{ fontSize: 10 }}>{item.NAMACC}</Text>
+                      </View>
+                      <View style={{ width: wp('35%'), alignSelf: 'center', justifyContent: 'center' }}>
+                        <Text style={{ fontSize: 10 }}>{item.NAMAPROJECT}</Text>
+                      </View>
+                      <View style={{ width: wp('10%'), alignSelf: 'center', justifyContent: 'center', alignItems: 'center' }}>
+                        <Text style={{ textAlign: 'center', fontSize: 10 }}>{parseFloat(item.REVENUE)}M</Text>
+                      </View>
+                    </TouchableOpacity>
                   </View>
                 )}
                 style={{ height: hp('80%'), marginBottom: hp('2%') }}
@@ -334,7 +303,7 @@ class detailMonitorOgp extends Component {
       ebisProspectREVENUE, ebisProspectProject, dataMitra, EbisDetailOgp
     } = this.props;
 
-    const { statusAll, statusSubs, statusMitra, statusTelkom } = this.state;
+    const { statusAll, statusSubs, statusMitra, statusTelkom, pressed } = this.state;
 
     return (
       <View style={{ backgroundColor: '#FFF', flex: 1 }}>
@@ -478,7 +447,9 @@ class detailMonitorOgp extends Component {
               <Modal
                 isVisible={this.state.visibleModal === true}
                 onBackdropPress={() => this.setState({ visibleModal: false })}>
-                {this.renderModalContent()}
+                {
+                  pressed ? this.renderModalContent() : this.renderDataDetail()
+                }
               </Modal>
             </View>
           )}
@@ -982,7 +953,7 @@ class detailMonitorOgp extends Component {
       ebisProspectREVENUE4, ebisProspectProject4, dataMitra4, DgsDetailOgp
     } = this.props;
 
-    const { statusAll, statusSubs, statusMitra, statusTelkom } = this.state;
+    const { statusAll, statusSubs, statusMitra, statusTelkom, pressed } = this.state;
 
     return (
       <View style={{ backgroundColor: '#FFF', flex: 1 }}>
@@ -1126,7 +1097,9 @@ class detailMonitorOgp extends Component {
               <Modal
                 isVisible={this.state.visibleModal === true}
                 onBackdropPress={() => this.setState({ visibleModal: false })}>
-                {this.renderModalContent()}
+                {
+                  pressed == false ? this.renderModalContent() : this.renderDataDetail()
+                }
               </Modal>
             </View>
           )}

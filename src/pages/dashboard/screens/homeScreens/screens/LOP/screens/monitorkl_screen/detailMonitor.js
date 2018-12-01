@@ -42,7 +42,7 @@ class detailMonitor extends Component{
       visibleModal: !this.state.visibleModal,
       loaderTampilDetail:true
     })
-    axios.get(`${url.API}/ebis_getstage5/stage/WIN/div/DBS/maindiv/DBS/mainseg/ALL/nmitra/${item}/start_date/201801/end_date/201811`).then((res) => {
+    axios.get(`${url.API}/ebis_getklproject/div/EBIS/treg/ALL/witel/ALL/startdate/201801/enddate/201811/state/DONE/mitra/${item}`).then((res) => {
       this.setState({dataTampung:res.data, loaderTampilDetail:false });
     }).catch((err) => {
       this.setState({
@@ -51,6 +51,52 @@ class detailMonitor extends Component{
       alert(err)
     })
   }
+
+  _toggleModalDes(item){
+    this.setState({
+      visibleModal: !this.state.visibleModal,
+      loaderTampilDetail:true
+    })
+    axios.get(`${url.API}/ebis_getklproject/div/DES/treg/ALL/witel/ALL/startdate/201801/enddate/201811/state/DONE/mitra/${item}`).then((res) => {
+      this.setState({dataTampung:res.data, loaderTampilDetail:false });
+    }).catch((err) => {
+      this.setState({
+        loaderTampilDetail:false
+      })
+      alert(err)
+    })
+  }
+
+  _toggleModalDbs(item){
+    this.setState({
+      visibleModal: !this.state.visibleModal,
+      loaderTampilDetail:true
+    })
+    axios.get(`${url.API}/ebis_getklproject/div/DBS/treg/ALL/witel/ALL/startdate/201801/enddate/201811/state/DONE/mitra/${item}`).then((res) => {
+      this.setState({dataTampung:res.data, loaderTampilDetail:false });
+    }).catch((err) => {
+      this.setState({
+        loaderTampilDetail:false
+      })
+      alert(err)
+    })
+  }
+
+  _toggleModalDgs(item){
+    this.setState({
+      visibleModal: !this.state.visibleModal,
+      loaderTampilDetail:true
+    })
+    axios.get(`${url.API}/ebis_getklproject/div/EBIS/treg/ALL/witel/ALL/startdate/201801/enddate/201811/state/DONE/mitra/${item}`).then((res) => {
+      this.setState({dataTampung:res.data, loaderTampilDetail:false });
+    }).catch((err) => {
+      this.setState({
+        loaderTampilDetail:false
+      })
+      alert(err)
+    })
+  }
+
   buttonAll(){
     if(this.state.statusAll === false){
       this.setState({
@@ -108,6 +154,7 @@ class detailMonitor extends Component{
       })
     }
   }
+
   renderModalContent(){
     const {dataTampung, loaderTampilDetail} = this.state;
     return(
@@ -137,13 +184,13 @@ class detailMonitor extends Component{
             renderItem={({ item }) => (
               <View style={styles.containerDetailData}> 
                 <View style={{width:wp('35%'), alignSelf:'center', justifyContent:'center'}}>
-                  <Text style={{fontSize:10}}>{item.stage_06}</Text>
+                  <Text style={{fontSize:10}}>{item.NAMACC}</Text>
                 </View>
                 <View style={{width:wp('35%'), alignSelf:'center', justifyContent:'center'}}>
-                  <Text style={{fontSize:10}}>{item.stage_07}</Text>
+                  <Text style={{fontSize:10}}>{item.NAMAPROJECT}</Text>
                 </View>
                 <View style={{width:wp('10%'), alignSelf:'center', justifyContent:'center', alignItems:'center'}}>
-                  <Text style={{textAlign:'center', fontSize:10}}>{parseFloat(item.stage_10)}M</Text>                    
+                  <Text style={{textAlign:'center', fontSize:10}}>{parseFloat(item.REVENUE)}M</Text>                    
                 </View>
               </View>
             )}
@@ -324,12 +371,12 @@ class detailMonitor extends Component{
                   data={EbisDetailDone}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModal(item.MITRA)}> 
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModal(item.NAMA_MITRA)}> 
                       <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
                         <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
                       </View>
                       <View style={{width:wp('65%')}}>
-                        <Text>{item.NAMACC}</Text>
+                        <Text>{item.NAMA_MITRA}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
                         <Text style={{textAlign:'center'}}>{item.REVENUE}M</Text>                    
@@ -540,12 +587,12 @@ class detailMonitor extends Component{
                   data={DesDetailDone}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModal(item.MITRA)}> 
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModalDes(item.NAMA_MITRA)}> 
                       <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
                         <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
                       </View>
                       <View style={{width:wp('65%')}}>
-                        <Text>{item.NAMACC}</Text>
+                        <Text>{item.NAMA_MITRA}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
                         <Text style={{textAlign:'center'}}>{item.REVENUE}M</Text>                    
@@ -756,12 +803,12 @@ class detailMonitor extends Component{
                   data={DbsDetailDone}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModal(item.MITRA)}> 
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModalDbs(item.NAMA_MITRA)}> 
                       <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
                         <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
                       </View>
                       <View style={{width:wp('65%')}}>
-                        <Text>{item.NAMACC}</Text>
+                        <Text>{item.NAMA_MITRA}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
                         <Text style={{textAlign:'center'}}>{item.REVENUE}M</Text>                    
@@ -972,12 +1019,12 @@ class detailMonitor extends Component{
                   data={DgsDetailDone}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModal(item.MITRA)}> 
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModalDgs(item.NAMA_MITRA)}> 
                       <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
                         <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
                       </View>
                       <View style={{width:wp('65%')}}>
-                        <Text>{item.NAMACC}</Text>
+                        <Text>{item.NAMA_MITRA}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
                         <Text style={{textAlign:'center'}}>{item.REVENUE}M</Text>                    
@@ -1044,7 +1091,7 @@ class detailMonitor extends Component{
             </Button>
           </Left>
           <Body>
-            <Title style={{color:'#FFF'}}>Detail Done KB</Title>
+            <Title style={{color:'#FFF'}}>Detail Done KL</Title>
           </Body>
           <Right/>
         </Header>
@@ -1098,10 +1145,10 @@ const mapStateToProps = (state) => ({
   dataMitra4:state.DgsDetailReducer.dataMitra,
 
   //detail done
-  EbisDetailDone: state.MonitorEbisReducer.detailDone,
-  DgsDetailDone: state.MonitorDgsReducer.detailDoneDgs,
-  DbsDetailDone: state.MonitorDbsReducer.detailDoneDbs,
-  DesDetailDone: state.MonitorDesReducer.detailDoneDes
+  EbisDetailDone: state.MonitorEbisReducerKL.detailDone,
+  DgsDetailDone: state.MonitorDgsReducerKL.detailDoneDgs,
+  DbsDetailDone: state.MonitorDbsReducerKL.detailDoneDbs,
+  DesDetailDone: state.MonitorDesReducerKL.detailDoneDes
 })
 
 export default connect(mapStateToProps)(detailMonitor);
