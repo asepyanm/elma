@@ -28,22 +28,26 @@ class DesScreens extends Component{
       statusRegTreg:'',
       
       //get date
-      date:''
+      date1:'',
+      date2:''
     }
   }
 
   componentWillMount(){
     var month = new Date().getMonth() + 1;
     var year = new Date().getFullYear();
-    var date = `${year}${month}`
+
+    var date1 = `${year}01`
+    var date2 = `${year}${month}`
 
     this.setState({
-      date:date
+      date1:date1,
+      date2:date2
     })
 
     this.props.dispatch({
       type:'DES_HOME_TREG',
-      payload:axios.get(`${url.API}/ebis_getlopmainytd_treg/startdate/${year}01/enddate/${date}/div/DES/witel/ALL/treg/ALL`)
+      payload:axios.get(`${url.API}/ebis_getlopmainytd_treg/startdate/${date1}/enddate/${date2}/div/DES/witel/ALL/treg/ALL`)
     })
 
     this.props.dispatch({
@@ -52,19 +56,34 @@ class DesScreens extends Component{
     })
   }
 
-  filterPeriode(data){
+  filterPeriodeDate1(data){
+    const {date2} = this.state;
+
     this.setState({
-      date:data.value
+      date1:data.value
     })
 
     this.props.dispatch({
       type:'DES_HOME_TREG_PERIODE',
-      payload:axios.get(`${url.API}/ebis_getlopmainytd_treg/startdate/${data.value}/enddate/${data.value}${data.value}/div/DES/witel/ALL/treg/ALL`)
+      payload:axios.get(`${url.API}/ebis_getlopmainytd_treg/startdate/${data.value}/enddate/${date2}/div/DES/witel/ALL/treg/ALL`)
+    });
+  }
+
+  filterPeriodeDate2(data){
+    const {date1} = this.state;
+
+    this.setState({
+      date2:data.value
+    })
+
+    this.props.dispatch({
+      type:'DES_HOME_TREG_PERIODE',
+      payload:axios.get(`${url.API}/ebis_getlopmainytd_treg/startdate/${date1}/enddate/${data.value}/div/DES/witel/ALL/treg/ALL`)
     });
   }
 
   renderFilterRegional(option){
-    const {date} = this.state;
+    const {date1, date2} = this.state;
 
     let dataFilter = option.value;
     this.setState({
@@ -74,7 +93,7 @@ class DesScreens extends Component{
     if(dataFilter === 'All'){
       this.props.dispatch({
         type:'DES_HOME_TREG',
-        payload:axios.get(`${url.API}/ebis_getlopmainytd_treg/startdate/${date}/enddate/${date}/div/DES/witel/ALL/treg/ALL`)
+        payload:axios.get(`${url.API}/ebis_getlopmainytd_treg/startdate/${date1}/enddate/${date2}/div/DES/witel/ALL/treg/ALL`)
       })
   
       this.props.dispatch({
@@ -103,12 +122,12 @@ class DesScreens extends Component{
   }
 
   renderFilterData(option){
-    const {statusRegTreg, date} = this.state;
+    const {statusRegTreg, date1, date2} = this.state;
     let dataWitel = option.W1;
 
     this.props.dispatch({
       type:'DES_HOME_TREG',
-      payload:axios.get(`${url.API}/ebis_getlopmainytd_treg/startdate/${date}/enddate/${date}/div/DES/witel/${dataWitel}/treg/${statusRegTreg}`)
+      payload:axios.get(`${url.API}/ebis_getlopmainytd_treg/startdate/${date1}/enddate/${date2}/div/DES/witel/${dataWitel}/treg/${statusRegTreg}`)
     })
 
     this.props.dispatch({
@@ -284,7 +303,7 @@ class DesScreens extends Component{
                 selectTextStyle={{textAlign:'center', alignSelf:'center', alignItems:'center'}}
                 initValue={`${year}-01`}
                 selectStyle={styles.modalPeriode}
-                onChange={(data)=> this.filterPeriode(data)} 
+                onChange={(data)=> this.filterPeriodeDate1(data)} 
               />
             </View>
             <View>
@@ -295,7 +314,7 @@ class DesScreens extends Component{
                 data={data}
                 initValue={`${year}-${month}`}
                 selectStyle={styles.modalPeriode}
-                onChange={(data)=> this.filterPeriode(data)} 
+                onChange={(data)=> this.filterPeriodeDate2(data)} 
               />
             </View>
           </View>
