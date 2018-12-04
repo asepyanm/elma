@@ -15,6 +15,7 @@ import {Header, Icon, Left, Right, Body, Button, Title, Tab, Tabs, Content, Cont
 import {connect} from 'react-redux';
 import Modal from "react-native-modal";
 import axios from 'axios';
+import Accordion from 'react-native-collapsible/Accordion';
 
 //global
 import renderIf from '../../../../../../../components/renderIf';
@@ -23,8 +24,11 @@ import url from '../../../../../../../../config/api_service';
 class EbisDetailScreens extends Component{
   constructor(props){
     super(props);
+    const { params } = this.props.navigation.state;
     this.state = {
-      //data status
+      //data date
+      date1:params.date1,
+      date2:params.date2,
 
       //modal
       visibleModal:false,
@@ -40,86 +44,91 @@ class EbisDetailScreens extends Component{
   }
 
   componentWillMount(){
+    const {date1, date2} = this.state;
+
     //get data ALL
     this.props.dispatch({
       type:'DETAIL_PROSPECT_EBIS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/EBIS/maindiv/DES/mainseg/ALL/start_date/2018001/end_date/201811`)
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/EBIS/maindiv/DES/mainseg/ALL/start_date/${date1}/end_date/${date2}`)
     });
     this.props.dispatch({
       type:'DETAIL_PROSPECT_DES',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/DES/maindiv/DES/mainseg/ALL/start_date/2018001/end_date/201811`)
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/DES/maindiv/DES/mainseg/ALL/start_date/${date1}/end_date/${date2}`)
     });
     this.props.dispatch({
       type:'DETAIL_PROSPECT_DBS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/DBS/maindiv/DBS/mainseg/ALL/start_date/2018001/end_date/201811`)
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/DBS/maindiv/DBS/mainseg/ALL/start_date/${date1}/end_date/${date2}`)
     });
     this.props.dispatch({
       type:'DETAIL_PROSPECT_DGS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/DGS/maindiv/DGS/mainseg/ALL/start_date/2018001/end_date/201811`)
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/DGS/maindiv/DGS/mainseg/ALL/start_date/${date1}/end_date/${date2}`)
     });
 
     //get data detail SUBS
     this.props.dispatch({
       type:'DETAIL_SUBS_PROSPECT_EBIS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/EBIS/maindiv/DES/mainseg/ALL/start_date/2018001/end_date/201807/mitra/CFU`)
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/EBIS/maindiv/DES/mainseg/ALL/start_date/${date1}/end_date/${date2}/mitra/CFU`)
     });
     this.props.dispatch({
       type:'DETAIL_SUBS_PROSPECT_DES',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/DES/maindiv/DES/mainseg/ALL/start_date/2018001/end_date/201807/mitra/CFU`)
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/DES/maindiv/DES/mainseg/ALL/start_date/${date1}/end_date/${date2}/mitra/CFU`)
     });
     this.props.dispatch({
       type:'DETAIL_SUBS_PROSPECT_DBS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/DBS/maindiv/DBS/mainseg/ALL/start_date/2018001/end_date/201807/mitra/CFU`)
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/DBS/maindiv/DBS/mainseg/ALL/start_date/${date1}/end_date/${date2}/mitra/CFU`)
     });
     this.props.dispatch({
       type:'DETAIL_SUBS_PROSPECT_DGS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/DGS/maindiv/DGS/mainseg/ALL/start_date/2018001/end_date/201807/mitra/CFU`)
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/DGS/maindiv/DGS/mainseg/ALL/start_date/${date1}/end_date/${date2}/mitra/CFU`)
     });
 
     //get data detail MITRA
     this.props.dispatch({
       type:'DETAIL_MITRA_PROSPECT_EBIS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/EBIS/maindiv/DES/mainseg/ALL/start_date/2018001/end_date/201807/mitra/MITRA`)
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/EBIS/maindiv/DES/mainseg/ALL/start_date/${date1}/end_date/${date2}/mitra/MITRA`)
     });
     this.props.dispatch({
       type:'DETAIL_MITRA_PROSPECT_DES',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/DES/maindiv/DES/mainseg/ALL/start_date/2018001/end_date/201807/mitra/MITRA`)
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/DES/maindiv/DES/mainseg/ALL/start_date/${date1}/end_date/${date2}/mitra/MITRA`)
     });
     this.props.dispatch({
       type:'DETAIL_MITRA_PROSPECT_DBS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/DBS/maindiv/DBS/mainseg/ALL/start_date/2018001/end_date/201807/mitra/MITRA`)
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/DBS/maindiv/DBS/mainseg/ALL/start_date/${date1}/end_date/${date2}/mitra/MITRA`)
     });
     this.props.dispatch({
       type:'DETAIL_MITRA_PROSPECT_DGS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/DGS/maindiv/DGS/mainseg/ALL/start_date/2018001/end_date/201807/mitra/MITRA`)
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/DGS/maindiv/DGS/mainseg/ALL/start_date/${date1}/end_date/${date2}/mitra/MITRA`)
     });
     
     //get data detail TELKOM
     this.props.dispatch({
       type:'DETAIL_TELKOM_PROSPECT_EBIS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/EBIS/maindiv/DES/mainseg/ALL/start_date/2018001/end_date/201807/mitra/TELKOM`)
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/EBIS/maindiv/DES/mainseg/ALL/start_date/${date1}/end_date/${date2}/mitra/TELKOM`)
     });
     this.props.dispatch({
       type:'DETAIL_TELKOM_PROSPECT_DES',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/DES/maindiv/DES/mainseg/ALL/start_date/2018001/end_date/201807/mitra/TELKOM`)
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/DES/maindiv/DES/mainseg/ALL/start_date/${date1}/end_date/${date2}/mitra/TELKOM`)
     });
     this.props.dispatch({
       type:'DETAIL_TELKOM_PROSPECT_DBS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/DBS/maindiv/DBS/mainseg/ALL/start_date/2018001/end_date/201807/mitra/TELKOM`)
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/DBS/maindiv/DBS/mainseg/ALL/start_date/${date1}/end_date/${date2}/mitra/TELKOM`)
     });
     this.props.dispatch({
       type:'DETAIL_TELKOM_PROSPECT_DGS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/DGS/maindiv/DGS/mainseg/ALL/start_date/2018001/end_date/201807/mitra/TELKOM`)
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/DGS/maindiv/DGS/mainseg/ALL/start_date/${date1}/end_date/${date2}/mitra/TELKOM`)
     });
   }
 
   //pop up and detail button ALL
-  _toggleModal(item){
+  _toggleModal(item, dataDivisi){
+    const {date1, date2} = this.state;
+
     this.setState({
       visibleModal: !this.state.visibleModal,
       loaderTampilDetail:true
     })
-    axios.get(`${url.API}/ebis_getstage5/stage/PROSPECT/div/DES/maindiv/EBIS/mainseg/ALL/nmitra/${item}/start_date/201801/end_date/201811`).then((res) => {
+    
+    axios.get(`${url.API}/ebis_getstage5/stage/PROSPECT/div/${dataDivisi}/maindiv/${dataDivisi}/mainseg/ALL/nmitra/${item}/start_date/${date1}/end_date/${date2}`).then((res) => {
       this.setState({dataTampung:res.data, loaderTampilDetail:false });
     }).catch((err) => {
       this.setState({
@@ -409,7 +418,7 @@ class EbisDetailScreens extends Component{
                   data={dataAll}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModal(item.MITRA)}> 
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModal(item.MITRA, data='EBIS')}> 
                       <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
                         <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
                       </View>
@@ -683,7 +692,7 @@ class EbisDetailScreens extends Component{
                   data={dataAll2}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModal(item.MITRA)}> 
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModal(item.MITRA, data='DES')}> 
                       <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
                         <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
                       </View>
@@ -957,7 +966,7 @@ class EbisDetailScreens extends Component{
                   data={dataAll3}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModal(item.MITRA)}> 
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModal(item.MITRA, data='DBS')}> 
                       <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
                         <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
                       </View>
@@ -1231,7 +1240,7 @@ class EbisDetailScreens extends Component{
                   data={dataAll4}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModal(item.MITRA)}> 
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModal(item.MITRA, data='DGS')}> 
                       <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
                         <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
                       </View>
