@@ -21,13 +21,51 @@ class DgsScreens extends Component{
     super(props);
     this.state = {
       data:[],
+
+      //date awal
+      date1:'',
+
+      //date akhir
+      date2:'',
     }
   }
 
-  filterPeriode(data){
+  componentWillMount(){
+    var month = new Date().getMonth() + 1;
+    var year = new Date().getFullYear();
+
+    var date1 = `${year}01`
+    var date2 = `${year}${month}`
+
+    this.setState({
+      date1:date1,
+      date2:date2
+    })
+  }
+
+  filterPeriodeDate1(data){
+    const {date2} = this.state;
+
+    this.setState({
+      date1:data.value,
+    })
+
     this.props.dispatch({
       type:'DGS_HOME_FILTER_PERIODE',
-      payload:axios.get(`${url.API}/ebis_getlopmain_ytd/div/DGS/date1/${data.value}/date2/${data.value}`)
+      payload:axios.get(`${url.API}/ebis_getlopmain_ytd/div/DGS/date1/${data.value}/date2/${date2}`)
+    });
+  }
+
+  filterPeriodeDate2(data){
+    const {date1} = this.state;
+
+    this.setState({
+      date2:data.value  
+    })
+
+    this.props.dispatch({
+      type:'DGS_HOME_FILTER_PERIODE',
+      payload:axios.get(`${url.API}/ebis_getlopmain_ytd/div/DGS/date1/${date1}/date2/${data.value}`)
     });
   }
   
@@ -150,7 +188,7 @@ class DgsScreens extends Component{
                 selectTextStyle={{textAlign:'center', alignSelf:'center', alignItems:'center'}}
                 initValue={`${year}-01`}                
                 selectStyle={styles.modalPeriode}
-                onChange={(data)=> this.filterPeriode(data)} 
+                onChange={(data)=> this.filterPeriodeDate1(data)} 
               />
             </View>
             <View>
@@ -161,7 +199,7 @@ class DgsScreens extends Component{
                 data={data}
                 initValue={`${year}-${month}`}
                 selectStyle={styles.modalPeriode}
-                onChange={(data)=> this.filterPeriode(data)} 
+                onChange={(data)=> this.filterPeriodeDate2(data)} 
               />
             </View>
           </View>
