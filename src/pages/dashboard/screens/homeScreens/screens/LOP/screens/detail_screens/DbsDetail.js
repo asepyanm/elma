@@ -378,7 +378,7 @@ class DbsDetailScreens extends Component{
           <TouchableOpacity style={styles.buttonTabStyle} onPress={() => this.props.navigation.navigate("MonitorKL")}>
             <Text>Monitor KL</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.buttonTabStyle}>
+          <TouchableOpacity style={styles.buttonTabStyle} onPress={() => this.props.navigation.navigate('MonitorDev')}>
             <Text>Monitor Delivery</Text>
           </TouchableOpacity>
         </View>
@@ -664,7 +664,7 @@ class DbsDetailScreens extends Component{
           <TouchableOpacity style={styles.buttonTabStyle} onPress={() => this.props.navigation.navigate('MonitorKL')}>
             <Text>Monitor KL</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.buttonTabStyle}>
+          <TouchableOpacity style={styles.buttonTabStyle} onPress={() => this.props.navigation.navigate('MonitorDev')}>
             <Text>Monitor Delivery</Text>
           </TouchableOpacity>
         </View>
@@ -950,7 +950,7 @@ class DbsDetailScreens extends Component{
           <TouchableOpacity style={styles.buttonTabStyle} onPress={() => this.props.navigation.navigate('MonitorKL')}>
             <Text>Monitor KL</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.buttonTabStyle}>
+          <TouchableOpacity style={styles.buttonTabStyle} onPress={() => this.props.navigation.navigate('MonitorDev')}>
             <Text>Monitor Delivery</Text>
           </TouchableOpacity>
         </View>
@@ -1236,7 +1236,7 @@ class DbsDetailScreens extends Component{
           <TouchableOpacity style={styles.buttonTabStyle} onPress={() => this.props.navigation.navigate('MonitorKL')}>
             <Text>Monitor KL</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.buttonTabStyle}>
+          <TouchableOpacity style={styles.buttonTabStyle} onPress={() => this.props.navigation.navigate('MonitorDev')}>
             <Text>Monitor Delivery</Text>
           </TouchableOpacity>
         </View>

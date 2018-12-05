@@ -383,6 +383,127 @@ class Dashboard extends Component {
       type: 'MONITOR_KL_DGS_DETAIL_OGP',
       payload: axios.get(`${url.API}/ebis_getklcc/div/DGS/treg/ALL/witel/ALL/startdate/201801/enddate/201811/state/OGP/nmitra/ALL/nmitra/ALL`)
     })
+
+    //Monitor DEV
+    //EBIS
+    this.props.dispatch({
+      type: 'MONITOR_DEV_EBIS',
+      payload: axios.get(`${url.API}/ebis_getwinsum/div/EBIS/treg/ALL/witel/ALL/startdate/201801/enddate/201811`)
+    })
+
+    //EBIS DONE
+    this.props.dispatch({
+      type: 'MONITOR_DEV_EBIS_DONE',
+      payload: axios.get(`${url.API}/ebis_getdeliverystatesum/div/EBIS/treg/ALL/witel/ALL/startdate/201801/enddate/201811/nmitra/ALL`)
+    })
+
+     //EBIS OGP DATA
+     this.props.dispatch({
+      type: 'MONITOR_DEV_EBIS_OGP_DATA',
+      payload: axios.get(`${url.API}/ebis_getdeliverysumperiod/div/EBIS/treg/ALL/witel/ALL/startdate/201801/enddate/201811/nmitra/ALL`)
+    })
+
+    //EBIS DETAIL DONE
+    this.props.dispatch({
+      type: 'MONITOR_DEV_EBIS_DETAIL_DONE',
+      payload: axios.get(`${url.API}/ebis_getdeliverycc/div/EBIS/treg/ALL/witel/ALL/startdate/201801/enddate/201811/nmitra/ALL`)
+    })
+
+    //EBIS DETAIL OGP
+    this.props.dispatch({
+      type: 'MONITOR_KL_EBIS_DETAIL_OGP',
+      payload: axios.get(`${url.API}/ebis_getklcc/div/EBIS/treg/ALL/witel/ALL/startdate/201801/enddate/201811/state/OGP/nmitra/ALL/nmitra/ALL`)
+    })
+
+    //DES
+    this.props.dispatch({
+      type: 'MONITOR_DEV_DES',
+      payload: axios.get(`${url.API}/ebis_getwinsum/div/DES/treg/ALL/witel/ALL/startdate/201801/enddate/201811`)
+    })
+
+    //DES DONE
+    this.props.dispatch({
+      type: 'MONITOR_DEV_DES_DONE',
+      payload: axios.get(`${url.API}/ebis_getdeliverystatesum/div/DES/treg/ALL/witel/ALL/startdate/201801/enddate/201811/nmitra/ALL`)
+    })
+
+    //DES OGP DATA
+    this.props.dispatch({
+      type: 'MONITOR_DEV_DES_OGP_DATA',
+      payload: axios.get(`${url.API}/ebis_getdeliverysumperiod/div/DES/treg/ALL/witel/ALL/startdate/201801/enddate/201811/nmitra/ALL`)
+    })
+
+    //DES DETAIL DONE
+    this.props.dispatch({
+      type: 'MONITOR_DEV_DES_DETAIL_DONE',
+      payload: axios.get(`${url.API}/ebis_getdeliverycc/div/DES/treg/ALL/witel/ALL/startdate/201801/enddate/201811/nmitra/ALL`)
+    })
+
+    //DES DETAIL OGP
+    this.props.dispatch({
+      type: 'MONITOR_KL_DES_DETAIL_OGP',
+      payload: axios.get(`${url.API}/ebis_getklcc/div/DES/treg/ALL/witel/ALL/startdate/201801/enddate/201811/state/OGP/nmitra/ALL/nmitra/ALL`)
+    })
+
+     //DBS
+     this.props.dispatch({
+      type: 'MONITOR_DEV_DBS',
+      payload: axios.get(`${url.API}/ebis_getwinsum/div/DBS/treg/ALL/witel/ALL/startdate/201801/enddate/201811`)
+    })
+
+    //DBS DONE
+    this.props.dispatch({
+      type: 'MONITOR_DEV_DBS_DONE',
+      payload: axios.get(`${url.API}/ebis_getdeliverystatesum/div/DBS/treg/ALL/witel/ALL/startdate/201801/enddate/201811/nmitra/ALL`)
+    })
+
+     //DBS OGP DATA
+     this.props.dispatch({
+      type: 'MONITOR_DEV_DBS_OGP_DATA',
+      payload: axios.get(`${url.API}/ebis_getdeliverysumperiod/div/DBS/treg/ALL/witel/ALL/startdate/201801/enddate/201811/nmitra/ALL`)
+    })
+
+    //DBS DETAIL DONE
+    this.props.dispatch({
+      type: 'MONITOR_DEV_DBS_DETAIL_DONE',
+      payload: axios.get(`${url.API}/ebis_getdeliverycc/div/DBS/treg/ALL/witel/ALL/startdate/201801/enddate/201811/nmitra/ALL`)
+    })
+
+    //DBS DETAIL OGP
+    this.props.dispatch({
+      type: 'MONITOR_KL_DBS_DETAIL_OGP',
+      payload: axios.get(`${url.API}/ebis_getklcc/div/DBS/treg/ALL/witel/ALL/startdate/201801/enddate/201811/state/OGP/nmitra/ALL/nmitra/ALL`)
+    })
+
+    //DGS
+    this.props.dispatch({
+      type: 'MONITOR_DEV_DGS',
+      payload: axios.get(`${url.API}/ebis_getwinsum/div/DGS/treg/ALL/witel/ALL/startdate/201801/enddate/201811`)
+    })
+
+    //DGS DONE
+    this.props.dispatch({
+      type: 'MONITOR_DEV_DGS_DONE',
+      payload: axios.get(`${url.API}/ebis_getdeliverystatesum/div/DGS/treg/ALL/witel/ALL/startdate/201801/enddate/201811/nmitra/ALL`)
+    })
+
+     //DGS OGP DATA
+     this.props.dispatch({
+      type: 'MONITOR_DEV_DGS_OGP_DATA',
+      payload: axios.get(`${url.API}/ebis_getdeliverysumperiod/div/DGS/treg/ALL/witel/ALL/startdate/201801/enddate/201811/nmitra/ALL`)
+    })
+
+    //DGS DETAIL DONE
+    this.props.dispatch({
+      type: 'MONITOR_DEV_DGS_DETAIL_DONE',
+      payload: axios.get(`${url.API}/ebis_getdeliverycc/div/DGS/treg/ALL/witel/ALL/startdate/201801/enddate/201811/nmitra/ALL`)
+    })
+
+    //DGS DETAIL OGP
+    this.props.dispatch({
+      type: 'MONITOR_KL_DGS_DETAIL_OGP',
+      payload: axios.get(`${url.API}/ebis_getklcc/div/DGS/treg/ALL/witel/ALL/startdate/201801/enddate/201811/state/OGP/nmitra/ALL/nmitra/ALL`)
+    })
     
   }
 

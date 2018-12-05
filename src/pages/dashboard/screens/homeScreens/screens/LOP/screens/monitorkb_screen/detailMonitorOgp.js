@@ -186,13 +186,66 @@ class detailMonitorOgp extends Component {
             <ActivityIndicator size={'large'} color={'#000'} style={{ margin: hp('5%') }} />
             :
             <View style={{ height: hp('90%'), width: wp('85%') }}>
-              <View style={{ width: wp('45%'), marginTop: hp('2%') }}>
-                  <Text style={{ fontSize: 10 }}>a. Nama Project</Text>
-                  <Text style={{ fontSize: 10 }}>{OgpData.NAMAPROJECT}</Text>
+              <View style={{ flexDirection: 'row', width: wp('45%'), marginTop: hp('2%') }}>
+                  <Text style={{ fontSize: 10 }}>a. Nama Project : </Text>
+                  <Text style={{ fontSize: 10, marginLeft: wp('2%') }}>{OgpData.NAMAPROJECT}</Text>
               </View>
-              <View style={{ width: wp('45%'), marginTop: hp('2%') }}>
-                  <Text style={{ fontSize: 10 }}>b. Nama CC</Text>
-                  <Text style={{ fontSize: 10 }}>{OgpData.NAMAPROJECT}</Text>
+              <View style={{ flexDirection: 'row', width: wp('45%'), marginTop: hp('2%') }}>
+                  <Text style={{ fontSize: 10 }}>b. Nama CC : </Text>
+                  <Text style={{ fontSize: 10, marginLeft: wp('2%') }}>{OgpData.NAMACC}</Text>
+              </View>
+              <View style={{ flexDirection: 'row', width: wp('45%'), marginTop: hp('2%') }}>
+                  <Text style={{ fontSize: 10 }}>c. Nilai Project : </Text>
+                  <Text style={{ fontSize: 10, marginLeft: wp('2%') }}>{OgpData.REVENUE}</Text>
+              </View>
+              <View style={{ flexDirection: 'row', width: wp('45%'), marginTop: hp('2%') }}>
+                  <Text style={{ fontSize: 10 }}>d. Lama Kontrak : </Text>
+                  <Text style={{ fontSize: 10, marginLeft: wp('2%') }}>{OgpData.LAMAKONTRAK}</Text>
+              </View>
+              <View style={{ flexDirection: 'row', width: wp('45%'), marginTop: hp('2%') }}>
+                  <Text style={{ fontSize: 10 }}>e. Divisi : </Text>
+                  <Text style={{ fontSize: 10, marginLeft: wp('2%') }}>{OgpData.DIVISI}</Text>
+              </View>
+              <View style={{ flexDirection: 'row', width: wp('45%'), marginTop: hp('2%') }}>
+                  <Text style={{ fontSize: 10 }}>f. Segmen : </Text>
+                  <Text style={{ fontSize: 10, marginLeft: wp('2%') }}>{OgpData.SEGMEN}</Text>
+              </View>
+              <View style={{ flexDirection: 'row', width: wp('45%'), marginTop: hp('2%') }}>
+                  <Text style={{ fontSize: 10 }}>g. Administration Progress : </Text>
+              </View>
+              <View style={{ flexDirection: 'row', width: wp('45%'), marginTop: hp('2%'), marginLeft: wp('5%') }}>
+                  <Text style={{ fontSize: 10 }}>a. Kontrak Berlangganan : </Text>
+              </View>
+              <View style={{ flexDirection: 'row', width: wp('45%'), marginTop: hp('2%'), marginLeft: wp('10%') }}>
+                  <Text style={{ fontSize: 10 }}>&bull; Status KB : </Text>
+                  <Text style={{ fontSize: 10, marginLeft: wp('2%') }}>{OgpData.STATUS_KB}</Text>
+              </View>
+              <View style={{ flexDirection: 'row', width: wp('45%'), marginTop: hp('2%'), marginLeft: wp('10%') }}>
+                  <Text style={{ fontSize: 10 }}>&bull; No. KB : </Text>
+                  <Text style={{ fontSize: 10, marginLeft: wp('2%') }}>{OgpData.NO_KB}</Text>
+              </View>
+              <View style={{ flexDirection: 'row', width: wp('45%'), marginTop: hp('2%'), marginLeft: wp('10%') }}>
+                  <Text style={{ fontSize: 10 }}>&bull; Durasi : </Text>
+                  <Text style={{ fontSize: 10, marginLeft: wp('2%') }}>{OgpData.DURASI}</Text>
+              </View>
+              <View style={{ flexDirection: 'row', width: wp('45%'), marginTop: hp('2%'), marginLeft: wp('10%') }}>
+                  <Text style={{ fontSize: 10 }}>&bull; Sympton : </Text>
+                  <Text style={{ fontSize: 10, marginLeft: wp('2%') }}>{OgpData.SYMPTON}</Text>
+              </View>
+              <View style={{ flexDirection: 'row', width: wp('45%'), marginTop: hp('2%'), marginLeft: wp('5%') }}>
+                  <Text style={{ fontSize: 10 }}>b. Justifikasi PO/P1 : </Text>
+              </View>
+              <View style={{ flexDirection: 'row', width: wp('45%'), marginTop: hp('2%'), marginLeft: wp('10%') }}>
+                  <Text style={{ fontSize: 10 }}>&bull; Status : </Text>
+                  <Text style={{ fontSize: 10, marginLeft: wp('2%') }}>{OgpData.STATUS_JUST_P0_P1}</Text>
+              </View>
+              <View style={{ flexDirection: 'row', width: wp('45%'), marginTop: hp('2%'), marginLeft: wp('10%') }}>
+                  <Text style={{ fontSize: 10 }}>&bull; Dokumen : </Text>
+                  <Text style={{ fontSize: 10, marginLeft: wp('2%') }}>{OgpData.DOKUMEN}</Text>
+              </View>
+              <View style={{ flexDirection: 'row', width: wp('45%'), marginTop: hp('2%'), marginLeft: wp('10%') }}>
+                  <Text style={{ fontSize: 10 }}>&bull; Type : </Text>
+                  <Text style={{ fontSize: 10, marginLeft: wp('2%') }}>{OgpData.DOKUMEN}</Text>
               </View>
               <View style={{ position: 'absolute', bottom: 0 }}>
               <TouchableOpacity onPress={() => this.setState({ visibleModal: !this.state.visibleModal })} style={{ height: hp('5%'), backgroundColor: '#e74c3c', width: wp('85%'), alignItems: 'center', padding: hp('1%'), borderRadius: 5, marginBottom: hp('2%') }}>
@@ -448,7 +501,7 @@ class detailMonitorOgp extends Component {
                 isVisible={this.state.visibleModal === true}
                 onBackdropPress={() => this.setState({ visibleModal: false })}>
                 {
-                  pressed ? this.renderModalContent() : this.renderDataDetail()
+                  pressed == false ? this.renderModalContent() : this.renderDataDetail()
                 }
               </Modal>
             </View>
@@ -521,7 +574,7 @@ class detailMonitorOgp extends Component {
       ebisProspectREVENUE2, ebisProspectProject2, dataMitra2, DesDetailOgp
     } = this.props;
 
-    const { statusAll, statusSubs, statusMitra, statusTelkom } = this.state;
+    const { statusAll, statusSubs, statusMitra, statusTelkom, pressed } = this.state;
 
     return (
       <View style={{ backgroundColor: '#FFF', flex: 1 }}>
@@ -665,7 +718,9 @@ class detailMonitorOgp extends Component {
               <Modal
                 isVisible={this.state.visibleModal === true}
                 onBackdropPress={() => this.setState({ visibleModal: false })}>
-                {this.renderModalContent()}
+                {
+                  pressed == false ? this.renderModalContent() : this.renderDataDetail()
+                }
               </Modal>
             </View>
           )}
@@ -737,7 +792,7 @@ class detailMonitorOgp extends Component {
       ebisProspectREVENUE3, ebisProspectProject3, dataMitra3, DbsDetailOgp
     } = this.props;
 
-    const { statusAll, statusSubs, statusMitra, statusTelkom } = this.state;
+    const { statusAll, statusSubs, statusMitra, statusTelkom, pressed } = this.state;
 
     return (
       <View style={{ backgroundColor: '#FFF', flex: 1 }}>
@@ -881,7 +936,9 @@ class detailMonitorOgp extends Component {
               <Modal
                 isVisible={this.state.visibleModal === true}
                 onBackdropPress={() => this.setState({ visibleModal: false })}>
-                {this.renderModalContent()}
+                 {
+                  pressed == false ? this.renderModalContent() : this.renderDataDetail()
+                }
               </Modal>
             </View>
           )}

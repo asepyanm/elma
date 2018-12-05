@@ -28,7 +28,8 @@ class detailMonitor extends Component{
       visibleModal:false,
       loaderTampilDetail:false,
       dataTampung:[],
-
+      OgpData: {},
+      pressed: false,
       data:[],
       statusAll:false, 
       statusSubs:true,
@@ -40,7 +41,8 @@ class detailMonitor extends Component{
   _toggleModal(item){
     this.setState({
       visibleModal: !this.state.visibleModal,
-      loaderTampilDetail:true
+      loaderTampilDetail:true,
+      pressed: false
     })
     axios.get(`${url.API}/ebis_getklproject/div/EBIS/treg/ALL/witel/ALL/startdate/201801/enddate/201811/state/DONE/mitra/${item}`).then((res) => {
       this.setState({dataTampung:res.data, loaderTampilDetail:false });
@@ -55,7 +57,8 @@ class detailMonitor extends Component{
   _toggleModalDes(item){
     this.setState({
       visibleModal: !this.state.visibleModal,
-      loaderTampilDetail:true
+      loaderTampilDetail:true,
+      pressed: false
     })
     axios.get(`${url.API}/ebis_getklproject/div/DES/treg/ALL/witel/ALL/startdate/201801/enddate/201811/state/DONE/mitra/${item}`).then((res) => {
       this.setState({dataTampung:res.data, loaderTampilDetail:false });
@@ -70,7 +73,8 @@ class detailMonitor extends Component{
   _toggleModalDbs(item){
     this.setState({
       visibleModal: !this.state.visibleModal,
-      loaderTampilDetail:true
+      loaderTampilDetail:true,
+      pressed: false
     })
     axios.get(`${url.API}/ebis_getklproject/div/DBS/treg/ALL/witel/ALL/startdate/201801/enddate/201811/state/DONE/mitra/${item}`).then((res) => {
       this.setState({dataTampung:res.data, loaderTampilDetail:false });
@@ -85,13 +89,30 @@ class detailMonitor extends Component{
   _toggleModalDgs(item){
     this.setState({
       visibleModal: !this.state.visibleModal,
-      loaderTampilDetail:true
+      loaderTampilDetail:true,
+      pressed: false
     })
-    axios.get(`${url.API}/ebis_getklproject/div/EBIS/treg/ALL/witel/ALL/startdate/201801/enddate/201811/state/DONE/mitra/${item}`).then((res) => {
+    axios.get(`${url.API}/ebis_getklproject/div/DGS/treg/ALL/witel/ALL/startdate/201801/enddate/201811/state/DONE/mitra/${item}`).then((res) => {
       this.setState({dataTampung:res.data, loaderTampilDetail:false });
     }).catch((err) => {
       this.setState({
         loaderTampilDetail:false
+      })
+      alert(err)
+    })
+  }
+
+  _onDataPress(level, mitra, id) {
+    this.setState({
+      visibleModal: true,
+      pressed: true,
+      loaderTampilDetail: true
+    })
+    axios.get(`${url.API}/ebis_getklproject/div/${level.level}/treg/ALL/witel/ALL/startdate/201801/enddate/201811/state/DONE/mitra/${level.mitra}/idproject/${level.id}`).then((res) => {
+      this.setState({ OgpData: res.data, loaderTampilDetail: false });
+    }).catch((err) => {
+      this.setState({
+        loaderTampilDetail: false
       })
       alert(err)
     })
@@ -155,6 +176,88 @@ class detailMonitor extends Component{
     }
   }
 
+  renderDataDetail() {
+    const { OgpData, dataTampung, loaderTampilDetail } = this.state;
+    return (
+      <View style={{ backgroundColor: "white", alignItems: "center",  borderRadius: 4, borderColor: "rgba(0, 0, 0, 0.1)"}}>
+        {
+          loaderTampilDetail
+            ?
+            <ActivityIndicator size={'large'} color={'#000'} style={{ margin: hp('5%') }} />
+            :
+            <View style={{ height: hp('90%'), width: wp('85%') }}>
+              <View style={{ flexDirection: 'row', width: wp('45%'), marginTop: hp('2%') }}>
+                  <Text style={{ fontSize: 10 }}>a. Nama Project : </Text>
+                  <Text style={{ fontSize: 10, marginLeft: wp('2%') }}>{OgpData.NAMAPROJECT}</Text>
+              </View>
+              <View style={{ flexDirection: 'row', width: wp('45%'), marginTop: hp('2%') }}>
+                  <Text style={{ fontSize: 10 }}>b. Nama CC : </Text>
+                  <Text style={{ fontSize: 10, marginLeft: wp('2%') }}>{OgpData.NAMACC}</Text>
+              </View>
+              <View style={{ flexDirection: 'row', width: wp('45%'), marginTop: hp('2%') }}>
+                  <Text style={{ fontSize: 10 }}>c. Nilai Project : </Text>
+                  <Text style={{ fontSize: 10, marginLeft: wp('2%') }}>{OgpData.REVENUE}</Text>
+              </View>
+              <View style={{ flexDirection: 'row', width: wp('45%'), marginTop: hp('2%') }}>
+                  <Text style={{ fontSize: 10 }}>d. Lama Kontrak : </Text>
+                  <Text style={{ fontSize: 10, marginLeft: wp('2%') }}>{OgpData.LAMAKONTRAK}</Text>
+              </View>
+              <View style={{ flexDirection: 'row', width: wp('45%'), marginTop: hp('2%') }}>
+                  <Text style={{ fontSize: 10 }}>e. Divisi : </Text>
+                  <Text style={{ fontSize: 10, marginLeft: wp('2%') }}>{OgpData.DIVISI}</Text>
+              </View>
+              <View style={{ flexDirection: 'row', width: wp('45%'), marginTop: hp('2%') }}>
+                  <Text style={{ fontSize: 10 }}>f. Segmen : </Text>
+                  <Text style={{ fontSize: 10, marginLeft: wp('2%') }}>{OgpData.SEGMEN}</Text>
+              </View>
+              <View style={{ flexDirection: 'row', width: wp('45%'), marginTop: hp('2%') }}>
+                  <Text style={{ fontSize: 10 }}>g. Administration Progress : </Text>
+              </View>
+              <View style={{ flexDirection: 'row', width: wp('45%'), marginTop: hp('2%'), marginLeft: wp('5%') }}>
+                  <Text style={{ fontSize: 10 }}>a. Kontrak Berlangganan : </Text>
+              </View>
+              <View style={{ flexDirection: 'row', width: wp('45%'), marginTop: hp('2%'), marginLeft: wp('10%') }}>
+                  <Text style={{ fontSize: 10 }}>&bull; Status KB : </Text>
+                  <Text style={{ fontSize: 10, marginLeft: wp('2%') }}>{OgpData.STATUS_KB}</Text>
+              </View>
+              <View style={{ flexDirection: 'row', width: wp('45%'), marginTop: hp('2%'), marginLeft: wp('10%') }}>
+                  <Text style={{ fontSize: 10 }}>&bull; No. KB : </Text>
+                  <Text style={{ fontSize: 10, marginLeft: wp('2%') }}>{OgpData.NO_KB}</Text>
+              </View>
+              <View style={{ flexDirection: 'row', width: wp('45%'), marginTop: hp('2%'), marginLeft: wp('10%') }}>
+                  <Text style={{ fontSize: 10 }}>&bull; Durasi : </Text>
+                  <Text style={{ fontSize: 10, marginLeft: wp('2%') }}>{OgpData.DURASI}</Text>
+              </View>
+              <View style={{ flexDirection: 'row', width: wp('45%'), marginTop: hp('2%'), marginLeft: wp('10%') }}>
+                  <Text style={{ fontSize: 10 }}>&bull; Sympton : </Text>
+                  <Text style={{ fontSize: 10, marginLeft: wp('2%') }}>{OgpData.SYMPTON}</Text>
+              </View>
+              <View style={{ flexDirection: 'row', width: wp('45%'), marginTop: hp('2%'), marginLeft: wp('5%') }}>
+                  <Text style={{ fontSize: 10 }}>b. Justifikasi PO/P1 : </Text>
+              </View>
+              <View style={{ flexDirection: 'row', width: wp('45%'), marginTop: hp('2%'), marginLeft: wp('10%') }}>
+                  <Text style={{ fontSize: 10 }}>&bull; Status : </Text>
+                  <Text style={{ fontSize: 10, marginLeft: wp('2%') }}>{OgpData.STATUS_JUST_P0_P1}</Text>
+              </View>
+              <View style={{ flexDirection: 'row', width: wp('45%'), marginTop: hp('2%'), marginLeft: wp('10%') }}>
+                  <Text style={{ fontSize: 10 }}>&bull; Dokumen : </Text>
+                  <Text style={{ fontSize: 10, marginLeft: wp('2%') }}>{OgpData.DOKUMEN}</Text>
+              </View>
+              <View style={{ flexDirection: 'row', width: wp('45%'), marginTop: hp('2%'), marginLeft: wp('10%') }}>
+                  <Text style={{ fontSize: 10 }}>&bull; Type : </Text>
+                  <Text style={{ fontSize: 10, marginLeft: wp('2%') }}>{OgpData.DOKUMEN}</Text>
+              </View>
+              <View style={{ position: 'absolute', bottom: 0 }}>
+              <TouchableOpacity onPress={() => this.setState({ visibleModal: !this.state.visibleModal })} style={{ height: hp('5%'), backgroundColor: '#e74c3c', width: wp('85%'), alignItems: 'center', padding: hp('1%'), borderRadius: 5, marginBottom: hp('2%') }}>
+                <Text style={{ color: '#FFF' }}>Tutup</Text>
+              </TouchableOpacity>
+              </View>
+            </View>
+        }
+      </View>
+    )
+  }
+
   renderModalContent(){
     const {dataTampung, loaderTampilDetail} = this.state;
     return(
@@ -182,7 +285,7 @@ class detailMonitor extends Component{
             )}
             keyExtractor={(item, index) => index.toString()}
             renderItem={({ item }) => (
-              <View style={styles.containerDetailData}> 
+              <TouchableOpacity style={styles.containerDetailData} onPress={this._onDataPress.bind(this, { level: item.DIVISI, mitra: item.MITRA, id: item.LOPID })}> 
                 <View style={{width:wp('35%'), alignSelf:'center', justifyContent:'center'}}>
                   <Text style={{fontSize:10}}>{item.NAMACC}</Text>
                 </View>
@@ -192,7 +295,7 @@ class detailMonitor extends Component{
                 <View style={{width:wp('10%'), alignSelf:'center', justifyContent:'center', alignItems:'center'}}>
                   <Text style={{textAlign:'center', fontSize:10}}>{parseFloat(item.REVENUE)}M</Text>                    
                 </View>
-              </View>
+              </TouchableOpacity>
             )}
             style={{height:hp('80%'), marginBottom:hp('2%')}}
           />
@@ -248,7 +351,7 @@ class detailMonitor extends Component{
       ebisProspectREVENUE,ebisProspectProject,dataMitra, EbisDetailDone
     } = this.props;
 
-    const {statusAll, statusSubs, statusMitra, statusTelkom} = this.state;
+    const {statusAll, statusSubs, statusMitra, statusTelkom, pressed} = this.state;
 
     return(
       <View style={{backgroundColor:'#FFF', flex:1}}>
@@ -392,7 +495,9 @@ class detailMonitor extends Component{
                 <Modal 
                   isVisible={this.state.visibleModal === true}
                   onBackdropPress={() => this.setState({ visibleModal: false })}>
-                  {this.renderModalContent()}
+                  {
+                  pressed == false ? this.renderModalContent() : this.renderDataDetail()
+                  }
                 </Modal>
               </View>
             )}
@@ -464,7 +569,7 @@ class detailMonitor extends Component{
       ebisProspectREVENUE2,ebisProspectProject2,dataMitra2, DesDetailDone
     } = this.props;
 
-    const {statusAll, statusSubs, statusMitra, statusTelkom} = this.state;
+    const {statusAll, statusSubs, statusMitra, statusTelkom, pressed} = this.state;
 
     return(
       <View style={{backgroundColor:'#FFF', flex:1}}>
@@ -608,7 +713,9 @@ class detailMonitor extends Component{
                 <Modal 
                   isVisible={this.state.visibleModal === true}
                   onBackdropPress={() => this.setState({ visibleModal: false })}>
-                  {this.renderModalContent()}
+                  {
+                  pressed == false ? this.renderModalContent() : this.renderDataDetail()
+                  }
                 </Modal>
               </View>
             )}
@@ -680,7 +787,7 @@ class detailMonitor extends Component{
       ebisProspectREVENUE3,ebisProspectProject3,dataMitra3, DbsDetailDone
     } = this.props;
 
-    const {statusAll, statusSubs, statusMitra, statusTelkom} = this.state;
+    const {statusAll, statusSubs, statusMitra, statusTelkom, pressed} = this.state;
 
     return(
       <View style={{backgroundColor:'#FFF', flex:1}}>
@@ -824,7 +931,9 @@ class detailMonitor extends Component{
                 <Modal 
                   isVisible={this.state.visibleModal === true}
                   onBackdropPress={() => this.setState({ visibleModal: false })}>
-                  {this.renderModalContent()}
+                  {
+                  pressed == false ? this.renderModalContent() : this.renderDataDetail()
+                  }
                 </Modal>
               </View>
             )}
@@ -896,7 +1005,7 @@ class detailMonitor extends Component{
       ebisProspectREVENUE4,ebisProspectProject4,dataMitra4, DgsDetailDone
     } = this.props;
 
-    const {statusAll, statusSubs, statusMitra, statusTelkom} = this.state;
+    const {statusAll, statusSubs, statusMitra, statusTelkom, pressed} = this.state;
 
     return(
       <View style={{backgroundColor:'#FFF', flex:1}}>
@@ -1040,7 +1149,9 @@ class detailMonitor extends Component{
                 <Modal 
                   isVisible={this.state.visibleModal === true}
                   onBackdropPress={() => this.setState({ visibleModal: false })}>
-                  {this.renderModalContent()}
+                  {
+                  pressed == false ? this.renderModalContent() : this.renderDataDetail()
+                  }
                 </Modal>
               </View>
             )}

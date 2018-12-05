@@ -20,7 +20,7 @@ import axios from 'axios';
 import renderIf from '../../../../../../../components/renderIf';
 import url from '../../../../../../../../config/api_service';
 
-class MonitorKB extends Component {
+class MonitorDev extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -204,15 +204,13 @@ class MonitorKB extends Component {
 
     const {
       //prospect
-      navigation, dataEbisOgp3Rev, dataEbisOgp3Project, dataEbisOgp6Rev, dataEbisOgp6Project, dataEbisOgp7Rev, dataEbisOgp7Project,
+      navigation, dataEbisScheduleRev, dataEbisScheduleProject, dataEbisDelay, dataEbisDelayProject,
       ebisProspectREVENUE, ebisProspectProject, dataMitra,
       ebisMonitor, ebisMonitorWP, ebisMonitorDone, ebisMonitorDoneWP,
       ebisMonitorOgp, ebisMonitorOgpWP
     } = this.props;
 
     const { statusAll, statusSubs, statusMitra, statusTelkom, dataEbis } = this.state;
-
-    const item = this.props.data;
 
     const valuePresentaseDone = (parseInt(ebisMonitorDone) / parseInt(ebisMonitor)) * 100;
     const newValueDone = Math.round(valuePresentaseDone)
@@ -355,8 +353,8 @@ class MonitorKB extends Component {
                   resizeMode={'stretch'}
                 />
 
-                <TouchableOpacity style={styles.containerArrowWin2} onPress={() => navigation.navigate('DetailMonitorDone')}>
-                  <Text style={styles.textJudul}>Done KB</Text>
+                <TouchableOpacity style={styles.containerArrowWin2} onPress={() => navigation.navigate('DetailMonitorDoneDev')}>
+                  <Text style={styles.textJudul}>Delivery</Text>
                   <Text style={styles.textIsi}>{ebisMonitorDone}M</Text>
                   <Text style={styles.textKeterangan}>per {ebisMonitorDoneWP} Project</Text>
                 </TouchableOpacity>
@@ -373,76 +371,27 @@ class MonitorKB extends Component {
                   </View>
                 </View>
               </View>
-              <View style={styles.wrapperArrow}>
-                <Image
-                  source={images.Win.arrowWin1}
-                  style={styles.imageStyle}
-                  resizeMode={'stretch'}
-                />
-
-                <View style={styles.containerArrowWin}>
-                  <Text style={styles.textJudul}>WIN</Text>
-                  <Text style={styles.textIsi}>{ebisMonitor}M</Text>
-                  <Text style={styles.textKeterangan}>per {ebisMonitorWP} Project</Text>
-                </View>
-
-                <Image
-                  source={images.Win.arrowWin3}
-                  style={styles.imageStyle}
-                  resizeMode={'stretch'}
-                />
-
-                <TouchableOpacity style={styles.containerArrowWin2} onPress={() => navigation.navigate('DetailMonitorOgp')}>
-                  <Text style={styles.textJudul}>OGP KB</Text>
-                  <Text style={styles.textIsi}>{ebisMonitorOgp}M</Text>
-                  <Text style={styles.textKeterangan}>per {ebisMonitorOgpWP} Project</Text>
-                </TouchableOpacity>
-
-                <Image
-                  source={images.arrowGrey}
-                  style={styles.imageStyle}
-                  resizeMode={'stretch'}
-                />
-
-                <View style={styles.wrapperPresentase}>
-                  <View style={styles.wrapperTextPresentase}>
-                    <Text style={styles.textJudul}>{newValueOgp}%</Text>
-                  </View>
-                </View>
-              </View>
 
               <View style={{ flexDirection: 'row', margin: hp('2%'), justifyContent: 'space-between' }}>
                 <View style={{ marginBottom: hp('2%') }}>
-                  <Text style={[styles.textJudul, { marginBottom: 20, alignItems: 'center' }]}>Progress OGP KB &#60; 3 Hari</Text>
+                  <Text style={[styles.textJudul, { marginBottom: 20, alignItems: 'center' }]}>On Schedule Delivery</Text>
                 </View>
 
                 <View>
-                  <Text style={styles.textIsi}>{dataEbisOgp3Rev}M</Text>
-                  <Text style={styles.textKeterangan}>per {dataEbisOgp3Project} Project</Text>
+                  <Text style={styles.textIsi}>{dataEbisScheduleRev}M</Text>
+                  <Text style={styles.textKeterangan}>per {dataEbisScheduleProject} Project</Text>
                 </View>
 
               </View>
 
               <View style={{ flexDirection: 'row', margin: hp('2%'), justifyContent: 'space-between' }}>
                 <View style={{ marginBottom: hp('2%') }}>
-                  <Text style={[styles.textJudul, { marginBottom: 20, alignItems: 'center' }]}>Progress OGP KB &#60; 7 Hari</Text>
+                  <Text style={[styles.textJudul, { marginBottom: 20, alignItems: 'center' }]}>Delay Delivery</Text>
                 </View>
 
                 <View>
-                  <Text style={styles.textIsi}>{dataEbisOgp6Rev}M</Text>
-                  <Text style={styles.textKeterangan}>per {dataEbisOgp6Project} Project</Text>
-                </View>
-
-              </View>
-
-              <View style={{ flexDirection: 'row', margin: hp('2%'), justifyContent: 'space-between' }}>
-                <View style={{ marginBottom: hp('2%') }}>
-                  <Text style={[styles.textJudul, { marginBottom: 20, alignItems: 'center' }]}>Progress OGP KB &#62; 7 Hari</Text>
-                </View>
-
-                <View>
-                  <Text style={styles.textIsi}>{dataEbisOgp7Rev}M</Text>
-                  <Text style={styles.textKeterangan}>per {dataEbisOgp7Project} Project</Text>
+                  <Text style={styles.textIsi}>{dataEbisDelay}M</Text>
+                  <Text style={styles.textKeterangan}>per {dataEbisDelayProject} Project</Text>
                 </View>
 
               </View>
@@ -515,15 +464,13 @@ class MonitorKB extends Component {
 
     const {
       //prospect
-      navigation, dataDesOgp3Rev, dataDesOgp3Project, dataDesOgp6Rev, dataDesOgp6Project, dataDesOgp7Rev, dataDesOgp7Project,
+      navigation, dataDesScheduleRev, dataDesScheduleProject, dataDesDelay, dataDesDelayProject,
       ebisProspectREVENUE2, ebisProspectProject2, dataMitra2,
       DesMonitor, DesMonitorWP, DesMonitorDone, DesMonitorDoneWP,
       DesMonitorOgp, DesMonitorOgpWP
     } = this.props;
 
     const { statusAll, statusSubs, statusMitra, statusTelkom, dataEbis } = this.state;
-
-    const item = this.props.dataDesOgp;
 
     const valuePresentaseDone = (parseInt(DesMonitorDone) / parseInt(DesMonitor)) * 100;
     const newValueDone = Math.round(valuePresentaseDone)
@@ -666,8 +613,8 @@ class MonitorKB extends Component {
                   resizeMode={'stretch'}
                 />
 
-                <TouchableOpacity style={styles.containerArrowWin2} onPress={() => navigation.navigate('DetailMonitorDone')}>
-                  <Text style={styles.textJudul}>Done KB</Text>
+                <TouchableOpacity style={styles.containerArrowWin2} onPress={() => navigation.navigate('DetailMonitorDoneDev')}>
+                  <Text style={styles.textJudul}>Delivery</Text>
                   <Text style={styles.textIsi}>{DesMonitorDone}M</Text>
                   <Text style={styles.textKeterangan}>per {DesMonitorDoneWP} Project</Text>
                 </TouchableOpacity>
@@ -684,76 +631,27 @@ class MonitorKB extends Component {
                   </View>
                 </View>
               </View>
-              <View style={styles.wrapperArrow}>
-                <Image
-                  source={images.Win.arrowWin1}
-                  style={styles.imageStyle}
-                  resizeMode={'stretch'}
-                />
-
-                <TouchableOpacity style={styles.containerArrowWin}>
-                  <Text style={styles.textJudul}>WIN</Text>
-                  <Text style={styles.textIsi}>{DesMonitor}M</Text>
-                  <Text style={styles.textKeterangan}>per {DesMonitorWP} Project</Text>
-                </TouchableOpacity>
-
-                <Image
-                  source={images.Win.arrowWin3}
-                  style={styles.imageStyle}
-                  resizeMode={'stretch'}
-                />
-
-                <TouchableOpacity style={styles.containerArrowWin2} onPress={() => navigation.navigate('DetailMonitorOgp')}>
-                  <Text style={styles.textJudul}>OGP KB</Text>
-                  <Text style={styles.textIsi}>{DesMonitorOgp}M</Text>
-                  <Text style={styles.textKeterangan}>per {DesMonitorOgpWP} Project</Text>
-                </TouchableOpacity>
-
-                <Image
-                  source={images.arrowGrey}
-                  style={styles.imageStyle}
-                  resizeMode={'stretch'}
-                />
-
-                <View style={styles.wrapperPresentase}>
-                  <View style={styles.wrapperTextPresentase}>
-                    <Text style={styles.textJudul}>{newValueOgp}%</Text>
-                  </View>
-                </View>
-              </View>
-
+              
               <View style={{ flexDirection: 'row', margin: hp('2%'), justifyContent: 'space-between' }}>
                 <View style={{ marginBottom: hp('2%') }}>
-                  <Text style={[styles.textJudul, { marginBottom: 20, alignItems: 'center' }]}>Progress OGP KB &#60; 3 Hari</Text>
+                  <Text style={[styles.textJudul, { marginBottom: 20, alignItems: 'center' }]}>On Schedule Delivery</Text>
                 </View>
 
                 <View>
-                  <Text style={styles.textIsi}>{dataDesOgp3Rev}M</Text>
-                  <Text style={styles.textKeterangan}>per {dataDesOgp3Project} Project</Text>
+                  <Text style={styles.textIsi}>{dataDesScheduleRev}M</Text>
+                  <Text style={styles.textKeterangan}>per {dataDesScheduleProject} Project</Text>
                 </View>
 
               </View>
 
               <View style={{ flexDirection: 'row', margin: hp('2%'), justifyContent: 'space-between' }}>
                 <View style={{ marginBottom: hp('2%') }}>
-                  <Text style={[styles.textJudul, { marginBottom: 20, alignItems: 'center' }]}>Progress OGP KB &#60; 7 Hari</Text>
+                  <Text style={[styles.textJudul, { marginBottom: 20, alignItems: 'center' }]}>Delay Delivery</Text>
                 </View>
 
                 <View>
-                  <Text style={styles.textIsi}>{dataDesOgp6Rev}M</Text>
-                  <Text style={styles.textKeterangan}>per {dataDesOgp6Project} Project</Text>
-                </View>
-
-              </View>
-
-              <View style={{ flexDirection: 'row', margin: hp('2%'), justifyContent: 'space-between' }}>
-                <View style={{ marginBottom: hp('2%') }}>
-                  <Text style={[styles.textJudul, { marginBottom: 20, alignItems: 'center' }]}>Progress OGP KB &#62; 7 Hari</Text>
-                </View>
-
-                <View>
-                  <Text style={styles.textIsi}>{dataDesOgp7Rev}M</Text>
-                  <Text style={styles.textKeterangan}>per {dataDesOgp7Project} Project</Text>
+                  <Text style={styles.textIsi}>{dataDesDelay}M</Text>
+                  <Text style={styles.textKeterangan}>per {dataDesDelayProject} Project</Text>
                 </View>
 
               </View>
@@ -826,15 +724,13 @@ class MonitorKB extends Component {
 
     const {
       //prospect
-      navigation, dataDbsOgp3Rev, dataDbsOgp3Project, dataDbsOgp6Rev, dataDbsOgp6Project, dataDbsOgp7Rev, dataDbsOgp7Project,
+      navigation, dataDbsScheduleRev, dataDbsScheduleProject, dataDbsDelay, dataDbsDelayProject,
       ebisProspectREVENUE3, ebisProspectProject3, dataMitra3,
       DbsMonitor, DbsMonitorWP, DbsMonitorDone, DbsMonitorDoneWP,
       DbsMonitorOgp, DbsMonitorOgpWP
     } = this.props;
 
     const { statusAll, statusSubs, statusMitra, statusTelkom, dataEbis } = this.state;
-
-    const item = this.props.dataDbsOgp;
 
     const valuePresentaseDone = (parseInt(DbsMonitorDone) / parseInt(DbsMonitor)) * 100;
     const newValueDone = Math.round(valuePresentaseDone)
@@ -977,8 +873,8 @@ class MonitorKB extends Component {
                   resizeMode={'stretch'}
                 />
 
-                <TouchableOpacity style={styles.containerArrowWin2} onPress={() => navigation.navigate('DetailMonitorDone')}>
-                  <Text style={styles.textJudul}>Done KB</Text>
+                <TouchableOpacity style={styles.containerArrowWin2} onPress={() => navigation.navigate('DetailMonitorDoneDev')}>
+                  <Text style={styles.textJudul}>Delivery</Text>
                   <Text style={styles.textIsi}>{DbsMonitorDone}M</Text>
                   <Text style={styles.textKeterangan}>per {DbsMonitorDoneWP} Project</Text>
                 </TouchableOpacity>
@@ -995,76 +891,27 @@ class MonitorKB extends Component {
                   </View>
                 </View>
               </View>
-              <View style={styles.wrapperArrow}>
-                <Image
-                  source={images.Win.arrowWin1}
-                  style={styles.imageStyle}
-                  resizeMode={'stretch'}
-                />
-
-                <TouchableOpacity style={styles.containerArrowWin}>
-                  <Text style={styles.textJudul}>WIN</Text>
-                  <Text style={styles.textIsi}>{DbsMonitor}M</Text>
-                  <Text style={styles.textKeterangan}>per {DbsMonitorWP} Project</Text>
-                </TouchableOpacity>
-
-                <Image
-                  source={images.Win.arrowWin3}
-                  style={styles.imageStyle}
-                  resizeMode={'stretch'}
-                />
-
-                <TouchableOpacity style={styles.containerArrowWin2} onPress={() => navigation.navigate('DetailMonitorOgp')}>
-                  <Text style={styles.textJudul}>OGP KB</Text>
-                  <Text style={styles.textIsi}>{DbsMonitorOgp}M</Text>
-                  <Text style={styles.textKeterangan}>per {DbsMonitorOgpWP} Project</Text>
-                </TouchableOpacity>
-
-                <Image
-                  source={images.arrowGrey}
-                  style={styles.imageStyle}
-                  resizeMode={'stretch'}
-                />
-
-                <View style={styles.wrapperPresentase}>
-                  <View style={styles.wrapperTextPresentase}>
-                    <Text style={styles.textJudul}>{newValueOgp}%</Text>
-                  </View>
-                </View>
-              </View>
-
+              
               <View style={{ flexDirection: 'row', margin: hp('2%'), justifyContent: 'space-between' }}>
                 <View style={{ marginBottom: hp('2%') }}>
-                  <Text style={[styles.textJudul, { marginBottom: 20, alignItems: 'center' }]}>Progress OGP KB &#60; 3 Hari</Text>
+                  <Text style={[styles.textJudul, { marginBottom: 20, alignItems: 'center' }]}>On Schedule Delivery</Text>
                 </View>
 
                 <View>
-                  <Text style={styles.textIsi}>{dataDbsOgp3Rev}M</Text>
-                  <Text style={styles.textKeterangan}>per {dataDbsOgp3Project} Project</Text>
+                  <Text style={styles.textIsi}>{dataDbsScheduleRev}M</Text>
+                  <Text style={styles.textKeterangan}>per {dataDbsScheduleProject} Project</Text>
                 </View>
 
               </View>
 
               <View style={{ flexDirection: 'row', margin: hp('2%'), justifyContent: 'space-between' }}>
                 <View style={{ marginBottom: hp('2%') }}>
-                  <Text style={[styles.textJudul, { marginBottom: 20, alignItems: 'center' }]}>Progress OGP KB &#60; 7 Hari</Text>
+                  <Text style={[styles.textJudul, { marginBottom: 20, alignItems: 'center' }]}>Delay Delivery</Text>
                 </View>
 
                 <View>
-                  <Text style={styles.textIsi}>{dataDbsOgp6Rev}M</Text>
-                  <Text style={styles.textKeterangan}>per {dataDbsOgp6Project} Project</Text>
-                </View>
-
-              </View>
-
-              <View style={{ flexDirection: 'row', margin: hp('2%'), justifyContent: 'space-between' }}>
-                <View style={{ marginBottom: hp('2%') }}>
-                  <Text style={[styles.textJudul, { marginBottom: 20, alignItems: 'center' }]}>Progress OGP KB &#62; 7 Hari</Text>
-                </View>
-
-                <View>
-                  <Text style={styles.textIsi}>{dataDbsOgp7Rev}M</Text>
-                  <Text style={styles.textKeterangan}>per {dataDbsOgp7Project} Project</Text>
+                  <Text style={styles.textIsi}>{dataDbsDelay}M</Text>
+                  <Text style={styles.textKeterangan}>per {dataDbsDelayProject} Project</Text>
                 </View>
 
               </View>
@@ -1137,7 +984,7 @@ class MonitorKB extends Component {
 
     const {
       //prospect
-      navigation, dataDgsOgp3Rev, dataDgsOgp3Project, dataDgsOgp6Rev, dataDgsOgp6Project, dataDgsOgp7Rev, dataDgsOgp7Project,
+      navigation, dataDgsScheduleRev, dataDgsScheduleProject, dataDgsDelay, dataDgsDelayProject,
       ebisProspectREVENUE4, ebisProspectProject4, dataMitra4,
       DgsMonitor, DgsMonitorWP, DgsMonitorDone, DgsMonitorDoneWP,
       DgsMonitorOgp, DgsMonitorOgpWP
@@ -1286,8 +1133,8 @@ class MonitorKB extends Component {
                   resizeMode={'stretch'}
                 />
 
-                <TouchableOpacity style={styles.containerArrowWin2} onPress={() => navigation.navigate('DetailMonitorDone')}>
-                  <Text style={styles.textJudul}>Done KB</Text>
+                <TouchableOpacity style={styles.containerArrowWin2} onPress={() => navigation.navigate('DetailMonitorDoneDev')}>
+                  <Text style={styles.textJudul}>Delivery</Text>
                   <Text style={styles.textIsi}>{DgsMonitorDone}M</Text>
                   <Text style={styles.textKeterangan}>per {DgsMonitorDoneWP} Project</Text>
                 </TouchableOpacity>
@@ -1304,76 +1151,27 @@ class MonitorKB extends Component {
                   </View>
                 </View>
               </View>
-              <View style={styles.wrapperArrow}>
-                <Image
-                  source={images.Win.arrowWin1}
-                  style={styles.imageStyle}
-                  resizeMode={'stretch'}
-                />
-
-                <TouchableOpacity style={styles.containerArrowWin}>
-                  <Text style={styles.textJudul}>WIN</Text>
-                  <Text style={styles.textIsi}>{DgsMonitor}M</Text>
-                  <Text style={styles.textKeterangan}>per {DgsMonitorWP} Project</Text>
-                </TouchableOpacity>
-
-                <Image
-                  source={images.Win.arrowWin3}
-                  style={styles.imageStyle}
-                  resizeMode={'stretch'}
-                />
-
-                <TouchableOpacity style={styles.containerArrowWin2} onPress={() => navigation.navigate('DetailMonitorOgp')}>
-                  <Text style={styles.textJudul}>OGP KB</Text>
-                  <Text style={styles.textIsi}>{DgsMonitorOgp}M</Text>
-                  <Text style={styles.textKeterangan}>per {DgsMonitorOgpWP} Project</Text>
-                </TouchableOpacity>
-
-                <Image
-                  source={images.arrowGrey}
-                  style={styles.imageStyle}
-                  resizeMode={'stretch'}
-                />
-
-                <View style={styles.wrapperPresentase}>
-                  <View style={styles.wrapperTextPresentase}>
-                    <Text style={styles.textJudul}>{newValueOgp}%</Text>
-                  </View>
-                </View>
-              </View>
 
               <View style={{ flexDirection: 'row', margin: hp('2%'), justifyContent: 'space-between' }}>
                 <View style={{ marginBottom: hp('2%') }}>
-                  <Text style={[styles.textJudul, { marginBottom: 20, alignItems: 'center' }]}>Progress OGP KB &#60; 3 Hari</Text>
+                  <Text style={[styles.textJudul, { marginBottom: 20, alignItems: 'center' }]}>On Schedule Delivery</Text>
                 </View>
 
                 <View>
-                  <Text style={styles.textIsi}>{dataDgsOgp3Rev}M</Text>
-                  <Text style={styles.textKeterangan}>per {dataDgsOgp3Project} Project</Text>
+                  <Text style={styles.textIsi}>{dataDgsScheduleRev}M</Text>
+                  <Text style={styles.textKeterangan}>per {dataDgsScheduleProject} Project</Text>
                 </View>
 
               </View>
 
               <View style={{ flexDirection: 'row', margin: hp('2%'), justifyContent: 'space-between' }}>
                 <View style={{ marginBottom: hp('2%') }}>
-                  <Text style={[styles.textJudul, { marginBottom: 20, alignItems: 'center' }]}>Progress OGP KB &#60; 7 Hari</Text>
+                  <Text style={[styles.textJudul, { marginBottom: 20, alignItems: 'center' }]}>Delay Delivery</Text>
                 </View>
 
                 <View>
-                  <Text style={styles.textIsi}>{dataDgsOgp6Rev}M</Text>
-                  <Text style={styles.textKeterangan}>per {dataDgsOgp6Project} Project</Text>
-                </View>
-
-              </View>
-
-              <View style={{ flexDirection: 'row', margin: hp('2%'), justifyContent: 'space-between' }}>
-                <View style={{ marginBottom: hp('2%') }}>
-                  <Text style={[styles.textJudul, { marginBottom: 20, alignItems: 'center' }]}>Progress OGP KB &#62; 7 Hari</Text>
-                </View>
-
-                <View>
-                  <Text style={styles.textIsi}>{dataDgsOgp7Rev}M</Text>
-                  <Text style={styles.textKeterangan}>per {dataDgsOgp7Project} Project</Text>
+                  <Text style={styles.textIsi}>{dataDgsDelay}M</Text>
+                  <Text style={styles.textKeterangan}>per {dataDgsDelayProject} Project</Text>
                 </View>
 
               </View>
@@ -1426,7 +1224,7 @@ class MonitorKB extends Component {
             </Button>
           </Left>
           <Body>
-            <Title style={{ color: '#FFF' }}>Monitor KB</Title>
+            <Title style={{ color: '#FFF' }}>Monitor Delivery</Title>
           </Body>
           <Right />
         </Header>
@@ -1454,36 +1252,28 @@ class MonitorKB extends Component {
 
 const mapStateToProps = (state) => ({
   //EBIS ALL DATA
-  dataEbisOgp3Rev: state.MonitorEbisReducer.dataOgp3Rev,
-  dataEbisOgp3Project: state.MonitorEbisReducer.dataOgp3Project,
-  dataEbisOgp6Rev: state.MonitorEbisReducer.dataOgp6Rev,
-  dataEbisOgp6Project: state.MonitorEbisReducer.dataOgp6Project,
-  dataEbisOgp7Rev: state.MonitorEbisReducer.dataOgp7Rev,
-  dataEbisOgp7Project: state.MonitorEbisReducer.dataOgp7Project,
+  dataEbisScheduleRev: state.MonitorEbisReducerDev.dataScheduleRev,
+  dataEbisScheduleProject: state.MonitorEbisReducerDev.dataScheduleProject,
+  dataEbisDelay: state.MonitorEbisReducerDev.dataDelay,
+  dataEbisDelayProject: state.MonitorEbisReducerDev.dataDelayProject,
 
-   //DES ALL DATA
-   dataDesOgp3Rev: state.MonitorDesReducer.dataOgp3Rev,
-   dataDesOgp3Project: state.MonitorDesReducer.dataOgp3Project,
-   dataDesOgp6Rev: state.MonitorDesReducer.dataOgp6Rev,
-   dataDesOgp6Project: state.MonitorDesReducer.dataOgp6Project,
-   dataDesOgp7Rev: state.MonitorDesReducer.dataOgp7Rev,
-   dataDesOgp7Project: state.MonitorDesReducer.dataOgp7Project,
+  //DES ALL DATA
+  dataDesScheduleRev: state.MonitorDesReducerDev.dataScheduleRev,
+  dataDesScheduleProject: state.MonitorDesReducerDev.dataScheduleProject,
+  dataDesDelay: state.MonitorDesReducerDev.dataDelay,
+  dataDesDelayProject: state.MonitorDesReducerDev.dataDelayProject,
 
-   //DBS ALL DATA
-   dataDbsOgp3Rev: state.MonitorDbsReducer.dataOgp3Rev,
-   dataDbsOgp3Project: state.MonitorDbsReducer.dataOgp3Project,
-   dataDbsOgp6Rev: state.MonitorDbsReducer.dataOgp6Rev,
-   dataDbsOgp6Project: state.MonitorDbsReducer.dataOgp6Project,
-   dataDbsOgp7Rev: state.MonitorDbsReducer.dataOgp7Rev,
-   dataDbsOgp7Project: state.MonitorDbsReducer.dataOgp7Project,
+  //DBS ALL DATA
+  dataDbsScheduleRev: state.MonitorDbsReducerDev.dataScheduleRev,
+  dataDbsScheduleProject: state.MonitorDbsReducerDev.dataScheduleProject,
+  dataDbsDelay: state.MonitorDbsReducerDev.dataDelay,
+  dataDbsDelayProject: state.MonitorDbsReducerDev.dataDelayProject,
 
-   //DGS ALL DATA
-   dataDgsOgp3Rev: state.MonitorDgsReducer.dataOgp3Rev,
-   dataDgsOgp3Project: state.MonitorDgsReducer.dataOgp3Project,
-   dataDgsOgp6Rev: state.MonitorDgsReducer.dataOgp6Rev,
-   dataDgsOgp6Project: state.MonitorDgsReducer.dataOgp6Project,
-   dataDgsOgp7Rev: state.MonitorDgsReducer.dataOgp7Rev,
-   dataDgsOgp7Project: state.MonitorDgsReducer.dataOgp7Project,
+  //DGS ALL DATA
+  dataDgsScheduleRev: state.MonitorDgsReducerDev.dataScheduleRev,
+  dataDgsScheduleProject: state.MonitorDgsReducerDev.dataScheduleProject,
+  dataDgsDelay: state.MonitorDgsReducerDev.dataDelay,
+  dataDgsDelayProject: state.MonitorDgsReducerDev.dataDelayProject,
 
   //EBIS
   ebisProspectREVENUE: state.EbisReducer.ebisWinREVENUE,
@@ -1512,39 +1302,39 @@ const mapStateToProps = (state) => ({
   dataMitra4: state.DgsDetailReducer.dataMitra,
 
   //MonitorEBIS
-  ebisMonitor: state.MonitorEbisReducer.dataEbisWin,
-  ebisMonitorWP: state.MonitorEbisReducer.dataEbisWP,
-  ebisMonitorDone: state.MonitorEbisReducer.dataEbisDoneWin,
-  ebisMonitorDoneWP: state.MonitorEbisReducer.dataEbisDoneWP,
-  ebisMonitorOgp: state.MonitorEbisReducer.dataEbisOgpWin,
-  ebisMonitorOgpWP: state.MonitorEbisReducer.dataEbisOgpWP,
+  ebisMonitor: state.MonitorEbisReducerDev.dataEbisWin,
+  ebisMonitorWP: state.MonitorEbisReducerDev.dataEbisWP,
+  ebisMonitorDone: state.MonitorEbisReducerDev.dataEbisDoneWin,
+  ebisMonitorDoneWP: state.MonitorEbisReducerDev.dataEbisDoneWP,
+  ebisMonitorOgp: state.MonitorEbisReducerDev.dataEbisOgpWin,
+  ebisMonitorOgpWP: state.MonitorEbisReducerDev.dataEbisOgpWP,
 
   //MonitorDES
-  DesMonitor: state.MonitorDesReducer.dataDesWin,
-  DesMonitorWP: state.MonitorDesReducer.dataDesWP,
-  DesMonitorDone: state.MonitorDesReducer.dataDesDoneWin,
-  DesMonitorDoneWP: state.MonitorDesReducer.dataDesDoneWP,
-  DesMonitorOgp: state.MonitorDesReducer.dataDesOgpWin,
-  DesMonitorOgpWP: state.MonitorDesReducer.dataDesOgpWP,
+  DesMonitor: state.MonitorDesReducerDev.dataDesWin,
+  DesMonitorWP: state.MonitorDesReducerDev.dataDesWP,
+  DesMonitorDone: state.MonitorDesReducerDev.dataDesDoneWin,
+  DesMonitorDoneWP: state.MonitorDesReducerDev.dataDesDoneWP,
+  DesMonitorOgp: state.MonitorDesReducerDev.dataDesOgpWin,
+  DesMonitorOgpWP: state.MonitorDesReducerDev.dataDesOgpWP,
 
   //MonitorDBS
-  DbsMonitor: state.MonitorDbsReducer.dataDbsWin,
-  DbsMonitorWP: state.MonitorDbsReducer.dataDbsWP,
-  DbsMonitorDone: state.MonitorDbsReducer.dataDbsDoneWin,
-  DbsMonitorDoneWP: state.MonitorDbsReducer.dataDbsDoneWP,
-  DbsMonitorOgp: state.MonitorDbsReducer.dataDbsOgpWin,
-  DbsMonitorOgpWP: state.MonitorDbsReducer.dataDbsOgpWP,
+  DbsMonitor: state.MonitorDbsReducerDev.dataDbsWin,
+  DbsMonitorWP: state.MonitorDbsReducerDev.dataDbsWP,
+  DbsMonitorDone: state.MonitorDbsReducerDev.dataDbsDoneWin,
+  DbsMonitorDoneWP: state.MonitorDbsReducerDev.dataDbsDoneWP,
+  DbsMonitorOgp: state.MonitorDbsReducerDev.dataDbsOgpWin,
+  DbsMonitorOgpWP: state.MonitorDbsReducerDev.dataDbsOgpWP,
 
   //Monitor DGS
-  DgsMonitor: state.MonitorDgsReducer.dataDgsWin,
-  DgsMonitorWP: state.MonitorDgsReducer.dataDgsWP,
-  DgsMonitorDone: state.MonitorDgsReducer.dataDgsDoneWin,
-  DgsMonitorDoneWP: state.MonitorDgsReducer.dataDgsDoneWP,
-  DgsMonitorOgp: state.MonitorDgsReducer.dataDgsOgpWin,
-  DgsMonitorOgpWP: state.MonitorDgsReducer.dataDgsOgpWP,
+  DgsMonitor: state.MonitorDgsReducerDev.dataDgsWin,
+  DgsMonitorWP: state.MonitorDgsReducerDev.dataDgsWP,
+  DgsMonitorDone: state.MonitorDgsReducerDev.dataDgsDoneWin,
+  DgsMonitorDoneWP: state.MonitorDgsReducerDev.dataDgsDoneWP,
+  DgsMonitorOgp: state.MonitorDgsReducerDev.dataDgsOgpWin,
+  DgsMonitorOgpWP: state.MonitorDgsReducerDev.dataDgsOgpWP,
 })
 
-export default connect(mapStateToProps)(MonitorKB);
+export default connect(mapStateToProps)(MonitorDev);
 
 const styles = StyleSheet.create({
   container: {

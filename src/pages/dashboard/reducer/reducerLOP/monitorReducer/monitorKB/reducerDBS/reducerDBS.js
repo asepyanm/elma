@@ -7,6 +7,12 @@ const initialState = {
     dataDbsDoneWP: '',
     dataDbsOgpWin: '',
     dataDbsOgpWP: '',
+    dataOgp3Rev: '',
+    dataOgp3Project: '',
+    dataOgp6Rev: '',
+    dataOgp6Project: '',
+    dataOgp7Rev: '',
+    dataOgp7Project: '',
     dataOgpDbs: [],
     detailDoneDbs: [],
     detailOgpDbs: []
@@ -93,7 +99,12 @@ const initialState = {
         return{
           ...state, 
           //Current status
-          dataOgpDbs : action.payload.data
+          dataOgp3Rev: action.payload.data[0].REVENUE,
+          dataOgp3Project: action.payload.data[0].PROJECT,
+          dataOgp6Rev: action.payload.data[1].REVENUE,
+          dataOgp6Project: action.payload.data[1].PROJECT,
+          dataOgp7Rev: action.payload.data[2].REVENUE,
+          dataOgp7Project: action.payload.data[2].PROJECT
         }
       break;
 

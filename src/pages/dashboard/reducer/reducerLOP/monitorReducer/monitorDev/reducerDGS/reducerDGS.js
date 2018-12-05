@@ -7,32 +7,30 @@ const initialState = {
     dataDgsDoneWP: '',
     dataDgsOgpWin: '',
     dataDgsOgpWP: '',
-    dataOgp3Rev: '',
-    dataOgp3Project: '',
-    dataOgp6Rev: '',
-    dataOgp6Project: '',
-    dataOgp7Rev: '',
-    dataOgp7Project: '',
     dataOgpDgs: [],
+    dataScheduleRev: '',
+    dataScheduleProject: '',
+    dataDelay: '',
+    dataDelayProject: '',
     detailDoneDgs: [],
     detailOgpDgs: []
   };
   
-  const MonitorDgsReducerKL = (state = initialState, action) => {
+  const MonitorDgsReducerDev = (state = initialState, action) => {
     switch (action.type) {
-      case 'MONITOR_KL_DGS_REJECTED':
+      case 'MONITOR_DEV_DGS_REJECTED':
         return{
           ...state, 
         }
       break;
       
-      case 'MONITOR_KL_DGS_PENDING':
+      case 'MONITOR_DEV_DGS_PENDING':
         return{
           ...state, 
         }
       break;
   
-      case 'MONITOR_KL_DGS_FULFILLED':
+      case 'MONITOR_DEV_DGS_FULFILLED':
         return{
           ...state, 
           //Current status
@@ -41,19 +39,19 @@ const initialState = {
         }
       break;
 
-      case 'MONITOR_KL_DGS_DONE_REJECTED':
+      case 'MONITOR_DEV_DGS_DONE_REJECTED':
         return{
           ...state, 
         }
       break;
       
-      case 'MONITOR_KL_DGS_DONE_PENDING':
+      case 'MONITOR_DEV_DGS_DONE_PENDING':
         return{
           ...state, 
         }
       break;
   
-      case 'MONITOR_KL_DGS_DONE_FULFILLED':
+      case 'MONITOR_DEV_DGS_DONE_FULFILLED':
         return{
           ...state, 
           //Current status
@@ -62,19 +60,19 @@ const initialState = {
         }
       break;
 
-      case 'MONITOR_KL_DGS_OGP_REJECTED':
+      case 'MONITOR_DEV_DGS_OGP_REJECTED':
         return{
           ...state, 
         }
       break;
       
-      case 'MONITOR_KL_DGS_OGP_PENDING':
+      case 'MONITOR_DEV_DGS_OGP_PENDING':
         return{
           ...state, 
         }
       break;
   
-      case 'MONITOR_KL_DGS_OGP_FULFILLED':
+      case 'MONITOR_DEV_DGS_OGP_FULFILLED':
         return{
           ...state, 
           //Current status
@@ -83,44 +81,42 @@ const initialState = {
         }
       break;
 
-      case 'MONITOR_KL_DGS_OGP_DATA_REJECTED':
+      case 'MONITOR_DEV_DGS_OGP_DATA_REJECTED':
         return{
           ...state, 
         }
       break;
       
-      case 'MONITOR_KL_DGS_OGP_DATA_PENDING':
+      case 'MONITOR_DEV_DGS_OGP_DATA_PENDING':
         return{
           ...state, 
         }
       break;
   
-      case 'MONITOR_KL_DGS_OGP_DATA_FULFILLED':
+      case 'MONITOR_DEV_DGS_OGP_DATA_FULFILLED':
         return{
           ...state, 
           //Current status
-          dataOgp3Rev: action.payload.data[0].REVENUE,
-          dataOgp3Project: action.payload.data[0].PROJECT,
-          dataOgp6Rev: action.payload.data[1].REVENUE,
-          dataOgp6Project: action.payload.data[1].PROJECT,
-          dataOgp7Rev: action.payload.data[2].REVENUE,
-          dataOgp7Project: action.payload.data[2].PROJECT
+          dataScheduleRev: action.payload.data[1].WIN,
+          dataScheduleProject: action.payload.data[1].PROJECT,
+          dataDelay: action.payload.data[0].WIN,
+          dataDelayProject: action.payload.data[0].PROJECT
         }
       break;
 
-      case 'MONITOR_KL_DGS_DETAIL_DONE_REJECTED':
+      case 'MONITOR_DEV_DGS_DETAIL_DONE_REJECTED':
         return{
           ...state, 
         }
       break;
       
-      case 'MONITOR_KL_DGS_DETAIL_DONE_PENDING':
+      case 'MONITOR_DEV_DGS_DETAIL_DONE_PENDING':
         return{
           ...state, 
         }
       break;
   
-      case 'MONITOR_KL_DGS_DETAIL_DONE_FULFILLED':
+      case 'MONITOR_DEV_DGS_DETAIL_DONE_FULFILLED':
         return{
           ...state, 
           //Current status
@@ -128,19 +124,19 @@ const initialState = {
         }
       break;
 
-      case 'MONITOR_KL_DGS_DETAIL_OGP_REJECTED':
+      case 'MONITOR_DEV_DGS_DETAIL_OGP_REJECTED':
       return{
         ...state, 
       }
      break;
     
-      case 'MONITOR_KL_DGS_DETAIL_OGP_PENDING':
+      case 'MONITOR_DEV_DGS_DETAIL_OGP_PENDING':
       return{
         ...state, 
         }
       break;
 
-    case 'MONITOR_KL_DGS_DETAIL_OGP_FULFILLED':
+    case 'MONITOR_DEV_DGS_DETAIL_OGP_FULFILLED':
       return{
         ...state, 
         //Current status
@@ -153,4 +149,4 @@ const initialState = {
     }
   };
   
-  export default MonitorDgsReducerKL;
+  export default MonitorDgsReducerDev;

@@ -203,7 +203,7 @@ class MonitorKL extends Component {
 
     const {
       //prospect
-      navigation,
+      navigation, dataEbisOgp3Rev, dataEbisOgp3Project, dataEbisOgp6Rev, dataEbisOgp6Project, dataEbisOgp7Rev, dataEbisOgp7Project,
       ebisProspectREVENUE, ebisProspectProject, dataMitra,
       ebisMonitor, ebisMonitorWP, ebisMonitorDone, ebisMonitorDoneWP,
       ebisMonitorOgp, ebisMonitorOgpWP
@@ -416,8 +416,8 @@ class MonitorKL extends Component {
                 </View>
 
                 <View>
-                  <Text style={styles.textIsi}>M</Text>
-                  <Text style={styles.textKeterangan}>perProject</Text>
+                  <Text style={styles.textIsi}>{dataEbisOgp3Rev}M</Text>
+                  <Text style={styles.textKeterangan}>per {dataEbisOgp3Project} Project</Text>
                 </View>
 
               </View>
@@ -428,8 +428,8 @@ class MonitorKL extends Component {
                 </View>
 
                 <View>
-                  <Text style={styles.textIsi}>M</Text>
-                  <Text style={styles.textKeterangan}>per Project</Text>
+                  <Text style={styles.textIsi}>{dataEbisOgp6Rev}M</Text>
+                  <Text style={styles.textKeterangan}>per {dataEbisOgp6Project} Project</Text>
                 </View>
 
               </View>
@@ -440,8 +440,8 @@ class MonitorKL extends Component {
                 </View>
 
                 <View>
-                  <Text style={styles.textIsi}>M</Text>
-                  <Text style={styles.textKeterangan}>per Project</Text>
+                  <Text style={styles.textIsi}>{dataEbisOgp7Rev}M</Text>
+                  <Text style={styles.textKeterangan}>per {dataEbisOgp7Project} Project</Text>
                 </View>
 
               </View>
@@ -514,7 +514,7 @@ class MonitorKL extends Component {
 
     const {
       //prospect
-      navigation,
+      navigation, dataDesOgp3Rev, dataDesOgp3Project, dataDesOgp6Rev, dataDesOgp6Project, dataDesOgp7Rev, dataDesOgp7Project,
       ebisProspectREVENUE2, ebisProspectProject2, dataMitra2,
       DesMonitor, DesMonitorWP, DesMonitorDone, DesMonitorDoneWP,
       DesMonitorOgp, DesMonitorOgpWP
@@ -727,8 +727,8 @@ class MonitorKL extends Component {
                 </View>
 
                 <View>
-                  <Text style={styles.textIsi}>M</Text>
-                  <Text style={styles.textKeterangan}>per Project</Text>
+                  <Text style={styles.textIsi}>{dataDesOgp3Rev}M</Text>
+                  <Text style={styles.textKeterangan}>per {dataDesOgp3Project} Project</Text>
                 </View>
 
               </View>
@@ -739,8 +739,8 @@ class MonitorKL extends Component {
                 </View>
 
                 <View>
-                  <Text style={styles.textIsi}>M</Text>
-                  <Text style={styles.textKeterangan}>per  Project</Text>
+                  <Text style={styles.textIsi}>{dataDesOgp6Rev}M</Text>
+                  <Text style={styles.textKeterangan}>per {dataDesOgp6Project} Project</Text>
                 </View>
 
               </View>
@@ -751,8 +751,8 @@ class MonitorKL extends Component {
                 </View>
 
                 <View>
-                  <Text style={styles.textIsi}>M</Text>
-                  <Text style={styles.textKeterangan}>pe Project</Text>
+                  <Text style={styles.textIsi}>{dataDesOgp7Rev}M</Text>
+                  <Text style={styles.textKeterangan}>per {dataDesOgp7Project} Project</Text>
                 </View>
 
               </View>
@@ -825,7 +825,7 @@ class MonitorKL extends Component {
 
     const {
       //prospect
-      navigation,
+      navigation, dataDbsOgp3Rev, dataDbsOgp3Project, dataDbsOgp6Rev, dataDbsOgp6Project, dataDbsOgp7Rev, dataDbsOgp7Project,
       ebisProspectREVENUE3, ebisProspectProject3, dataMitra3,
       DbsMonitor, DbsMonitorWP, DbsMonitorDone, DbsMonitorDoneWP,
       DbsMonitorOgp, DbsMonitorOgpWP
@@ -1038,8 +1038,8 @@ class MonitorKL extends Component {
                 </View>
 
                 <View>
-                  <Text style={styles.textIsi}>M</Text>
-                  <Text style={styles.textKeterangan}>per Project</Text>
+                  <Text style={styles.textIsi}>{dataDbsOgp3Rev}M</Text>
+                  <Text style={styles.textKeterangan}>per {dataDbsOgp3Project} Project</Text>
                 </View>
 
               </View>
@@ -1050,8 +1050,8 @@ class MonitorKL extends Component {
                 </View>
 
                 <View>
-                  <Text style={styles.textIsi}>M</Text>
-                  <Text style={styles.textKeterangan}>per Project</Text>
+                  <Text style={styles.textIsi}>{dataDbsOgp6Rev}M</Text>
+                  <Text style={styles.textKeterangan}>per {dataDbsOgp6Project} Project</Text>
                 </View>
 
               </View>
@@ -1062,8 +1062,8 @@ class MonitorKL extends Component {
                 </View>
 
                 <View>
-                  <Text style={styles.textIsi}>M</Text>
-                  <Text style={styles.textKeterangan}>per Project</Text>
+                  <Text style={styles.textIsi}>{dataDbsOgp7Rev}M</Text>
+                  <Text style={styles.textKeterangan}>per {dataDbsOgp7Project} Project</Text>
                 </View>
 
               </View>
@@ -1136,7 +1136,7 @@ class MonitorKL extends Component {
 
     const {
       //prospect
-      navigation,
+      navigation, dataDgsOgp3Rev, dataDgsOgp3Project, dataDgsOgp6Rev, dataDgsOgp6Project, dataDgsOgp7Rev, dataDgsOgp7Project,
       ebisProspectREVENUE4, ebisProspectProject4, dataMitra4,
       DgsMonitor, DgsMonitorWP, DgsMonitorDone, DgsMonitorDoneWP,
       DgsMonitorOgp, DgsMonitorOgpWP
@@ -1349,8 +1349,8 @@ class MonitorKL extends Component {
                 </View>
 
                 <View>
-                  <Text style={styles.textIsi}>M</Text>
-                  <Text style={styles.textKeterangan}>per Project</Text>
+                  <Text style={styles.textIsi}>{dataDgsOgp3Rev}M</Text>
+                  <Text style={styles.textKeterangan}>per {dataDgsOgp3Project} Project</Text>
                 </View>
 
               </View>
@@ -1361,8 +1361,8 @@ class MonitorKL extends Component {
                 </View>
 
                 <View>
-                  <Text style={styles.textIsi}>M</Text>
-                  <Text style={styles.textKeterangan}>per Project</Text>
+                  <Text style={styles.textIsi}>{dataDgsOgp6Rev}M</Text>
+                  <Text style={styles.textKeterangan}>per {dataDgsOgp6Project} Project</Text>
                 </View>
 
               </View>
@@ -1373,8 +1373,8 @@ class MonitorKL extends Component {
                 </View>
 
                 <View>
-                  <Text style={styles.textIsi}>M</Text>
-                  <Text style={styles.textKeterangan}>per Project</Text>
+                  <Text style={styles.textIsi}>{dataDgsOgp7Rev}M</Text>
+                  <Text style={styles.textKeterangan}>per {dataDgsOgp7Project} Project</Text>
                 </View>
 
               </View>
@@ -1454,10 +1454,37 @@ class MonitorKL extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  data: state.MonitorEbisReducerKL.dataOgp,
-  dataDesOgp: state.MonitorDesReducerKL.dataOgpDes,
-  dataDbsOgp: state.MonitorDbsReducerKL.dataOgpDbs,
-  dataDgsOgp: state.MonitorDgsReducerKL.dataOgpDgs,
+  //EBIS ALL DATA
+  dataEbisOgp3Rev: state.MonitorEbisReducerKL.dataOgp3Rev,
+  dataEbisOgp3Project: state.MonitorEbisReducerKL.dataOgp3Project,
+  dataEbisOgp6Rev: state.MonitorEbisReducerKL.dataOgp6Rev,
+  dataEbisOgp6Project: state.MonitorEbisReducerKL.dataOgp6Project,
+  dataEbisOgp7Rev: state.MonitorEbisReducerKL.dataOgp7Rev,
+  dataEbisOgp7Project: state.MonitorEbisReducerKL.dataOgp7Project,
+
+   //DES ALL DATA
+   dataDesOgp3Rev: state.MonitorDesReducerKL.dataOgp3Rev,
+   dataDesOgp3Project: state.MonitorDesReducerKL.dataOgp3Project,
+   dataDesOgp6Rev: state.MonitorDesReducerKL.dataOgp6Rev,
+   dataDesOgp6Project: state.MonitorDesReducerKL.dataOgp6Project,
+   dataDesOgp7Rev: state.MonitorDesReducerKL.dataOgp7Rev,
+   dataDesOgp7Project: state.MonitorDesReducerKL.dataOgp7Project,
+
+   //DBS ALL DATA
+   dataDbsOgp3Rev: state.MonitorDbsReducerKL.dataOgp3Rev,
+   dataDbsOgp3Project: state.MonitorDbsReducerKL.dataOgp3Project,
+   dataDbsOgp6Rev: state.MonitorDbsReducerKL.dataOgp6Rev,
+   dataDbsOgp6Project: state.MonitorDbsReducerKL.dataOgp6Project,
+   dataDbsOgp7Rev: state.MonitorDbsReducerKL.dataOgp7Rev,
+   dataDbsOgp7Project: state.MonitorDbsReducerKL.dataOgp7Project,
+
+   //DGS ALL DATA
+   dataDgsOgp3Rev: state.MonitorDgsReducerKL.dataOgp3Rev,
+   dataDgsOgp3Project: state.MonitorDgsReducerKL.dataOgp3Project,
+   dataDgsOgp6Rev: state.MonitorDgsReducerKL.dataOgp6Rev,
+   dataDgsOgp6Project: state.MonitorDgsReducerKL.dataOgp6Project,
+   dataDgsOgp7Rev: state.MonitorDgsReducerKL.dataOgp7Rev,
+   dataDgsOgp7Project: state.MonitorDgsReducerKL.dataOgp7Project,
 
   //EBIS
   ebisProspectREVENUE: state.EbisReducer.ebisWinREVENUE,

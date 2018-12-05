@@ -35,10 +35,17 @@ import MonitorDesReducer from '../pages/dashboard/reducer/reducerLOP/monitorRedu
 import MonitorDbsReducer from '../pages/dashboard/reducer/reducerLOP/monitorReducer/monitorKB/reducerDBS/reducerDBS';
 import MonitorDgsReducer from '../pages/dashboard/reducer/reducerLOP/monitorReducer/monitorKB/reducerDGS/reducerDGS';
 
+//monitor KL reducer
 import MonitorEbisReducerKL from '../pages/dashboard/reducer/reducerLOP/monitorReducer/monitorKL/reducerEBIS/reducerEbis';
 import MonitorDesReducerKL from '../pages/dashboard/reducer/reducerLOP/monitorReducer/monitorKL/reducerDES/reducerDes';
 import MonitorDbsReducerKL from '../pages/dashboard/reducer/reducerLOP/monitorReducer/monitorKL/reducerDBS/reducerDBS';
 import MonitorDgsReducerKL from '../pages/dashboard/reducer/reducerLOP/monitorReducer/monitorKL/reducerDGS/reducerDGS';
+
+//monitor Dev reducer
+import MonitorEbisReducerDev from '../pages/dashboard/reducer/reducerLOP/monitorReducer/monitorDev/reducerEBIS/reducerEbis';
+import MonitorDesReducerDev from '../pages/dashboard/reducer/reducerLOP/monitorReducer/monitorDev/reducerDES/reducerDes';
+import MonitorDbsReducerDev from '../pages/dashboard/reducer/reducerLOP/monitorReducer/monitorDev/reducerDBS/reducerDBS';
+import MonitorDgsReducerDev from '../pages/dashboard/reducer/reducerLOP/monitorReducer/monitorDev/reducerDGS/reducerDGS';
 
 //reducer treg LOP
 import EbisTregReducer from '../pages/dashboard/screens/tregScreens/screens/LOP/screens/reducer/reducerEbisTreg';
@@ -93,6 +100,12 @@ const rootReducer = combineReducers({
   MonitorDesReducerKL,
   MonitorDbsReducerKL,
   MonitorDgsReducerKL,
+
+  //monitor reducer Dev
+  MonitorEbisReducerDev,
+  MonitorDesReducerDev,
+  MonitorDbsReducerDev,
+  MonitorDgsReducerDev,
 
   //reducer treg LOP
   EbisTregReducer,

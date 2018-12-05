@@ -20,7 +20,7 @@ import axios from 'axios';
 import renderIf from '../../../../../../../components/renderIf';
 import url from '../../../../../../../../config/api_service';
 
-class detailMonitorOgp extends Component{
+class detailMonitor extends Component{
   constructor(props){
     super(props);
     this.state = {
@@ -29,8 +29,8 @@ class detailMonitorOgp extends Component{
       loaderTampilDetail:false,
       dataTampung:[],
       OgpData: {},
-      data:[],
       pressed: false,
+      data:[],
       statusAll:false, 
       statusSubs:true,
       statusMitra:true,
@@ -44,7 +44,7 @@ class detailMonitorOgp extends Component{
       loaderTampilDetail:true,
       pressed: false
     })
-    axios.get(`${url.API}/ebis_getklproject/div/EBIS/treg/ALL/witel/ALL/startdate/201801/enddate/201811/state/OGP/mitra/${item}`).then((res) => {
+    axios.get(`${url.API}/ebis_getdeliveryproject/div/EBIS/treg/ALL/witel/ALL/startdate/201801/enddate/201811/cc/${item}`).then((res) => {
       this.setState({dataTampung:res.data, loaderTampilDetail:false });
     }).catch((err) => {
       this.setState({
@@ -60,7 +60,7 @@ class detailMonitorOgp extends Component{
       loaderTampilDetail:true,
       pressed: false
     })
-    axios.get(`${url.API}/ebis_getklproject/div/DES/treg/ALL/witel/ALL/startdate/201801/enddate/201811/state/OGP/mitra/${item}`).then((res) => {
+    axios.get(`${url.API}/ebis_getdeliveryproject/div/DES/treg/ALL/witel/ALL/startdate/201801/enddate/201811/cc/${item}`).then((res) => {
       this.setState({dataTampung:res.data, loaderTampilDetail:false });
     }).catch((err) => {
       this.setState({
@@ -76,7 +76,7 @@ class detailMonitorOgp extends Component{
       loaderTampilDetail:true,
       pressed: false
     })
-    axios.get(`${url.API}/ebis_getklproject/div/DBS/treg/ALL/witel/ALL/startdate/201801/enddate/201811/state/OGP/mitra/${item}`).then((res) => {
+    axios.get(`${url.API}/ebis_getdeliveryproject/div/DBS/treg/ALL/witel/ALL/startdate/201801/enddate/201811/cc/${item}`).then((res) => {
       this.setState({dataTampung:res.data, loaderTampilDetail:false });
     }).catch((err) => {
       this.setState({
@@ -92,7 +92,7 @@ class detailMonitorOgp extends Component{
       loaderTampilDetail:true,
       pressed: false
     })
-    axios.get(`${url.API}/ebis_getklproject/div/DGS/treg/ALL/witel/ALL/startdate/201801/enddate/201811/state/OGP/mitra/${item}`).then((res) => {
+    axios.get(`${url.API}/ebis_getdeliveryproject/div/DGS/treg/ALL/witel/ALL/startdate/201801/enddate/201811/cc/${item}`).then((res) => {
       this.setState({dataTampung:res.data, loaderTampilDetail:false });
     }).catch((err) => {
       this.setState({
@@ -108,7 +108,7 @@ class detailMonitorOgp extends Component{
       pressed: true,
       loaderTampilDetail: true
     })
-    axios.get(`${url.API}/ebis_getklproject/div/${level.level}/treg/ALL/witel/ALL/startdate/201801/enddate/201811/state/OGP/mitra/${level.mitra}/idproject/${level.id}`).then((res) => {
+    axios.get(`${url.API}/ebis_getdeliveryproject/div/${level.level}/treg/ALL/witel/ALL/startdate/201801/enddate/201811/idproject/${level.id}`).then((res) => {
       this.setState({ OgpData: res.data, loaderTampilDetail: false });
     }).catch((err) => {
       this.setState({
@@ -348,7 +348,7 @@ class detailMonitorOgp extends Component{
 
     const{
       //prospect
-      ebisProspectREVENUE,ebisProspectProject,dataMitra, EbisDetailOgp
+      ebisProspectREVENUE,ebisProspectProject,dataMitra, EbisDetailDone
     } = this.props;
 
     const {statusAll, statusSubs, statusMitra, statusTelkom, pressed} = this.state;
@@ -471,15 +471,15 @@ class detailMonitorOgp extends Component{
             {renderIf(!statusAll)(
               <View>
                 <FlatList
-                  data={EbisDetailOgp}
+                  data={EbisDetailDone}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModal(item.NAMA_MITRA)}> 
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModal(item.NAMACC)}> 
                       <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
                         <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
                       </View>
                       <View style={{width:wp('65%')}}>
-                        <Text>{item.NAMA_MITRA}</Text>
+                        <Text>{item.NAMACC}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
                         <Text style={{textAlign:'center'}}>{item.REVENUE}M</Text>                    
@@ -566,7 +566,7 @@ class detailMonitorOgp extends Component{
 
     const{
       //prospect
-      ebisProspectREVENUE2,ebisProspectProject2,dataMitra2, DesDetailOgp
+      ebisProspectREVENUE2,ebisProspectProject2,dataMitra2, DesDetailDone
     } = this.props;
 
     const {statusAll, statusSubs, statusMitra, statusTelkom, pressed} = this.state;
@@ -689,15 +689,15 @@ class detailMonitorOgp extends Component{
             {renderIf(!statusAll)(
               <View>
                 <FlatList
-                  data={DesDetailOgp}
+                  data={DesDetailDone}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModalDes(item.NAMA_MITRA)}> 
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModalDes(item.NAMACC)}> 
                       <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
                         <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
                       </View>
                       <View style={{width:wp('65%')}}>
-                        <Text>{item.NAMA_MITRA}</Text>
+                        <Text>{item.NAMACC}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
                         <Text style={{textAlign:'center'}}>{item.REVENUE}M</Text>                    
@@ -784,7 +784,7 @@ class detailMonitorOgp extends Component{
 
     const{
       //prospect
-      ebisProspectREVENUE3,ebisProspectProject3,dataMitra3, DbsDetailOgp
+      ebisProspectREVENUE3,ebisProspectProject3,dataMitra3, DbsDetailDone
     } = this.props;
 
     const {statusAll, statusSubs, statusMitra, statusTelkom, pressed} = this.state;
@@ -907,15 +907,15 @@ class detailMonitorOgp extends Component{
             {renderIf(!statusAll)(
               <View>
                 <FlatList
-                  data={DbsDetailOgp}
+                  data={DbsDetailDone}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModalDbs(item.NAMA_MITRA)}> 
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModalDbs(item.NAMACC)}> 
                       <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
                         <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
                       </View>
                       <View style={{width:wp('65%')}}>
-                        <Text>{item.NAMA_MITRA}</Text>
+                        <Text>{item.NAMACC}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
                         <Text style={{textAlign:'center'}}>{item.REVENUE}M</Text>                    
@@ -1002,7 +1002,7 @@ class detailMonitorOgp extends Component{
 
     const{
       //prospect
-      ebisProspectREVENUE4,ebisProspectProject4,dataMitra4, DgsDetailOgp
+      ebisProspectREVENUE4,ebisProspectProject4,dataMitra4, DgsDetailDone
     } = this.props;
 
     const {statusAll, statusSubs, statusMitra, statusTelkom, pressed} = this.state;
@@ -1125,15 +1125,15 @@ class detailMonitorOgp extends Component{
             {renderIf(!statusAll)(
               <View>
                 <FlatList
-                  data={DgsDetailOgp}
+                  data={DgsDetailDone}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModalDgs(item.NAMA_MITRA)}> 
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModalDgs(item.NAMACC)}> 
                       <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
                         <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
                       </View>
                       <View style={{width:wp('65%')}}>
-                        <Text>{item.NAMA_MITRA}</Text>
+                        <Text>{item.NAMACC}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
                         <Text style={{textAlign:'center'}}>{item.REVENUE}M</Text>                    
@@ -1202,7 +1202,7 @@ class detailMonitorOgp extends Component{
             </Button>
           </Left>
           <Body>
-            <Title style={{color:'#FFF'}}>Detail OGP KL</Title>
+            <Title style={{color:'#FFF'}}>Detail Delivery</Title>
           </Body>
           <Right/>
         </Header>
@@ -1255,14 +1255,14 @@ const mapStateToProps = (state) => ({
   dataMitra3:state.DbsDetailReducer.dataMitra,
   dataMitra4:state.DgsDetailReducer.dataMitra,
 
-  //detail ogp
-  EbisDetailOgp: state.MonitorEbisReducerKL.detailOgp,
-  DgsDetailOgp: state.MonitorDgsReducerKL.detailOgpDgs,
-  DbsDetailOgp: state.MonitorDbsReducerKL.detailOgpDbs,
-  DesDetailOgp: state.MonitorDesReducerKL.detailOgpDes
+  //detail done
+  EbisDetailDone: state.MonitorEbisReducerDev.detailDone,
+  DgsDetailDone: state.MonitorDgsReducerDev.detailDoneDgs,
+  DbsDetailDone: state.MonitorDbsReducerDev.detailDoneDbs,
+  DesDetailDone: state.MonitorDesReducerDev.detailDoneDes
 })
 
-export default connect(mapStateToProps)(detailMonitorOgp);
+export default connect(mapStateToProps)(detailMonitor);
 
 const styles = StyleSheet.create({
   container: {

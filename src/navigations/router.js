@@ -27,6 +27,11 @@ import MonitorKL from '../pages/dashboard/screens/homeScreens/screens/LOP/screen
 import DetailMonitorDoneKL from '../pages/dashboard/screens/homeScreens/screens/LOP/screens/monitorkl_screen/detailMonitor';
 import DetailMonitorOgpKL from '../pages/dashboard/screens/homeScreens/screens/LOP/screens/monitorkl_screen/detailMonitorOgp';
 
+//monitor-dev LOP
+import MonitorDev from '../pages/dashboard/screens/homeScreens/screens/LOP/screens/monitordev_screen/index.js';
+import DetailMonitorDoneDev from '../pages/dashboard/screens/homeScreens/screens/LOP/screens/monitordev_screen/detailMonitor';
+import DetailMonitorOgpDev from '../pages/dashboard/screens/homeScreens/screens/LOP/screens/monitordev_screen/detailMonitorOgp';
+
 const noTransitionConfig = () => ({
   transitionSpec: {
     duration: 0,
@@ -96,6 +101,24 @@ const navigator = StackNavigator({
   },
   DetailMonitorOgpKL: {
     screen: DetailMonitorOgpKL,
+    navigationOptions: {
+      header: null
+    }
+  },
+  MonitorDev: {
+    screen: MonitorDev,
+    navigationOptions: {
+      header: null
+    }
+  },
+  DetailMonitorDoneDev: {
+    screen: DetailMonitorDoneDev,
+    navigationOptions: {
+      header: null
+    }
+  },
+  DetailMonitorOgpDev: {
+    screen: DetailMonitorOgpDev,
     navigationOptions: {
       header: null
     }
