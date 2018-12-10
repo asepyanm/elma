@@ -13,7 +13,6 @@ import {
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import {Header, Icon, Left, Right, Body, Button, Title, Tab, Tabs, Content, Container} from 'native-base';
 import {connect} from 'react-redux';
-import Modal from "react-native-modal";
 import axios from 'axios';
 
 //global
@@ -23,8 +22,14 @@ import url from '../../../../../../../../config/api_service';
 class EbisDetailScreens extends Component{
   constructor(props){
     super(props);
+    const { params } = this.props.navigation.state;
     this.state = {
-      //data status
+      //data date
+      date1:params.date1,
+      date2:params.date2,
+      
+      dataDivisi:'',
+      dataMitraDetail:'',
 
       //modal
       visibleModal:false,
@@ -40,143 +45,92 @@ class EbisDetailScreens extends Component{
   }
 
   componentWillMount(){
+    const {date1, date2} = this.state;
+
     //get data ALL
     this.props.dispatch({
       type:'DETAIL_PROSPECT_EBIS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/EBIS/maindiv/DES/mainseg/ALL/start_date/2018001/end_date/201811`)
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/EBIS/maindiv/DES/mainseg/ALL/start_date/${date1}/end_date/${date2}`)
     });
     this.props.dispatch({
       type:'DETAIL_PROSPECT_DES',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/DES/maindiv/DES/mainseg/ALL/start_date/2018001/end_date/201811`)
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/DES/maindiv/DES/mainseg/ALL/start_date/${date1}/end_date/${date2}`)
     });
     this.props.dispatch({
       type:'DETAIL_PROSPECT_DBS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/DBS/maindiv/DBS/mainseg/ALL/start_date/2018001/end_date/201811`)
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/DBS/maindiv/DBS/mainseg/ALL/start_date/${date1}/end_date/${date2}`)
     });
     this.props.dispatch({
       type:'DETAIL_PROSPECT_DGS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/DGS/maindiv/DGS/mainseg/ALL/start_date/2018001/end_date/201811`)
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/DGS/maindiv/DGS/mainseg/ALL/start_date/${date1}/end_date/${date2}`)
     });
 
     //get data detail SUBS
     this.props.dispatch({
       type:'DETAIL_SUBS_PROSPECT_EBIS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/EBIS/maindiv/DES/mainseg/ALL/start_date/2018001/end_date/201807/mitra/CFU`)
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/EBIS/maindiv/DES/mainseg/ALL/start_date/${date1}/end_date/${date2}/mitra/CFU`)
     });
     this.props.dispatch({
       type:'DETAIL_SUBS_PROSPECT_DES',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/DES/maindiv/DES/mainseg/ALL/start_date/2018001/end_date/201807/mitra/CFU`)
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/DES/maindiv/DES/mainseg/ALL/start_date/${date1}/end_date/${date2}/mitra/CFU`)
     });
     this.props.dispatch({
       type:'DETAIL_SUBS_PROSPECT_DBS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/DBS/maindiv/DBS/mainseg/ALL/start_date/2018001/end_date/201807/mitra/CFU`)
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/DBS/maindiv/DBS/mainseg/ALL/start_date/${date1}/end_date/${date2}/mitra/CFU`)
     });
     this.props.dispatch({
       type:'DETAIL_SUBS_PROSPECT_DGS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/DGS/maindiv/DGS/mainseg/ALL/start_date/2018001/end_date/201807/mitra/CFU`)
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/DGS/maindiv/DGS/mainseg/ALL/start_date/${date1}/end_date/${date2}/mitra/CFU`)
     });
 
     //get data detail MITRA
     this.props.dispatch({
       type:'DETAIL_MITRA_PROSPECT_EBIS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/EBIS/maindiv/DES/mainseg/ALL/start_date/2018001/end_date/201807/mitra/MITRA`)
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/EBIS/maindiv/DES/mainseg/ALL/start_date/${date1}/end_date/${date2}/mitra/MITRA`)
     });
     this.props.dispatch({
       type:'DETAIL_MITRA_PROSPECT_DES',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/DES/maindiv/DES/mainseg/ALL/start_date/2018001/end_date/201807/mitra/MITRA`)
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/DES/maindiv/DES/mainseg/ALL/start_date/${date1}/end_date/${date2}/mitra/MITRA`)
     });
     this.props.dispatch({
       type:'DETAIL_MITRA_PROSPECT_DBS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/DBS/maindiv/DBS/mainseg/ALL/start_date/2018001/end_date/201807/mitra/MITRA`)
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/DBS/maindiv/DBS/mainseg/ALL/start_date/${date1}/end_date/${date2}/mitra/MITRA`)
     });
     this.props.dispatch({
       type:'DETAIL_MITRA_PROSPECT_DGS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/DGS/maindiv/DGS/mainseg/ALL/start_date/2018001/end_date/201807/mitra/MITRA`)
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/DGS/maindiv/DGS/mainseg/ALL/start_date/${date1}/end_date/${date2}/mitra/MITRA`)
     });
     
     //get data detail TELKOM
     this.props.dispatch({
       type:'DETAIL_TELKOM_PROSPECT_EBIS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/EBIS/maindiv/DES/mainseg/ALL/start_date/2018001/end_date/201807/mitra/TELKOM`)
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/EBIS/maindiv/DES/mainseg/ALL/start_date/${date1}/end_date/${date2}/mitra/TELKOM`)
     });
     this.props.dispatch({
       type:'DETAIL_TELKOM_PROSPECT_DES',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/DES/maindiv/DES/mainseg/ALL/start_date/2018001/end_date/201807/mitra/TELKOM`)
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/DES/maindiv/DES/mainseg/ALL/start_date/${date1}/end_date/${date2}/mitra/TELKOM`)
     });
     this.props.dispatch({
       type:'DETAIL_TELKOM_PROSPECT_DBS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/DBS/maindiv/DBS/mainseg/ALL/start_date/2018001/end_date/201807/mitra/TELKOM`)
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/DBS/maindiv/DBS/mainseg/ALL/start_date/${date1}/end_date/${date2}/mitra/TELKOM`)
     });
     this.props.dispatch({
       type:'DETAIL_TELKOM_PROSPECT_DGS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/DGS/maindiv/DGS/mainseg/ALL/start_date/2018001/end_date/201807/mitra/TELKOM`)
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/PROSPECT/div/DGS/maindiv/DGS/mainseg/ALL/start_date/${date1}/end_date/${date2}/mitra/TELKOM`)
     });
   }
 
-  //pop up and detail button ALL
-  _toggleModal(item){
-    this.setState({
-      visibleModal: !this.state.visibleModal,
-      loaderTampilDetail:true
-    })
-    axios.get(`${url.API}/ebis_getstage5/stage/PROSPECT/div/DES/maindiv/EBIS/mainseg/ALL/nmitra/${item}/start_date/201801/end_date/201811`).then((res) => {
-      this.setState({dataTampung:res.data, loaderTampilDetail:false });
-    }).catch((err) => {
-      this.setState({
-        loaderTampilDetail:false
-      })
-      alert(err)
+  //fungsi pindah page untuk detail level 2
+  renderMovePage(item, dataDivisi, dataKategoriMitra){
+    this.props.navigation.navigate('EbisDetailLevel2',{
+      dataMitraDetail:`${item}`,
+      dataDivisi:`${dataDivisi}`,
+      dataKategoriMitra:`${dataKategoriMitra}`,
+      date1:`${this.state.date1}`,
+      date2:`${this.state.date2}`,
     })
   }
-  renderModalContent(){
-    const {dataTampung, loaderTampilDetail} = this.state;
-    return(
-      <View style={styles.modalContent}>
-        {
-        loaderTampilDetail 
-          ?
-        <ActivityIndicator size={'large'} color={'#000'} style={{margin:hp('5%')}}/>
-          :
-        <View style={{width:wp('85%')}}>
-          <FlatList
-            data={dataTampung}
-            ListHeaderComponent={() => (
-              <View style={styles.wrapperHeaderContent}>
-                <View style={{width:wp('35%')}}>
-                  <Text style={{textAlign:'center', color:'#FFF', fontSize:12}}>Nama CC</Text>
-                </View>
-                <View style={{width:wp('35%')}}>
-                  <Text style={{textAlign:'center', color:'#FFF', fontSize:12}}>Nama Project</Text>
-                </View>
-                <View style={{width:wp('10%'), alignItems:'center', justifyContent:'center'}}>
-                  <Text style={{textAlign:'center', color:'#FFF', fontSize:12}}>Nilai</Text>
-                </View>
-              </View>
-            )}
-            keyExtractor={(item, index) => index.toString()}
-            renderItem={({ item }) => (
-              <View style={styles.containerDetailData}> 
-                <View style={{width:wp('35%'), alignSelf:'center', justifyContent:'center'}}>
-                  <Text style={{fontSize:10}}>{item.stage_06}</Text>
-                </View>
-                <View style={{width:wp('35%'), alignSelf:'center', justifyContent:'center'}}>
-                  <Text style={{fontSize:10}}>{item.stage_07}</Text>
-                </View>
-                <View style={{width:wp('10%'), alignSelf:'center', justifyContent:'center', alignItems:'center'}}>
-                  <Text style={{textAlign:'center', fontSize:10}}>{parseFloat(item.stage_10)}M</Text>                    
-                </View>
-              </View>
-            )}
-            style={{height:hp('80%'), marginBottom:hp('2%')}}
-          />
-          <TouchableOpacity onPress={() => this.setState({ visibleModal: !this.state.visibleModal})} style={{height:hp('5%'),backgroundColor:'#e74c3c', width:wp('85%'), justifyContent:'center', alignItems:'center', padding:hp('1%'), borderRadius:5, marginBottom:hp('2%')}}>
-            <Text style={{color:'#FFF'}}>Tutup</Text>
-          </TouchableOpacity>
-        </View>
-        }
-      </View>
-    )
-  };
+
   buttonAll(){
     if(this.state.statusAll === false){
       this.setState({
@@ -192,9 +146,6 @@ class EbisDetailScreens extends Component{
     }  
   }
 
-  _toggleModalSubs(item){
-    null
-  }
   buttonSubs(){
     if(this.state.statusSubs === false){
       this.setState({
@@ -291,92 +242,92 @@ class EbisDetailScreens extends Component{
     return(
       <View style={{backgroundColor:'#FFF', flex:1}}>
         <View style={styles.wrapperArrow}>
-        <Image 
-          source={images.prospect.arrowProspect1}
-          style={styles.imageStyle}
-          resizeMode={'stretch'}
-        />
+          <Image 
+            source={images.prospect.arrowProspect1}
+            style={styles.imageStyle}
+            resizeMode={'stretch'}
+          />
 
-        <View style={styles.containerArrowProspect}>
-          <Text style={styles.textJudul}>PROSPECT</Text>
-          <Text style={styles.textIsi}>{ebisProspectREVENUE}M</Text>
-          <Text style={styles.textKeterangan}>per {ebisProspectProject} Project</Text>
+          <View style={styles.containerArrowProspect}>
+            <Text style={styles.textJudul}>PROSPECT</Text>
+            <Text style={styles.textIsi}>{ebisProspectREVENUE}M</Text>
+            <Text style={styles.textKeterangan}>per {ebisProspectProject} Project</Text>
+          </View>
+
+          <Image 
+            source={images.prospect.arrowProspect2}
+            style={styles.imageStyle}
+            resizeMode={'stretch'}
+          />
+
+          <TouchableOpacity onPress={() => this.buttonAll()} style={styles.containerArrowProspect2}>
+            { statusAll === false 
+                ?
+              <Image 
+                source={images.allImage.allAktif}
+                style={styles.imageContent}
+                resizeMode={'stretch'}
+              />
+                :
+              <Image 
+                source={images.allImage.allNon}
+                style={styles.imageContent}
+                resizeMode={'stretch'}
+              />
+            }
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={() => this.buttonSubs()} style={styles.containerArrowProspect2}>
+            { statusSubs === false 
+                ?
+              <Image 
+                source={images.subsImage.subsAktif}
+                style={styles.imageContent}
+                resizeMode={'stretch'}
+              />
+                :
+              <Image 
+                source={images.subsImage.subsNon}
+                style={styles.imageContent}
+                resizeMode={'stretch'}
+              />
+            }
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={() => this.buttonMitra()} style={styles.containerArrowProspect2}>
+            { statusMitra === false
+                ?
+              <Image 
+                source={images.mitraImage.mitraAktif}
+                style={styles.imageContent}
+                resizeMode={'stretch'}
+              />
+                :
+              <Image 
+                source={images.mitraImage.mitraNon}
+                style={styles.imageContent}
+                resizeMode={'stretch'}
+              />
+            }
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={() => this.buttonTelkom()} style={styles.containerArrowProspect2}>
+            { statusTelkom === false 
+                ?
+              <Image 
+                source={images.telkomImage.telkomAktif}
+                style={styles.imageContent}
+                resizeMode={'stretch'}
+              />
+                :
+              <Image 
+                source={images.telkomImage.telkomNon}
+                style={styles.imageContent}
+                resizeMode={'stretch'}
+              />
+            }
+          </TouchableOpacity>
         </View>
-
-        <Image 
-          source={images.prospect.arrowProspect2}
-          style={styles.imageStyle}
-          resizeMode={'stretch'}
-        />
-
-        <TouchableOpacity onPress={() => this.buttonAll()} style={styles.containerArrowProspect2}>
-          { statusAll === false 
-              ?
-            <Image 
-              source={images.allImage.allAktif}
-              style={styles.imageContent}
-              resizeMode={'stretch'}
-            />
-              :
-            <Image 
-              source={images.allImage.allNon}
-              style={styles.imageContent}
-              resizeMode={'stretch'}
-            />
-          }
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={() => this.buttonSubs()} style={styles.containerArrowProspect2}>
-          { statusSubs === false 
-              ?
-            <Image 
-              source={images.subsImage.subsAktif}
-              style={styles.imageContent}
-              resizeMode={'stretch'}
-            />
-              :
-            <Image 
-              source={images.subsImage.subsNon}
-              style={styles.imageContent}
-              resizeMode={'stretch'}
-            />
-          }
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={() => this.buttonMitra()} style={styles.containerArrowProspect2}>
-          { statusMitra === false
-              ?
-            <Image 
-              source={images.mitraImage.mitraAktif}
-              style={styles.imageContent}
-              resizeMode={'stretch'}
-            />
-              :
-            <Image 
-              source={images.mitraImage.mitraNon}
-              style={styles.imageContent}
-              resizeMode={'stretch'}
-            />
-          }
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={() => this.buttonTelkom()} style={styles.containerArrowProspect2}>
-          { statusTelkom === false 
-              ?
-            <Image 
-              source={images.telkomImage.telkomAktif}
-              style={styles.imageContent}
-              resizeMode={'stretch'}
-            />
-              :
-            <Image 
-              source={images.telkomImage.telkomNon}
-              style={styles.imageContent}
-              resizeMode={'stretch'}
-            />
-          }
-        </TouchableOpacity>
-      </View>
         
         <View style={styles.wrapperHeaderContent}>
           <View style={{width:wp('70%')}}>
@@ -409,7 +360,7 @@ class EbisDetailScreens extends Component{
                   data={dataAll}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModal(item.MITRA)}> 
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this.renderMovePage(item.MITRA, dataDivisi='EBIS', dataKategoriMitra='ALL')}> 
                       <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
                         <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
                       </View>
@@ -422,11 +373,6 @@ class EbisDetailScreens extends Component{
                     </TouchableOpacity>
                   )}
                 />
-                <Modal 
-                  isVisible={this.state.visibleModal === true}
-                  onBackdropPress={() => this.setState({ visibleModal: false })}>
-                  {this.renderModalContent()}
-                </Modal>
               </View>
             )}
 
@@ -436,7 +382,7 @@ class EbisDetailScreens extends Component{
                   data={dataSubs}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModalSubs(item.MITRA)}> 
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this.renderMovePage(item.MITRA, dataDivisi='EBIS', dataKategoriMitra='CFU')}> 
                       <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
                         <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
                       </View>
@@ -449,11 +395,6 @@ class EbisDetailScreens extends Component{
                     </TouchableOpacity>
                   )}
                 />
-                {/* <Modal 
-                  isVisible={this.state.visibleModal === true}
-                  onBackdropPress={() => this.setState({ visibleModal: false })}>
-                  {this.renderModalContentSubs()}
-                </Modal> */}
               </View>
             )}
 
@@ -463,7 +404,7 @@ class EbisDetailScreens extends Component{
                   data={dataMitra}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModalSubs(item.MITRA)}> 
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this.renderMovePage(item.MITRA, dataDivisi='EBIS', dataKategoriMitra='MITRA')}> 
                       <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
                         <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
                       </View>
@@ -476,11 +417,6 @@ class EbisDetailScreens extends Component{
                     </TouchableOpacity>
                   )}
                 />
-                {/* <Modal 
-                  isVisible={this.state.visibleModal === true}
-                  onBackdropPress={() => this.setState({ visibleModal: false })}>
-                  {this.renderModalContentSubs()}
-                </Modal> */}
               </View>
             )}
 
@@ -490,7 +426,7 @@ class EbisDetailScreens extends Component{
                   data={dataTelkom}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModalSubs(item.MITRA)}> 
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this.renderMovePage(item.MITRA, dataDivisi='EBIS', dataKategoriMitra='TELKOM')}> 
                       <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
                         <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
                       </View>
@@ -503,11 +439,6 @@ class EbisDetailScreens extends Component{
                     </TouchableOpacity>
                   )}
                 />
-                {/* <Modal 
-                  isVisible={this.state.visibleModal === true}
-                  onBackdropPress={() => this.setState({ visibleModal: false })}>
-                  {this.renderModalContentSubs()}
-                </Modal> */}
               </View>
             )}
           </Content>
@@ -683,7 +614,7 @@ class EbisDetailScreens extends Component{
                   data={dataAll2}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModal(item.MITRA)}> 
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this.renderMovePage(item.MITRA, dataDivisi='DES', dataKategoriMitra='ALL')}> 
                       <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
                         <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
                       </View>
@@ -696,11 +627,6 @@ class EbisDetailScreens extends Component{
                     </TouchableOpacity>
                   )}
                 />
-                <Modal 
-                  isVisible={this.state.visibleModal === true}
-                  onBackdropPress={() => this.setState({ visibleModal: false })}>
-                  {this.renderModalContent()}
-                </Modal>
               </View>
             )}
 
@@ -710,7 +636,7 @@ class EbisDetailScreens extends Component{
                   data={dataSubs2}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModalSubs(item.MITRA)}> 
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this.renderMovePage(item.MITRA, dataDivisi='DES', dataKategoriMitra='CFU')}> 
                       <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
                         <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
                       </View>
@@ -737,7 +663,7 @@ class EbisDetailScreens extends Component{
                 data={dataMitra2}
                 keyExtractor={(item, index) => index.toString()}
                 renderItem={({ item }) => (
-                  <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModalSubs(item.MITRA)}> 
+                  <TouchableOpacity style={styles.containerDetailData} onPress={() => this.renderMovePage(item.MITRA, dataDivisi='DES', dataKategoriMitra='MITRA')}> 
                     <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
                       <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
                     </View>
@@ -764,7 +690,7 @@ class EbisDetailScreens extends Component{
                 data={dataTelkom2}
                 keyExtractor={(item, index) => index.toString()}
                 renderItem={({ item }) => (
-                  <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModalSubs(item.MITRA)}> 
+                  <TouchableOpacity style={styles.containerDetailData} onPress={() => this.renderMovePage(item.MITRA, dataDivisi='DES', dataKategoriMitra='TELKOM')}> 
                     <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
                       <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
                     </View>
@@ -957,7 +883,7 @@ class EbisDetailScreens extends Component{
                   data={dataAll3}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModal(item.MITRA)}> 
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this.renderMovePage(item.MITRA, dataDivisi='DBS', dataKategoriMitra='ALL')}> 
                       <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
                         <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
                       </View>
@@ -970,11 +896,6 @@ class EbisDetailScreens extends Component{
                     </TouchableOpacity>
                   )}
                 />
-                <Modal 
-                  isVisible={this.state.visibleModal === true}
-                  onBackdropPress={() => this.setState({ visibleModal: false })}>
-                  {this.renderModalContent()}
-                </Modal>
               </View>
             )}
 
@@ -984,7 +905,7 @@ class EbisDetailScreens extends Component{
                   data={dataSubs3}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModalSubs(item.MITRA)}> 
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this.renderMovePage(item.MITRA, dataDivisi='DBS', dataKategoriMitra='CFU')}> 
                       <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
                         <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
                       </View>
@@ -997,11 +918,6 @@ class EbisDetailScreens extends Component{
                     </TouchableOpacity>
                   )}
                 />
-                {/* <Modal 
-                  isVisible={this.state.visibleModal === true}
-                  onBackdropPress={() => this.setState({ visibleModal: false })}>
-                  {this.renderModalContentSubs()}
-                </Modal> */}
               </View>
             )}
 
@@ -1011,7 +927,7 @@ class EbisDetailScreens extends Component{
                   data={dataMitra3}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModalSubs(item.MITRA)}> 
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this.renderMovePage(item.MITRA, dataDivisi='DBS', dataKategoriMitra='MITRA')}> 
                       <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
                         <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
                       </View>
@@ -1024,11 +940,6 @@ class EbisDetailScreens extends Component{
                     </TouchableOpacity>
                   )}
                 />
-                {/* <Modal 
-                  isVisible={this.state.visibleModal === true}
-                  onBackdropPress={() => this.setState({ visibleModal: false })}>
-                  {this.renderModalContentSubs()}
-                </Modal> */}
               </View>
             )}
 
@@ -1038,7 +949,7 @@ class EbisDetailScreens extends Component{
                   data={dataTelkom3}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModalSubs(item.MITRA)}> 
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this.renderMovePage(item.MITRA, dataDivisi='DBS', dataKategoriMitra='TELKOM')}> 
                       <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
                         <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
                       </View>
@@ -1051,11 +962,6 @@ class EbisDetailScreens extends Component{
                     </TouchableOpacity>
                   )}
                 />
-                {/* <Modal 
-                  isVisible={this.state.visibleModal === true}
-                  onBackdropPress={() => this.setState({ visibleModal: false })}>
-                  {this.renderModalContentSubs()}
-                </Modal> */}
               </View>
             )}
           </Content>
@@ -1231,7 +1137,7 @@ class EbisDetailScreens extends Component{
                   data={dataAll4}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModal(item.MITRA)}> 
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this.renderMovePage(item.MITRA, dataDivisi='DGS', dataKategoriMitra='ALL')}> 
                       <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
                         <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
                       </View>
@@ -1244,11 +1150,6 @@ class EbisDetailScreens extends Component{
                     </TouchableOpacity>
                   )}
                 />
-                <Modal 
-                  isVisible={this.state.visibleModal === true}
-                  onBackdropPress={() => this.setState({ visibleModal: false })}>
-                  {this.renderModalContent()}
-                </Modal>
               </View>
             )}
 
@@ -1258,7 +1159,7 @@ class EbisDetailScreens extends Component{
                   data={dataSubs4}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModalSubs(item.MITRA)}> 
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this.renderMovePage(item.MITRA, dataDivisi='DGS', dataKategoriMitra='CFU')}> 
                       <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
                         <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
                       </View>
@@ -1271,11 +1172,6 @@ class EbisDetailScreens extends Component{
                     </TouchableOpacity>
                   )}
                 />
-                {/* <Modal 
-                  isVisible={this.state.visibleModal === true}
-                  onBackdropPress={() => this.setState({ visibleModal: false })}>
-                  {this.renderModalContentSubs()}
-                </Modal> */}
               </View>
             )}
 
@@ -1285,7 +1181,7 @@ class EbisDetailScreens extends Component{
                   data={dataMitra4}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModalSubs(item.MITRA)}> 
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this.renderMovePage(item.MITRA, dataDivisi='DGS', dataKategoriMitra='MITRA')}> 
                       <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
                         <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
                       </View>
@@ -1298,11 +1194,6 @@ class EbisDetailScreens extends Component{
                     </TouchableOpacity>
                   )}
                 />
-                {/* <Modal 
-                  isVisible={this.state.visibleModal === true}
-                  onBackdropPress={() => this.setState({ visibleModal: false })}>
-                  {this.renderModalContentSubs()}
-                </Modal> */}
               </View>
             )}
 
@@ -1312,7 +1203,7 @@ class EbisDetailScreens extends Component{
                   data={dataTelkom4}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModalSubs(item.MITRA)}> 
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this.renderMovePage(item.MITRA, dataDivisi='DGS', dataKategoriMitra='TELKOM')}> 
                       <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
                         <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
                       </View>
@@ -1325,11 +1216,6 @@ class EbisDetailScreens extends Component{
                     </TouchableOpacity>
                   )}
                 />
-                {/* <Modal 
-                  isVisible={this.state.visibleModal === true}
-                  onBackdropPress={() => this.setState({ visibleModal: false })}>
-                  {this.renderModalContentSubs()}
-                </Modal> */}
               </View>
             )}
           </Content>
@@ -1430,6 +1316,7 @@ const mapStateToProps = (state) => ({
   dataTelkom2:state.DesDetailReducer.dataTelkom,
   dataTelkom3:state.DbsDetailReducer.dataTelkom,
   dataTelkom4:state.DgsDetailReducer.dataTelkom,
+
 })
 
 export default connect(mapStateToProps)(EbisDetailScreens);

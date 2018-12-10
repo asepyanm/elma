@@ -24,6 +24,9 @@ const initialState = {
   dataSubs4:'',
   dataMitra4:'',
   dataTelkom4:'',
+
+  //data detail
+  dataDetailLevel3:'',
 };
 
 const EbisDetailReducer = (state = initialState, action) => {
@@ -361,6 +364,28 @@ const EbisDetailReducer = (state = initialState, action) => {
         }
       break;
     //----------------------------billcom
+
+    //----------------------------detail level 3
+    case 'DETAIL_LEVEL_3_REJECTED':
+      return{
+        ...state, 
+        loaderStatus:false
+      }
+    break;
+    case 'DETAIL_LEVEL_3_PENDING':
+      return{
+        ...state, 
+        loaderStatus:true
+      }
+    break;
+    case 'DETAIL_LEVEL_3_FULFILLED':
+      return{
+        ...state, 
+        loaderStatus:false,
+        //Current status
+        dataDetailLevel3:action.payload.data,
+      }
+    break;
 
     
     default:
