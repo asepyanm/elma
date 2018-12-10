@@ -15,7 +15,7 @@ import {Header, Icon, Left, Right, Body, Button, Title, Tab, Tabs, Content, Cont
 import {connect} from 'react-redux';
 import Modal from "react-native-modal";
 import axios from 'axios';
-import Accordion from 'react-native-collapsible/Accordion';
+import Collapsible from 'react-native-collapsible';
 
 //global
 import renderIf from '../../../../../../../components/renderIf';
@@ -29,6 +29,9 @@ class EbisDetailScreens extends Component{
       //data date
       date1:params.date1,
       date2:params.date2,
+      
+      dataDivisi:'',
+      dataMitraDetail:'',
 
       //modal
       visibleModal:false,
@@ -40,6 +43,9 @@ class EbisDetailScreens extends Component{
       statusSubs:true,
       statusMitra:true,
       statusTelkom:true,
+
+      collapsed:true,
+      activeIndex:0
     }
   }
 
@@ -121,24 +127,43 @@ class EbisDetailScreens extends Component{
 
   //pop up and detail button ALL
   _toggleModal(item, dataDivisi){
-    const {date1, date2} = this.state;
-
-    this.setState({
-      visibleModal: !this.state.visibleModal,
-      loaderTampilDetail:true
-    })
+    // this.setState({
+    //   visibleModal: !this.state.visibleModal,
+    //   loaderTampilDetail:true,
+    //   dataDivisi:dataDivisi,
+    //   dataMitraDetail:item,
+    // })
     
-    axios.get(`${url.API}/ebis_getstage5/stage/PROSPECT/div/${dataDivisi}/maindiv/${dataDivisi}/mainseg/ALL/nmitra/${item}/start_date/${date1}/end_date/${date2}`).then((res) => {
-      this.setState({dataTampung:res.data, loaderTampilDetail:false });
-    }).catch((err) => {
-      this.setState({
-        loaderTampilDetail:false
-      })
-      alert(err)
+    // axios.get(`${url.API}/ebis_getstage5/stage/PROSPECT/div/${dataDivisi}/maindiv/${dataDivisi}/mainseg/ALL/nmitra/${item}`).then((res) => {
+    //   this.setState({dataTampung:res.data, loaderTampilDetail:false });
+    // }).catch((err) => {
+    //   this.setState({
+    //     loaderTampilDetail:false
+    //   })
+    //   alert(err)
+    // })
+
+    this.props.navigation.navigate('EbisDetailLevel2', {
+      dataDivisi:`${dataDivisi}`, 
+      dataMitraDetail:`${item}`,
+      date1:`${this.state.date1}`,
+      date2:`${this.state.date2}`,
+
     })
   }
+  openDetailEbis = (item, index) => {
+    const {date1, date2, dataDivisi, dataMitraDetail} = this.state;
+
+    this.props.dispatch({
+      type:'DETAIL_LEVEL_3',
+      payload:axios.get(`${url.API}/ebis_getstage5/stage/PROSPECT/div/${dataDivisi}/maindiv/${dataDivisi}/mitra/CFU/nmitra/${dataMitraDetail}/mainseg/ALL/start_date/${date1}/end_date/${date2}/cc/${item.stage_06}`)
+    });
+    this.setState({ collapsed: !this.state.collapsed, activeIndex: index });
+  };
   renderModalContent(){
-    const {dataTampung, loaderTampilDetail} = this.state;
+    const {dataTampung, loaderTampilDetail, activeIndex, collapsed} = this.state;
+    const {dataDetailLevel3, loaderStatus} = this.props;
+
     return(
       <View style={styles.modalContent}>
         {
@@ -163,17 +188,39 @@ class EbisDetailScreens extends Component{
               </View>
             )}
             keyExtractor={(item, index) => index.toString()}
-            renderItem={({ item }) => (
-              <View style={styles.containerDetailData}> 
-                <View style={{width:wp('35%'), alignSelf:'center', justifyContent:'center'}}>
-                  <Text style={{fontSize:10}}>{item.stage_06}</Text>
-                </View>
-                <View style={{width:wp('35%'), alignSelf:'center', justifyContent:'center'}}>
-                  <Text style={{fontSize:10}}>{item.stage_07}</Text>
-                </View>
-                <View style={{width:wp('10%'), alignSelf:'center', justifyContent:'center', alignItems:'center'}}>
-                  <Text style={{textAlign:'center', fontSize:10}}>{parseFloat(item.stage_10)}M</Text>                    
-                </View>
+            renderItem={({ item, index }) => (
+              <View>
+                <TouchableOpacity onPress={() => this.openDetailEbis(item, index)}>
+                  <View style={styles.containerDetailData}> 
+                    <View style={{width:wp('35%'), alignSelf:'center', justifyContent:'center'}}>
+                      <Text style={{fontSize:10}}>{item.stage_06}</Text>
+                    </View>
+                    <View style={{width:wp('35%'), alignSelf:'center', justifyContent:'center'}}>
+                      <Text style={{fontSize:10}}>{item.stage_07}</Text>
+                    </View>
+                    <View style={{width:wp('10%'), alignSelf:'center', justifyContent:'center', alignItems:'center'}}>
+                      <Text style={{textAlign:'center', fontSize:10}}>{parseFloat(item.stage_10)}M</Text>                    
+                    </View>
+                  </View>
+                </TouchableOpacity>
+
+                <Collapsible collapsed={activeIndex === index ? collapsed : true} align="center">
+                  {
+                    loaderStatus
+                      ?
+                    <ActivityIndicator size='small' style={{justifyContent:'center', alignItems:'center'}}/>
+                      :
+                    <FlatList 
+                      data={dataDetailLevel3}
+                      keyExtractor={(item, index) => index.toString()}
+                      renderItem={({ item }) => (
+                        <View>
+                          <Text>{item.stage_06}</Text>
+                        </View>  
+                      )}
+                    />
+                  }
+                </Collapsible>
               </View>
             )}
             style={{height:hp('80%'), marginBottom:hp('2%')}}
@@ -300,92 +347,92 @@ class EbisDetailScreens extends Component{
     return(
       <View style={{backgroundColor:'#FFF', flex:1}}>
         <View style={styles.wrapperArrow}>
-        <Image 
-          source={images.prospect.arrowProspect1}
-          style={styles.imageStyle}
-          resizeMode={'stretch'}
-        />
+          <Image 
+            source={images.prospect.arrowProspect1}
+            style={styles.imageStyle}
+            resizeMode={'stretch'}
+          />
 
-        <View style={styles.containerArrowProspect}>
-          <Text style={styles.textJudul}>PROSPECT</Text>
-          <Text style={styles.textIsi}>{ebisProspectREVENUE}M</Text>
-          <Text style={styles.textKeterangan}>per {ebisProspectProject} Project</Text>
+          <View style={styles.containerArrowProspect}>
+            <Text style={styles.textJudul}>PROSPECT</Text>
+            <Text style={styles.textIsi}>{ebisProspectREVENUE}M</Text>
+            <Text style={styles.textKeterangan}>per {ebisProspectProject} Project</Text>
+          </View>
+
+          <Image 
+            source={images.prospect.arrowProspect2}
+            style={styles.imageStyle}
+            resizeMode={'stretch'}
+          />
+
+          <TouchableOpacity onPress={() => this.buttonAll()} style={styles.containerArrowProspect2}>
+            { statusAll === false 
+                ?
+              <Image 
+                source={images.allImage.allAktif}
+                style={styles.imageContent}
+                resizeMode={'stretch'}
+              />
+                :
+              <Image 
+                source={images.allImage.allNon}
+                style={styles.imageContent}
+                resizeMode={'stretch'}
+              />
+            }
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={() => this.buttonSubs()} style={styles.containerArrowProspect2}>
+            { statusSubs === false 
+                ?
+              <Image 
+                source={images.subsImage.subsAktif}
+                style={styles.imageContent}
+                resizeMode={'stretch'}
+              />
+                :
+              <Image 
+                source={images.subsImage.subsNon}
+                style={styles.imageContent}
+                resizeMode={'stretch'}
+              />
+            }
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={() => this.buttonMitra()} style={styles.containerArrowProspect2}>
+            { statusMitra === false
+                ?
+              <Image 
+                source={images.mitraImage.mitraAktif}
+                style={styles.imageContent}
+                resizeMode={'stretch'}
+              />
+                :
+              <Image 
+                source={images.mitraImage.mitraNon}
+                style={styles.imageContent}
+                resizeMode={'stretch'}
+              />
+            }
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={() => this.buttonTelkom()} style={styles.containerArrowProspect2}>
+            { statusTelkom === false 
+                ?
+              <Image 
+                source={images.telkomImage.telkomAktif}
+                style={styles.imageContent}
+                resizeMode={'stretch'}
+              />
+                :
+              <Image 
+                source={images.telkomImage.telkomNon}
+                style={styles.imageContent}
+                resizeMode={'stretch'}
+              />
+            }
+          </TouchableOpacity>
         </View>
-
-        <Image 
-          source={images.prospect.arrowProspect2}
-          style={styles.imageStyle}
-          resizeMode={'stretch'}
-        />
-
-        <TouchableOpacity onPress={() => this.buttonAll()} style={styles.containerArrowProspect2}>
-          { statusAll === false 
-              ?
-            <Image 
-              source={images.allImage.allAktif}
-              style={styles.imageContent}
-              resizeMode={'stretch'}
-            />
-              :
-            <Image 
-              source={images.allImage.allNon}
-              style={styles.imageContent}
-              resizeMode={'stretch'}
-            />
-          }
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={() => this.buttonSubs()} style={styles.containerArrowProspect2}>
-          { statusSubs === false 
-              ?
-            <Image 
-              source={images.subsImage.subsAktif}
-              style={styles.imageContent}
-              resizeMode={'stretch'}
-            />
-              :
-            <Image 
-              source={images.subsImage.subsNon}
-              style={styles.imageContent}
-              resizeMode={'stretch'}
-            />
-          }
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={() => this.buttonMitra()} style={styles.containerArrowProspect2}>
-          { statusMitra === false
-              ?
-            <Image 
-              source={images.mitraImage.mitraAktif}
-              style={styles.imageContent}
-              resizeMode={'stretch'}
-            />
-              :
-            <Image 
-              source={images.mitraImage.mitraNon}
-              style={styles.imageContent}
-              resizeMode={'stretch'}
-            />
-          }
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={() => this.buttonTelkom()} style={styles.containerArrowProspect2}>
-          { statusTelkom === false 
-              ?
-            <Image 
-              source={images.telkomImage.telkomAktif}
-              style={styles.imageContent}
-              resizeMode={'stretch'}
-            />
-              :
-            <Image 
-              source={images.telkomImage.telkomNon}
-              style={styles.imageContent}
-              resizeMode={'stretch'}
-            />
-          }
-        </TouchableOpacity>
-      </View>
         
         <View style={styles.wrapperHeaderContent}>
           <View style={{width:wp('70%')}}>
@@ -418,7 +465,7 @@ class EbisDetailScreens extends Component{
                   data={dataAll}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModal(item.MITRA, data='EBIS')}> 
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModal(item.MITRA, dataDivisi='EBIS')}> 
                       <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
                         <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
                       </View>
@@ -1439,6 +1486,10 @@ const mapStateToProps = (state) => ({
   dataTelkom2:state.DesDetailReducer.dataTelkom,
   dataTelkom3:state.DbsDetailReducer.dataTelkom,
   dataTelkom4:state.DgsDetailReducer.dataTelkom,
+
+  //data detail level 3
+  loaderStatus:state.EbisDetailReducer.loaderStatus,
+  dataDetailLevel3:state.EbisDetailReducer.dataDetailLevel3
 })
 
 export default connect(mapStateToProps)(EbisDetailScreens);
