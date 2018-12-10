@@ -17,7 +17,6 @@ import Modal from "react-native-modal";
 import axios from 'axios';
 
 //global
-import renderIf from '../../../../../../../../components/renderIf';
 import url from '../../../../../../../../../config/api_service';
 
 class EbisDetailScreens extends Component{
@@ -28,6 +27,7 @@ class EbisDetailScreens extends Component{
       //data dari parameter
       dataDivisi:params.dataDivisi, 
       dataMitraDetail:params.dataMitraDetail,
+      dataKategoriMitra:params.dataKategoriMitra,
       date1:params.date1,
       date2:params.date2,
 
@@ -41,11 +41,11 @@ class EbisDetailScreens extends Component{
   }
 
   componentWillMount(){
-    const {dataDivisi, dataMitraDetail} = this.state;
+    const {dataDivisi, dataMitraDetail, dataKategoriMitra, date1, date2} = this.state;
     this.setState({
       loaderTampilDetail : true
     })
-    axios.get(`${url.API}/ebis_getstage5/stage/PROSPECT/div/${dataDivisi}/maindiv/${dataDivisi}/mainseg/ALL/nmitra/${dataMitraDetail}`).then((res) => {
+    axios.get(`${url.API}/ebis_getstage5/stage/PROSPECT/div/${dataDivisi}/maindiv/${dataDivisi}/mitra/${dataKategoriMitra}/nmitra/${dataMitraDetail}/mainseg/ALL/start_date/${date1}/end_date/${date2}`).then((res) => {
       this.setState({dataDetail2:res.data, loaderTampilDetail:false });
     }).catch((err) => {
       this.setState({
@@ -57,7 +57,7 @@ class EbisDetailScreens extends Component{
 
   //pop up and detail button ALL
   _toggleModal(item){
-    const {date1, date2, dataDivisi, dataMitraDetail} = this.state;
+    const {dataDivisi, dataMitraDetail, dataKategoriMitra, date1, date2} = this.state;
 
     this.setState({
       visibleModal: !this.state.visibleModal,
@@ -65,7 +65,7 @@ class EbisDetailScreens extends Component{
 
     this.props.dispatch({
       type:'DETAIL_LEVEL_3',
-      payload:axios.get(`${url.API}/ebis_getstage5/stage/PROSPECT/div/${dataDivisi}/maindiv/${dataDivisi}/mitra/CFU/nmitra/${dataMitraDetail}/mainseg/ALL/start_date/${date1}/end_date/${date2}/cc/${item.stage_06}`)
+      payload:axios.get(`${url.API}/ebis_getstage5/stage/PROSPECT/div/${dataDivisi}/maindiv/${dataDivisi}/mitra/${dataKategoriMitra}/nmitra/${dataMitraDetail}/mainseg/ALL/start_date/${date1}/end_date/${date2}/cc/${item.stage_06}`)
     });
   }
   renderModalContent(){
