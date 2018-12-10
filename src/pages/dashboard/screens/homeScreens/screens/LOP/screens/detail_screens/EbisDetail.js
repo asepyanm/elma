@@ -13,7 +13,6 @@ import {
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import {Header, Icon, Left, Right, Body, Button, Title, Tab, Tabs, Content, Container} from 'native-base';
 import {connect} from 'react-redux';
-import Modal from "react-native-modal";
 import axios from 'axios';
 
 //global
@@ -147,9 +146,6 @@ class EbisDetailScreens extends Component{
     }  
   }
 
-  _toggleModalSubs(item){
-    null
-  }
   buttonSubs(){
     if(this.state.statusSubs === false){
       this.setState({

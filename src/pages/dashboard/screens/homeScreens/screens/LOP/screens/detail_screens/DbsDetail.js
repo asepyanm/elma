@@ -23,7 +23,14 @@ import url from '../../../../../../../../config/api_service';
 class DbsDetailScreens extends Component{
   constructor(props){
     super(props);
+    const { params } = this.props.navigation.state;
     this.state = {
+      //data date
+      date1:params.date1,
+      date2:params.date2,
+      
+      dataDivisi:'',
+      dataMitraDetail:'',
 
       //modal
       visibleModal:false,
@@ -39,141 +46,92 @@ class DbsDetailScreens extends Component{
   }
 
   componentWillMount(){
+    const {date1, date2} = this.state;
+
     //get data ALL
     this.props.dispatch({
       type:'DETAIL_WIN_EBIS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/WIN/div/EBIS/maindiv/DES/mainseg/ALL/start_date/2018001/end_date/201811`)
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/WIN/div/EBIS/maindiv/DES/mainseg/ALL/start_date/${date1}/end_date/${date2}`)
     });
     this.props.dispatch({
       type:'DETAIL_WIN_DES',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/WIN/div/DES/maindiv/DES/mainseg/ALL/start_date/2018001/end_date/201811`)
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/WIN/div/DES/maindiv/DES/mainseg/ALL/start_date/${date1}/end_date/${date2}`)
     });
     this.props.dispatch({
       type:'DETAIL_WIN_DBS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/WIN/div/DBS/maindiv/DBS/mainseg/ALL/start_date/2018001/end_date/201811`)
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/WIN/div/DBS/maindiv/DBS/mainseg/ALL/start_date/${date1}/end_date/${date2}`)
     });
     this.props.dispatch({
       type:'DETAIL_WIN_DGS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/WIN/div/DGS/maindiv/DGS/mainseg/ALL/start_date/2018001/end_date/201811`)
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/WIN/div/DGS/maindiv/DGS/mainseg/ALL/start_date/${date1}/end_date/${date2}`)
     });
 
     //get data detail SUBS
     this.props.dispatch({
       type:'DETAIL_SUBS_WIN_EBIS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/WIN/div/EBIS/maindiv/DES/mainseg/ALL/start_date/2018001/end_date/201807/mitra/CFU`)
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/WIN/div/EBIS/maindiv/DES/mainseg/ALL/start_date/${date1}/end_date/${date2}/mitra/CFU`)
     });
     this.props.dispatch({
       type:'DETAIL_SUBS_WIN_DES',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/WIN/div/DES/maindiv/DES/mainseg/ALL/start_date/2018001/end_date/201807/mitra/CFU`)
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/WIN/div/DES/maindiv/DES/mainseg/ALL/start_date/${date1}/end_date/${date2}/mitra/CFU`)
     });
     this.props.dispatch({
       type:'DETAIL_SUBS_WIN_DBS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/WIN/div/DBS/maindiv/DBS/mainseg/ALL/start_date/2018001/end_date/201807/mitra/CFU`)
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/WIN/div/DBS/maindiv/DBS/mainseg/ALL/start_date/${date1}/end_date/${date2}/mitra/CFU`)
     });
     this.props.dispatch({
       type:'DETAIL_SUBS_WIN_DGS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/WIN/div/DGS/maindiv/DGS/mainseg/ALL/start_date/2018001/end_date/201807/mitra/CFU`)
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/WIN/div/DGS/maindiv/DGS/mainseg/ALL/start_date/${date1}/end_date/${date2}/mitra/CFU`)
     });
 
     //get data detail MITRA
     this.props.dispatch({
       type:'DETAIL_MITRA_WIN_EBIS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/WIN/div/EBIS/maindiv/DES/mainseg/ALL/start_date/2018001/end_date/201807/mitra/MITRA`)
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/WIN/div/EBIS/maindiv/DES/mainseg/ALL/start_date/${date1}/end_date/${date2}/mitra/MITRA`)
     });
     this.props.dispatch({
       type:'DETAIL_MITRA_WIN_DES',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/WIN/div/DES/maindiv/DES/mainseg/ALL/start_date/2018001/end_date/201807/mitra/MITRA`)
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/WIN/div/DES/maindiv/DES/mainseg/ALL/start_date/${date1}/end_date/${date2}/mitra/MITRA`)
     });
     this.props.dispatch({
       type:'DETAIL_MITRA_WIN_DBS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/WIN/div/DBS/maindiv/DBS/mainseg/ALL/start_date/2018001/end_date/201807/mitra/MITRA`)
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/WIN/div/DBS/maindiv/DBS/mainseg/ALL/start_date/${date1}/end_date/${date2}/mitra/MITRA`)
     });
     this.props.dispatch({
       type:'DETAIL_MITRA_WIN_DGS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/WIN/div/DGS/maindiv/DGS/mainseg/ALL/start_date/2018001/end_date/201807/mitra/MITRA`)
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/WIN/div/DGS/maindiv/DGS/mainseg/ALL/start_date/${date1}/end_date/${date2}/mitra/MITRA`)
     });
     
     //get data detail TELKOM
     this.props.dispatch({
       type:'DETAIL_TELKOM_WIN_EBIS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/WIN/div/EBIS/maindiv/DES/mainseg/ALL/start_date/2018001/end_date/201807/mitra/TELKOM`)
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/WIN/div/EBIS/maindiv/DES/mainseg/ALL/start_date/${date1}/end_date/${date2}/mitra/TELKOM`)
     });
     this.props.dispatch({
       type:'DETAIL_TELKOM_WIN_DES',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/WIN/div/DES/maindiv/DES/mainseg/ALL/start_date/2018001/end_date/201807/mitra/TELKOM`)
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/WIN/div/DES/maindiv/DES/mainseg/ALL/start_date/${date1}/end_date/${date2}/mitra/TELKOM`)
     });
     this.props.dispatch({
       type:'DETAIL_TELKOM_WIN_DBS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/WIN/div/DBS/maindiv/DBS/mainseg/ALL/start_date/2018001/end_date/201807/mitra/TELKOM`)
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/WIN/div/DBS/maindiv/DBS/mainseg/ALL/start_date/${date1}/end_date/${date2}/mitra/TELKOM`)
     });
     this.props.dispatch({
       type:'DETAIL_TELKOM_WIN_DGS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/WIN/div/DGS/maindiv/DGS/mainseg/ALL/start_date/2018001/end_date/201807/mitra/TELKOM`)
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/WIN/div/DGS/maindiv/DGS/mainseg/ALL/start_date/${date1}/end_date/${date2}/mitra/TELKOM`)
     });    
   }
 
-  _toggleModal(item){
-    this.setState({
-      visibleModal: !this.state.visibleModal,
-      loaderTampilDetail:true
-    })
-    axios.get(`${url.API}/ebis_getstage5/stage/WIN/div/DBS/maindiv/DBS/mainseg/ALL/nmitra/${item}/start_date/201801/end_date/201811`).then((res) => {
-      this.setState({dataTampung:res.data, loaderTampilDetail:false });
-    }).catch((err) => {
-      this.setState({
-        loaderTampilDetail:false
-      })
-      alert(err)
+   //fungsi pindah page untuk detail level 2
+  renderMovePage(item, dataDivisi, dataKategoriMitra){
+    this.props.navigation.navigate('DbsDetailLevel2',{
+      dataMitraDetail:`${item}`,
+      dataDivisi:`${dataDivisi}`,
+      dataKategoriMitra:`${dataKategoriMitra}`,
+      date1:`${this.state.date1}`,
+      date2:`${this.state.date2}`,
     })
   }
-  renderModalContent(){
-    const {dataTampung, loaderTampilDetail} = this.state;
-    return(
-      <View style={styles.modalContent}>
-        {
-        loaderTampilDetail 
-            ?
-        <ActivityIndicator size={'large'} color={'#000'} style={{margin:hp('5%')}}/>
-            :
-        <View style={{width:wp('85%')}}>
-          <FlatList
-            data={dataTampung}
-            ListHeaderComponent={() => (
-              <View style={styles.wrapperHeaderContent}>
-                <View style={{width:wp('35%')}}>
-                  <Text style={{textAlign:'center', color:'#FFF', fontSize:12}}>Nama CC</Text>
-                </View>
-                <View style={{width:wp('35%')}}>
-                  <Text style={{textAlign:'center', color:'#FFF', fontSize:12}}>Nama Project</Text>
-                </View>
-                <View style={{width:wp('10%'), alignItems:'center', justifyContent:'center'}}>
-                  <Text style={{textAlign:'center', color:'#FFF', fontSize:12}}>Nilai</Text>
-                </View>
-              </View>
-            )}
-            keyExtractor={(item, index) => index.toString()}
-            renderItem={({ item }) => (
-              <View style={styles.containerDetailData}> 
-                <View style={{width:wp('35%'), alignSelf:'center', justifyContent:'center'}}>
-                  <Text style={{fontSize:10}}>{item.stage_06}</Text>
-                </View>
-                <View style={{width:wp('35%'), alignSelf:'center', justifyContent:'center'}}>
-                  <Text style={{fontSize:10}}>{item.stage_07}</Text>
-                </View>
-                <View style={{width:wp('10%'), alignSelf:'center', justifyContent:'center', alignItems:'center'}}>
-                  <Text style={{textAlign:'center', fontSize:10}}>{parseFloat(item.stage_10)}M</Text>                    
-                </View>
-              </View>
-            )}
-            style={{height:hp('80%'), marginBottom:hp('2%')}}
-          />
-          <TouchableOpacity onPress={() => this.setState({ visibleModal: !this.state.visibleModal})} style={{height:hp('5%'),backgroundColor:'#e74c3c', width:wp('85%'), justifyContent:'center', alignItems:'center', padding:hp('1%'), borderRadius:5, marginBottom:hp('2%')}}>
-            <Text style={{color:'#FFF'}}>Tutup</Text>
-          </TouchableOpacity>
-        </View>
-        }
-      </View>
-  )};
+
   buttonAll(){
     if(this.state.statusAll === false){
       this.setState({
@@ -414,7 +372,7 @@ class DbsDetailScreens extends Component{
                   data={dataAll}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModal(item.MITRA)}> 
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this.renderMovePage(item.MITRA, dataDivisi='EBIS', dataKategoriMitra='ALL')}> 
                       <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
                         <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
                       </View>
@@ -427,11 +385,6 @@ class DbsDetailScreens extends Component{
                     </TouchableOpacity>
                   )}
                 />
-                <Modal 
-                  isVisible={this.state.visibleModal === true}
-                  onBackdropPress={() => this.setState({ visibleModal: false })}>
-                  {this.renderModalContent()}
-                </Modal>
               </View>
             )}
 
@@ -441,7 +394,7 @@ class DbsDetailScreens extends Component{
                   data={dataSubs}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.containerDetailData}> 
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this.renderMovePage(item.MITRA, dataDivisi='EBIS', dataKategoriMitra='CFU')}> 
                       <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
                         <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
                       </View>
@@ -454,11 +407,6 @@ class DbsDetailScreens extends Component{
                     </TouchableOpacity>
                   )}
                 />
-                {/* <Modal 
-                  isVisible={this.state.visibleModal === true}
-                  onBackdropPress={() => this.setState({ visibleModal: false })}>
-                  {this.renderModalContent()}
-                </Modal> */}
               </View>
             )}
 
@@ -468,7 +416,7 @@ class DbsDetailScreens extends Component{
                   data={dataMitra}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.containerDetailData}> 
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this.renderMovePage(item.MITRA, dataDivisi='EBIS', dataKategoriMitra='MITRA')}> 
                       <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
                         <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
                       </View>
@@ -481,11 +429,6 @@ class DbsDetailScreens extends Component{
                     </TouchableOpacity>
                   )}
                 />
-                {/* <Modal 
-                  isVisible={this.state.visibleModal === true}
-                  onBackdropPress={() => this.setState({ visibleModal: false })}>
-                  {this.renderModalContent()}
-                </Modal> */}
               </View>
             )}
 
@@ -495,7 +438,7 @@ class DbsDetailScreens extends Component{
                   data={dataTelkom}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.containerDetailData}> 
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this.renderMovePage(item.MITRA, dataDivisi='EBIS', dataKategoriMitra='TELKOM')}> 
                       <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
                         <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
                       </View>
@@ -508,11 +451,6 @@ class DbsDetailScreens extends Component{
                     </TouchableOpacity>
                   )}
                 />
-                {/* <Modal 
-                  isVisible={this.state.visibleModal === true}
-                  onBackdropPress={() => this.setState({ visibleModal: false })}>
-                  {this.renderModalContent()}
-                </Modal> */}
               </View>
             )}
           </Content>
@@ -700,7 +638,7 @@ class DbsDetailScreens extends Component{
                   data={dataAll2}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModal(item.MITRA)}> 
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this.renderMovePage(item.MITRA, dataDivisi='DES', dataKategoriMitra='ALL')}> 
                       <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
                         <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
                       </View>
@@ -713,11 +651,6 @@ class DbsDetailScreens extends Component{
                     </TouchableOpacity>
                   )}
                 />
-                <Modal 
-                  isVisible={this.state.visibleModal === true}
-                  onBackdropPress={() => this.setState({ visibleModal: false })}>
-                  {this.renderModalContent()}
-                </Modal>
               </View>
             )}
 
@@ -727,7 +660,7 @@ class DbsDetailScreens extends Component{
                   data={dataSubs2}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.containerDetailData}> 
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this.renderMovePage(item.MITRA, dataDivisi='DES', dataKategoriMitra='CFU')}> 
                       <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
                         <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
                       </View>
@@ -740,11 +673,6 @@ class DbsDetailScreens extends Component{
                     </TouchableOpacity>
                   )}
                 />
-                {/* <Modal 
-                  isVisible={this.state.visibleModal === true}
-                  onBackdropPress={() => this.setState({ visibleModal: false })}>
-                  {this.renderModalContent()}
-                </Modal> */}
               </View>
             )}
 
@@ -754,7 +682,7 @@ class DbsDetailScreens extends Component{
                   data={dataMitra2}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.containerDetailData}> 
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this.renderMovePage(item.MITRA, dataDivisi='DES', dataKategoriMitra='MITRA')}> 
                       <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
                         <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
                       </View>
@@ -767,11 +695,6 @@ class DbsDetailScreens extends Component{
                     </TouchableOpacity>
                   )}
                 />
-                {/* <Modal 
-                  isVisible={this.state.visibleModal === true}
-                  onBackdropPress={() => this.setState({ visibleModal: false })}>
-                  {this.renderModalContent()}
-                </Modal> */}
               </View>
             )}
 
@@ -781,7 +704,7 @@ class DbsDetailScreens extends Component{
                   data={dataTelkom2}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.containerDetailData}> 
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this.renderMovePage(item.MITRA, dataDivisi='DES', dataKategoriMitra='TELKOM')}> 
                       <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
                         <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
                       </View>
@@ -794,11 +717,6 @@ class DbsDetailScreens extends Component{
                     </TouchableOpacity>
                   )}
                 />
-                {/* <Modal 
-                  isVisible={this.state.visibleModal === true}
-                  onBackdropPress={() => this.setState({ visibleModal: false })}>
-                  {this.renderModalContent()}
-                </Modal> */}
               </View>
             )}
           </Content>
@@ -986,7 +904,7 @@ class DbsDetailScreens extends Component{
                   data={dataAll3}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModal(item.MITRA)}> 
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this.renderMovePage(item.MITRA, dataDivisi='DBS', dataKategoriMitra='ALL')}> 
                       <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
                         <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
                       </View>
@@ -999,11 +917,6 @@ class DbsDetailScreens extends Component{
                     </TouchableOpacity>
                   )}
                 />
-                <Modal 
-                  isVisible={this.state.visibleModal === true}
-                  onBackdropPress={() => this.setState({ visibleModal: false })}>
-                  {this.renderModalContent()}
-                </Modal>
               </View>
             )}
 
@@ -1013,7 +926,7 @@ class DbsDetailScreens extends Component{
                   data={dataSubs3}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.containerDetailData}> 
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this.renderMovePage(item.MITRA, dataDivisi='DBS', dataKategoriMitra='CFU')}> 
                       <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
                         <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
                       </View>
@@ -1026,11 +939,6 @@ class DbsDetailScreens extends Component{
                     </TouchableOpacity>
                   )}
                 />
-                {/* <Modal 
-                  isVisible={this.state.visibleModal === true}
-                  onBackdropPress={() => this.setState({ visibleModal: false })}>
-                  {this.renderModalContent()}
-                </Modal> */}
               </View>
             )}
 
@@ -1040,7 +948,7 @@ class DbsDetailScreens extends Component{
                   data={dataMitra3}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.containerDetailData}> 
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this.renderMovePage(item.MITRA, dataDivisi='DBS', dataKategoriMitra='MITRA')}> 
                       <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
                         <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
                       </View>
@@ -1053,11 +961,6 @@ class DbsDetailScreens extends Component{
                     </TouchableOpacity>
                   )}
                 />
-                {/* <Modal 
-                  isVisible={this.state.visibleModal === true}
-                  onBackdropPress={() => this.setState({ visibleModal: false })}>
-                  {this.renderModalContent()}
-                </Modal> */}
               </View>
             )}
 
@@ -1067,7 +970,7 @@ class DbsDetailScreens extends Component{
                   data={dataTelkom3}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.containerDetailData}> 
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this.renderMovePage(item.MITRA, dataDivisi='DBS', dataKategoriMitra='TELKOM')}> 
                       <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
                         <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
                       </View>
@@ -1080,11 +983,6 @@ class DbsDetailScreens extends Component{
                     </TouchableOpacity>
                   )}
                 />
-                {/* <Modal 
-                  isVisible={this.state.visibleModal === true}
-                  onBackdropPress={() => this.setState({ visibleModal: false })}>
-                  {this.renderModalContent()}
-                </Modal> */}
               </View>
             )}
           </Content>
@@ -1272,7 +1170,7 @@ class DbsDetailScreens extends Component{
                   data={dataAll4}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModal(item.MITRA)}> 
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this.renderMovePage(item.MITRA, dataDivisi='DGS', dataKategoriMitra='ALL')}> 
                       <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
                         <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
                       </View>
@@ -1285,11 +1183,6 @@ class DbsDetailScreens extends Component{
                     </TouchableOpacity>
                   )}
                 />
-                <Modal 
-                  isVisible={this.state.visibleModal === true}
-                  onBackdropPress={() => this.setState({ visibleModal: false })}>
-                  {this.renderModalContent()}
-                </Modal>
               </View>
             )}
 
@@ -1299,7 +1192,7 @@ class DbsDetailScreens extends Component{
                   data={dataSubs4}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.containerDetailData}> 
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this.renderMovePage(item.MITRA, dataDivisi='DGS', dataKategoriMitra='CFU')}> 
                       <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
                         <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
                       </View>
@@ -1312,11 +1205,6 @@ class DbsDetailScreens extends Component{
                     </TouchableOpacity>
                   )}
                 />
-                {/* <Modal 
-                  isVisible={this.state.visibleModal === true}
-                  onBackdropPress={() => this.setState({ visibleModal: false })}>
-                  {this.renderModalContent()}
-                </Modal> */}
               </View>
             )}
 
@@ -1326,7 +1214,7 @@ class DbsDetailScreens extends Component{
                   data={dataMitra4}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.containerDetailData}> 
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this.renderMovePage(item.MITRA, dataDivisi='DGS', dataKategoriMitra='MITRA')}> 
                       <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
                         <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
                       </View>
@@ -1339,11 +1227,6 @@ class DbsDetailScreens extends Component{
                     </TouchableOpacity>
                   )}
                 />
-                {/* <Modal 
-                  isVisible={this.state.visibleModal === true}
-                  onBackdropPress={() => this.setState({ visibleModal: false })}>
-                  {this.renderModalContent()}
-                </Modal> */}
               </View>
             )}
 
@@ -1353,7 +1236,7 @@ class DbsDetailScreens extends Component{
                   data={dataTelkom4}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.containerDetailData}> 
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this.renderMovePage(item.MITRA, dataDivisi='DGS', dataKategoriMitra='TELKOM')}> 
                       <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
                         <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
                       </View>
@@ -1366,11 +1249,6 @@ class DbsDetailScreens extends Component{
                     </TouchableOpacity>
                   )}
                 />
-                {/* <Modal 
-                  isVisible={this.state.visibleModal === true}
-                  onBackdropPress={() => this.setState({ visibleModal: false })}>
-                  {this.renderModalContent()}
-                </Modal> */}
               </View>
             )}
           </Content>
