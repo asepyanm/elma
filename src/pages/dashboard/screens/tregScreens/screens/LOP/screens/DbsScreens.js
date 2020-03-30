@@ -22,154 +22,79 @@ class DbsScreens extends Component{
     this.state = {
       data:[],
 
-      //state pilihan regional
-      dataRegionalWitel:[],
-      statusGetReg:false,
+      //get date
+      date1: '',
+      date2: '',
+      dataFilter:'All',
+      dataWitel:'',
       statusRegTreg:'',
 
-      //get date
-      date1:'',
-      date2:''
     }
   }
 
   componentWillMount(){
-    var month = new Date().getMonth() + 1;
-    var year = new Date().getFullYear();
-
-    var date1 = `${year}01`
-    var date2 = `${year}${month}`
-
-    this.setState({
-      date1:date1,
-      date2:date2
-    })
-
     this.props.dispatch({
-      type:'DBS_HOME_TREG',
-      payload:axios.get(`${url.API}/ebis_getlopmainytd_treg/startdate/${date1}/enddate/${date2}/div/DBS/witel/ALL/treg/ALL`)
-    })
-
-    this.props.dispatch({
-      type:'DBS_HOME_CURRENT_TREG',
+      type:'EBIS_HOME_CURRENT_TREG',
       payload:axios.get(`${url.API}/ebis_getlopmaincurrent_treg/witel/ALL/treg/ALL/div/DBS`)
-    })
+    })  
   }
 
-  filterPeriodeDate1(data){
-    const {date2} = this.state;
-
-    this.setState({
-      date1:data.value
-    })
-
-    this.props.dispatch({
-      type:'DBS_HOME_TREG_PERIODE',
-      payload:axios.get(`${url.API}/ebis_getlopmainytd_treg/startdate/${data.value}/enddate/${date2}/div/DBS/witel/ALL/treg/ALL`)
-    });
-  }
-
-  filterPeriodeDate2(data){
-    const {date1} = this.state;
-
-    this.setState({
-      date2:data.value
-    })
-
-    this.props.dispatch({
-      type:'DBS_HOME_TREG_PERIODE',
-      payload:axios.get(`${url.API}/ebis_getlopmainytd_treg/startdate/${date1}/enddate/${data.value}/div/DBS/witel/ALL/treg/ALL`)
-    });
-  }
-
-  renderFilterRegional(option){
-    const {date1, date2} = this.state;
-
-    let dataFilter = option.value;
-    this.setState({
-      statusGetReg:true
-    })
-
-    if(dataFilter === 'All'){
+  refreshPeriode(sDate,eDate,sDataFilter,sDataWitel,sStatusRegTreg){
+    /*    this.setState({
+         date1:sDate,
+         date2:eDate,
+         dataFilter:sDataFilter,
+         dataWitel:sDataWitel,
+         statusRegTreg:sStatusRegTreg,
+       })
+    */
+    if(sDataFilter === 'All'){
+        
       this.props.dispatch({
         type:'DBS_HOME_TREG',
-        payload:axios.get(`${url.API}/ebis_getlopmainytd_treg/startdate/${date1}/enddate/${date2}/div/DBS/witel/ALL/treg/ALL`)
+        payload:axios.get(`${url.API}/ebis_getlopmain_ytd/date1/${sDate}/date2/${eDate}/div/DBS/treg/ALL/witel/ALL`)
       })
   
       this.props.dispatch({
         type:'DBS_HOME_CURRENT_TREG',
         payload:axios.get(`${url.API}/ebis_getlopmaincurrent_treg/witel/ALL/treg/ALL/div/DBS`)
       })
-
-      this.setState({
-        dataRegionalWitel:[],
-        statusGetReg:false
-      })
     } else {
-      axios.get(`${url.API}/ebis_getwitel/reg/${dataFilter}`).then((res)=>{
-        console.log(res);
-        this.setState({
-          statusRegTreg:dataFilter,
-          statusGetReg:false,
-          dataRegionalWitel:res.data
-        })
-      }).catch((err)=> {
-        this.setState({
-          statusGetReg:false
-        })
+
+      this.props.dispatch({
+        type:'DBS_HOME_TREG',
+        payload:axios.get(`${url.API}/ebis_getlopmain_ytd/date1/${sDate}/date2/${eDate}/div/DBS/treg/${sStatusRegTreg}/witel/${sDataWitel}`)
+      })
+  
+      this.props.dispatch({
+        type:'DBS_HOME_CURRENT_TREG',
+        payload:axios.get(`${url.API}/ebis_getlopmaincurrent_treg/witel/${sDataWitel}/treg/${sStatusRegTreg}/div/DBS`)
       })
     }
   }
 
-  renderFilterData(option){
-    const {statusRegTreg, date1, date2} = this.state;
-    let dataWitel = option.W1;
-
-    this.props.dispatch({
-      type:'DBS_HOME_TREG',
-      payload:axios.get(`${url.API}/ebis_getlopmainytd_treg/startdate/${date1}/enddate/${date2}/div/DBS/witel/${dataWitel}/treg/${statusRegTreg}`)
-    })
-
-    this.props.dispatch({
-      type:'DBS_HOME_CURRENT_TREG',
-      payload:axios.get(`${url.API}/ebis_getlopmaincurrent_treg/witel/${dataWitel}/treg/${statusRegTreg}/div/DBS`)
-    })
+  getNum(val) {
+    if (!isFinite(val)) {
+      return 0;
+    }
+    if (isNaN(val)) {
+      return 0;
+    }
+    return Math.ceil(val);
   }
-  
+
   render() {
+    var sDate = '' 
+    var eDate = ''
+    var sDataFilter = '' 
+    var sDataWitel = ''
+    var sStatusRegTreg = ''
+
     var date = new Date().getDate();
     var month = new Date().getMonth() + 1;
     var year = new Date().getFullYear();
 
     var dateNow = `${date}-${month}-${year}`
-
-    let index = 0;
-
-    const data = [
-      { key: index++, label: `${year}-01`, value:`${year}01`},
-      { key: index++, label: `${year}-02`, value:`${year}02`},
-      { key: index++, label: `${year}-03`, value:`${year}03`},
-      { key: index++, label: `${year}-04`, value:`${year}04`},
-      { key: index++, label: `${year}-05`, value:`${year}05`},
-      { key: index++, label: `${year}-06`, value:`${year}06`},
-      { key: index++, label: `${year}-07`, value:`${year}07`},
-      { key: index++, label: `${year}-08`, value:`${year}08`},
-      { key: index++, label: `${year}-09`, value:`${year}09`},
-      { key: index++, label: `${year}-10`, value:`${year}10`},
-      { key: index++, label: `${year}-11`, value:`${year}11`},
-      { key: index++, label: `${year}-12`, value:`${year}12`},
-    ];
-
-    const regional = [
-      { key: index++, label: 'All Regional', value:'All'},
-      { key: index++, label: 'Reg 1', value:'REG-1'},
-      { key: index++, label: 'Reg 2', value:'REG-2'},
-      { key: index++, label: 'Reg 3', value:'REG-3'},
-      { key: index++, label: 'Reg 4', value:'REG-4'},
-      { key: index++, label: 'Reg 5', value:'REG-5'},
-      { key: index++, label: 'Reg 6', value:'REG-6'},
-      { key: index++, label: 'Reg 7', value:'REG-7'},
-    ];
 
     //import image arrow
     const images = {
@@ -213,8 +138,10 @@ class DbsScreens extends Component{
     };
 
     const {
+      tampilActivityIndicator,
+      lastUpdated,
       //navigation
-      navigation,
+      xParams, navigation,
       //prospect
       ebisProspectREVENUE,ebisProspectProject,ebisProspectTarget,
       //submission
@@ -239,12 +166,12 @@ class DbsScreens extends Component{
       currentBIllcomRevenue,currentBillcomProject,
     } = this.props;
 
-    const {dataRegionalWitel, statusGetReg} = this.state;
+    //const {dataRegionalWitel, statusGetReg} = this.state;
 
-    const ebisPresentase = (parseInt(ebisProspectREVENUE) / parseInt(ebisProspectTarget))*100;
-    const ebisPresentase2 = (parseInt(ebisSubmisionREVENUE) / parseInt(ebisSubmissionTarget))*100;
-    const ebisPresentase3 = (parseInt(ebisWinREVENUE) / parseInt(ebisWinTarget))*100;
-    const ebisPresentase4 = (parseInt(ebisBillcomREVENUE) / parseInt(ebisBillcommTarget))*100;
+    const ebisPresentase =  (parseInt(ebisProspectREVENUE)*100) / parseInt(ebisProspectTarget);
+    const ebisPresentase2 = (parseInt(ebisSubmisionREVENUE)*100) / parseInt(ebisSubmissionTarget);
+    const ebisPresentase3 = (parseInt(ebisWinREVENUE)*100) / parseInt(ebisWinTarget);
+    const ebisPresentase4 = (parseInt(ebisBillcomREVENUE)*100) / parseInt(ebisBillcommTarget);
 
     SPRratio = (parseInt(ebisSubmisionREVENUE) / parseInt(ebisProspectREVENUE))*100;
     WSRratio = (parseInt(ebisWinREVENUE) / parseInt(ebisSubmisionREVENUE))*100;
@@ -256,69 +183,16 @@ class DbsScreens extends Component{
     // BWRratio = (parseInt(ebisPresentase4) / parseInt(ebisPresentase3))*100;
     // WPRratio = (parseInt(ebisPresentase3) / parseInt(ebisPresentase))*100;
 
+    sDate = this.props.xParams.sdate
+    eDate = this.props.xParams.edate
+    sDataFilter = this.props.xParams.dataFilter
+    sDataWitel = this.props.xParams.dataWitel
+    sStatusRegTreg = this.props.xParams.statusRegTreg
+
+    this.refreshPeriode(sDate,eDate,sDataFilter,sDataWitel,sStatusRegTreg)
+
     return (
       <View style={styles.container}>
-        <View style={styles.wrapperPeriode}>
-          <View>
-            <Text style={styles.textPeriode}>Regional</Text>
-          </View>
-
-          <View style={[styles.wrapperModalPeriode,{}]}>
-            <View>
-              <ModalSelector
-                data={regional}
-                overlayStyle={{ backgroundColor: 'rgba(0,0,0,0.8)', justifyContent: 'flex-end' }}
-                selectTextStyle={{textAlign:'center', alignSelf:'center', alignItems:'center'}}
-                initValue="All Regional"
-                selectStyle={styles.modalPeriode}
-                onChange={(option)=> this.renderFilterRegional(option)} 
-              />
-            </View>
-            <View style={{alignSelf:'center', justifyContent:'center'}}>
-              <Text style={{fontSize:20, fontWeight:'bold'}}> - </Text>
-            </View>
-            <View>
-              <ModalSelector
-                data={dataRegionalWitel}
-                disabled={statusGetReg ? true : false}
-                overlayStyle={{ backgroundColor: 'rgba(0,0,0,0.8)', justifyContent: 'flex-end' }}
-                initValue={statusGetReg ? 'Loading...' : 'Pilih'}
-                labelExtractor={(data) => data.W2}
-                keyExtractor={(data)=> data.W1}
-                selectStyle={styles.modalPeriode}
-                onChange={(option)=> this.renderFilterData(option)} 
-              />
-            </View>
-          </View>
-        </View>
-
-        <View style={styles.wrapperPeriode}>
-          <View>
-            <Text style={styles.textPeriode}>Periode : </Text>
-          </View>
-          <View style={styles.wrapperModalPeriode}>
-            <View>
-              <ModalSelector
-                data={data}
-                selectTextStyle={{textAlign:'center', alignSelf:'center', alignItems:'center'}}
-                initValue={`${year}-01`}
-                selectStyle={styles.modalPeriode}
-                onChange={(data)=> this.filterPeriodeDate1(data)} 
-              />
-            </View>
-            <View>
-              <Text style={{fontSize:20, fontWeight:'bold'}}> - </Text>
-            </View>
-            <View>
-              <ModalSelector
-                data={data}
-                initValue={`${year}-${month}`}
-                selectStyle={styles.modalPeriode}
-                onChange={(data)=> this.filterPeriodeDate2(data)} 
-              />
-            </View>
-          </View>
-        </View>
 
         <ScrollView>
           <View style={styles.wrapperArrow}>
@@ -328,7 +202,7 @@ class DbsScreens extends Component{
               resizeMode={'stretch'}
             />
 
-            <TouchableOpacity onPress={() => navigation.navigate('EbisDetailLOP')} style={styles.containerArrowProspect}>
+            <TouchableOpacity onPress={() => navigation.navigate('EbisDetailLOP', {start_date:sDate,end_date:eDate,namaDetail:'PROSPECT',reg:sStatusRegTreg,witel:sDataWitel})} style={styles.containerArrowProspect}>
               <Text style={styles.textJudul}>PROSPECT</Text>
               <Text style={styles.textIsi}>{ebisProspectREVENUE}M</Text>
               <Text style={styles.textKeterangan}>per {ebisProspectProject} Project</Text>
@@ -368,7 +242,7 @@ class DbsScreens extends Component{
                   />
               }
               <View style={styles.wrapperTextPresentase}>
-                <Text style={styles.textJudul}>{Math.ceil(ebisPresentase)}</Text>
+                <Text style={styles.textJudul}>{this.getNum(ebisPresentase)}%</Text>
               </View>
             </View>
           </View>
@@ -380,7 +254,7 @@ class DbsScreens extends Component{
               resizeMode={'stretch'}
             />
 
-            <TouchableOpacity onPress={() => navigation.navigate('DesDetailLOP')} style={styles.containerArrowSubmission}>
+            <TouchableOpacity onPress={() => navigation.navigate('DesDetailLOP', {start_date:sDate,end_date:eDate,namaDetail:'SUBMISSION',reg:sStatusRegTreg,witel:sDataWitel})} style={styles.containerArrowSubmission}>
               <Text style={styles.textJudul}>SUBMISSION</Text>
               <Text style={styles.textIsi}>{ebisSubmisionREVENUE}M</Text>
               <Text style={styles.textKeterangan}>per {ebisSubmissionProject} Project</Text>
@@ -420,7 +294,7 @@ class DbsScreens extends Component{
                   />
               }
               <View style={styles.wrapperTextPresentase}>
-                <Text style={styles.textJudul}>{Math.ceil(ebisPresentase2)}</Text>
+                <Text style={styles.textJudul}>{this.getNum(ebisPresentase2)}%</Text>
               </View>
             </View>
           </View>
@@ -432,7 +306,7 @@ class DbsScreens extends Component{
               resizeMode={'stretch'}
             />
 
-            <TouchableOpacity onPress={() => navigation.navigate('DbsDetailLOP')} style={styles.containerArrowWin}>
+            <TouchableOpacity onPress={() => navigation.navigate('DbsDetailLOP', {start_date:sDate,end_date:eDate,namaDetail:'WIN',reg:sStatusRegTreg,witel:sDataWitel})} style={styles.containerArrowWin}>
               <Text style={styles.textJudul}>WIN</Text>
               <Text style={styles.textIsi}>{ebisWinREVENUE}M</Text>
               <Text style={styles.textKeterangan}>per {ebisWinProject} Project</Text>
@@ -472,7 +346,7 @@ class DbsScreens extends Component{
                   />
               }
               <View style={styles.wrapperTextPresentase}>
-                <Text style={styles.textJudul}>{Math.ceil(ebisPresentase3)}</Text>
+                <Text style={styles.textJudul}>{this.getNum(ebisPresentase3)}%</Text>
               </View>
             </View>
           </View>
@@ -484,7 +358,7 @@ class DbsScreens extends Component{
               resizeMode={'stretch'}
             />
 
-            <TouchableOpacity onPress={() => navigation.navigate('DgsDetailLOP')} style={styles.containerArrowBill}>
+            <TouchableOpacity onPress={() => navigation.navigate('DgsDetailLOP', {start_date:sDate,end_date:eDate,namaDetail:'BILLCOM',reg:sStatusRegTreg,witel:sDataWitel})} style={styles.containerArrowBill}>
               <Text style={styles.textJudul}>BILLCOM</Text>
               <Text style={styles.textIsi}>{ebisBillcomREVENUE}M</Text>
               <Text style={styles.textKeterangan}>per {ebisBillcomeProject} Project</Text>
@@ -524,9 +398,12 @@ class DbsScreens extends Component{
                   />
               }
               <View style={styles.wrapperTextPresentase}>
-                <Text style={styles.textJudul}>{Math.ceil(ebisPresentase4)}</Text>
+                <Text style={styles.textJudul}>{this.getNum(ebisPresentase4)}%</Text>
               </View>
             </View>
+          </View>
+          <View>
+            <Text style={{fontSize:9,marginLeft:wp('2%')}}>Lastupdate: {lastUpdated}</Text>
           </View>
         
           <View style={styles.wrapperRatio}>
@@ -721,6 +598,8 @@ class DbsScreens extends Component{
 }
 
 const mapStateToProps = (state) => ({
+  lastUpdated: state.DbsReducer.ebisLastupdate,
+
   ebisProspectREVENUE:state.DbsTregReducer.ebisProspectREVENUE,
   ebisProspectProject:state.DbsTregReducer.ebisProspectProject,
   ebisProspectTarget:state.DbsTregReducer.ebisProspectTarget,

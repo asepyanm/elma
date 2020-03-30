@@ -39,10 +39,19 @@ const initialState = {
   currentWINProject:'',
   currentBIllcomRevenue:'',
   currentBillcomProject:'',
+  ebisLastupdate: '',
+
 };
 
 const DbsReducer = (state = initialState, action) => {
   switch (action.type) {
+
+    case 'DBS_LASTUPDATE_FULFILLED':
+      return {
+        ...state, 
+        ebisLastupdate: action.payload.data[0].RECTIME,
+      }
+    break;
 
     case 'DBS_HOME_REJECTED':
       return{

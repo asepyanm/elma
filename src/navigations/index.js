@@ -25,12 +25,12 @@ class AppNavigation extends Component {
   };
 
   render() {
-    const { navigationState, dispatch, isLoggedIn } = this.props;
+    const { navigationState, dispatch, isLoggedIn, loginGroup } = this.props;
     const state = isLoggedIn
       ? navigationState.stateForLoggedIn
       : navigationState.stateForLoggedOut;
     return (
-      <NavigationStack navigation={addNavigationHelpers({ dispatch, state })} />
+      <NavigationStack navigation={addNavigationHelpers({ dispatch, state, isLoggedIn, loginGroup })} />
     );
   }
 }
@@ -38,7 +38,8 @@ class AppNavigation extends Component {
 const mapStateToProps = state => {
   return {
     isLoggedIn: state.LoginReducer.isLoggedIn,
-    navigationState: state.NavigationReducer
+    navigationState: state.NavigationReducer,
+    loginGroup:state.LoginReducer.group_ID,
   };
 };
 

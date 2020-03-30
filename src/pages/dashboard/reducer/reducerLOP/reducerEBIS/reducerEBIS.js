@@ -40,10 +40,18 @@ const initialState = {
   currentWINProject:'',
   currentBIllcomRevenue:'',
   currentBillcomProject:'',
+  ebisLastupdate: '',
 };
 
 const EbisReducer = (state = initialState, action) => {
   switch (action.type) {
+
+    case 'EBIS_LASTUPDATE_FULFILLED':
+      return {
+        ...state, 
+        ebisLastupdate: action.payload.data[0].RECTIME,
+      }
+    break;
 
     case 'EBIS_HOME_REJECTED':
       return{
@@ -104,12 +112,15 @@ const EbisReducer = (state = initialState, action) => {
     case 'EBIS_HOME_CURRENT_REJECTED':
       return{
         ...state, 
+        loaderStatus:false,
+        statusErrorFrom:false,
       }
     break;
     
     case 'EBIS_HOME_CURRENT_PENDING':
       return{
         ...state, 
+        loaderStatus:true,
       }
     break;
 
@@ -133,14 +144,15 @@ const EbisReducer = (state = initialState, action) => {
     case 'EBIS_HOME_FILTER_PERIODE_REJECTED':
       return{
         ...state, 
-        statusErrorFrom:false,
+        //loaderStatus:false,
+        //statusErrorFrom:false,
       }
     break;
     
     case 'EBIS_HOME_FILTER_PERIODE_PENDING':
       return{
         ...state, 
-        // loaderStatus:true,
+        //loaderStatus:true,
       }
     break;
 

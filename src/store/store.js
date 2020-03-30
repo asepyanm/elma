@@ -11,6 +11,12 @@ import promiseMiddleware from 'redux-promise-middleware';
 import NavigationReducer  from '../navigations/reducer/navigationReducers';
 import loginReducer       from '../pages/login/reducer/loginReducer';
 
+//reducer Alert
+import alertReducer from '../pages/dashboard/reducer/reducerAlert/reducerAlert';
+
+//reducer Rekap
+import rekapReducer from '../pages/dashboard/reducer/rekap/reducerRekap';
+
 //reducer home LOP
 import EbisReducer from '../pages/dashboard/reducer/reducerLOP/reducerEBIS/reducerEBIS';
 import DesReducer from '../pages/dashboard/reducer/reducerLOP/reducerDES/reducerDES';
@@ -30,22 +36,32 @@ import DbsDetailReducer from '../pages/dashboard/reducer/reducerLOP/detailReduce
 import DgsDetailReducer from '../pages/dashboard/reducer/reducerLOP/detailReducer/reducerDGS/reducerDetailDgs';
 
 //monitor reducer
-import MonitorEbisReducer from '../pages/dashboard/reducer/reducerLOP/monitorReducer/monitorKB/reducerEBIS/reducerEbis';
-import MonitorDesReducer from '../pages/dashboard/reducer/reducerLOP/monitorReducer/monitorKB/reducerDES/reducerDes';
-import MonitorDbsReducer from '../pages/dashboard/reducer/reducerLOP/monitorReducer/monitorKB/reducerDBS/reducerDBS';
-import MonitorDgsReducer from '../pages/dashboard/reducer/reducerLOP/monitorReducer/monitorKB/reducerDGS/reducerDGS';
+import MonitorEbisReducer from            '../pages/dashboard/reducer/reducerLOP/monitorReducer/monitorKB/reducerEBIS/reducerEbis';
+import MonitorEbisProgressOgpReducer from '../pages/dashboard/reducer/reducerLOP/monitorReducer/monitorKB/reducerEBIS/reducerEbisProgressOgp';
+import MonitorDesReducer from             '../pages/dashboard/reducer/reducerLOP/monitorReducer/monitorKB/reducerDES/reducerDes';
+import MonitorDesProgressOgpReducer  from '../pages/dashboard/reducer/reducerLOP/monitorReducer/monitorKB/reducerDES/reducerDESProgressOgp';
+import MonitorDbsReducer from             '../pages/dashboard/reducer/reducerLOP/monitorReducer/monitorKB/reducerDBS/reducerDBS';
+import MonitorDbsProgressOgpReducer  from '../pages/dashboard/reducer/reducerLOP/monitorReducer/monitorKB/reducerDBS/reducerDBSProgressOgp';
+import MonitorDgsReducer from             '../pages/dashboard/reducer/reducerLOP/monitorReducer/monitorKB/reducerDGS/reducerDGS';
+import MonitorDgsProgressOgpReducer  from '../pages/dashboard/reducer/reducerLOP/monitorReducer/monitorKB/reducerDGS/reducerDGSProgressOgp';
 
-//monitor KL reducer
-import MonitorEbisReducerKL from '../pages/dashboard/reducer/reducerLOP/monitorReducer/monitorKL/reducerEBIS/reducerEbis';
-import MonitorDesReducerKL from '../pages/dashboard/reducer/reducerLOP/monitorReducer/monitorKL/reducerDES/reducerDes';
-import MonitorDbsReducerKL from '../pages/dashboard/reducer/reducerLOP/monitorReducer/monitorKL/reducerDBS/reducerDBS';
-import MonitorDgsReducerKL from '../pages/dashboard/reducer/reducerLOP/monitorReducer/monitorKL/reducerDGS/reducerDGS';
+import MonitorEbisReducerKL from            '../pages/dashboard/reducer/reducerLOP/monitorReducer/monitorKL/reducerEBIS/reducerEbis';
+import MonitorEbisProgressOgpReducerKL from '../pages/dashboard/reducer/reducerLOP/monitorReducer/monitorKL/reducerEBIS/reducerEbisProgressOgp';
+import MonitorDesReducerKL from             '../pages/dashboard/reducer/reducerLOP/monitorReducer/monitorKL/reducerDES/reducerDes';
+import MonitorDesProgressOgpReducerKL from  '../pages/dashboard/reducer/reducerLOP/monitorReducer/monitorKL/reducerDES/reducerDESProgressOgp';
+import MonitorDbsReducerKL from             '../pages/dashboard/reducer/reducerLOP/monitorReducer/monitorKL/reducerDBS/reducerDBS';
+import MonitorDbsProgressOgpReducerKL from  '../pages/dashboard/reducer/reducerLOP/monitorReducer/monitorKL/reducerDBS/reducerDBSProgressOgp';
+import MonitorDgsReducerKL from             '../pages/dashboard/reducer/reducerLOP/monitorReducer/monitorKL/reducerDGS/reducerDGS';
+import MonitorDgsProgressOgpReducerKL from  '../pages/dashboard/reducer/reducerLOP/monitorReducer/monitorKL/reducerDGS/reducerDGSProgressOgp';
 
-//monitor Dev reducer
-import MonitorEbisReducerDev from '../pages/dashboard/reducer/reducerLOP/monitorReducer/monitorDev/reducerEBIS/reducerEbis';
-import MonitorDesReducerDev from '../pages/dashboard/reducer/reducerLOP/monitorReducer/monitorDev/reducerDES/reducerDes';
-import MonitorDbsReducerDev from '../pages/dashboard/reducer/reducerLOP/monitorReducer/monitorDev/reducerDBS/reducerDBS';
-import MonitorDgsReducerDev from '../pages/dashboard/reducer/reducerLOP/monitorReducer/monitorDev/reducerDGS/reducerDGS';
+import MonitorEbisReducerDlv         from '../pages/dashboard/reducer/reducerLOP/monitorReducer/monitorDev/reducerEBIS/reducerEbis';
+import MonitorEbisProgressReducerDlv from '../pages/dashboard/reducer/reducerLOP/monitorReducer/monitorDev/reducerEBIS/reducerEbisProgressDlv';
+import MonitorDesReducerDlv          from '../pages/dashboard/reducer/reducerLOP/monitorReducer/monitorDev/reducerDES/reducerDes';
+import MonitorDesProgressReducerDlv  from '../pages/dashboard/reducer/reducerLOP/monitorReducer/monitorDev/reducerDES/reducerDESProgressDlv';
+import MonitorDbsReducerDlv          from '../pages/dashboard/reducer/reducerLOP/monitorReducer/monitorDev/reducerDBS/reducerDBS';
+import MonitorDbsProgressReducerDlv  from '../pages/dashboard/reducer/reducerLOP/monitorReducer/monitorDev/reducerDBS/reducerDBSProgressDlv';
+import MonitorDgsReducerDlv          from '../pages/dashboard/reducer/reducerLOP/monitorReducer/monitorDev/reducerDGS/reducerDGS';
+import MonitorDgsProgressReducerDlv  from '../pages/dashboard/reducer/reducerLOP/monitorReducer/monitorDev/reducerDGS/reducerDGSProgressDlv';
 
 //reducer treg LOP
 import EbisTregReducer from '../pages/dashboard/screens/tregScreens/screens/LOP/screens/reducer/reducerEbisTreg';
@@ -71,6 +87,12 @@ const rootReducer = combineReducers({
   NavigationReducer,
   LoginReducer,
 
+  //reducer Alert
+  alertReducer,
+
+  //reducer Rekap
+  rekapReducer,
+
   //reducer home LOP
   EbisReducer,
   DesReducer,
@@ -91,21 +113,33 @@ const rootReducer = combineReducers({
 
   //monitor reducer kb
   MonitorEbisReducer,
+  MonitorEbisProgressOgpReducer,
   MonitorDesReducer,
+  MonitorDesProgressOgpReducer,
   MonitorDbsReducer,
+  MonitorDbsProgressOgpReducer,
   MonitorDgsReducer,
+  MonitorDgsProgressOgpReducer,
 
   //monitor reducer kl
   MonitorEbisReducerKL,
+  MonitorEbisProgressOgpReducerKL,
   MonitorDesReducerKL,
+  MonitorDesProgressOgpReducerKL,
   MonitorDbsReducerKL,
+  MonitorDbsProgressOgpReducerKL,
   MonitorDgsReducerKL,
+  MonitorDgsProgressOgpReducerKL,
 
-  //monitor reducer Dev
-  MonitorEbisReducerDev,
-  MonitorDesReducerDev,
-  MonitorDbsReducerDev,
-  MonitorDgsReducerDev,
+  //monitor reducer dev
+  MonitorEbisReducerDlv,
+  MonitorEbisProgressReducerDlv,
+  MonitorDesReducerDlv,
+  MonitorDesProgressReducerDlv,
+  MonitorDbsReducerDlv,
+  MonitorDbsProgressReducerDlv,
+  MonitorDgsReducerDlv,
+  MonitorDgsProgressReducerDlv,
 
   //reducer treg LOP
   EbisTregReducer,

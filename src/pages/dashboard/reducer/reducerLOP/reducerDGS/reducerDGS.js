@@ -39,10 +39,19 @@ const initialState = {
   currentWINProject:'',
   currentBIllcomRevenue:'',
   currentBillcomProject:'',
+  ebisLastupdate: '',
+
 };
 
 const DgsReducer = (state = initialState, action) => {
   switch (action.type) {
+
+    case 'DGS_LASTUPDATE_FULFILLED':
+      return {
+        ...state, 
+        ebisLastupdate: action.payload.data[0].RECTIME,
+      }
+    break;
 
     case 'DGS_HOME_REJECTED':
       return{

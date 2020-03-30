@@ -10,7 +10,8 @@ import { logout } from '../../actions/actionCreator';
 //screen
 import Home  from '../dashboard/screens/homeScreens/homeScreens';
 import Rekap from '../dashboard/screens/rekapScreens/rekapScreens';
-import Chat  from '../dashboard/screens/chatScreens/chatScreens';
+// import Chat  from '../dashboard/screens/chatScreens/chatScreens';
+import RoomList  from '../dashboard/screens/chatScreens/roomList';
 import TReg  from '../dashboard/screens/tregScreens/tregScreens';
 
 class ComponentDashboard extends Component {
@@ -34,10 +35,10 @@ class ComponentDashboard extends Component {
         return (<Home navigation={this.props.navigation}/>);
       break;
       case 'rekap':
-        return (<Rekap/>);
+        return (<Rekap navigation={this.props.navigation}/>);
       break;
       case 'chat':
-        return (<Chat/>);
+        return (<RoomList navigation={this.props.navigation}/>);
       break;
       case 'treg':
         return (<TReg navigation={this.props.navigation}/>);

@@ -39,10 +39,18 @@ const initialState = {
   currentWINProject:'',
   currentBIllcomRevenue:'',
   currentBillcomProject:'',
+  ebisLastupdate: '',
 };
 
 const DesReducer = (state = initialState, action) => {
   switch (action.type) {
+
+    case 'DES_LASTUPDATE_FULFILLED':
+      return {
+        ...state, 
+        ebisLastupdate: action.payload.data[0].RECTIME,
+      }
+    break;
 
     case 'DES_HOME_REJECTED':
       return{

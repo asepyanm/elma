@@ -10,9 +10,9 @@ import {
   FlatList,
   ActivityIndicator
 } from 'react-native';
-import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
-import {Header, Icon, Left, Right, Body, Button, Title, Tab, Tabs, Content, Container} from 'native-base';
-import {connect} from 'react-redux';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import { Header, Icon, Left, Right, Body, Button, Title, Tab, Tabs, Content, Container } from 'native-base';
+import { connect } from 'react-redux';
 import Modal from "react-native-modal";
 import axios from 'axios';
 
@@ -20,82 +20,121 @@ import axios from 'axios';
 import renderIf from '../../../../../../../components/renderIf';
 import url from '../../../../../../../../config/api_service';
 
-class detailMonitorOgp extends Component{
+class detailMonitorOgpKL extends Component{
   constructor(props){
     super(props);
     this.state = {
+
+      treg: this.props.navigation.state.params.treg,
+      witel: this.props.navigation.state.params.witel,
+      startdate : this.props.navigation.state.params.start_date,
+      enddate   : this.props.navigation.state.params.end_date,   
+
       //modal
       visibleModal:false,
       loaderTampilDetail:false,
       dataTampung:[],
+      dataTampungSubs:[],
+      dataTampungMitra:[],
+      dataTampungTelkom:[],
+
       OgpData: {},
       data:[],
       pressed: false,
-      statusAll:false, 
-      statusSubs:true,
-      statusMitra:true,
-      statusTelkom:true,
+      statusAll:    this.props.navigation.state.params.status != 'A',
+      statusSubs:   this.props.navigation.state.params.status != 'S',
+      statusMitra:  this.props.navigation.state.params.status != 'M',
+      statusTelkom: this.props.navigation.state.params.status != 'T',
     }
   }
 
-  _toggleModal(item){
-    this.setState({
-      visibleModal: !this.state.visibleModal,
-      loaderTampilDetail:true,
-      pressed: false
+  componentWillMount(){
+
+    //EBIS DETAIL OGP
+    this.props.dispatch({
+      type: 'MONITOR_KL_EBIS_DETAIL_OGP',
+      //payload: axios.get(`${url.API}/ebis_getklcc/div/EBIS/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/state/OGP/nmitra/ALL`)
     })
-    axios.get(`${url.API}/ebis_getklproject/div/EBIS/treg/ALL/witel/ALL/startdate/201801/enddate/201811/state/OGP/mitra/${item}`).then((res) => {
-      this.setState({dataTampung:res.data, loaderTampilDetail:false });
-    }).catch((err) => {
-      this.setState({
-        loaderTampilDetail:false
-      })
-      alert(err)
+    this.props.dispatch({
+      type: 'MONITOR_KL_EBIS_DETAIL_OGP_SUBS',
+      payload: axios.get(`${url.API}/ebis_getklcc/div/EBIS/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/state/OGP/nmitra/CFU`)
     })
+    this.props.dispatch({
+      type: 'MONITOR_KL_EBIS_DETAIL_OGP_MITRA',
+      payload: axios.get(`${url.API}/ebis_getklcc/div/EBIS/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/state/OGP/nmitra/MITRA`)
+    })
+    this.props.dispatch({
+      type: 'MONITOR_KL_EBIS_DETAIL_OGP_TELKOM',
+      //payload: axios.get(`${url.API}/ebis_getklcc/div/EBIS/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/state/OGP/nmitra/TELKOM`)
+    })
+
+    //DES DETAIL OGP
+    this.props.dispatch({
+      type: 'MONITOR_KL_DES_DETAIL_OGP',
+      //payload: axios.get(`${url.API}/ebis_getklcc/div/DES/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/state/OGP/nmitra/ALL`)
+    })
+    this.props.dispatch({
+      type: 'MONITOR_KL_DES_DETAIL_OGP_SUBS',
+      payload: axios.get(`${url.API}/ebis_getklcc/div/DES/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/state/OGP/nmitra/CFU`)
+    })
+    this.props.dispatch({
+      type: 'MONITOR_KL_DES_DETAIL_OGP_MITRA',
+      payload: axios.get(`${url.API}/ebis_getklcc/div/DES/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/state/OGP/nmitra/MITRA`)
+    })
+    this.props.dispatch({
+      type: 'MONITOR_KL_DES_DETAIL_OGP_TELKOM',
+      //ayload: axios.get(`${url.API}/ebis_getklcc/div/DES/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/state/OGP/nmitra/TELKOM`)
+    })
+
+    //DBS DETAIL OGP
+    this.props.dispatch({
+      type: 'MONITOR_KL_DBS_DETAIL_OGP',
+      //payload: axios.get(`${url.API}/ebis_getklcc/div/DBS/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/state/OGP/nmitra/ALL`)
+    })
+    this.props.dispatch({
+      type: 'MONITOR_KL_DBS_DETAIL_OGP_SUBS',
+      payload: axios.get(`${url.API}/ebis_getklcc/div/DBS/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/state/OGP/nmitra/CFU`)
+    })
+    this.props.dispatch({
+      type: 'MONITOR_KL_DBS_DETAIL_OGP_MITRA',
+      payload: axios.get(`${url.API}/ebis_getklcc/div/DBS/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/state/OGP/nmitra/MITRA`)
+    })
+    this.props.dispatch({
+      type: 'MONITOR_KL_DBS_DETAIL_OGP_TELKOM',
+      //payload: axios.get(`${url.API}/ebis_getklcc/div/DBS/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/state/OGP/nmitra/TELKOM`)
+    })
+
+    //DGS DETAIL OGP
+    this.props.dispatch({
+      type: 'MONITOR_KL_DGS_DETAIL_OGP',
+      //payload: axios.get(`${url.API}/ebis_getklcc/div/DGS/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/state/OGP/nmitra/ALL/nmitra/ALL`)
+    })
+    this.props.dispatch({
+      type: 'MONITOR_KL_DGS_DETAIL_OGP_SUBS',
+      payload: axios.get(`${url.API}/ebis_getklcc/div/DGS/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/state/OGP/nmitra/ALL/nmitra/CFU`)
+    })
+    this.props.dispatch({
+      type: 'MONITOR_KL_DGS_DETAIL_OGP_MITRA',
+      payload: axios.get(`${url.API}/ebis_getklcc/div/DGS/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/state/OGP/nmitra/ALL/nmitra/MITRA`)
+    })
+    this.props.dispatch({
+      type: 'MONITOR_KL_DGS_DETAIL_OGP_TELKOM',
+      //payload: axios.get(`${url.API}/ebis_getklcc/div/DGS/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/state/OGP/nmitra/ALL/nmitra/TELKOM`)
+    })
+
   }
 
-  _toggleModalDes(item){
+  _toggleModal(div,nmitra,mitra){
     this.setState({
       visibleModal: !this.state.visibleModal,
       loaderTampilDetail:true,
       pressed: false
     })
-    axios.get(`${url.API}/ebis_getklproject/div/DES/treg/ALL/witel/ALL/startdate/201801/enddate/201811/state/OGP/mitra/${item}`).then((res) => {
+    axios.get(`${url.API}/ebis_getklproject/div/${div}/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/state/OGP/nmitra/${nmitra}/mitra/${mitra}`).then((res) => {
       this.setState({dataTampung:res.data, loaderTampilDetail:false });
     }).catch((err) => {
       this.setState({
-        loaderTampilDetail:false
-      })
-      alert(err)
-    })
-  }
-
-  _toggleModalDbs(item){
-    this.setState({
-      visibleModal: !this.state.visibleModal,
-      loaderTampilDetail:true,
-      pressed: false
-    })
-    axios.get(`${url.API}/ebis_getklproject/div/DBS/treg/ALL/witel/ALL/startdate/201801/enddate/201811/state/OGP/mitra/${item}`).then((res) => {
-      this.setState({dataTampung:res.data, loaderTampilDetail:false });
-    }).catch((err) => {
-      this.setState({
-        loaderTampilDetail:false
-      })
-      alert(err)
-    })
-  }
-
-  _toggleModalDgs(item){
-    this.setState({
-      visibleModal: !this.state.visibleModal,
-      loaderTampilDetail:true,
-      pressed: false
-    })
-    axios.get(`${url.API}/ebis_getklproject/div/DGS/treg/ALL/witel/ALL/startdate/201801/enddate/201811/state/OGP/mitra/${item}`).then((res) => {
-      this.setState({dataTampung:res.data, loaderTampilDetail:false });
-    }).catch((err) => {
-      this.setState({
+        dataTampung:[],
         loaderTampilDetail:false
       })
       alert(err)
@@ -108,7 +147,7 @@ class detailMonitorOgp extends Component{
       pressed: true,
       loaderTampilDetail: true
     })
-    axios.get(`${url.API}/ebis_getklproject/div/${level.level}/treg/ALL/witel/ALL/startdate/201801/enddate/201811/state/OGP/mitra/${level.mitra}/idproject/${level.id}`).then((res) => {
+    axios.get(`${url.API}/ebis_getklproject/div/${level.level}/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/state/OGP/mitra/ALL/nmitra/${level.mitra}/idproject/${level.id}`).then((res) => {
       this.setState({ OgpData: res.data, loaderTampilDetail: false });
     }).catch((err) => {
       this.setState({
@@ -132,6 +171,7 @@ class detailMonitorOgp extends Component{
       })
     }  
   }
+
   buttonSubs(){
     if(this.state.statusSubs === false){
       this.setState({
@@ -161,6 +201,7 @@ class detailMonitorOgp extends Component{
       })
     }
   }
+  
   buttonTelkom(){
     if(this.state.statusTelkom === false){
       this.setState({
@@ -182,84 +223,84 @@ class detailMonitorOgp extends Component{
       <View style={{ backgroundColor: "white", alignItems: "center",  borderRadius: 4, borderColor: "rgba(0, 0, 0, 0.1)"}}>
         {
           loaderTampilDetail
-            ?
-            <ActivityIndicator size={'large'} color={'#000'} style={{ margin: hp('5%') }} />
-            :
-            <View style={{ height: hp('90%'), width: wp('85%') }}>
-              <View style={{ flexDirection: 'row', width: wp('45%'), marginTop: hp('2%') }}>
-                  <Text style={{ fontSize: 10 }}>a. Nama Project : </Text>
-                  <Text style={{ fontSize: 10, marginLeft: wp('2%') }}>{OgpData.NAMAPROJECT}</Text>
-              </View>
-              <View style={{ flexDirection: 'row', width: wp('45%'), marginTop: hp('2%') }}>
-                  <Text style={{ fontSize: 10 }}>b. Nama CC : </Text>
-                  <Text style={{ fontSize: 10, marginLeft: wp('2%') }}>{OgpData.NAMACC}</Text>
-              </View>
-              <View style={{ flexDirection: 'row', width: wp('45%'), marginTop: hp('2%') }}>
-                  <Text style={{ fontSize: 10 }}>c. Nilai Project : </Text>
-                  <Text style={{ fontSize: 10, marginLeft: wp('2%') }}>{OgpData.REVENUE}</Text>
-              </View>
-              <View style={{ flexDirection: 'row', width: wp('45%'), marginTop: hp('2%') }}>
-                  <Text style={{ fontSize: 10 }}>d. Lama Kontrak : </Text>
-                  <Text style={{ fontSize: 10, marginLeft: wp('2%') }}>{OgpData.LAMAKONTRAK}</Text>
-              </View>
-              <View style={{ flexDirection: 'row', width: wp('45%'), marginTop: hp('2%') }}>
-                  <Text style={{ fontSize: 10 }}>e. Divisi : </Text>
-                  <Text style={{ fontSize: 10, marginLeft: wp('2%') }}>{OgpData.DIVISI}</Text>
-              </View>
-              <View style={{ flexDirection: 'row', width: wp('45%'), marginTop: hp('2%') }}>
-                  <Text style={{ fontSize: 10 }}>f. Segmen : </Text>
-                  <Text style={{ fontSize: 10, marginLeft: wp('2%') }}>{OgpData.SEGMEN}</Text>
-              </View>
-              <View style={{ flexDirection: 'row', width: wp('45%'), marginTop: hp('2%') }}>
-                  <Text style={{ fontSize: 10 }}>g. Administration Progress : </Text>
-              </View>
-              <View style={{ flexDirection: 'row', width: wp('45%'), marginTop: hp('2%'), marginLeft: wp('5%') }}>
-                  <Text style={{ fontSize: 10 }}>a. Kontrak Berlangganan : </Text>
-              </View>
-              <View style={{ flexDirection: 'row', width: wp('45%'), marginTop: hp('2%'), marginLeft: wp('10%') }}>
-                  <Text style={{ fontSize: 10 }}>&bull; Status KB : </Text>
-                  <Text style={{ fontSize: 10, marginLeft: wp('2%') }}>{OgpData.STATUS_KB}</Text>
-              </View>
-              <View style={{ flexDirection: 'row', width: wp('45%'), marginTop: hp('2%'), marginLeft: wp('10%') }}>
-                  <Text style={{ fontSize: 10 }}>&bull; No. KB : </Text>
-                  <Text style={{ fontSize: 10, marginLeft: wp('2%') }}>{OgpData.NO_KB}</Text>
-              </View>
-              <View style={{ flexDirection: 'row', width: wp('45%'), marginTop: hp('2%'), marginLeft: wp('10%') }}>
-                  <Text style={{ fontSize: 10 }}>&bull; Durasi : </Text>
-                  <Text style={{ fontSize: 10, marginLeft: wp('2%') }}>{OgpData.DURASI}</Text>
-              </View>
-              <View style={{ flexDirection: 'row', width: wp('45%'), marginTop: hp('2%'), marginLeft: wp('10%') }}>
-                  <Text style={{ fontSize: 10 }}>&bull; Sympton : </Text>
-                  <Text style={{ fontSize: 10, marginLeft: wp('2%') }}>{OgpData.SYMPTON}</Text>
-              </View>
-              <View style={{ flexDirection: 'row', width: wp('45%'), marginTop: hp('2%'), marginLeft: wp('5%') }}>
-                  <Text style={{ fontSize: 10 }}>b. Justifikasi PO/P1 : </Text>
-              </View>
-              <View style={{ flexDirection: 'row', width: wp('45%'), marginTop: hp('2%'), marginLeft: wp('10%') }}>
-                  <Text style={{ fontSize: 10 }}>&bull; Status : </Text>
-                  <Text style={{ fontSize: 10, marginLeft: wp('2%') }}>{OgpData.STATUS_JUST_P0_P1}</Text>
-              </View>
-              <View style={{ flexDirection: 'row', width: wp('45%'), marginTop: hp('2%'), marginLeft: wp('10%') }}>
-                  <Text style={{ fontSize: 10 }}>&bull; Dokumen : </Text>
-                  <Text style={{ fontSize: 10, marginLeft: wp('2%') }}>{OgpData.DOKUMEN}</Text>
-              </View>
-              <View style={{ flexDirection: 'row', width: wp('45%'), marginTop: hp('2%'), marginLeft: wp('10%') }}>
-                  <Text style={{ fontSize: 10 }}>&bull; Type : </Text>
-                  <Text style={{ fontSize: 10, marginLeft: wp('2%') }}>{OgpData.DOKUMEN}</Text>
-              </View>
-              <View style={{ position: 'absolute', bottom: 0 }}>
-              <TouchableOpacity onPress={() => this.setState({ visibleModal: !this.state.visibleModal })} style={{ height: hp('5%'), backgroundColor: '#e74c3c', width: wp('85%'), alignItems: 'center', padding: hp('1%'), borderRadius: 5, marginBottom: hp('2%') }}>
-                <Text style={{ color: '#FFF' }}>Tutup</Text>
+          ?
+          <ActivityIndicator size={'large'} color={'#000'} style={{ margin: hp('5%') }} />
+          :
+          <View style={{ height: hp('90%'), width: wp('85%') }}>
+
+            <View style={{ flexDirection: 'row', width: wp('45%'), marginTop: hp('2%') }}>                
+              <TouchableOpacity style={{ height: hp('5%'), backgroundColor: '#575f6a', width: wp('85%'), alignItems: 'center', padding: hp('1%'), borderRadius: 5, marginBottom: hp('1%') }}>
+                <Text style={{ color: '#FFF' }}>DETAIL</Text>
               </TouchableOpacity>
-              </View>
             </View>
+
+            <View style={{ flexDirection: 'row', width: wp('45%'), marginTop: hp('2%') }}>
+                <Text style={{ fontSize: 10, width:wp('22%') }}>A. Nama Project</Text>
+                <Text style={{ fontSize: 10, width:wp('1%') }}>:</Text>
+                <Text style={{ fontSize: 10, marginLeft: wp('2%') }}>{OgpData.NAMAPROJECT}</Text>
+            </View>
+
+            <View style={{ flexDirection: 'row', width: wp('45%'), marginTop: hp('2%') }}>
+                <Text style={{ fontSize: 10, width:wp('22%') }}>B. Nama CC</Text>
+                <Text style={{ fontSize: 10, width:wp('1%') }}>:</Text>
+                <Text style={{ fontSize: 10, marginLeft: wp('2%') }}>{OgpData.NAMACC}</Text>
+            </View>
+
+            <View style={{ flexDirection: 'row', width: wp('45%'), marginTop: hp('2%') }}>
+                <Text style={{ fontSize: 10, width:wp('22%') }}>C. Nilai Project</Text>
+                <Text style={{ fontSize: 10, width:wp('1%') }}>:</Text>
+                <Text style={{ fontSize: 10, marginLeft: wp('2%') }}>{OgpData.REVENUE}M</Text>
+            </View>
+
+            <View style={{ flexDirection: 'row', width: wp('45%'), marginTop: hp('2%') }}>
+                <Text style={{ fontSize: 10, width:wp('22%') }}>D. Lama Kontrak</Text>
+                <Text style={{ fontSize: 10, width:wp('1%') }}>:</Text>
+                <Text style={{ fontSize: 10, marginLeft: wp('2%') }}>{OgpData.LAMAKONTRAK}</Text>
+            </View>
+
+            <View style={{ flexDirection: 'row', width: wp('45%'), marginTop: hp('2%') }}>
+                <Text style={{ fontSize: 10, width:wp('22%') }}>E. Divisi</Text>
+                <Text style={{ fontSize: 10, width:wp('1%') }}>:</Text>
+                <Text style={{ fontSize: 10, marginLeft: wp('2%') }}>{OgpData.DIVISI}</Text>
+            </View>
+
+            <View style={{ flexDirection: 'row', width: wp('45%'), marginTop: hp('2%') }}>
+                <Text style={{ fontSize: 10, width:wp('22%') }}>F. Segmen</Text>
+                <Text style={{ fontSize: 10, width:wp('1%') }}>:</Text>
+                <Text style={{ fontSize: 10, marginLeft: wp('2%') }}>{OgpData.SEGMEN}</Text>
+            </View>
+
+            <View style={{ flexDirection: 'row', width: wp('45%'), marginTop: hp('2%') }}>
+                <Text style={{ fontSize: 10, width:wp('75%') }}>G. Administration Progress</Text>
+            </View>
+            
+            <View style={{ flexDirection: 'row', width: wp('45%'), marginTop: hp('2%'), marginLeft: wp('10%') }}>
+              <Text style={{ fontSize: 10, width:wp('3%') }}></Text>
+              <Text style={{ fontSize: 10, width:wp('17%') }}>&bull; Justifikasi</Text>
+              <Text style={{ fontSize: 10, width:wp('1%') }}>:</Text>
+              <Text style={{ fontSize: 10, marginLeft: wp('2%') }}>{OgpData.STATUS_JUST_P0_P1}</Text>
+            </View>
+
+            <View style={{ flexDirection: 'row', width: wp('45%'), marginTop: hp('2%'), marginLeft: wp('10%') }}>
+              <Text style={{ fontSize: 10, width:wp('3%') }}></Text>
+              <Text style={{ fontSize: 10, width:wp('17%') }}>&bull; Status KL</Text>
+              <Text style={{ fontSize: 10, width:wp('1%') }}>:</Text>
+              <Text style={{ fontSize: 10, marginLeft: wp('2%') }}>{OgpData.STATUS_KB}</Text>
+            </View>
+
+            <View style={{ position: 'absolute', bottom: 0 }}>
+            <TouchableOpacity onPress={() => this.setState({ visibleModal: !this.state.visibleModal })} style={{ height: hp('5%'), backgroundColor: '#e74c3c', width: wp('85%'), alignItems: 'center', padding: hp('1%'), borderRadius: 5, marginBottom: hp('2%') }}>
+              <Text style={{ color: '#FFF' }}>Tutup</Text>
+            </TouchableOpacity>
+            </View>
+          </View>
         }
       </View>
     )
   }
 
   renderModalContent(){
-    const {dataTampung, loaderTampilDetail} = this.state;
+    const {dataTampung, loaderTampilDetail, pressed} = this.state;
     return(
       <View style={styles.modalContent}>
         {
@@ -269,33 +310,37 @@ class detailMonitorOgp extends Component{
             :
         <View style={{width:wp('85%')}}>
           <FlatList
-            data={dataTampung}
+            data={(dataTampung.length>0) ? dataTampung : []} 
             ListHeaderComponent={() => (
-              <View style={styles.wrapperHeaderContent}>
-                <View style={{width:wp('35%')}}>
-                  <Text style={{textAlign:'center', color:'#FFF', fontSize:12}}>Nama CC</Text>
-                </View>
-                <View style={{width:wp('35%')}}>
-                  <Text style={{textAlign:'center', color:'#FFF', fontSize:12}}>Nama Project</Text>
-                </View>
-                <View style={{width:wp('10%'), alignItems:'center', justifyContent:'center'}}>
-                  <Text style={{textAlign:'center', color:'#FFF', fontSize:12}}>Nilai</Text>
+              <View>
+               <View style={styles.wrapperHeaderContent}>
+                    <View style={{width:wp('35%')}}>
+                      <Text style={{textAlign:'center', color:'#FFF', fontSize:12}}>Nama CC</Text>
+                    </View>
+                    <View style={{width:wp('35%')}}>
+                      <Text style={{textAlign:'center', color:'#FFF', fontSize:12}}>Nama Project</Text>
+                    </View>
+                    <View style={{width:wp('10%'), alignItems:'center', justifyContent:'center'}}>
+                      <Text style={{textAlign:'center', color:'#FFF', fontSize:12}}>Nilai</Text>
+                    </View>
                 </View>
               </View>
             )}
             keyExtractor={(item, index) => index.toString()}
             renderItem={({ item }) => (
-              <TouchableOpacity style={styles.containerDetailData} onPress={this._onDataPress.bind(this, { level: item.DIVISI, mitra: item.MITRA, id: item.LOPID })}> 
-                <View style={{width:wp('35%'), alignSelf:'center', justifyContent:'center'}}>
-                  <Text style={{fontSize:10}}>{item.NAMACC}</Text>
-                </View>
-                <View style={{width:wp('35%'), alignSelf:'center', justifyContent:'center'}}>
-                  <Text style={{fontSize:10}}>{item.NAMAPROJECT}</Text>
-                </View>
-                <View style={{width:wp('10%'), alignSelf:'center', justifyContent:'center', alignItems:'center'}}>
-                  <Text style={{textAlign:'center', fontSize:10}}>{parseFloat(item.REVENUE)}M</Text>                    
-                </View>
-              </TouchableOpacity>
+              <View>
+                <TouchableOpacity style={styles.containerDetailData} onPress={this._onDataPress.bind(this, { level: item.DIVISI, mitra: item.MITRA, id: item.LOPID })}> 
+                    <View style={{width:wp('35%'), alignSelf:'center', justifyContent:'center'}}>
+                      <Text style={{fontSize:10}}>{item.NAMACC}</Text>
+                    </View>
+                    <View style={{width:wp('35%'), alignSelf:'center', justifyContent:'center'}}>
+                      <Text style={{fontSize:10}}>{item.NAMAPROJECT}</Text>
+                    </View>
+                    <View style={{width:wp('10%'), alignSelf:'center', justifyContent:'center', alignItems:'center'}}>
+                      <Text style={{textAlign:'center', fontSize:10}}>{parseFloat(item.REVENUE)}M</Text>                    
+                    </View>
+                </TouchableOpacity>
+              </View>
             )}
             style={{height:hp('80%'), marginBottom:hp('2%')}}
           />
@@ -347,8 +392,9 @@ class detailMonitorOgp extends Component{
     };
 
     const{
-      //prospect
-      ebisProspectREVENUE,ebisProspectProject,dataMitra, EbisDetailOgp
+      //Win
+      ebisWinRev,ebisWinProject,
+      ebisDetailOgp, ebisDetailOgpSubs, ebisDetailOgpMitra, ebisDetailOgpTelkom 
     } = this.props;
 
     const {statusAll, statusSubs, statusMitra, statusTelkom, pressed} = this.state;
@@ -364,8 +410,8 @@ class detailMonitorOgp extends Component{
 
             <TouchableOpacity style={styles.containerArrowWin}>
               <Text style={styles.textJudul}>WIN</Text>
-              <Text style={styles.textIsi}>{ebisProspectREVENUE}M</Text>
-              <Text style={styles.textKeterangan}>per {ebisProspectProject} Project</Text>
+              <Text style={styles.textIsi}>{ebisWinRev}M</Text>
+              <Text style={styles.textKeterangan}>per {ebisWinProject} Project</Text>
             </TouchableOpacity>
 
             <Image 
@@ -373,23 +419,6 @@ class detailMonitorOgp extends Component{
               style={styles.imageStyle}
               resizeMode={'stretch'}
           />
-
-          <TouchableOpacity onPress={() => this.buttonAll()} style={styles.containerArrowSubmission2}>
-            { statusAll === false 
-                ?
-              <Image 
-                source={images.allImage.allAktif}
-                style={styles.imageContent}
-                resizeMode={'stretch'}
-              />
-                :
-              <Image 
-                source={images.allImage.allNon}
-                style={styles.imageContent}
-                resizeMode={'stretch'}
-              />
-            }
-          </TouchableOpacity>
 
           <TouchableOpacity onPress={() => this.buttonSubs()} style={styles.containerArrowSubmission2}>
             { statusSubs === false 
@@ -425,22 +454,6 @@ class detailMonitorOgp extends Component{
             }
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={() => this.buttonTelkom()} style={styles.containerArrowSubmission2}>
-            { statusTelkom === false 
-                ?
-              <Image 
-                source={images.telkomImage.telkomAktif}
-                style={styles.imageContent}
-                resizeMode={'stretch'}
-              />
-                :
-              <Image 
-                source={images.telkomImage.telkomNon}
-                style={styles.imageContent}
-                resizeMode={'stretch'}
-              />
-            }
-          </TouchableOpacity>
         </View>
         
         <View style={styles.wrapperHeaderContent}>
@@ -468,23 +481,37 @@ class detailMonitorOgp extends Component{
         
         {/* <ScrollView> */}
           <Content style={{backgroundColor:'#FFF'}}>
+
             {renderIf(!statusAll)(
               <View>
                 <FlatList
-                  data={EbisDetailOgp}
+                  data={(ebisDetailOgp.length>0) ? ebisDetailOgp : []} 
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModal(item.NAMA_MITRA)}> 
+
+                    item.NAMACC=='TOTAL'
+                    ?
+                    <TouchableOpacity style={styles.containerDetailData}> 
+                      <View style={{width:wp('70%')}}>
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.NAMACC}</Text>
+                      </View>
+                      <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.REVENUE}M</Text>                    
+                      </View>
+                    </TouchableOpacity>
+                    :
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModal('EBIS','ALL',item.NAMACC)}>
                       <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
                         <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
                       </View>
                       <View style={{width:wp('65%')}}>
-                        <Text>{item.NAMA_MITRA}</Text>
+                        <Text>{item.NAMACC}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
                         <Text style={{textAlign:'center'}}>{item.REVENUE}M</Text>                    
                       </View>
                     </TouchableOpacity>
+
                   )}
                   ListEmptyComponent={() => (
                     <View style={{ alignItems : "center", justifyContent: 'center'}}>
@@ -503,21 +530,144 @@ class detailMonitorOgp extends Component{
             )}
 
             {renderIf(!statusSubs)(
-              <Text>
-                Status Subs
-              </Text>
+              <View>
+                <FlatList
+                  data={(ebisDetailOgpSubs.length>0) ? ebisDetailOgpSubs : []} 
+                  keyExtractor={(item, index) => index.toString()}
+                  renderItem={({ item }) => (
+
+                    item.NAMACC=='TOTAL'
+                    ?
+                    <TouchableOpacity style={styles.containerDetailData}> 
+                      <View style={{width:wp('70%')}}>
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.NAMACC}</Text>
+                      </View>
+                      <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.REVENUE}M</Text>                    
+                      </View>
+                    </TouchableOpacity>
+                    :
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModal('EBIS','CFU',item.NAMACC)}>
+                      <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
+                        <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
+                      </View>
+                      <View style={{width:wp('65%')}}>
+                        <Text>{item.NAMACC}</Text>
+                      </View>
+                      <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
+                        <Text style={{textAlign:'center'}}>{item.REVENUE}M</Text>                    
+                      </View>
+                    </TouchableOpacity>
+
+                  )}
+                  ListEmptyComponent={() => (
+                    <View style={{ alignItems : "center", justifyContent: 'center'}}>
+                      <Text>Tidak ada data</Text>
+                    </View>
+                  )}
+                />
+                <Modal 
+                  isVisible={this.state.visibleModal === true}
+                  onBackdropPress={() => this.setState({ visibleModal: false })}>
+                  {
+                  pressed == false ? this.renderModalContent() : this.renderDataDetail()
+                  }
+                </Modal>
+              </View>
             )}
 
             {renderIf(!statusMitra)(
-              <Text>
-                Status Mitra
-              </Text>
+              <View>
+                <FlatList
+                  data={(ebisDetailOgpMitra.length>0) ? ebisDetailOgpMitra : []} 
+                  keyExtractor={(item, index) => index.toString()}
+                  renderItem={({ item }) => (
+
+                    item.NAMACC=='TOTAL'
+                    ?
+                    <TouchableOpacity style={styles.containerDetailData}> 
+                      <View style={{width:wp('70%')}}>
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.NAMACC}</Text>
+                      </View>
+                      <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.REVENUE}M</Text>                    
+                      </View>
+                    </TouchableOpacity>
+                    :
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModal('EBIS','MITRA',item.NAMACC)}>
+                      <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
+                        <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
+                      </View>
+                      <View style={{width:wp('65%')}}>
+                        <Text>{item.NAMACC}</Text>
+                      </View>
+                      <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
+                        <Text style={{textAlign:'center'}}>{item.REVENUE}M</Text>                    
+                      </View>
+                    </TouchableOpacity>
+
+                  )}
+                  ListEmptyComponent={() => (
+                    <View style={{ alignItems : "center", justifyContent: 'center'}}>
+                      <Text>Tidak ada data</Text>
+                    </View>
+                  )}
+                />
+                <Modal 
+                  isVisible={this.state.visibleModal === true}
+                  onBackdropPress={() => this.setState({ visibleModal: false })}>
+                  {
+                  pressed == false ? this.renderModalContent() : this.renderDataDetail()
+                  }
+                </Modal>
+              </View>
             )}
 
             {renderIf(!statusTelkom)(
-              <Text>
-                Status Telkom
-              </Text>
+              <View>
+                <FlatList
+                  data={(ebisDetailOgpTelkom.length>0) ? ebisDetailOgpTelkom : []} 
+                  keyExtractor={(item, index) => index.toString()}
+                  renderItem={({ item }) => (
+
+                    item.NAMACC=='TOTAL'
+                    ?
+                    <TouchableOpacity style={styles.containerDetailData}> 
+                      <View style={{width:wp('70%')}}>
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.NAMACC}</Text>
+                      </View>
+                      <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.REVENUE}M</Text>                    
+                      </View>
+                    </TouchableOpacity>
+                    :
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModal('EBIS','TELKOM',item.NAMACC)}>
+                      <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
+                        <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
+                      </View>
+                      <View style={{width:wp('65%')}}>
+                        <Text>{item.NAMACC}</Text>
+                      </View>
+                      <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
+                        <Text style={{textAlign:'center'}}>{item.REVENUE}M</Text>                    
+                      </View>
+                    </TouchableOpacity>
+
+                  )}
+                  ListEmptyComponent={() => (
+                    <View style={{ alignItems : "center", justifyContent: 'center'}}>
+                      <Text>Tidak ada data</Text>
+                    </View>
+                  )}
+                />
+                <Modal 
+                  isVisible={this.state.visibleModal === true}
+                  onBackdropPress={() => this.setState({ visibleModal: false })}>
+                  {
+                  pressed == false ? this.renderModalContent() : this.renderDataDetail()
+                  }
+                </Modal>
+              </View>
             )}
           </Content>
         {/* </ScrollView> */}
@@ -565,8 +715,9 @@ class detailMonitorOgp extends Component{
     };
 
     const{
-      //prospect
-      ebisProspectREVENUE2,ebisProspectProject2,dataMitra2, DesDetailOgp
+      //Win
+      desWinRev, desWinProject, 
+      desDetailOgp, desDetailOgpSubs, desDetailOgpMitra, desDetailOgpTelkom 
     } = this.props;
 
     const {statusAll, statusSubs, statusMitra, statusTelkom, pressed} = this.state;
@@ -582,8 +733,8 @@ class detailMonitorOgp extends Component{
 
           <View style={styles.containerArrowWin}>
             <Text style={styles.textJudul}>WIN</Text>
-            <Text style={styles.textIsi}>{ebisProspectREVENUE2}M</Text>
-            <Text style={styles.textKeterangan}>per {ebisProspectProject2} Project</Text>
+            <Text style={styles.textIsi}>{desWinRev}M</Text>
+            <Text style={styles.textKeterangan}>per {desWinProject} Project</Text>
           </View>
 
           <Image 
@@ -591,23 +742,6 @@ class detailMonitorOgp extends Component{
             style={styles.imageStyle}
             resizeMode={'stretch'}
           />
-
-          <TouchableOpacity onPress={() => this.buttonAll()} style={styles.containerArrowSubmission2}>
-            { statusAll === false 
-                ?
-              <Image 
-                source={images.allImage.allAktif}
-                style={styles.imageContent}
-                resizeMode={'stretch'}
-              />
-                :
-              <Image 
-                source={images.allImage.allNon}
-                style={styles.imageContent}
-                resizeMode={'stretch'}
-              />
-            }
-          </TouchableOpacity>
 
           <TouchableOpacity onPress={() => this.buttonSubs()} style={styles.containerArrowSubmission2}>
             { statusSubs === false 
@@ -643,22 +777,6 @@ class detailMonitorOgp extends Component{
             }
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={() => this.buttonTelkom()} style={styles.containerArrowSubmission2}>
-            { statusTelkom === false 
-                ?
-              <Image 
-                source={images.telkomImage.telkomAktif}
-                style={styles.imageContent}
-                resizeMode={'stretch'}
-              />
-                :
-              <Image 
-                source={images.telkomImage.telkomNon}
-                style={styles.imageContent}
-                resizeMode={'stretch'}
-              />
-            }
-          </TouchableOpacity>
         </View>
         
         <View style={styles.wrapperHeaderContent}>
@@ -689,20 +807,33 @@ class detailMonitorOgp extends Component{
             {renderIf(!statusAll)(
               <View>
                 <FlatList
-                  data={DesDetailOgp}
+                  data={(desDetailOgp.length>0) ? desDetailOgpdata : []} 
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModalDes(item.NAMA_MITRA)}> 
+
+                    item.NAMACC=='TOTAL'
+                    ?
+                    <TouchableOpacity style={styles.containerDetailData}> 
+                      <View style={{width:wp('70%')}}>
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.NAMACC}</Text>
+                      </View>
+                      <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.REVENUE}M</Text>                    
+                      </View>
+                    </TouchableOpacity>
+                    :
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModal('DES','ALL',item.NAMACC)}>
                       <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
                         <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
                       </View>
                       <View style={{width:wp('65%')}}>
-                        <Text>{item.NAMA_MITRA}</Text>
+                        <Text>{item.NAMACC}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
                         <Text style={{textAlign:'center'}}>{item.REVENUE}M</Text>                    
                       </View>
                     </TouchableOpacity>
+
                   )}
                   ListEmptyComponent={() => (
                     <View style={{ alignItems : "center", justifyContent: 'center'}}>
@@ -721,22 +852,146 @@ class detailMonitorOgp extends Component{
             )}
 
             {renderIf(!statusSubs)(
-              <Text>
-                Status Subs
-              </Text>
+              <View>
+                <FlatList
+                  data={(desDetailOgpSubs.length>0) ? desDetailOgpSubs : []} 
+                  keyExtractor={(item, index) => index.toString()}
+                  renderItem={({ item }) => (
+
+                    item.NAMACC=='TOTAL'
+                    ?
+                    <TouchableOpacity style={styles.containerDetailData}> 
+                      <View style={{width:wp('70%')}}>
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.NAMACC}</Text>
+                      </View>
+                      <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.REVENUE}M</Text>                    
+                      </View>
+                    </TouchableOpacity>
+                    :
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModal('DES','CFU',item.NAMACC)}>
+                      <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
+                        <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
+                      </View>
+                      <View style={{width:wp('65%')}}>
+                        <Text>{item.NAMACC}</Text>
+                      </View>
+                      <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
+                        <Text style={{textAlign:'center'}}>{item.REVENUE}M</Text>                    
+                      </View>
+                    </TouchableOpacity>
+
+                  )}
+                  ListEmptyComponent={() => (
+                    <View style={{ alignItems : "center", justifyContent: 'center'}}>
+                      <Text>Tidak ada data</Text>
+                    </View>
+                  )}
+                />
+                <Modal 
+                  isVisible={this.state.visibleModal === true}
+                  onBackdropPress={() => this.setState({ visibleModal: false })}>
+                  {
+                  pressed == false ? this.renderModalContent() : this.renderDataDetail()
+                  }
+                </Modal>
+              </View>
             )}
 
             {renderIf(!statusMitra)(
-              <Text>
-                Status Mitra
-              </Text>
+              <View>
+                <FlatList
+                  data={(desDetailOgpMitra.length>0) ? desDetailOgpMitra : []} 
+                  keyExtractor={(item, index) => index.toString()}
+                  renderItem={({ item }) => (
+
+                    item.NAMACC=='TOTAL'
+                    ?
+                    <TouchableOpacity style={styles.containerDetailData}> 
+                      <View style={{width:wp('70%')}}>
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.NAMACC}</Text>
+                      </View>
+                      <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.REVENUE}M</Text>                    
+                      </View>
+                    </TouchableOpacity>
+                    :
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModal('DES','MITRA',item.NAMACC)}>
+                      <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
+                        <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
+                      </View>
+                      <View style={{width:wp('65%')}}>
+                        <Text>{item.NAMACC}</Text>
+                      </View>
+                      <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
+                        <Text style={{textAlign:'center'}}>{item.REVENUE}M</Text>                    
+                      </View>
+                    </TouchableOpacity>
+
+                  )}
+                  ListEmptyComponent={() => (
+                    <View style={{ alignItems : "center", justifyContent: 'center'}}>
+                      <Text>Tidak ada data</Text>
+                    </View>
+                  )}
+                />
+                <Modal 
+                  isVisible={this.state.visibleModal === true}
+                  onBackdropPress={() => this.setState({ visibleModal: false })}>
+                  {
+                  pressed == false ? this.renderModalContent() : this.renderDataDetail()
+                  }
+                </Modal>
+              </View>
             )}
 
             {renderIf(!statusTelkom)(
-              <Text>
-                Status Telkom
-              </Text>
+              <View>
+                <FlatList
+                  data={(desDetailOgpTelkom.length>0) ? desDetailOgpTelkom : []} 
+                  keyExtractor={(item, index) => index.toString()}
+                  renderItem={({ item }) => (
+
+                    item.NAMACC=='TOTAL'
+                    ?
+                    <TouchableOpacity style={styles.containerDetailData}> 
+                      <View style={{width:wp('70%')}}>
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.NAMACC}</Text>
+                      </View>
+                      <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.REVENUE}M</Text>                    
+                      </View>
+                    </TouchableOpacity>
+                    :
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModal('DES','TELKOM',item.NAMACC)}>
+                      <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
+                        <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
+                      </View>
+                      <View style={{width:wp('65%')}}>
+                        <Text>{item.NAMACC}</Text>
+                      </View>
+                      <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
+                        <Text style={{textAlign:'center'}}>{item.REVENUE}M</Text>                    
+                      </View>
+                    </TouchableOpacity>
+
+                  )}
+                  ListEmptyComponent={() => (
+                    <View style={{ alignItems : "center", justifyContent: 'center'}}>
+                      <Text>Tidak ada data</Text>
+                    </View>
+                  )}
+                />
+                <Modal 
+                  isVisible={this.state.visibleModal === true}
+                  onBackdropPress={() => this.setState({ visibleModal: false })}>
+                  {
+                  pressed == false ? this.renderModalContent() : this.renderDataDetail()
+                  }
+                </Modal>
+              </View>
             )}
+
           </Content>
         {/* </ScrollView> */}
       </View>
@@ -784,7 +1039,8 @@ class detailMonitorOgp extends Component{
 
     const{
       //prospect
-      ebisProspectREVENUE3,ebisProspectProject3,dataMitra3, DbsDetailOgp
+      dbsWinRev,dbsWinProject, 
+      dbsDetailOgp, dbsDetailOgpSubs, dbsDetailOgpMitra, dbsDetailOgpTelkom 
     } = this.props;
 
     const {statusAll, statusSubs, statusMitra, statusTelkom, pressed} = this.state;
@@ -800,8 +1056,8 @@ class detailMonitorOgp extends Component{
 
           <View style={styles.containerArrowWin}>
             <Text style={styles.textJudul}>WIN</Text>
-            <Text style={styles.textIsi}>{ebisProspectREVENUE3}M</Text>
-            <Text style={styles.textKeterangan}>per {ebisProspectProject3} Project</Text>
+            <Text style={styles.textIsi}>{dbsWinRev}M</Text>
+            <Text style={styles.textKeterangan}>per {dbsWinProject} Project</Text>
           </View>
 
           <Image 
@@ -809,23 +1065,6 @@ class detailMonitorOgp extends Component{
             style={styles.imageStyle}
             resizeMode={'stretch'}
           />
-
-          <TouchableOpacity onPress={() => this.buttonAll()} style={styles.containerArrowSubmission2}>
-            { statusAll === false 
-                ?
-              <Image 
-                source={images.allImage.allAktif}
-                style={styles.imageContent}
-                resizeMode={'stretch'}
-              />
-                :
-              <Image 
-                source={images.allImage.allNon}
-                style={styles.imageContent}
-                resizeMode={'stretch'}
-              />
-            }
-          </TouchableOpacity>
 
           <TouchableOpacity onPress={() => this.buttonSubs()} style={styles.containerArrowSubmission2}>
             { statusSubs === false 
@@ -861,22 +1100,6 @@ class detailMonitorOgp extends Component{
             }
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={() => this.buttonTelkom()} style={styles.containerArrowSubmission2}>
-            { statusTelkom === false 
-                ?
-              <Image 
-                source={images.telkomImage.telkomAktif}
-                style={styles.imageContent}
-                resizeMode={'stretch'}
-              />
-                :
-              <Image 
-                source={images.telkomImage.telkomNon}
-                style={styles.imageContent}
-                resizeMode={'stretch'}
-              />
-            }
-          </TouchableOpacity>
         </View>
         
         <View style={styles.wrapperHeaderContent}>
@@ -907,20 +1130,33 @@ class detailMonitorOgp extends Component{
             {renderIf(!statusAll)(
               <View>
                 <FlatList
-                  data={DbsDetailOgp}
+                  data={(dbsDetailOgp.length>0) ? dbsDetailOgp : []} 
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModalDbs(item.NAMA_MITRA)}> 
+
+                    item.NAMACC=='TOTAL'
+                    ?
+                    <TouchableOpacity style={styles.containerDetailData}> 
+                      <View style={{width:wp('70%')}}>
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.NAMACC}</Text>
+                      </View>
+                      <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.REVENUE}M</Text>                    
+                      </View>
+                    </TouchableOpacity>
+                    :
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModal('DBS','ALL',item.NAMACC)}>
                       <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
                         <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
                       </View>
                       <View style={{width:wp('65%')}}>
-                        <Text>{item.NAMA_MITRA}</Text>
+                        <Text>{item.NAMACC}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
                         <Text style={{textAlign:'center'}}>{item.REVENUE}M</Text>                    
                       </View>
                     </TouchableOpacity>
+
                   )}
                   ListEmptyComponent={() => (
                     <View style={{ alignItems : "center", justifyContent: 'center'}}>
@@ -939,22 +1175,146 @@ class detailMonitorOgp extends Component{
             )}
 
             {renderIf(!statusSubs)(
-              <Text>
-                Status Subs
-              </Text>
+              <View>
+                <FlatList
+                  data={(dbsDetailOgpSubs.length>0) ? dbsDetailOgpSubs : []} 
+                  keyExtractor={(item, index) => index.toString()}
+                  renderItem={({ item }) => (
+
+                    item.NAMACC=='TOTAL'
+                    ?
+                    <TouchableOpacity style={styles.containerDetailData}> 
+                      <View style={{width:wp('70%')}}>
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.NAMACC}</Text>
+                      </View>
+                      <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.REVENUE}M</Text>                    
+                      </View>
+                    </TouchableOpacity>
+                    :
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModal('DBS','CFU',item.NAMACC)}>
+                      <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
+                        <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
+                      </View>
+                      <View style={{width:wp('65%')}}>
+                        <Text>{item.NAMACC}</Text>
+                      </View>
+                      <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
+                        <Text style={{textAlign:'center'}}>{item.REVENUE}M</Text>                    
+                      </View>
+                    </TouchableOpacity>
+
+                  )}
+                  ListEmptyComponent={() => (
+                    <View style={{ alignItems : "center", justifyContent: 'center'}}>
+                      <Text>Tidak ada data</Text>
+                    </View>
+                  )}
+                />
+                <Modal 
+                  isVisible={this.state.visibleModal === true}
+                  onBackdropPress={() => this.setState({ visibleModal: false })}>
+                  {
+                  pressed == false ? this.renderModalContent() : this.renderDataDetail()
+                  }
+                </Modal>
+              </View>
             )}
 
             {renderIf(!statusMitra)(
-              <Text>
-                Status Mitra
-              </Text>
+              <View>
+                <FlatList
+                  data={(dbsDetailOgpMitra.length>0) ? dbsDetailOgpMitra : []} 
+                  keyExtractor={(item, index) => index.toString()}
+                  renderItem={({ item }) => (
+
+                    item.NAMACC=='TOTAL'
+                    ?
+                    <TouchableOpacity style={styles.containerDetailData}> 
+                      <View style={{width:wp('70%')}}>
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.NAMACC}</Text>
+                      </View>
+                      <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.REVENUE}M</Text>                    
+                      </View>
+                    </TouchableOpacity>
+                    :
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModal('DBS','TELKOM',item.NAMACC)}>
+                      <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
+                        <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
+                      </View>
+                      <View style={{width:wp('65%')}}>
+                        <Text>{item.NAMACC}</Text>
+                      </View>
+                      <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
+                        <Text style={{textAlign:'center'}}>{item.REVENUE}M</Text>                    
+                      </View>
+                    </TouchableOpacity>
+
+                  )}
+                  ListEmptyComponent={() => (
+                    <View style={{ alignItems : "center", justifyContent: 'center'}}>
+                      <Text>Tidak ada data</Text>
+                    </View>
+                  )}
+                />
+                <Modal 
+                  isVisible={this.state.visibleModal === true}
+                  onBackdropPress={() => this.setState({ visibleModal: false })}>
+                  {
+                  pressed == false ? this.renderModalContent() : this.renderDataDetail()
+                  }
+                </Modal>
+              </View>
             )}
 
             {renderIf(!statusTelkom)(
-              <Text>
-                Status Telkom
-              </Text>
+              <View>
+                <FlatList
+                  data={(dbsDetailOgpTelkom.length>0) ? dbsDetailOgpTelkom : []} 
+                  keyExtractor={(item, index) => index.toString()}
+                  renderItem={({ item }) => (
+
+                    item.NAMACC=='TOTAL'
+                    ?
+                    <TouchableOpacity style={styles.containerDetailData}> 
+                      <View style={{width:wp('70%')}}>
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.NAMACC}</Text>
+                      </View>
+                      <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.REVENUE}M</Text>                    
+                      </View>
+                    </TouchableOpacity>
+                    :
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModal('DBS','TELKOM',item.NAMACC)}>
+                      <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
+                        <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
+                      </View>
+                      <View style={{width:wp('65%')}}>
+                        <Text>{item.NAMACC}</Text>
+                      </View>
+                      <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
+                        <Text style={{textAlign:'center'}}>{item.REVENUE}M</Text>                    
+                      </View>
+                    </TouchableOpacity>
+
+                  )}
+                  ListEmptyComponent={() => (
+                    <View style={{ alignItems : "center", justifyContent: 'center'}}>
+                      <Text>Tidak ada data</Text>
+                    </View>
+                  )}
+                />
+                <Modal 
+                  isVisible={this.state.visibleModal === true}
+                  onBackdropPress={() => this.setState({ visibleModal: false })}>
+                  {
+                  pressed == false ? this.renderModalContent() : this.renderDataDetail()
+                  }
+                </Modal>
+              </View>
             )}
+
           </Content>
         {/* </ScrollView> */}
       </View>
@@ -1001,8 +1361,9 @@ class detailMonitorOgp extends Component{
     };
 
     const{
-      //prospect
-      ebisProspectREVENUE4,ebisProspectProject4,dataMitra4, DgsDetailOgp
+      //Win
+      dgsWinRev,dgsWinProject, 
+      dgsDetailOgp, dgsDetailOgpSubs, dgsDetailOgpMitra, dgsDetailOgpTelkom 
     } = this.props;
 
     const {statusAll, statusSubs, statusMitra, statusTelkom, pressed} = this.state;
@@ -1018,8 +1379,8 @@ class detailMonitorOgp extends Component{
 
           <View style={styles.containerArrowWin}>
             <Text style={styles.textJudul}>WIN</Text>
-            <Text style={styles.textIsi}>{ebisProspectREVENUE4}M</Text>
-            <Text style={styles.textKeterangan}>per {ebisProspectProject4} Project</Text>
+            <Text style={styles.textIsi}>{dgsWinRev}M</Text>
+            <Text style={styles.textKeterangan}>per {dgsWinProject} Project</Text>
           </View>
 
           <Image 
@@ -1027,23 +1388,6 @@ class detailMonitorOgp extends Component{
             style={styles.imageStyle}
             resizeMode={'stretch'}
           />
-
-          <TouchableOpacity onPress={() => this.buttonAll()} style={styles.containerArrowSubmission2}>
-            { statusAll === false 
-                ?
-              <Image 
-                source={images.allImage.allAktif}
-                style={styles.imageContent}
-                resizeMode={'stretch'}
-              />
-                :
-              <Image 
-                source={images.allImage.allNon}
-                style={styles.imageContent}
-                resizeMode={'stretch'}
-              />
-            }
-          </TouchableOpacity>
 
           <TouchableOpacity onPress={() => this.buttonSubs()} style={styles.containerArrowSubmission2}>
             { statusSubs === false 
@@ -1079,22 +1423,6 @@ class detailMonitorOgp extends Component{
             }
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={() => this.buttonTelkom()} style={styles.containerArrowSubmission2}>
-            { statusTelkom === false 
-                ?
-              <Image 
-                source={images.telkomImage.telkomAktif}
-                style={styles.imageContent}
-                resizeMode={'stretch'}
-              />
-                :
-              <Image 
-                source={images.telkomImage.telkomNon}
-                style={styles.imageContent}
-                resizeMode={'stretch'}
-              />
-            }
-          </TouchableOpacity>
         </View>
         
         <View style={styles.wrapperHeaderContent}>
@@ -1125,20 +1453,33 @@ class detailMonitorOgp extends Component{
             {renderIf(!statusAll)(
               <View>
                 <FlatList
-                  data={DgsDetailOgp}
+                  data={(dgsDetailOgp.length>0) ? dgsDetailOgp : []} 
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModalDgs(item.NAMA_MITRA)}> 
+
+                    item.NAMACC=='TOTAL'
+                    ?
+                    <TouchableOpacity style={styles.containerDetailData}> 
+                      <View style={{width:wp('70%')}}>
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.NAMACC}</Text>
+                      </View>
+                      <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.REVENUE}M</Text>                    
+                      </View>
+                    </TouchableOpacity>
+                    :
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModal('DGS','ALL',item.NAMACC)}>
                       <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
                         <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
                       </View>
                       <View style={{width:wp('65%')}}>
-                        <Text>{item.NAMA_MITRA}</Text>
+                        <Text>{item.NAMACC}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
                         <Text style={{textAlign:'center'}}>{item.REVENUE}M</Text>                    
                       </View>
                     </TouchableOpacity>
+
                   )}
                   ListEmptyComponent={() => (
                     <View style={{ alignItems : "center", justifyContent: 'center'}}>
@@ -1157,21 +1498,144 @@ class detailMonitorOgp extends Component{
             )}
 
             {renderIf(!statusSubs)(
-              <Text>
-                Status Subs
-              </Text>
+              <View>
+                <FlatList
+                  data={(dgsDetailOgpSubs.length>0) ? dgsDetailOgpSubs : []} 
+                  keyExtractor={(item, index) => index.toString()}
+                  renderItem={({ item }) => (
+
+                    item.NAMACC=='TOTAL'
+                    ?
+                    <TouchableOpacity style={styles.containerDetailData}> 
+                      <View style={{width:wp('70%')}}>
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.NAMACC}</Text>
+                      </View>
+                      <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.REVENUE}M</Text>                    
+                      </View>
+                    </TouchableOpacity>
+                    :
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModal('DGS','CFU',item.NAMACC)}>
+                      <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
+                        <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
+                      </View>
+                      <View style={{width:wp('65%')}}>
+                        <Text>{item.NAMACC}</Text>
+                      </View>
+                      <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
+                        <Text style={{textAlign:'center'}}>{item.REVENUE}M</Text>                    
+                      </View>
+                    </TouchableOpacity>
+
+                  )}
+                  ListEmptyComponent={() => (
+                    <View style={{ alignItems : "center", justifyContent: 'center'}}>
+                      <Text>Tidak ada data</Text>
+                    </View>
+                  )}
+                />
+                <Modal 
+                  isVisible={this.state.visibleModal === true}
+                  onBackdropPress={() => this.setState({ visibleModal: false })}>
+                  {
+                  pressed == false ? this.renderModalContent() : this.renderDataDetail()
+                  }
+                </Modal>
+              </View>
             )}
 
             {renderIf(!statusMitra)(
-              <Text>
-                Status Mitra
-              </Text>
+              <View>
+                <FlatList
+                  data={(dgsDetailOgpMitra.length>0) ? dgsDetailOgpMitra : []} 
+                  keyExtractor={(item, index) => index.toString()}
+                  renderItem={({ item }) => (
+
+                    item.NAMACC=='TOTAL'
+                    ?
+                    <TouchableOpacity style={styles.containerDetailData}> 
+                      <View style={{width:wp('70%')}}>
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.NAMACC}</Text>
+                      </View>
+                      <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.REVENUE}M</Text>                    
+                      </View>
+                    </TouchableOpacity>
+                    :
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModal('DGS','MITRA',item.NAMACC)}>
+                      <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
+                        <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
+                      </View>
+                      <View style={{width:wp('65%')}}>
+                        <Text>{item.NAMACC}</Text>
+                      </View>
+                      <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
+                        <Text style={{textAlign:'center'}}>{item.REVENUE}M</Text>                    
+                      </View>
+                    </TouchableOpacity>
+
+                  )}
+                  ListEmptyComponent={() => (
+                    <View style={{ alignItems : "center", justifyContent: 'center'}}>
+                      <Text>Tidak ada data</Text>
+                    </View>
+                  )}
+                />
+                <Modal 
+                  isVisible={this.state.visibleModal === true}
+                  onBackdropPress={() => this.setState({ visibleModal: false })}>
+                  {
+                  pressed == false ? this.renderModalContent() : this.renderDataDetail()
+                  }
+                </Modal>
+              </View>
             )}
 
             {renderIf(!statusTelkom)(
-              <Text>
-                Status Telkom
-              </Text>
+              <View>
+                <FlatList
+                  data={(dgsDetailOgpTelkom.length>0) ? dgsDetailOgpTelkom : []} 
+                  keyExtractor={(item, index) => index.toString()}
+                  renderItem={({ item }) => (
+
+                    item.NAMACC=='TOTAL'
+                    ?
+                    <TouchableOpacity style={styles.containerDetailData}> 
+                      <View style={{width:wp('70%')}}>
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.NAMACC}</Text>
+                      </View>
+                      <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.REVENUE}M</Text>                    
+                      </View>
+                    </TouchableOpacity>
+                    :
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModal('DGS','TELKOM',item.NAMACC)}>
+                      <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
+                        <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
+                      </View>
+                      <View style={{width:wp('65%')}}>
+                        <Text>{item.NAMACC}</Text>
+                      </View>
+                      <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
+                        <Text style={{textAlign:'center'}}>{item.REVENUE}M</Text>                    
+                      </View>
+                    </TouchableOpacity>
+
+                  )}
+                  ListEmptyComponent={() => (
+                    <View style={{ alignItems : "center", justifyContent: 'center'}}>
+                      <Text>Tidak ada data</Text>
+                    </View>
+                  )}
+                />
+                <Modal 
+                  isVisible={this.state.visibleModal === true}
+                  onBackdropPress={() => this.setState({ visibleModal: false })}>
+                  {
+                  pressed == false ? this.renderModalContent() : this.renderDataDetail()
+                  }
+                </Modal>
+              </View>
             )}
           </Content>
         {/* </ScrollView> */}
@@ -1179,8 +1643,6 @@ class detailMonitorOgp extends Component{
     )
   }
 
-
-  
   render() {
     var date = new Date().getDate();
     var month = new Date().getMonth() + 1;
@@ -1230,39 +1692,44 @@ class detailMonitorOgp extends Component{
 
 const mapStateToProps = (state) => ({
   //EBIS
-  ebisProspectREVENUE:state.EbisReducer.ebisWinREVENUE,
-  ebisProspectProject:state.EbisReducer.ebisWinProject,
-  ebisProspectTarget:state.EbisReducer.ebisWinTarget,
+  ebisWinRev: state.MonitorEbisReducerKL.dataEbisOgpWinSubs,
+  ebisWinProject: state.MonitorEbisReducerKL.dataEbisOgpWPSubs,
   
   //DES
-  ebisProspectREVENUE2:state.DesReducer.ebisWinREVENUE,
-  ebisProspectProject2:state.DesReducer.ebisWinProject,
-  ebisProspectTarget2:state.DesReducer.ebisWinTarget,
+  desWinRev: state.MonitorDesReducerKL.dataDesOgpWinSubs,
+  desWinProject: state.MonitorDesReducerKL.dataDesOgpWPSubs,
 
   //DBS
-  ebisProspectREVENUE3:state.DbsReducer.ebisWinREVENUE,
-  ebisProspectProject3:state.DbsReducer.ebisWinProject,
-  ebisProspectTarget3:state.DbsReducer.ebisWinTarget,
+  dbsWinRev: state.MonitorDbsReducerKL.dataDbsOgpWinSubs,
+  dbsWinProject: state.MonitorDbsReducerKL.dataDbsOgpWPSubs,
 
   //DGS
-  ebisProspectREVENUE4:state.DgsReducer.ebisWinREVENUE,
-  ebisProspectProject4:state.DgsReducer.ebisWinProject,
-  ebisProspectTarget4:state.DgsReducer.ebisWinTarget,
+  dgsWinRev: state.MonitorDgsReducerKL.dataDgsOgpWinSubs,
+  dgsWinProject: state.MonitorDgsReducerKL.dataDgsOgpWPSubs,
 
-  //data Mitra
-  dataMitra:state.EbisDetailReducer.dataMitra,
-  dataMitra2:state.DesDetailReducer.dataMitra,
-  dataMitra3:state.DbsDetailReducer.dataMitra,
-  dataMitra4:state.DgsDetailReducer.dataMitra,
+  ebisDetailOgp: state.MonitorEbisReducerKL.detailOgp,
+  ebisDetailOgpSubs: state.MonitorEbisReducerKL.detailOgpSubs,
+  ebisDetailOgpMitra: state.MonitorEbisReducerKL.detailOgpMitra,
+  ebisDetailOgpTelkom: state.MonitorEbisReducerKL.detailOgpTelkom,
 
-  //detail ogp
-  EbisDetailOgp: state.MonitorEbisReducerKL.detailOgp,
-  DgsDetailOgp: state.MonitorDgsReducerKL.detailOgpDgs,
-  DbsDetailOgp: state.MonitorDbsReducerKL.detailOgpDbs,
-  DesDetailOgp: state.MonitorDesReducerKL.detailOgpDes
+  desDetailOgp: state.MonitorDesReducerKL.detailOgp,
+  desDetailOgpSubs: state.MonitorDesReducerKL.detailOgpSubs,
+  desDetailOgpMitra: state.MonitorDesReducerKL.detailOgpMitra,
+  desDetailOgpTelkom: state.MonitorDesReducerKL.detailOgpTelkom,
+
+  dbsDetailOgp: state.MonitorDbsReducerKL.detailOgp,
+  dbsDetailOgpSubs: state.MonitorDbsReducerKL.detailOgpSubs,
+  dbsDetailOgpMitra: state.MonitorDbsReducerKL.detailOgpMitra,
+  dbsDetailOgpTelkom: state.MonitorDbsReducerKL.detailOgpTelkom,
+
+  dgsDetailOgp: state.MonitorDgsReducerKL.detailOgp,
+  dgsDetailOgpSubs: state.MonitorDgsReducerKL.detailOgpSubs,
+  dgsDetailOgpMitra: state.MonitorDgsReducerKL.detailOgpMitra,
+  dgsDetailOgpTelkom: state.MonitorDgsReducerKL.detailOgpTelkom,
+
 })
 
-export default connect(mapStateToProps)(detailMonitorOgp);
+export default connect(mapStateToProps)(detailMonitorOgpKL);
 
 const styles = StyleSheet.create({
   container: {
@@ -1270,170 +1737,170 @@ const styles = StyleSheet.create({
   },
 
   //content style
-  imageContent:{
-    width:wp('13%'), height:'100%'
+  imageContent: {
+    width: wp('13%'), height: '100%'
   },
-  wrapperHeaderContent:{
-    backgroundColor:'#FFF',
-    marginTop:hp('2%'),
-    backgroundColor:'#575F6A', 
-    flexDirection:'row', 
-    width:wp('100%'), 
-    padding:hp('1%')
+  wrapperHeaderContent: {
+    backgroundColor: '#FFF',
+    marginTop: hp('2%'),
+    backgroundColor: '#575F6A',
+    flexDirection: 'row',
+    width: wp('100%'),
+    padding: hp('1%')
   },
 
   //tab style 
-  wrapperTabs:{
-    flex:1,
-    width:wp('100%'),
-    height:hp('8%'),
-    backgroundColor:'#D1D4D9',
-    alignSelf:'center',
-    alignItems:'center'
+  wrapperTabs: {
+    flex: 1,
+    width: wp('100%'),
+    height: hp('8%'),
+    backgroundColor: '#D1D4D9',
+    alignSelf: 'center',
+    alignItems: 'center'
   },
-  tabStyle:{
-    backgroundColor:'#575F6A'
+  tabStyle: {
+    backgroundColor: '#575F6A'
   },
-  activeTabStyle:{
-    backgroundColor:'#95a5a6',
+  activeTabStyle: {
+    backgroundColor: '#95a5a6',
   },
-  activeTextStyle:{
-    color:'#FFF'
+  activeTextStyle: {
+    color: '#FFF'
   },
-  textStyle:{
-    color:'#FFF'
+  textStyle: {
+    color: '#FFF'
   },
 
   //style buat arrownya
-  wrapperArrow:{
-    flexDirection:'row', 
-    marginTop:hp('2%')
+  wrapperArrow: {
+    flexDirection: 'row',
+    marginTop: hp('2%')
   },
-  imageStyle:{
-    width:wp('9%'), 
-    height:hp('9%')
+  imageStyle: {
+    width: wp('9%'),
+    height: hp('9%')
   },
-  containerArrowProspect:{
-    height:hp('9%'), 
-    width:wp('24%'), 
-    backgroundColor:'#ddc8df',
-    justifyContent:'center',
-    alignItems:'center'
+  containerArrowProspect: {
+    height: hp('9%'),
+    width: wp('24%'),
+    backgroundColor: '#ddc8df',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
-  containerArrowProspect2:{
-    marginLeft:wp('.5'),
-    marginRight:wp('.5'),
-    height:hp('9%'), 
-    width:wp('13%'), 
+  containerArrowProspect2: {
+    marginLeft: wp('.5'),
+    marginRight: wp('.5'),
+    height: hp('9%'),
+    width: wp('13%'),
   },
-  containerArrowSubmission:{
-    height:hp('9%'), 
-    width:wp('24%'), 
-    backgroundColor:'#ecb889',
-    justifyContent:'center',
-    alignItems:'center'
+  containerArrowSubmission: {
+    height: hp('9%'),
+    width: wp('24%'),
+    backgroundColor: '#ecb889',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
-  containerArrowSubmission2:{
-    marginLeft:wp('.5'),
-    marginRight:wp('.5'),
-    height:hp('9%'), 
-    width:wp('13%'), 
+  containerArrowSubmission2: {
+    marginLeft: wp('.5'),
+    marginRight: wp('.5'),
+    height: hp('9%'),
+    width: wp('13%'),
   },
-  containerArrowWin:{
-    height:hp('9%'), 
-    width:wp('24%'), 
-    backgroundColor:'#c7eecc',
-    justifyContent:'center',
-    alignItems:'center'
+  containerArrowWin: {
+    height: hp('9%'),
+    width: wp('24%'),
+    backgroundColor: '#c7eecc',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
-  containerArrowWin2:{
-    marginLeft:wp('.5'),
-    marginRight:wp('.5'),
-    height:hp('9%'), 
-    width:wp('13%'), 
+  containerArrowWin2: {
+    marginLeft: wp('.5'),
+    marginRight: wp('.5'),
+    height: hp('9%'),
+    width: wp('13%'),
   },
-  containerArrowBill:{
-    height:hp('9%'), 
-    width:wp('24%'), 
-    backgroundColor:'#a9c1fb',
-    justifyContent:'center',
-    alignItems:'center'
+  containerArrowBill: {
+    height: hp('9%'),
+    width: wp('24%'),
+    backgroundColor: '#a9c1fb',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
-  containerArrowBill2:{
-    marginLeft:wp('.5'),
-    marginRight:wp('.5'),
-    height:hp('9%'), 
-    width:wp('13%'), 
+  containerArrowBill2: {
+    marginLeft: wp('.5'),
+    marginRight: wp('.5'),
+    height: hp('9%'),
+    width: wp('13%'),
   },
-  textJudul:{
-    fontWeight:'bold',
-    fontSize:13
+  textJudul: {
+    fontWeight: 'bold',
+    fontSize: 13
   },
-  textIsi:{
-    fontWeight:'700',
-    fontSize:11
+  textIsi: {
+    fontWeight: '700',
+    fontSize: 11
   },
-  textKeterangan:{
-    fontSize:9,
-    fontWeight:'500',
+  textKeterangan: {
+    fontSize: 9,
+    fontWeight: '500',
   },
 
   //column 4 deskripsi
-  judulColumn:{
-    backgroundColor:'#670063'
+  judulColumn: {
+    backgroundColor: '#670063'
   },
-  isiColumn:{
-    height:hp('7%'),
-    backgroundColor:'#ddc8df',
-    justifyContent:'center',
-    alignItems:'center'
+  isiColumn: {
+    height: hp('7%'),
+    backgroundColor: '#ddc8df',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
-  judulColumn2:{
-    backgroundColor:'#D95C00'
+  judulColumn2: {
+    backgroundColor: '#D95C00'
   },
-  isiColumn2:{
-    height:hp('7%'),
-    backgroundColor:'#ecb889',
-    justifyContent:'center',
-    alignItems:'center'
+  isiColumn2: {
+    height: hp('7%'),
+    backgroundColor: '#ecb889',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
-  judulColumn3:{
-    backgroundColor:'#00A440'
+  judulColumn3: {
+    backgroundColor: '#00A440'
   },
-  isiColumn3:{
-    height:hp('7%'),
-    backgroundColor:'#c7eecc',
-    justifyContent:'center',
-    alignItems:'center'
+  isiColumn3: {
+    height: hp('7%'),
+    backgroundColor: '#c7eecc',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
-  judulColumn4:{
-    backgroundColor:'#4C6BA7'
+  judulColumn4: {
+    backgroundColor: '#4C6BA7'
   },
-  isiColumn4:{
-    height:hp('7%'),
-    backgroundColor:'#a9c1fb',
-    justifyContent:'center',
-    alignItems:'center'
+  isiColumn4: {
+    height: hp('7%'),
+    backgroundColor: '#a9c1fb',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
-  textJudulColumn:{
-    fontWeight:'bold',
-    color:'#FFF',
-    fontSize:12,
-    textAlign:'center'
+  textJudulColumn: {
+    fontWeight: 'bold',
+    color: '#FFF',
+    fontSize: 12,
+    textAlign: 'center'
   },
-  textIsiColumn:{
-    fontWeight:'700',
-    fontSize:10,
-    textAlign:'center'
+  textIsiColumn: {
+    fontWeight: '700',
+    fontSize: 10,
+    textAlign: 'center'
   },
 
   //detail 
-  containerDetailData:{
-    justifyContent:'space-between', 
-    flexDirection:'row', 
-    borderBottomColor:'#000',
-    borderBottomWidth:1,
-    padding:hp('2%')
+  containerDetailData: {
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    borderBottomColor: '#000',
+    borderBottomWidth: 1,
+    padding: hp('2%')
   },
   modalContent: {
     backgroundColor: "white",

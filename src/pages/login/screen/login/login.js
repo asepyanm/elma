@@ -6,6 +6,7 @@ import {
   View,
   TextInput,
   Button,
+  AsyncStorage,
   TouchableHighlight,
   Image,
   Alert
@@ -29,19 +30,74 @@ class Login extends Component {
     this.state = {
       username:'',
       password:'',
+      token:'',
+      user_id:'',
+      group:'NOT_LOGGED',
       validationUsername:false,     
-      validationPassword:false,   
+      validationPassword:false,
     }
   }
 
+  _storeData = async () => {
+    this._storeDataToken();
+    const {loginGroup} = this.props;
+    try {
+      // console.log(`isi login group ${loginGroup}`);
+      // console.log(`isi login group string ${JSON.stringify(loginGroup)}`);  
+      // console.log(`isi props ${this.props}`);
+      // console.log(`isi props string ${JSON.stringify(this.props)}`);
+      await AsyncStorage.setItem('loginGroup',loginGroup);
+    } catch (error) {
+      // Error saving data
+    }
+    await AsyncStorage.getItem('loginGroup', (error, result) => {
+      if (result) {
+        console.warn(`AsyncStorage.storeData: ${result} ${loginGroup}`)
+      }
+    });   
+  };
+    _storeDataToken = async () => {
+    await AsyncStorage.getItem('fcmtoken', (error, result) => {
+      if (result) {
+       this._saveToken(result)
+      }
+    });   
+  };
+_saveToken=async(token)=>{
+         if(this.state.group!='NOT_LOGGED'){
+              await AsyncStorage.getItem('loginGroup', (error, result) => {
+                if (result) {
+                  if(this.state.group!==result){
+                    this.setState({
+                      group: result
+                    });
+                  }
+                }
+              })
+            }
+            if(this.state.user_id==''){
+             await AsyncStorage.getItem('user_id', (error, result) => {
+                   this.setState({
+                                  user_id: result
+                                });
+            });   
+          }
+          await axios.get(`${url.API}/fcmsavetoken/${token}/${this.state.user_id}/${this.state.group}/ya`)
+}
+  _cekSession= async () => {
+    await AsyncStorage.getItem('user_id', (error, result) => {
+      console.log(`isi session ${result}`)
+    });   
+  };
   validationForm(){
-    const {username, password} = this.state;
+    const {username, password, groupID} = this.state;
     
     if (username === '' && password === '')
       {
         this.setState({
           validationUsername:true,
           validationPassword:true,
+          group: 'NOT_LOGGED',
         })
         Toast.show({
           text: "Username / Password tidak boleh kosong",
@@ -49,26 +105,72 @@ class Login extends Component {
         });
       }
     else{
+
       this.setState({
         validationUsername:false,
         validationPassword:false,
       }, () => {
+
         this.getLogin();
+
+        //Toast.show({
+        //  text: `GroupID: state: ${this.state.group} / ${loginGroup}`,
+        //  duration: 1024
+        //});
       })
     }
   }
-
+  setSessionLogin = () => {
+    const {username, password} = this.state;
+    axios.get(`${url.API}/ebis_getlogin?user_id=${username}&user_pass=${password}`).then(async(response) => {
+    console.log(`response.data login ${JSON.stringify(response.data)}`);
+      const dataSession=response.data[0];
+      AsyncStorage.setItem('user_id',response.data[0].USER_ID);
+         try {
+       AsyncStorage.setItem('user_id',response.data[0].USER_ID);
+    } catch (error) {
+      console.log(`gagal save ${error}`)
+    }
+      // try {
+      //   await AsyncStorage.setItem('sessionUser',dataSession);
+      // } catch (error) {
+      //   // Error saving data
+      // }
+      this._cekSession;
+  })
+  .catch(error => {
+    console.log(error);
+  });
+  }
   getLogin(){
-    const {username, password} = this.state;	
-    
+    const {username, password} = this.state;  
+      // console.log(`value username ${username}`);
+      // console.log(`value password ${password}`);
+      // console.log(`value state ${JSON.stringify(this.state)}`);
     this.props.dispatch({
       type:'LOGIN',
       payload:axios.get(`${url.API}/ebis_getlogin?user_id=${username}&user_pass=${password}`),
     })
+    // console.log(`value props ${JSON.stringify(this.props)}`);
+
   }
 
   render() {
-    const {statusForm, loaderStatus} = this.props;
+    const {statusForm,loaderStatus,loginGroup} = this.props;
+  
+    if(this.state.group!=loginGroup){
+      //console.warn(`ELMA AsyncStorage.setItem: ${this.state.group} ${loginGroup}`)
+      if(loginGroup!='NOT_LOGGED'){
+        this.setState({group:loginGroup})
+        this._storeData();
+        this.setSessionLogin();
+      } else {
+        if(this.state.group!='NOT_LOGGED'){
+          this.setState({group:'NOT_LOGGED'})
+          this._storeData();
+        }
+      }
+    }
     return (
       <View style={styles.container}>
         <Image 
@@ -108,9 +210,9 @@ class Login extends Component {
         <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={() => this.validationForm()}>
           {
             loaderStatus
-              ?
+            ?
             <ActivityIndicator size="small" color="#FFF" />
-              :
+            :
             <Text style={styles.loginText}>Login</Text>
           }
         </TouchableHighlight>
@@ -122,6 +224,8 @@ class Login extends Component {
 const mapStateToProps = (state) => ({
   loaderStatus:state.LoginReducer.loaderStatus,
   statusForm:state.LoginReducer.statusErrorFrom,
+  loginGroup:state.LoginReducer.group_ID,
+  isLogged:state.LoginReducer.isLoggedIn,
 })
 
 export default connect(mapStateToProps)(Login);

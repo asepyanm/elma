@@ -22,51 +22,26 @@ class DgsScreens extends Component{
     this.state = {
       data:[],
 
-      //date awal
-      date1:'',
+      tampilActivityIndicator: false,
 
-      //date akhir
-      date2:'',
+      //get date
+      date1: '',
+      date2: '',
     }
   }
 
-  componentWillMount(){
-    var month = new Date().getMonth() + 1;
-    var year = new Date().getFullYear();
-
-    var date1 = `${year}01`
-    var date2 = `${year}${month}`
-
-    this.setState({
-      date1:date1,
-      date2:date2
-    })
-  }
-
-  filterPeriodeDate1(data){
-    const {date2} = this.state;
-
-    this.setState({
-      date1:data.value,
-    })
-
+  refreshPeriode(sDate,eDate){
+    this.setState({date1:sDate,date2:eDate})
     this.props.dispatch({
       type:'DGS_HOME_FILTER_PERIODE',
-      payload:axios.get(`${url.API}/ebis_getlopmain_ytd/div/DGS/date1/${data.value}/date2/${date2}`)
+      payload:axios.get(`${url.API}/ebis_getlopmain_ytd/div/DGS/date1/${sDate}/date2/${eDate}/treg/ALL/witel/ALL`)
     });
-  }
-
-  filterPeriodeDate2(data){
-    const {date1} = this.state;
-
-    this.setState({
-      date2:data.value  
-    })
 
     this.props.dispatch({
-      type:'DGS_HOME_FILTER_PERIODE',
-      payload:axios.get(`${url.API}/ebis_getlopmain_ytd/div/DGS/date1/${date1}/date2/${data.value}`)
+      type:'DGS_LASTUPDATE',
+      payload:axios.get(`${url.API}/ebis_lastime`)
     });
+
   }
   
   render() {
@@ -75,22 +50,6 @@ class DgsScreens extends Component{
     var year = new Date().getFullYear();
 
     var dateNow = `${date}-${month}-${year}`
-
-    let index = 0;
-    const data = [
-      { key: index++, label: `${year}-01`, value:`${year}01`},
-      { key: index++, label: `${year}-02`, value:`${year}02`},
-      { key: index++, label: `${year}-03`, value:`${year}03`},
-      { key: index++, label: `${year}-04`, value:`${year}04`},
-      { key: index++, label: `${year}-05`, value:`${year}05`},
-      { key: index++, label: `${year}-06`, value:`${year}06`},
-      { key: index++, label: `${year}-07`, value:`${year}07`},
-      { key: index++, label: `${year}-08`, value:`${year}08`},
-      { key: index++, label: `${year}-09`, value:`${year}09`},
-      { key: index++, label: `${year}-10`, value:`${year}10`},
-      { key: index++, label: `${year}-11`, value:`${year}11`},
-      { key: index++, label: `${year}-12`, value:`${year}12`},
-    ];
 
     //import image arrow
     const images = {
@@ -134,6 +93,9 @@ class DgsScreens extends Component{
     };
 
     const {
+      tampilActivityIndicator,
+      lastUpdated,
+      sDate, eDate,
       //navigation
       navigation,
       //prospect
@@ -160,8 +122,6 @@ class DgsScreens extends Component{
       currentBIllcomRevenue,currentBillcomProject,
     } = this.props;
 
-    const {date1, date2} = this.state;
-
     const ebisPresentase = (parseInt(ebisProspectREVENUE) / parseInt(ebisProspectTarget))*100;
     const ebisPresentase2 = (parseInt(ebisSubmisionREVENUE) / parseInt(ebisSubmissionTarget))*100;
     const ebisPresentase3 = (parseInt(ebisWinREVENUE) / parseInt(ebisWinTarget))*100;
@@ -177,35 +137,19 @@ class DgsScreens extends Component{
     // BWRratio = (parseInt(ebisPresentase4) / parseInt(ebisPresentase3))*100;
     // WPRratio = (parseInt(ebisPresentase3) / parseInt(ebisPresentase))*100;
 
+    const {date1,date2} = this.state;
+    if (date1 != sDate){
+      //this.setState({date1:sDate,date2:eDate})
+      this.refreshPeriode(sDate,eDate)
+    } else {
+      if (date2 != eDate){
+        //this.setState({date1:sDate,date2:eDate})
+        this.refreshPeriode(sDate,eDate)
+      }
+    }
+
     return (
       <View style={styles.container}>
-        <View style={styles.wrapperPeriode}>
-          <View>
-            <Text style={styles.textPeriode}>Periode : </Text>
-          </View>
-          <View style={styles.wrapperModalPeriode}>
-            <View>
-              <ModalSelector
-                data={data}
-                selectTextStyle={{textAlign:'center', alignSelf:'center', alignItems:'center'}}
-                initValue={`${year}-01`}                
-                selectStyle={styles.modalPeriode}
-                onChange={(data)=> this.filterPeriodeDate1(data)} 
-              />
-            </View>
-            <View>
-              <Text style={{fontSize:20, fontWeight:'bold'}}> - </Text>
-            </View>
-            <View>
-              <ModalSelector
-                data={data}
-                initValue={`${year}-${month}`}
-                selectStyle={styles.modalPeriode}
-                onChange={(data)=> this.filterPeriodeDate2(data)} 
-              />
-            </View>
-          </View>
-        </View>
 
         <ScrollView>
           <View style={styles.wrapperArrow}>
@@ -215,7 +159,7 @@ class DgsScreens extends Component{
               resizeMode={'stretch'}
             />
 
-            <TouchableOpacity onPress={() => navigation.navigate('EbisDetailLOP', {date1:`${date1}`, date2:`${date2}`})} style={styles.containerArrowProspect}>
+            <TouchableOpacity onPress={() => navigation.navigate('EbisDetailLOP',{start_date:this.state.date1,end_date:this.state.date2,reg:'ALL',witel:'ALL'})} style={styles.containerArrowProspect}>
               <Text style={styles.textJudul}>PROSPECT</Text>
               <Text style={styles.textIsi}>{ebisProspectREVENUE}M</Text>
               <Text style={styles.textKeterangan}>per {ebisProspectProject} Project</Text>
@@ -255,7 +199,7 @@ class DgsScreens extends Component{
                   />
               }
               <View style={styles.wrapperTextPresentase}>
-                <Text style={styles.textJudul}>{Math.ceil(ebisPresentase)}</Text>
+                <Text style={styles.textJudul}>{Math.ceil(ebisPresentase)}%</Text>
               </View>
             </View>
           </View>
@@ -267,7 +211,7 @@ class DgsScreens extends Component{
               resizeMode={'stretch'}
             />
 
-            <TouchableOpacity onPress={() => navigation.navigate('DesDetailLOP', {date1:`${date1}`, date2:`${date2}`})} style={styles.containerArrowSubmission}>
+            <TouchableOpacity onPress={() => navigation.navigate('DesDetailLOP',{start_date:this.state.date1,end_date:this.state.date2,reg:'ALL',witel:'ALL'})} style={styles.containerArrowSubmission}>
               <Text style={styles.textJudul}>SUBMISSION</Text>
               <Text style={styles.textIsi}>{ebisSubmisionREVENUE}M</Text>
               <Text style={styles.textKeterangan}>per {ebisSubmissionProject} Project</Text>
@@ -307,7 +251,7 @@ class DgsScreens extends Component{
                   />
               }
               <View style={styles.wrapperTextPresentase}>
-                <Text style={styles.textJudul}>{Math.ceil(ebisPresentase2)}</Text>
+                <Text style={styles.textJudul}>{Math.ceil(ebisPresentase2)}%</Text>
               </View>
             </View>
           </View>
@@ -319,7 +263,7 @@ class DgsScreens extends Component{
               resizeMode={'stretch'}
             />
 
-            <TouchableOpacity onPress={() => navigation.navigate('DbsDetailLOP', {date1:`${date1}`, date2:`${date2}`})} style={styles.containerArrowWin}>
+            <TouchableOpacity onPress={() => navigation.navigate('DbsDetailLOP',{start_date:this.state.date1,end_date:this.state.date2,reg:'ALL',witel:'ALL'})} style={styles.containerArrowWin}>
               <Text style={styles.textJudul}>WIN</Text>
               <Text style={styles.textIsi}>{ebisWinREVENUE}M</Text>
               <Text style={styles.textKeterangan}>per {ebisWinProject} Project</Text>
@@ -359,7 +303,7 @@ class DgsScreens extends Component{
                   />
               }
               <View style={styles.wrapperTextPresentase}>
-                <Text style={styles.textJudul}>{Math.ceil(ebisPresentase3)}</Text>
+                <Text style={styles.textJudul}>{Math.ceil(ebisPresentase3)}%</Text>
               </View>
             </View>
           </View>
@@ -371,7 +315,7 @@ class DgsScreens extends Component{
               resizeMode={'stretch'}
             />
 
-            <TouchableOpacity onPress={() => navigation.navigate('DgsDetailLOP', {date1:`${date1}`, date2:`${date2}`})} style={styles.containerArrowBill}>
+            <TouchableOpacity onPress={() => navigation.navigate('DgsDetailLOP',{start_date:this.state.date1,end_date:this.state.date2,reg:'ALL',witel:'ALL'})} style={styles.containerArrowBill}>
               <Text style={styles.textJudul}>BILLCOM</Text>
               <Text style={styles.textIsi}>{ebisBillcomREVENUE}M</Text>
               <Text style={styles.textKeterangan}>per {ebisBillcomeProject} Project</Text>
@@ -411,11 +355,14 @@ class DgsScreens extends Component{
                   />
               }
               <View style={styles.wrapperTextPresentase}>
-                <Text style={styles.textJudul}>{Math.ceil(ebisPresentase4)}</Text>
+                <Text style={styles.textJudul}>{Math.ceil(ebisPresentase4)}%</Text>
               </View>
             </View>
           </View>
-        
+          <View>
+            <Text style={{fontSize:9,marginLeft:wp('2%')}}>Lastupdate: {lastUpdated}</Text>
+          </View>
+       
           <View style={styles.wrapperRatio}>
             <View style={styles.wrapperKontenRatio}>
               <View style={styles.judulRatio}>
@@ -608,6 +555,8 @@ class DgsScreens extends Component{
 }
 
 const mapStateToProps = (state) => ({
+  lastUpdated: state.DgsReducer.ebisLastupdate,
+
   ebisProspectREVENUE:state.DgsReducer.ebisProspectREVENUE,
   ebisProspectProject:state.DgsReducer.ebisProspectProject,
   ebisProspectTarget:state.DgsReducer.ebisProspectTarget,

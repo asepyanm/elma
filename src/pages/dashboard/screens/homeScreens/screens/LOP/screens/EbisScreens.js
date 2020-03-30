@@ -6,91 +6,164 @@ import {
   View,
   ScrollView,
   Image,
+  ActivityIndicator,
   TouchableOpacity
 } from 'react-native';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import ModalSelector from 'react-native-modal-selector';
 import {connect} from 'react-redux';
+import Modal from "react-native-modal";
+
 import axios from 'axios';
 
 //global
+import renderIf from '../../../../../../components/renderIf';
 import url from '../../../../../../../config/api_service';
 
 class EbisScreens extends Component{
   constructor(props){
     super(props);
+
     this.state = {
       data:[],
 
-      //date awal
-      date1:'',
+      isSenin9Pagi: false,
+      isModalSenin: true,
+      allAlertTP:'',allAlertNP:'',
+      winAlertTP:'',winAlertNP:'',
+      loseAlertTP:'',loseAlertNP:'',
 
-      //date akhir
-      date2:'',
+      //group:'G1',
+      
+      tampilActivityIndicator: false,
+      treg:'',
+      witel:'',
+
+      //get date
+      date1: '',
+      date2: '',
     }
   }
 
-  componentWillMount(){
-    var month = new Date().getMonth() + 1;
-    var year = new Date().getFullYear();
+  rekapSeninPagi(){
 
-    var date1 = `${year}01`
-    var date2 = `${year}${month}`
-
-    this.setState({
-      date1:date1,
-      date2:date2
+    //const { loginGroup } = this.props;
+/* 
+    axios.get(`${url.API}/ebis_getnotificationsummaryrekap/group/${this.state.group}`).then((res) => {
+    //axios.get(`${url.API}/ebis_getnotificationsummaryrekap/group/${loginGroup}`).then((res) => {
+      this.setState({dataTampungDetail:res.data,
+                     allAlertTP:res.data[0].TOTALREV,
+                     allAlertNP:res.data[0].TOTALPROJECT,
+                     winAlertTP:res.data[2].TOTALREV,
+                     winAlertNP:res.data[2].TOTALPROJECT,
+                     loseAlertTP:res.data[1].TOTALREV,
+                     loseAlertNP:res.data[1].TOTALPROJECT,
+                     });
     })
+   
+    //alert('test');
+    return(
+
+      <View style={styles.modalContent}>
+        <View style={{ height: hp('50%'), width: wp('85%') }}>
+
+          <View style={{ flexDirection: 'row', width: wp('45%'), marginTop: hp('2%') }}>                
+            <TouchableOpacity style={{ height: hp('5%'), backgroundColor: '#575f6a', width: wp('85%'), alignItems: 'center', padding: hp('1%'), borderRadius: 1, marginBottom: hp('1%') }}>
+              <Text style={{ color: '#FFF' }}>BIG DEAL Arrangement</Text>
+            </TouchableOpacity>
+          </View>
+
+          <View style={{ flexDirection: 'row', width: wp('45%'), marginTop: hp('2%') }}>
+            <Text style={{ fontSize: 10, width:wp('22%') }}></Text>
+          </View>
+
+          <View style={{ flexDirection: 'row', width: wp('45%') }}>
+            <Text style={{ fontSize: 10, width:wp('5%') }}></Text>
+            <Text style={{ fontSize: 10, width:wp('22%') }}>TOTAL Project</Text>
+            <Text style={{ fontSize: 10, width:wp('1%') }}>:</Text>
+            <Text style={{ fontSize: 10, marginLeft: wp('2%') }}>{this.state.allAlertTP} Project(s)</Text>
+          </View>
+          <View style={{ flexDirection: 'row', width: wp('45%') }}>
+            <Text style={{ fontSize: 10, width:wp('5%') }}></Text>
+            <Text style={{ fontSize: 10, width:wp('22%') }}>NILAI Project</Text>
+            <Text style={{ fontSize: 10, width:wp('1%') }}>:</Text>
+            <Text style={{ fontSize: 10, marginLeft: wp('2%') }}>Rp. {this.state.allAlertNP}M</Text>
+          </View>
+          <View style={{ flexDirection: 'row', width: wp('45%') }}>
+            <Text style={{ fontSize: 10, width:wp('22%') }}></Text>
+          </View>
+
+          <View style={{ flexDirection: 'row', width: wp('45%') }}>
+            <Text style={{ fontSize: 10, width:wp('5%') }}></Text>
+            <Text style={{ fontSize: 10, width:wp('22%') }}>WIN SUMMARY</Text>
+          </View>
+          <View style={{ flexDirection: 'row', width: wp('45%') }}>
+            <Text style={{ fontSize: 10, width:wp('7%') }}></Text>
+            <Text style={{ fontSize: 10, width:wp('20%') }}>TOTAL Project</Text>
+            <Text style={{ fontSize: 10, width:wp('1%') }}>:</Text>
+            <Text style={{ fontSize: 10, marginLeft: wp('2%') }}>{this.state.winAlertTP} Project(s)</Text>
+          </View>
+          <View style={{ flexDirection: 'row', width: wp('45%') }}>
+            <Text style={{ fontSize: 10, width:wp('7%') }}></Text>
+            <Text style={{ fontSize: 10, width:wp('20%') }}>NILAI Project</Text>
+            <Text style={{ fontSize: 10, width:wp('1%') }}>:</Text>
+            <Text style={{ fontSize: 10, marginLeft: wp('2%') }}>Rp. {this.state.winAlertNP} M</Text>
+          </View>
+          <View style={{ flexDirection: 'row', width: wp('45%') }}>
+            <Text style={{ fontSize: 10, width:wp('22%') }}></Text>
+          </View>
+
+          <View style={{ flexDirection: 'row', width: wp('45%') }}>
+            <Text style={{ fontSize: 10, width:wp('5%') }}></Text>
+            <Text style={{ fontSize: 10, width:wp('22%') }}>LOSE SUMMARY</Text>
+          </View>
+          <View style={{ flexDirection: 'row', width: wp('45%') }}>
+            <Text style={{ fontSize: 10, width:wp('7%') }}></Text>
+            <Text style={{ fontSize: 10, width:wp('20%') }}>TOTAL Project</Text>
+            <Text style={{ fontSize: 10, width:wp('1%') }}>:</Text>
+            <Text style={{ fontSize: 10, marginLeft: wp('2%') }}>{this.state.loseAlertTP} Project(s)</Text>
+          </View>
+          <View style={{ flexDirection: 'row', width: wp('45%') }}>
+            <Text style={{ fontSize: 10, width:wp('7%') }}></Text>
+            <Text style={{ fontSize: 10, width:wp('20%') }}>NILAI Project</Text>
+            <Text style={{ fontSize: 10, width:wp('1%') }}>:</Text>
+            <Text style={{ fontSize: 10, marginLeft: wp('2%') }}>Rp. {this.state.loseAlertNP} M</Text>
+          </View>
+
+          <View style={{ position: 'absolute', bottom: 0 }}>
+            <TouchableOpacity onPress={() => this.setState({ isModalSenin:false })} style={{ height: hp('5%'), backgroundColor: '#e74c3c', width: wp('85%'), alignItems: 'center', padding: hp('1%'), borderRadius: 5, marginBottom: hp('2%') }}>
+              <Text style={{ color: '#FFF' }}>Tutup</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </View>
+    )
+ */    
   }
 
-  filterPeriodeDate1(data){
-    const {date2} = this.state;
-
-    this.setState({
-      date1:data.value,
-    })
+  refreshPeriode(sDate,eDate,sTreg,sWitel){
 
     this.props.dispatch({
       type:'EBIS_HOME_FILTER_PERIODE',
-      payload:axios.get(`${url.API}/ebis_getlopmain_ytd/div/EBIS/date1/${data.value}/date2/${date2}`)
+      payload:axios.get(`${url.API}/ebis_getlopmain_ytd/div/EBIS/date1/${sDate}/date2/${eDate}/treg/${sTreg}/witel/${sWitel}`)
     });
-  }
-
-  filterPeriodeDate2(data){
-    const {date1} = this.state;
-
-    this.setState({
-      date2:data.value  
-    })
 
     this.props.dispatch({
-      type:'EBIS_HOME_FILTER_PERIODE',
-      payload:axios.get(`${url.API}/ebis_getlopmain_ytd/div/EBIS/date1/${date1}/date2/${data.value}`)
+      type:'EBIS_LASTUPDATE',
+      payload:axios.get(`${url.API}/ebis_lastime`)
     });
+
   }
-  
+
   render() {
     var date = new Date().getDate();
-    var month = new Date().getMonth() + 1;
+    var month = new Date().getMonth() +1;
     var year = new Date().getFullYear();
 
+    var hari = new Date().getDay()
+    var jam = new Date().getHours()
+  
     var dateNow = `${date}-${month}-${year}`
-
-    let index = 0;
-    const data = [
-      { key: index++, label: `${year}-01`, value:`${year}01`},
-      { key: index++, label: `${year}-02`, value:`${year}02`},
-      { key: index++, label: `${year}-03`, value:`${year}03`},
-      { key: index++, label: `${year}-04`, value:`${year}04`},
-      { key: index++, label: `${year}-05`, value:`${year}05`},
-      { key: index++, label: `${year}-06`, value:`${year}06`},
-      { key: index++, label: `${year}-07`, value:`${year}07`},
-      { key: index++, label: `${year}-08`, value:`${year}08`},
-      { key: index++, label: `${year}-09`, value:`${year}09`},
-      { key: index++, label: `${year}-10`, value:`${year}10`},
-      { key: index++, label: `${year}-11`, value:`${year}11`},
-      { key: index++, label: `${year}-12`, value:`${year}12`},
-    ];
 
     //import image arrow
     const images = {
@@ -134,6 +207,9 @@ class EbisScreens extends Component{
     };
 
     const {
+      tampilActivityIndicator,
+      lastUpdated,
+      sDate, eDate,
       //navgaiton props
       navigation,
       
@@ -161,8 +237,6 @@ class EbisScreens extends Component{
       currentBIllcomRevenue,currentBillcomProject,
     } = this.props;
 
-    const {date1, date2} = this.state;
-
     const ebisPresentase = (parseInt(ebisProspectREVENUE) / parseInt(ebisProspectTarget))*100;
     const ebisPresentase2 = (parseInt(ebisSubmisionREVENUE) / parseInt(ebisSubmissionTarget))*100;
     const ebisPresentase3 = (parseInt(ebisWinREVENUE) / parseInt(ebisWinTarget))*100;
@@ -178,29 +252,98 @@ class EbisScreens extends Component{
     // BWRratio = (parseInt(ebisPresentase4) / parseInt(ebisPresentase3))*100;
     // WPRratio = (parseInt(ebisPresentase3) / parseInt(ebisPresentase))*100;
 
+    const {isSenin9Pagi, date1,date2} = this.state;
+    if (date1 != sDate){
+      //this.setState({date1:sDate,date2:eDate})
+      this.setState({
+        treg:'ALL',
+        witel:'ALL',
+        date1:sDate,
+        date2:eDate
+      })
+      this.refreshPeriode(sDate,eDate,'ALL','ALL')
+    } else {
+      if (date2 != eDate){
+        //this.setState({date1:sDate,date2:eDate})
+        this.setState({
+          treg:'ALL',
+          witel:'ALL',
+          date1:sDate,
+          date2:eDate
+        })
+        this.refreshPeriode(sDate,eDate,'ALL','ALL')
+      }
+    }
+
+    //if(hari===0){
+    //  if(jam===9){
+    //    if(this.state.isModalSenin) {
+    //      if(!this.state.isSenin9Pagi){
+    //        this.setState({isSenin9Pagi:true})
+    //      }
+    //    }
+    //  }
+    //}
+/* 
+    if(jam===9){
+      if(this.state.isModalSenin) {
+        if(!this.state.isSenin9Pagi){
+          this.setState({isSenin9Pagi:true})
+        }
+      }
+    } 
+
+    if(jam===13){
+      if(this.state.isModalSenin) {
+        if(!this.state.isSenin9Pagi){
+          this.setState({isSenin9Pagi:true})
+        }
+      }
+    }
+
+    if(jam===16){
+      if(this.state.isModalSenin) {
+        if(!this.state.isSenin9Pagi){
+          this.setState({isSenin9Pagi:true})
+        }
+      }
+    }
+   
+    if(jam===21){
+      if(this.state.isModalSenin) {
+        if(!this.state.isSenin9Pagi){
+          this.setState({isSenin9Pagi:true})
+        }
+      }
+    }
+ */
     return (
       <View style={styles.container}>
+
+{/*       
         <View style={styles.wrapperPeriode}>
           <View>
-            <Text style={styles.textPeriode}>Periode : </Text>
+            <Text style={styles.textPeriode}>{sDate} Periode : </Text>
           </View>
           <View style={styles.wrapperModalPeriode}>
             <View>
               <ModalSelector
                 data={data}
                 selectTextStyle={{textAlign:'center', alignSelf:'center', alignItems:'center'}}
-                initValue={`${year}-01`}
+                //initValue={`${year}-01`}
+                initValue={`${this.state.sdateInitValue.substring(0,4)}-${this.state.sdateInitValue.substring(4,6)}`}
+                //initValue={this.state.sdate}
                 selectStyle={styles.modalPeriode}
                 onChange={(data)=> this.filterPeriodeDate1(data)} 
               />
             </View>
             <View>
-              <Text style={{fontSize:20, fontWeight:'bold'}}> - </Text>
+              <Text style={{fontSize:20, fontWeight:'bold'}}> - {eDate} </Text>
             </View>
             <View>
               <ModalSelector
                 data={data}
-                initValue={`${year}-${month}`}
+                initValue={`${year}-${("0"+month).slice(-2)}`}
                 selectStyle={styles.modalPeriode}
                 onChange={(data)=> this.filterPeriodeDate2(data)} 
               />
@@ -208,6 +351,7 @@ class EbisScreens extends Component{
           </View>
         </View>
 
+ */}        
         <ScrollView>
           <View style={styles.wrapperArrow}>
             <Image 
@@ -216,7 +360,7 @@ class EbisScreens extends Component{
               resizeMode={'stretch'}
             />
 
-            <TouchableOpacity onPress={() => navigation.navigate('EbisDetailLOP', {date1:`${date1}`, date2:`${date2}`})} style={styles.containerArrowProspect} underlayColor="#ffffff00">
+            <TouchableOpacity onPress={() => navigation.navigate('EbisDetailLOP',{start_date:this.state.date1,end_date:this.state.date2,reg:'ALL',witel:'ALL'})} style={styles.containerArrowProspect} underlayColor="#ffffff00">
               <Text style={styles.textJudul}>PROSPECT</Text>
               <Text style={styles.textIsi}>{ebisProspectREVENUE}M</Text>
               <Text style={styles.textKeterangan}>per {ebisProspectProject} Project</Text>
@@ -256,7 +400,7 @@ class EbisScreens extends Component{
                   />
               }
               <View style={styles.wrapperTextPresentase}>
-                <Text style={styles.textJudul}>{Math.ceil(ebisPresentase)}</Text>
+                <Text style={styles.textJudul}>{Math.ceil(ebisPresentase)}%</Text>
               </View>
             </View>
           </View>
@@ -268,7 +412,7 @@ class EbisScreens extends Component{
               resizeMode={'stretch'}
             />
 
-            <TouchableOpacity onPress={() => navigation.navigate('DesDetailLOP', {date1:`${date1}`, date2:`${date2}`})} style={styles.containerArrowSubmission}>
+            <TouchableOpacity onPress={() => navigation.navigate('DesDetailLOP',{start_date:this.state.date1,end_date:this.state.date2,reg:'ALL',witel:'ALL'})} style={styles.containerArrowSubmission}>
               <Text style={styles.textJudul}>SUBMISSION</Text>
               <Text style={styles.textIsi}>{ebisSubmisionREVENUE}M</Text>
               <Text style={styles.textKeterangan}>per {ebisSubmissionProject} Project</Text>
@@ -308,7 +452,7 @@ class EbisScreens extends Component{
                   />
               }
               <View style={styles.wrapperTextPresentase}>
-                <Text style={styles.textJudul}>{Math.ceil(ebisPresentase2)}</Text>
+                <Text style={styles.textJudul}>{Math.ceil(ebisPresentase2)}%</Text>
               </View>
             </View>
           </View>
@@ -320,7 +464,7 @@ class EbisScreens extends Component{
               resizeMode={'stretch'}
             />
 
-            <TouchableOpacity onPress={() => navigation.navigate('DbsDetailLOP', {date1:`${date1}`, date2:`${date2}`})} style={styles.containerArrowWin}>
+            <TouchableOpacity onPress={() => navigation.navigate('DbsDetailLOP',{start_date:this.state.date1,end_date:this.state.date2,reg:'ALL',witel:'ALL'})} style={styles.containerArrowWin}>
               <Text style={styles.textJudul}>WIN</Text>
               <Text style={styles.textIsi}>{ebisWinREVENUE}M</Text>
               <Text style={styles.textKeterangan}>per {ebisWinProject} Project</Text>
@@ -360,7 +504,7 @@ class EbisScreens extends Component{
                   />
               }
               <View style={styles.wrapperTextPresentase}>
-                <Text style={styles.textJudul}>{Math.ceil(ebisPresentase3)}</Text>
+                <Text style={styles.textJudul}>{Math.ceil(ebisPresentase3)}%</Text>
               </View>
             </View>
           </View>
@@ -372,7 +516,7 @@ class EbisScreens extends Component{
               resizeMode={'stretch'}
             />
 
-            <TouchableOpacity onPress={() => navigation.navigate('DgsDetailLOP', {date1:`${date1}`, date2:`${date2}`})} style={styles.containerArrowBill}>
+            <TouchableOpacity onPress={() => navigation.navigate('DgsDetailLOP',{start_date:this.state.date1,end_date:this.state.date2,reg:'ALL',witel:'ALL'})} style={styles.containerArrowBill}>
               <Text style={styles.textJudul}>BILLCOM</Text>
               <Text style={styles.textIsi}>{ebisBillcomREVENUE}M</Text>
               <Text style={styles.textKeterangan}>per {ebisBillcomeProject} Project</Text>
@@ -412,11 +556,22 @@ class EbisScreens extends Component{
                   />
               }
               <View style={styles.wrapperTextPresentase}>
-                <Text style={styles.textJudul}>{Math.ceil(ebisPresentase4)}</Text>
+                <Text style={styles.textJudul}>{Math.ceil(ebisPresentase4)}%</Text>
               </View>
             </View>
           </View>
-        
+ {/* 
+          {renderIf(this.state.isSenin9Pagi)(
+            <Modal 
+              isVisible={this.state.isModalSenin}>
+              {this.rekapSeninPagi()}
+            </Modal>
+          )}
+  */}         
+          <View>
+            <Text style={{fontSize:9,marginLeft:wp('2%')}}>Lastupdate: {lastUpdated}</Text>
+          </View>
+
           <View style={styles.wrapperRatio}>
             <View style={styles.wrapperKontenRatio}>
               <View style={styles.judulRatio}>
@@ -609,6 +764,10 @@ class EbisScreens extends Component{
 }
 
 const mapStateToProps = (state) => ({
+  lastUpdated: state.EbisReducer.ebisLastupdate,
+
+  loginGroup:state.LoginReducer.group_ID,
+
   ebisProspectREVENUE:state.EbisReducer.ebisProspectREVENUE,
   ebisProspectProject:state.EbisReducer.ebisProspectProject,
   ebisProspectTarget:state.EbisReducer.ebisProspectTarget,
@@ -925,4 +1084,31 @@ const styles = StyleSheet.create({
       textAlign:'center',
       fontSize:7
     },
+  //detail 
+  containerDetailData:{
+    justifyContent:'space-between', 
+    flexDirection:'row', 
+    borderBottomColor:'#000',
+    borderBottomWidth:1,
+    padding:hp('2%')
+  },
+  modalContent: {
+    backgroundColor: "white",
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 4,
+    borderColor: "rgba(0, 0, 0, 0.1)"
+  },
+  buttonTab: {
+    marginTop: hp('2%'),
+    flexDirection: 'row',
+    paddingLeft: hp('1%'),
+    paddingRight: hp('1%'),
+    justifyContent: 'space-between'
+  },
+  buttonTabStyle: {
+    padding: hp('1%'),
+    backgroundColor: '#dfdfdd'
+  }
+
 });

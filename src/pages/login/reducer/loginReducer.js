@@ -4,7 +4,8 @@ const initialState = {
   isLoggedIn: false,
   statusErrorFrom:true,
   loaderStatus:false,
-  data:[]
+  data:[],
+  group_ID:'NOT_LOGGED',
 };
 
 const loginReducer = (state = initialState, action) => {
@@ -16,6 +17,7 @@ const loginReducer = (state = initialState, action) => {
         isLoggedIn: false,
         loaderStatus:false,
         statusErrorFrom:false,
+        group_ID:'NOT_LOGGED',
       }
     break;
     
@@ -24,6 +26,7 @@ const loginReducer = (state = initialState, action) => {
         ...state, 
         isLoggedIn: false,
         loaderStatus:true,
+        group_ID:'NOT_LOGGED',
       }
     break;
 
@@ -33,12 +36,13 @@ const loginReducer = (state = initialState, action) => {
         isLoggedIn: true,
         loaderStatus:false,
         statusErrorFrom:true,
-        data:action.payload.data
+        //data:action.payload.data,
+        group_ID:action.payload.data[0].GROUP_ID,
       }
     break;
 
     case Logout:
-      return { ...state, isLoggedIn: false };
+      return { ...state, isLoggedIn: false, group_ID:'NOT_LOGGED' };
     break;
     
     default:

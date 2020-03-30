@@ -1,36 +1,78 @@
 const initialState = { 
   loaderStatus:false,
 
-  //data ebis prospect
-  dataAll:'',
-  dataSubs:'',
-  dataMitra:'',
-  dataTelkom:'',
+  //PROSPECT
+  //EBIS
+  headerEbisValue: '0',
+  headerEbisProject: '0',
+  //DES
+  headerDesValue: '0',
+  headerDesProject: '0',
+  //DBS
+  headerDbsValue: '0',
+  headerDbsProject: '0',
+  //DGS
+  headerDgsValue: '0',
+  headerDgsProject: '0',       
 
-  //data ebis submission
-  dataAll2:'',
-  dataSubs2:'',
-  dataMitra2:'',
-  dataTelkom2:'',
+  //data ebis
+  dataEbisAll:[],
+  dataEbisSubs:[],
+  dataEbisMitra:[],
+  dataEbisTelkom:[],
 
-  //data ebis win
-  dataAll3:'',
-  dataSubs3:'',
-  dataMitra3:'',
-  dataTelkom3:'',
+  //data des
+  dataDesAll:[],
+  dataDesSubs:[],
+  dataDesMitra:[],
+  dataDesTelkom:[],
 
-  //data ebis billcom
-  dataAll4:'',
-  dataSubs4:'',
-  dataMitra4:'',
-  dataTelkom4:'',
+  //data dbs
+  dataDbsAll:[],
+  dataDbsSubs:[],
+  dataDbsMitra:[],
+  dataDbsTelkom:[],
 
-  //data detail
-  dataDetailLevel3:'',
+  //data dgs
+  dataDgsAll:[],
+  dataDgsSubs:[],
+  dataDgsMitra:[],
+  dataDgsTelkom:[],
 };
 
 const EbisDetailReducer = (state = initialState, action) => {
   switch (action.type) {
+
+    //Header status
+    case 'HEADER_PROSPECT_EBIS_FULFILLED':
+      return{
+        ...state, 
+        headerEbisValue: action.payload.data[0].lop_11_1,
+        headerEbisProject: action.payload.data[0].lop_11_2,
+      }
+      break;
+    case 'HEADER_PROSPECT_DES_FULFILLED':
+      return{
+        ...state, 
+        headerDesValue: action.payload.data[0].lop_11_1,
+        headerDesProject: action.payload.data[0].lop_11_2,
+      }
+      break;
+    case 'HEADER_PROSPECT_DBS_FULFILLED':
+      return{
+        ...state, 
+        headerDbsValue: action.payload.data[0].lop_11_1,
+        headerDbsProject: action.payload.data[0].lop_11_2,
+      }
+      break;
+    case 'HEADER_PROSPECT_DGS_FULFILLED':
+      return{
+        ...state, 
+        headerDgsValue: action.payload.data[0].lop_11_1,
+        headerDgsProject: action.payload.data[0].lop_11_2,
+      }
+      break;
+
     //--------------------------prospect
       //detail ALL
       case 'DETAIL_PROSPECT_EBIS_REJECTED':
@@ -47,7 +89,29 @@ const EbisDetailReducer = (state = initialState, action) => {
         return{
           ...state, 
           //Current status
-          dataAll:action.payload.data,
+          dataEbisAll:action.payload.data,
+        }
+      break;
+
+      case 'DETAIL_PROSPECT_DES_FULFILLED':
+        return{
+          ...state, 
+          //Current status
+          dataDesAll:action.payload.data,
+        }
+      break;
+      case 'DETAIL_PROSPECT_DBS_FULFILLED':
+        return{
+          ...state, 
+          //Current status
+          dataDbsAll:action.payload.data,
+        }
+      break;
+      case 'DETAIL_PROSPECT_DGS_FULFILLED':
+        return{
+          ...state, 
+          //Current status
+          dataDgsAll:action.payload.data,
         }
       break;
 
@@ -66,7 +130,28 @@ const EbisDetailReducer = (state = initialState, action) => {
         return{
           ...state, 
           //Current status
-          dataSubs:action.payload.data,
+          dataEbisSubs:action.payload.data,
+        }
+      break;
+      case 'DETAIL_SUBS_PROSPECT_DES_FULFILLED':
+        return{
+          ...state, 
+          //Current status
+          dataDesSubs:action.payload.data,
+        }
+      break;
+      case 'DETAIL_SUBS_PROSPECT_DBS_FULFILLED':
+        return{
+          ...state, 
+          //Current status
+          dataDbsSubs:action.payload.data,
+        }
+      break;
+      case 'DETAIL_SUBS_PROSPECT_DGS_FULFILLED':
+        return{
+          ...state, 
+          //Current status
+          dataDgsSubs:action.payload.data,
         }
       break;
 
@@ -85,7 +170,28 @@ const EbisDetailReducer = (state = initialState, action) => {
         return{
           ...state, 
           //Current status
-          dataMitra:action.payload.data,
+          dataEbisMitra:action.payload.data,
+        }
+      break;
+      case 'DETAIL_MITRA_PROSPECT_DES_FULFILLED':
+        return{
+          ...state, 
+          //Current status
+          dataDesMitra:action.payload.data,
+        }
+      break;
+      case 'DETAIL_MITRA_PROSPECT_DBS_FULFILLED':
+        return{
+          ...state, 
+          //Current status
+          dataDbsMitra:action.payload.data,
+        }
+      break;
+      case 'DETAIL_MITRA_PROSPECT_DGS_FULFILLED':
+        return{
+          ...state, 
+          //Current status
+          dataDgsMitra:action.payload.data,
         }
       break;
 
@@ -104,293 +210,36 @@ const EbisDetailReducer = (state = initialState, action) => {
         return{
           ...state, 
           //Current status
-          dataTelkom:action.payload.data,
+          dataEbisTelkom:action.payload.data,
         }
       break;
-    //--------------------------prospect
-    
-
-
-
-
-
-
-
-    //--------------------------submission
-      //detail ALL
-      case 'DETAIL_SUBMISSION_EBIS_REJECTED':
-        return{
-          ...state, 
-        }
-      break;
-      case 'DETAIL_SUBMISSION_EBIS_PENDING':
-        return{
-          ...state, 
-        }
-      break;
-      case 'DETAIL_SUBMISSION_EBIS_FULFILLED':
+      case 'DETAIL_TELKOM_PROSPECT_DES_FULFILLED':
         return{
           ...state, 
           //Current status
-          dataAll2:action.payload.data,
+          dataDesTelkom:action.payload.data,
         }
       break;
-
-      //detail SUBS
-      case 'DETAIL_SUBS_SUBMISSION_EBIS_REJECTED':
-        return{
-          ...state, 
-        }
-      break;
-      case 'DETAIL_SUBS_SUBMISSION_EBIS_PENDING':
-        return{
-          ...state, 
-        }
-      break;
-      case 'DETAIL_SUBS_SUBMISSION_EBIS_FULFILLED':
+      case 'DETAIL_TELKOM_PROSPECT_DBS_FULFILLED':
         return{
           ...state, 
           //Current status
-          dataSubs2:action.payload.data,
+          dataDbsTelkom:action.payload.data,
         }
       break;
-
-      //detail MITRA
-      case 'DETAIL_MITRA_SUBMISSION_EBIS_REJECTED':
-        return{
-          ...state, 
-        }
-      break;
-      case 'DETAIL_MITRA_SUBMISSION_EBIS_PENDING':
-        return{
-          ...state, 
-        }
-      break;
-      case 'DETAIL_MITRA_SUBMISSION_EBIS_FULFILLED':
+      case 'DETAIL_TELKOM_PROSPECT_DGS_FULFILLED':
         return{
           ...state, 
           //Current status
-          dataMitra2:action.payload.data,
+          dataDgsTelkom:action.payload.data,
         }
       break;
 
-      //detail TELKOM
-      case 'DETAIL_TELKOM_SUBMISSION_EBIS_REJECTED':
-        return{
-          ...state, 
-        }
-      break;
-      case 'DETAIL_TELKOM_SUBMISSION_EBIS_PENDING':
-        return{
-          ...state, 
-        }
-      break;
-      case 'DETAIL_TELKOM_SUBMISSION_EBIS_FULFILLED':
-        return{
-          ...state, 
-          //Current status
-          dataTelkom2:action.payload.data,
-        }
-      break;
-    //--------------------------submission
-    
-
-
-
-
-
-
-
-    //---------------------------win
-      //detail ALL
-      case 'DETAIL_WIN_EBIS_REJECTED':
-        return{
-          ...state, 
-        }
-      break;
-      case 'DETAIL_WIN_EBIS_PENDING':
-        return{
-          ...state, 
-        }
-      break;
-      case 'DETAIL_WIN_EBIS_FULFILLED':
-        return{
-          ...state, 
-          //Current status
-          dataAll3:action.payload.data,
-        }
-      break;
-
-      //detail SUBS
-      case 'DETAIL_SUBS_WIN_EBIS_REJECTED':
-        return{
-          ...state, 
-        }
-      break;
-      case 'DETAIL_SUBS_WIN_EBIS_PENDING':
-        return{
-          ...state, 
-        }
-      break;
-      case 'DETAIL_SUBS_WIN_EBIS_FULFILLED':
-        return{
-          ...state, 
-          //Current status
-          dataSubs3:action.payload.data,
-        }
-      break;
-
-      //detail MITRA
-      case 'DETAIL_MITRA_WIN_EBIS_REJECTED':
-        return{
-          ...state, 
-        }
-      break;
-      case 'DETAIL_MITRA_WIN_EBIS_PENDING':
-        return{
-          ...state, 
-        }
-      break;
-      case 'DETAIL_MITRA_WIN_EBIS_FULFILLED':
-        return{
-          ...state, 
-          //Current status
-          dataMitra3:action.payload.data,
-        }
-      break;
-
-      //detail TELKOM
-      case 'DETAIL_TELKOM_WIN_EBIS_REJECTED':
-        return{
-          ...state, 
-        }
-      break;
-      case 'DETAIL_TELKOM_WIN_EBIS_PENDING':
-        return{
-          ...state, 
-        }
-      break;
-      case 'DETAIL_TELKOM_WIN_EBIS_FULFILLED':
-        return{
-          ...state, 
-          //Current status
-          dataTelkom3:action.payload.data,
-        }
-      break;
-    //---------------------------win
-
-
-
-
-
-
-
-
-
-    //----------------------------billcom
-      //detail ALL
-      case 'DETAIL_BILLCOM_EBIS_REJECTED':
-        return{
-          ...state, 
-        }
-      break;
-      case 'DETAIL_BILLCOM_EBIS_PENDING':
-        return{
-          ...state, 
-        }
-      break;
-      case 'DETAIL_BILLCOM_EBIS_FULFILLED':
-        return{
-          ...state, 
-          //Current status
-          dataAll4:action.payload.data,
-        }
-      break;
-
-      //detail SUBS
-      case 'DETAIL_SUBS_BILLCOM_EBIS_REJECTED':
-        return{
-          ...state, 
-        }
-      break;
-      case 'DETAIL_SUBS_BILLCOM_EBIS_PENDING':
-        return{
-          ...state, 
-        }
-      break;
-      case 'DETAIL_SUBS_BILLCOM_EBIS_FULFILLED':
-        return{
-          ...state, 
-          //Current status
-          dataSubs3:action.payload.data,
-        }
-      break;
-
-      //detail MITRA
-      case 'DETAIL_MITRA_BILLCOM_EBIS_REJECTED':
-        return{
-          ...state, 
-        }
-      break;
-      case 'DETAIL_MITRA_BILLCOM_EBIS_PENDING':
-        return{
-          ...state, 
-        }
-      break;
-      case 'DETAIL_MITRA_BILLCOM_EBIS_FULFILLED':
-        return{
-          ...state, 
-          //Current status
-          dataMitra3:action.payload.data,
-        }
-      break;
-
-      //detail TELKOM
-      case 'DETAIL_TELKOM_BILLCOM_EBIS_REJECTED':
-        return{
-          ...state, 
-        }
-      break;
-      case 'DETAIL_TELKOM_BILLCOM_EBIS_PENDING':
-        return{
-          ...state, 
-        }
-      break;
-      case 'DETAIL_TELKOM_BILLCOM_EBIS_FULFILLED':
-        return{
-          ...state, 
-          //Current status
-          dataTelkom3:action.payload.data,
-        }
-      break;
-    //----------------------------billcom
-
-    //----------------------------detail level 3
-    case 'DETAIL_LEVEL_3_REJECTED':
-      return{
-        ...state, 
-        loaderStatus:false
-      }
-    break;
-    case 'DETAIL_LEVEL_3_PENDING':
-      return{
-        ...state, 
-        loaderStatus:true
-      }
-    break;
-    case 'DETAIL_LEVEL_3_FULFILLED':
-      return{
-        ...state, 
-        loaderStatus:false,
-        //Current status
-        dataDetailLevel3:action.payload.data,
-      }
-    break;
-
-    
+ 
     default:
       return state;
   }
+  
 };
 
 export default EbisDetailReducer;

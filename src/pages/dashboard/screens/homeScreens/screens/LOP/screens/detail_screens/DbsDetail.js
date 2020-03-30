@@ -23,21 +23,25 @@ import url from '../../../../../../../../config/api_service';
 class DbsDetailScreens extends Component{
   constructor(props){
     super(props);
-    const { params } = this.props.navigation.state;
     this.state = {
-      //data date
-      date1:params.date1,
-      date2:params.date2,
-      
-      dataDivisi:'',
-      dataMitraDetail:'',
+
+      startdate: this.props.navigation.state.params.start_date,
+      enddate: this.props.navigation.state.params.end_date,   
+      namaDetail: this.props.navigation.state.params.namaDetail,
+      reg: this.props.navigation.state.params.reg,
+      witel: this.props.navigation.state.params.witel,
 
       //modal
       visibleModal:false,
       loaderTampilDetail:false,
       dataTampung:[],
-
       data:[],
+
+      visibleModalDetail:false,
+      loaderTampilDetailDetail:false,
+      dataTampungDetail:[],
+      dataDetail:[],
+
       statusAll:false, 
       statusSubs:true,
       statusMitra:true,
@@ -46,92 +50,346 @@ class DbsDetailScreens extends Component{
   }
 
   componentWillMount(){
-    const {date1, date2} = this.state;
+    this.setState({
+      loaderTampil:false,
+    })    
+
+    //get TOTAL ALL
+    this.props.dispatch({
+      type:'TOTAL_WIN_EBIS',
+      payload:axios.get(`${url.API}/ebis_getwinsum/div/EBIS/treg/${this.state.reg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/nmitra/ALL`)
+      //payload:axios.get(`${url.API}/ebis_getstageorign/stage/WIN/div/EBIS/maindiv/ALL/mitra/ALL/nmitra/ALL/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/reg/${this.state.reg}/witel/${this.state.witel}`)
+    });
+    this.props.dispatch({
+      type:'TOTAL_WIN_DES',
+      payload:axios.get(`${url.API}/ebis_getwinsum/div/DES/treg/${this.state.reg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/nmitra/ALL`)
+      //payload:axios.get(`${url.API}/ebis_getstageorign/stage/WIN/div/EBIS/maindiv/ALL/mitra/ALL/nmitra/ALL/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/reg/${this.state.reg}/witel/${this.state.witel}`)
+    });
+    this.props.dispatch({
+      type:'TOTAL_WIN_DBS',
+      payload:axios.get(`${url.API}/ebis_getwinsum/div/DBS/treg/${this.state.reg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/nmitra/ALL`)
+      //payload:axios.get(`${url.API}/ebis_getstageorign/stage/WIN/div/EBIS/maindiv/ALL/mitra/ALL/nmitra/ALL/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/reg/${this.state.reg}/witel/${this.state.witel}`)
+    });
+    this.props.dispatch({
+      type:'TOTAL_WIN_DGS',
+      payload:axios.get(`${url.API}/ebis_getwinsum/div/DGS/treg/${this.state.reg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/nmitra/ALL`)
+      //payload:axios.get(`${url.API}/ebis_getstageorign/stage/WIN/div/EBIS/maindiv/ALL/mitra/ALL/nmitra/ALL/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/reg/${this.state.reg}/witel/${this.state.witel}`)
+    });
 
     //get data ALL
     this.props.dispatch({
       type:'DETAIL_WIN_EBIS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/WIN/div/EBIS/maindiv/DES/mainseg/ALL/start_date/${date1}/end_date/${date2}`)
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/WIN/div/EBIS/maindiv/ALL/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/mitra/ALL/reg/${this.state.reg}/witel/${this.state.witel}`)
     });
     this.props.dispatch({
       type:'DETAIL_WIN_DES',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/WIN/div/DES/maindiv/DES/mainseg/ALL/start_date/${date1}/end_date/${date2}`)
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/WIN/div/DES/maindiv/DES/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/mitra/ALL/reg/${this.state.reg}/witel/${this.state.witel}`)
     });
     this.props.dispatch({
       type:'DETAIL_WIN_DBS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/WIN/div/DBS/maindiv/DBS/mainseg/ALL/start_date/${date1}/end_date/${date2}`)
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/WIN/div/DBS/maindiv/DBS/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/mitra/ALL/reg/${this.state.reg}/witel/${this.state.witel}`)
     });
     this.props.dispatch({
       type:'DETAIL_WIN_DGS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/WIN/div/DGS/maindiv/DGS/mainseg/ALL/start_date/${date1}/end_date/${date2}`)
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/WIN/div/DGS/maindiv/DGS/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/mitra/ALL/reg/${this.state.reg}/witel/${this.state.witel}`)
     });
 
     //get data detail SUBS
     this.props.dispatch({
       type:'DETAIL_SUBS_WIN_EBIS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/WIN/div/EBIS/maindiv/DES/mainseg/ALL/start_date/${date1}/end_date/${date2}/mitra/CFU`)
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/WIN/div/EBIS/maindiv/ALL/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/mitra/CFU/reg/${this.state.reg}/witel/${this.state.witel}`)
     });
     this.props.dispatch({
       type:'DETAIL_SUBS_WIN_DES',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/WIN/div/DES/maindiv/DES/mainseg/ALL/start_date/${date1}/end_date/${date2}/mitra/CFU`)
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/WIN/div/DES/maindiv/DES/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/mitra/CFU/reg/${this.state.reg}/witel/${this.state.witel}`)
     });
     this.props.dispatch({
       type:'DETAIL_SUBS_WIN_DBS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/WIN/div/DBS/maindiv/DBS/mainseg/ALL/start_date/${date1}/end_date/${date2}/mitra/CFU`)
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/WIN/div/DBS/maindiv/DBS/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/mitra/CFU/reg/${this.state.reg}/witel/${this.state.witel}`)
     });
     this.props.dispatch({
       type:'DETAIL_SUBS_WIN_DGS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/WIN/div/DGS/maindiv/DGS/mainseg/ALL/start_date/${date1}/end_date/${date2}/mitra/CFU`)
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/WIN/div/DGS/maindiv/DGS/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/mitra/CFU/reg/${this.state.reg}/witel/${this.state.witel}`)
     });
 
     //get data detail MITRA
     this.props.dispatch({
       type:'DETAIL_MITRA_WIN_EBIS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/WIN/div/EBIS/maindiv/DES/mainseg/ALL/start_date/${date1}/end_date/${date2}/mitra/MITRA`)
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/WIN/div/EBIS/maindiv/ALL/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/mitra/MITRA/reg/${this.state.reg}/witel/${this.state.witel}`)
     });
     this.props.dispatch({
       type:'DETAIL_MITRA_WIN_DES',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/WIN/div/DES/maindiv/DES/mainseg/ALL/start_date/${date1}/end_date/${date2}/mitra/MITRA`)
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/WIN/div/DES/maindiv/DES/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/mitra/MITRA/reg/${this.state.reg}/witel/${this.state.witel}`)
     });
     this.props.dispatch({
       type:'DETAIL_MITRA_WIN_DBS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/WIN/div/DBS/maindiv/DBS/mainseg/ALL/start_date/${date1}/end_date/${date2}/mitra/MITRA`)
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/WIN/div/DBS/maindiv/DBS/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/mitra/MITRA/reg/${this.state.reg}/witel/${this.state.witel}`)
     });
     this.props.dispatch({
       type:'DETAIL_MITRA_WIN_DGS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/WIN/div/DGS/maindiv/DGS/mainseg/ALL/start_date/${date1}/end_date/${date2}/mitra/MITRA`)
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/WIN/div/DGS/maindiv/DGS/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/mitra/MITRA/reg/${this.state.reg}/witel/${this.state.witel}`)
     });
     
     //get data detail TELKOM
     this.props.dispatch({
       type:'DETAIL_TELKOM_WIN_EBIS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/WIN/div/EBIS/maindiv/DES/mainseg/ALL/start_date/${date1}/end_date/${date2}/mitra/TELKOM`)
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/WIN/div/EBIS/maindiv/ALL/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/mitra/TELKOM/reg/${this.state.reg}/witel/${this.state.witel}`)
     });
     this.props.dispatch({
       type:'DETAIL_TELKOM_WIN_DES',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/WIN/div/DES/maindiv/DES/mainseg/ALL/start_date/${date1}/end_date/${date2}/mitra/TELKOM`)
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/WIN/div/DES/maindiv/DES/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/mitra/TELKOM/reg/${this.state.reg}/witel/${this.state.witel}`)
     });
     this.props.dispatch({
       type:'DETAIL_TELKOM_WIN_DBS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/WIN/div/DBS/maindiv/DBS/mainseg/ALL/start_date/${date1}/end_date/${date2}/mitra/TELKOM`)
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/WIN/div/DBS/maindiv/DBS/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/mitra/TELKOM/reg/${this.state.reg}/witel/${this.state.witel}`)
     });
     this.props.dispatch({
       type:'DETAIL_TELKOM_WIN_DGS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/WIN/div/DGS/maindiv/DGS/mainseg/ALL/start_date/${date1}/end_date/${date2}/mitra/TELKOM`)
+      payload:axios.get(`${url.API}/ebis_getstage3/stage/WIN/div/DGS/maindiv/DGS/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/mitra/TELKOM/reg/${this.state.reg}/witel/${this.state.witel}`)
     });    
+
   }
 
-   //fungsi pindah page untuk detail level 2
-  renderMovePage(item, dataDivisi, dataKategoriMitra){
-    this.props.navigation.navigate('DbsDetailLevel2',{
-      dataMitraDetail:`${item}`,
-      dataDivisi:`${dataDivisi}`,
-      dataKategoriMitra:`${dataKategoriMitra}`,
-      date1:`${this.state.date1}`,
-      date2:`${this.state.date2}`,
+  //pop up and detail L4
+  _toggleModalDetail(item){
+    this.setState({
+      visibleModalDetail: !this.state.visibleModalDetail,
+      //visibleModalDetail:false,
+      loaderTampilDetailDetail:true
+    })
+    console.log('jrk',`${url.API}/ebis_getstage5/stage/WIN/div/ALL/maindiv/ALL/mitra/ALL/nmitra/${item.stage_01}/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/cc/${item.stage_06}/project/${item.stage_07}`)
+    
+    axios.get(`${url.API}/ebis_getstage5/stage/WIN/div/ALL/maindiv/ALL/mitra/ALL/nmitra/${item.stage_01}/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/cc/${item.stage_06}/project/${item.stage_07}`).then((res) => {
+      this.setState({dataTampungDetail:res.data, loaderTampilDetailDetail:false });
+    }).catch((err) => {
+      this.setState({
+        dataTampungDetail: [],
+        loaderTampilDetailDetail:false
+      })
+      alert(err+` ==> (${this.state.startdate} ${this.state.enddate} ${item.stage_01})`)
     })
   }
+  renderModalContentDetail(){
+    const {dataTampungDetail, loaderTampilDetailDetail} = this.state;
+    return(
+      <View style={styles.modalContent}>
+        {
+        loaderTampilDetailDetail 
+          ?
+        <ActivityIndicator size={'large'} color={'#ffddcc'} style={{margin:hp('5%')}}/>
+          :
+        <View style={{width:wp('85%')}}>
+          <FlatList
+            data={(dataTampungDetail.length>0) ? dataTampungDetail : []}
+            ListHeaderComponent={() => (
+              <View style={styles.wrapperHeaderContent}>
+                <View style={{width:wp('80%')}}>
+                  <Text style={{color:'#FFF', fontSize:12}}>DETAIL:</Text>
+                </View>
+              </View>
+            )}
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={({ item }) => (
+              <TouchableOpacity style={styles.containerDetailData} > 
+              <View style={{flex: 1, flexDirection: 'row', flexWrap: 'wrap'}}>
 
+                <View style={{width:wp('15%'), alignSelf:'center' }}>
+                  <Text style={{fontSize:10}}>Nama CC</Text>
+                </View>
+                <View style={{width:wp('2%'), alignSelf:'center' }}>
+                  <Text style={{fontSize:10}}>:</Text>
+                </View>
+                <View style={{width:wp('60%'), alignSelf:'center' }}>
+                  <Text style={{fontSize:11}}>{item.stage_06}</Text>
+                </View>
+
+                <View style={{width:wp('15%'), alignSelf:'center' }}>
+                  <Text style={{fontSize:10}}>Project</Text>
+                </View>
+                <View style={{width:wp('2%'), alignSelf:'center' }}>
+                  <Text style={{fontSize:10}}>:</Text>
+                </View>
+                <View style={{width:wp('60%'), alignSelf:'center' }}>
+                  <Text style={{fontSize:11}}>{item.stage_07}</Text>
+                </View>
+
+                <View style={{width:wp('15%'), alignSelf:'center' }}>
+                  <Text style={{fontSize:10}}>Nilai</Text>
+                </View>
+                <View style={{width:wp('2%'), alignSelf:'center' }}>
+                  <Text style={{fontSize:10}}>:</Text>
+                </View>
+                <View style={{width:wp('60%'), alignSelf:'center' }}>
+                  <Text style={{fontSize:11}}>{item.stage_02}M</Text>
+                </View>
+
+                <View style={{width:wp('15%'), alignSelf:'center' }}>
+                  <Text style={{fontSize:10}}>RevOTC</Text>
+                </View>
+                <View style={{width:wp('2%'), alignSelf:'center' }}>
+                  <Text style={{fontSize:10}}>:</Text>
+                </View>
+                <View style={{width:wp('60%'), alignSelf:'center' }}>
+                  <Text style={{fontSize:11}}>{item.stage_11}</Text>
+                </View>
+                <View style={{width:wp('15%'), alignSelf:'center' }}>
+                  <Text style={{fontSize:10}}>RevMo</Text>
+                </View>
+                <View style={{width:wp('2%'), alignSelf:'center' }}>
+                  <Text style={{fontSize:10}}>:</Text>
+                </View>
+                <View style={{width:wp('60%'), alignSelf:'center' }}>
+                  <Text style={{fontSize:11}}>{item.stage_12}</Text>
+                </View>
+
+                <View style={{width:wp('15%'), alignSelf:'center' }}>
+                  <Text style={{fontSize:10}}>Mitra</Text>
+                </View>
+                <View style={{width:wp('2%'), alignSelf:'center' }}>
+                  <Text style={{fontSize:10}}>:</Text>
+                </View>
+                <View style={{width:wp('60%'), alignSelf:'center' }}>
+                  <Text style={{fontSize:11}}>{item.stage_01}</Text>
+                </View>
+
+                <View style={{width:wp('15%'), alignSelf:'center' }}>
+                  <Text style={{fontSize:10}}>Segmen</Text>
+                </View>
+                <View style={{width:wp('2%'), alignSelf:'center' }}>
+                  <Text style={{fontSize:10}}>:</Text>
+                </View>
+                <View style={{width:wp('60%'), alignSelf:'center' }}>
+                  <Text style={{fontSize:11}}>{item.stage_05}</Text>
+                </View>
+
+                <View style={{width:wp('15%'), alignSelf:'center' }}>
+                  <Text style={{fontSize:10}}>Status</Text>
+                </View>
+                <View style={{width:wp('2%'), alignSelf:'center' }}>
+                  <Text style={{fontSize:10}}>:</Text>
+                </View>
+                <View style={{width:wp('60%'), alignSelf:'center' }}>
+                  <Text style={{fontSize:11}}>{item.stage_09}</Text>
+                </View>
+{/* 
+                <View style={{width:wp('15%'), alignSelf:'center' }}>
+                  <Text style={{fontSize:10}}>RevAll</Text>
+                </View>
+                <View style={{width:wp('2%'), alignSelf:'center' }}>
+                  <Text style={{fontSize:10}}>:</Text>
+                </View>
+                <View style={{width:wp('60%'), alignSelf:'center' }}>
+                  <Text style={{fontSize:11}}>{item.stage_10}</Text>
+                </View>
+                 */}
+
+                <View style={{width:wp('15%'), alignSelf:'center' }}>
+                  <Text style={{fontSize:10}}>Keterangan</Text>
+                </View>
+                <View style={{width:wp('2%'), alignSelf:'center' }}>
+                  <Text style={{fontSize:10}}>:</Text>
+                </View>
+                <View style={{width:wp('60%'), alignSelf:'center' }}>
+                  <Text style={{fontSize:11}}>{item.stage_14}</Text>
+                </View>
+              </View>
+              </TouchableOpacity > 
+            )}
+            style={{height:hp('40%'), marginBottom:hp('2%')}}
+          />
+          <TouchableOpacity onPress={() => this.setState({ visibleModalDetail:false})} style={{height:hp('5%'),backgroundColor:'#e74c3c', width:wp('85%'), justifyContent:'center', alignItems:'center', padding:hp('1%'), borderRadius:5, marginBottom:hp('2%')}}>
+            <Text style={{color:'#FFF'}}>Tutup</Text>
+          </TouchableOpacity>
+        </View>
+        }
+      </View>
+    )
+  };
+  buttonAllDetail(){
+    if(this.state.statusAll === false){
+      this.setState({
+        statusAll:false
+      })
+    } else {
+      this.setState({
+        statusAll:!this.state.statusAll,
+        statusTelkom:true, 
+        statusSubs:true,
+        statusMitra:true,
+      })
+    }  
+  }
+
+  _toggleModal(item,div,maindiv){
+    this.setState({
+      visibleModal: !this.state.visibleModal,
+      loaderTampilDetail:true
+    })
+    axios.get(`${url.API}/ebis_getstage5/stage/WIN/div/${div}/maindiv/${maindiv}/mainseg/ALL/mitra/ALL/nmitra/${item}/start_date/${this.state.startdate}/end_date/${this.state.enddate}`).then((res) => {
+      this.setState({dataTampung:res.data, loaderTampilDetail:false });
+    }).catch((err) => {
+      this.setState({
+        dataTampung:[],
+        loaderTampilDetail:false
+      })
+      alert(err +` ==> (${this.state.startdate} ${this.state.enddate} ${item})`)
+    })
+  }
+  renderModalContent(){
+    const {dataTampung, loaderTampilDetail} = this.state;
+    return(
+      <View style={styles.modalContent}>
+        {
+        loaderTampilDetail 
+            ?
+        <ActivityIndicator size={'large'} color={'#000'} style={{margin:hp('5%')}}/>
+            :
+        <View style={{width:wp('85%')}}>
+          <FlatList
+            data={(dataTampung.length>0) ? dataTampung : []}
+            ListHeaderComponent={() => (
+              <View style={styles.wrapperHeaderContent}>
+                <View style={{width:wp('30%')}}>
+                  <Text style={{textAlign:'center', color:'#FFF', fontSize:12}}>Nama CC</Text>
+                </View>
+                <View style={{width:wp('30%')}}>
+                  <Text style={{textAlign:'center', color:'#FFF', fontSize:12}}>Nama Project</Text>
+                </View>
+                <View style={{width:wp('10%'), alignItems:'center', justifyContent:'center'}}>
+                  <Text style={{textAlign:'center', color:'#FFF', fontSize:12}}>Nilai</Text>
+                </View>
+              </View>
+            )}
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={({ item }) => (
+              <TouchableOpacity onPress={() => this._toggleModalDetail(item)}> 
+              <View style={styles.containerDetailData}> 
+                <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
+                  <Text style={{fontSize:10}}>{item.stage_06}</Text>
+                </View>
+                <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
+                  <Text style={{fontSize:10}}>{item.stage_07}</Text>
+                </View>
+                <View style={{width:wp('10%'), alignSelf:'center', justifyContent:'center', alignItems:'center'}}>
+                  <Text style={{textAlign:'center', fontSize:10}}>{parseFloat(item.stage_10)}M</Text>                    
+                </View>
+              </View>
+              </TouchableOpacity>
+            )}
+            style={{height:hp('80%'), marginBottom:hp('2%')}}
+          />
+          <Modal 
+            isVisible={this.state.visibleModalDetail === true}
+            onBackdropPress={() => this.setState({ visibleModalDetail: false })}>
+            {this.renderModalContentDetail()}
+          </Modal>
+          <TouchableOpacity onPress={() => this.setState({ visibleModal: !this.state.visibleModal})} style={{height:hp('5%'),backgroundColor:'#e74c3c', width:wp('85%'), justifyContent:'center', alignItems:'center', padding:hp('1%'), borderRadius:5, marginBottom:hp('2%')}}>
+            <Text style={{color:'#FFF'}}>Tutup</Text>
+          </TouchableOpacity>
+        </View>
+        }
+      </View>
+  )};
   buttonAll(){
     if(this.state.statusAll === false){
       this.setState({
@@ -147,6 +405,75 @@ class DbsDetailScreens extends Component{
     }  
   }
 
+  _toggleModalSubs(item,div,maindiv){
+    this.setState({
+      visibleModal: !this.state.visibleModal,
+      loaderTampilDetail:true
+    })
+    axios.get(`${url.API}/ebis_getstage5/stage/WIN/div/${div}/maindiv/${maindiv}/mitra/CFU/nmitra/${item}/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}`).then((res) => {
+      this.setState({dataTampung:res.data, loaderTampilDetail:false });
+    }).catch((err) => {
+      this.setState({
+        loaderTampilDetail:false
+      })
+      alert(err +` ==> (${this.state.startdate} ${this.state.enddate} ${item})`)
+    })
+  }
+  renderModalContentSubs(){
+    const {dataTampung, loaderTampilDetail} = this.state;
+    return(
+      <View style={styles.modalContent}>
+        {
+        loaderTampilDetail 
+            ?
+        <ActivityIndicator size={'large'} color={'#000'} style={{margin:hp('5%')}}/>
+            :
+        <View style={{width:wp('85%')}}>
+          <FlatList
+            data={(dataTampung.length>0) ? dataTampung : []}
+            ListHeaderComponent={() => (
+              <View style={styles.wrapperHeaderContent}>
+                <View style={{width:wp('30%')}}>
+                  <Text style={{textAlign:'center', color:'#FFF', fontSize:12}}>Nama CC</Text>
+                </View>
+                <View style={{width:wp('30%')}}>
+                  <Text style={{textAlign:'center', color:'#FFF', fontSize:12}}>Nama Project</Text>
+                </View>
+                <View style={{width:wp('10%'), alignItems:'center', justifyContent:'center'}}>
+                  <Text style={{textAlign:'center', color:'#FFF', fontSize:12}}>Nilai</Text>
+                </View>
+              </View>
+            )}
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={({ item }) => (
+              <TouchableOpacity onPress={() => this._toggleModalDetail(item)}> 
+              <View style={styles.containerDetailData}> 
+                <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
+                  <Text style={{fontSize:10}}>{item.stage_06}</Text>
+                </View>
+                <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
+                  <Text style={{fontSize:10}}>{item.stage_07}</Text>
+                </View>
+                <View style={{width:wp('10%'), alignSelf:'center', justifyContent:'center', alignItems:'center'}}>
+                  <Text style={{textAlign:'center', fontSize:10}}>{parseFloat(item.stage_10)}M</Text>                    
+                </View>
+              </View>
+              </TouchableOpacity>
+            )}
+            style={{height:hp('80%'), marginBottom:hp('2%')}}
+          />
+          <Modal 
+            isVisible={this.state.visibleModalDetail === true}
+            onBackdropPress={() => this.setState({ visibleModalDetail: false })}>
+            {this.renderModalContentDetail()}
+          </Modal>
+          <TouchableOpacity onPress={() => this.setState({ visibleModal: !this.state.visibleModal})} style={{height:hp('5%'),backgroundColor:'#e74c3c', width:wp('85%'), justifyContent:'center', alignItems:'center', padding:hp('1%'), borderRadius:5, marginBottom:hp('2%')}}>
+            <Text style={{color:'#FFF'}}>Tutup</Text>
+          </TouchableOpacity>
+        </View>
+        }
+      </View>
+  )};
   buttonSubs(){
     if(this.state.statusSubs === false){
       this.setState({
@@ -162,6 +489,75 @@ class DbsDetailScreens extends Component{
     }
   }
 
+  _toggleModalMitra(item,div,maindiv){
+    this.setState({
+      visibleModal: !this.state.visibleModal,
+      loaderTampilDetail:true
+    })
+    axios.get(`${url.API}/ebis_getstage5/stage/WIN/div/${div}/maindiv/${maindiv}/mitra/MITRA/nmitra/${item}/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}`).then((res) => {
+      this.setState({dataTampung:res.data, loaderTampilDetail:false });
+    }).catch((err) => {
+      this.setState({
+        loaderTampilDetail:false
+      })
+      alert(err +` ==> (${this.state.startdate} ${this.state.enddate} ${item})`)
+    })
+  }
+  renderModalContentMitra(){
+    const {dataTampung, loaderTampilDetail} = this.state;
+    return(
+      <View style={styles.modalContent}>
+        {
+        loaderTampilDetail 
+            ?
+        <ActivityIndicator size={'large'} color={'#000'} style={{margin:hp('5%')}}/>
+            :
+        <View style={{width:wp('85%')}}>
+          <FlatList
+            data={(dataTampung.length>0) ? dataTampung : []}
+            ListHeaderComponent={() => (
+              <View style={styles.wrapperHeaderContent}>
+                <View style={{width:wp('30%')}}>
+                  <Text style={{textAlign:'center', color:'#FFF', fontSize:12}}>Nama CC</Text>
+                </View>
+                <View style={{width:wp('30%')}}>
+                  <Text style={{textAlign:'center', color:'#FFF', fontSize:12}}>Nama Project</Text>
+                </View>
+                <View style={{width:wp('10%'), alignItems:'center', justifyContent:'center'}}>
+                  <Text style={{textAlign:'center', color:'#FFF', fontSize:12}}>Nilai</Text>
+                </View>
+              </View>
+            )}
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={({ item }) => (
+              <TouchableOpacity onPress={() => this._toggleModalDetail(item)}> 
+              <View style={styles.containerDetailData}> 
+                <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
+                  <Text style={{fontSize:10}}>{item.stage_06}</Text>
+                </View>
+                <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
+                  <Text style={{fontSize:10}}>{item.stage_07}</Text>
+                </View>
+                <View style={{width:wp('10%'), alignSelf:'center', justifyContent:'center', alignItems:'center'}}>
+                  <Text style={{textAlign:'center', fontSize:10}}>{parseFloat(item.stage_10)}M</Text>                    
+                </View>
+              </View>
+              </TouchableOpacity>
+            )}
+            style={{height:hp('80%'), marginBottom:hp('2%')}}
+          />
+          <Modal 
+            isVisible={this.state.visibleModalDetail === true}
+            onBackdropPress={() => this.setState({ visibleModalDetail: false })}>
+            {this.renderModalContentDetail()}
+          </Modal>
+          <TouchableOpacity onPress={() => this.setState({ visibleModal: !this.state.visibleModal})} style={{height:hp('5%'),backgroundColor:'#e74c3c', width:wp('85%'), justifyContent:'center', alignItems:'center', padding:hp('1%'), borderRadius:5, marginBottom:hp('2%')}}>
+            <Text style={{color:'#FFF'}}>Tutup</Text>
+          </TouchableOpacity>
+        </View>
+        }
+      </View>
+  )};
   buttonMitra(){
     if(this.state.statusMitra === false){
       this.setState({
@@ -177,6 +573,77 @@ class DbsDetailScreens extends Component{
     }
   }
 
+  _toggleModalTelkom(item,div,maindiv){
+    this.setState({
+      visibleModal: !this.state.visibleModal,
+      loaderTampilDetail:true
+    })
+
+    axios.get(`${url.API}/ebis_getstage5/stage/WIN/div/${div}/maindiv/${maindiv}/mitra/TELKOM/nmitra/${item}/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}`).then((res) => {
+      this.setState({dataTampung:res.data, loaderTampilDetail:false });
+    }).catch((err) => {
+      this.setState({
+        dataTampung: [],
+        loaderTampilDetail:false
+      })
+      alert(err +` ==> (${this.state.startdate} ${this.state.enddate} ${item})`)
+    })
+  }
+  renderModalContentTelkom(){
+    const {dataTampung, loaderTampilDetail} = this.state;
+    return(
+      <View style={styles.modalContent}>
+        {
+        loaderTampilDetail 
+            ?
+        <ActivityIndicator size={'large'} color={'#000'} style={{margin:hp('5%')}}/>
+            :
+        <View style={{width:wp('85%')}}>
+          <FlatList
+            data={(dataTampung.length>0) ? dataTampung : []}
+            ListHeaderComponent={() => (
+              <View style={styles.wrapperHeaderContent}>
+                <View style={{width:wp('30%')}}>
+                  <Text style={{textAlign:'center', color:'#FFF', fontSize:12}}>Nama CC</Text>
+                </View>
+                <View style={{width:wp('30%')}}>
+                  <Text style={{textAlign:'center', color:'#FFF', fontSize:12}}>Nama Project</Text>
+                </View>
+                <View style={{width:wp('10%'), alignItems:'center', justifyContent:'center'}}>
+                  <Text style={{textAlign:'center', color:'#FFF', fontSize:12}}>Nilai</Text>
+                </View>
+              </View>
+            )}
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={({ item }) => (
+              <TouchableOpacity onPress={() => this._toggleModalDetail(item)}> 
+              <View style={styles.containerDetailData}> 
+                <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
+                  <Text style={{fontSize:10}}>{item.stage_06}</Text>
+                </View>
+                <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
+                  <Text style={{fontSize:10}}>{item.stage_07}</Text>
+                </View>
+                <View style={{width:wp('10%'), alignSelf:'center', justifyContent:'center', alignItems:'center'}}>
+                  <Text style={{textAlign:'center', fontSize:10}}>{parseFloat(item.stage_10)}M</Text>                    
+                </View>
+              </View>
+              </TouchableOpacity>
+            )}
+            style={{height:hp('80%'), marginBottom:hp('2%')}}
+          />
+          <Modal 
+            isVisible={this.state.visibleModalDetail === true}
+            onBackdropPress={() => this.setState({ visibleModalDetail: false })}>
+            {this.renderModalContentDetail()}
+          </Modal>
+          <TouchableOpacity onPress={() => this.setState({ visibleModal: !this.state.visibleModal})} style={{height:hp('5%'),backgroundColor:'#e74c3c', width:wp('85%'), justifyContent:'center', alignItems:'center', padding:hp('1%'), borderRadius:5, marginBottom:hp('2%')}}>
+            <Text style={{color:'#FFF'}}>Tutup</Text>
+          </TouchableOpacity>
+        </View>
+        }
+      </View>
+  )};
   buttonTelkom(){
     if(this.state.statusTelkom === false){
       this.setState({
@@ -234,12 +701,16 @@ class DbsDetailScreens extends Component{
 
     const{
       //prospect
-      ebisProspectREVENUE,ebisProspectProject,dataAll,dataSubs,dataMitra,dataTelkom
+      loaderTampil, ebisProspectREVENUE,ebisProspectProject,dataAll,dataSubs,dataMitra,dataTelkom
     } = this.props;
 
-    const {statusAll, statusSubs, statusMitra, statusTelkom} = this.state;
+    const {reg, witel, statusAll, statusSubs, statusMitra, statusTelkom} = this.state;
 
     return(
+      loaderTampil
+      ?
+      <ActivityIndicator size={'large'} color={'#ffddcc'} style={{margin:hp('5%')}}/>
+      :
       <View style={{backgroundColor:'#FFF', flex:1}}>
         <View style={styles.wrapperArrow}>
           <Image 
@@ -330,13 +801,13 @@ class DbsDetailScreens extends Component{
         </View>
 
         <View style={styles.buttonTab}>
-          <TouchableOpacity style={styles.buttonTabStyle} onPress={() => this.props.navigation.navigate('MonitorKB')}>
+          <TouchableOpacity style={styles.buttonTabStyle} onPress={() => this.props.navigation.navigate('MonitorKB',{treg:reg,witel:witel,start_date:this.state.startdate,end_date:this.state.enddate})}>
             <Text>Monitor KB</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.buttonTabStyle} onPress={() => this.props.navigation.navigate("MonitorKL")}>
+          <TouchableOpacity style={styles.buttonTabStyle} onPress={() => this.props.navigation.navigate('MonitorKL',{treg:reg,witel:witel,start_date:this.state.startdate,end_date:this.state.enddate})}>
             <Text>Monitor KL</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.buttonTabStyle} onPress={() => this.props.navigation.navigate('MonitorDev')}>
+          <TouchableOpacity style={styles.buttonTabStyle} onPress={() => this.props.navigation.navigate('MonitorDev',{treg:reg,witel:witel,start_date:this.state.startdate,end_date:this.state.enddate})}>
             <Text>Monitor Delivery</Text>
           </TouchableOpacity>
         </View>
@@ -369,10 +840,22 @@ class DbsDetailScreens extends Component{
             {renderIf(!statusAll)(
               <View>
                 <FlatList
-                  data={dataAll}
+                  data={(dataAll.length>0) ? dataAll : []}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this.renderMovePage(item.MITRA, dataDivisi='EBIS', dataKategoriMitra='ALL')}> 
+                    
+                    item.MITRA=='TOTAL'
+                    ?
+                    <TouchableOpacity style={styles.containerDetailData}> 
+                      <View style={{width:wp('70%')}}>
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.MITRA}</Text>
+                      </View>
+                      <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.jumlah}M</Text>                    
+                      </View>
+                    </TouchableOpacity>
+                    :
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModal(item.MITRA,'EBIS','ALL')}> 
                       <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
                         <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
                       </View>
@@ -383,18 +866,48 @@ class DbsDetailScreens extends Component{
                         <Text style={{textAlign:'center'}}>{item.jumlah}M</Text>                    
                       </View>
                     </TouchableOpacity>
+                    
                   )}
+
+                  //ListEmptyComponent={() => (
+                  //  <View style={{ alignItems : "center", justifyContent: 'center'}}>
+                  //    <Text>Tidak ada data</Text>
+                  //  </View>
+                  //)}
+                  //ListFooterComponent={() => (
+                  //  <View style={{ alignItems : "center", justifyContent: 'center'}}>
+                  //    <Text>Footer Content</Text>
+                  //  </View>
+                  //)}
+
                 />
+                <Modal 
+                  isVisible={this.state.visibleModal === true}
+                  onBackdropPress={() => this.setState({ visibleModal: false })}>
+                  {this.renderModalContent()}
+                </Modal>
               </View>
             )}
 
             {renderIf(!statusSubs)(
               <View>
                 <FlatList
-                  data={dataSubs}
+                  data={(dataSubs.length>0) ? dataSubs : []}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this.renderMovePage(item.MITRA, dataDivisi='EBIS', dataKategoriMitra='CFU')}> 
+
+                    item.MITRA=='TOTAL'
+                    ?
+                    <TouchableOpacity style={styles.containerDetailData}> 
+                      <View style={{width:wp('70%')}}>
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.MITRA}</Text>
+                      </View>
+                      <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.jumlah}M</Text>                    
+                      </View>
+                    </TouchableOpacity>
+                    :
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModalSubs(item.MITRA,'EBIS','ALL')}> 
                       <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
                         <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
                       </View>
@@ -405,18 +918,36 @@ class DbsDetailScreens extends Component{
                         <Text style={{textAlign:'center'}}>{item.jumlah}M</Text>                    
                       </View>
                     </TouchableOpacity>
+
                   )}
                 />
+                <Modal 
+                  isVisible={this.state.visibleModal === true}
+                  onBackdropPress={() => this.setState({ visibleModal: false })}>
+                  {this.renderModalContentSubs()}
+                </Modal>
               </View>
             )}
 
             {renderIf(!statusMitra)(
               <View>
                 <FlatList
-                  data={dataMitra}
+                  data={(dataMitra.length>0) ? dataMitra : []}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this.renderMovePage(item.MITRA, dataDivisi='EBIS', dataKategoriMitra='MITRA')}> 
+
+                    item.MITRA=='TOTAL'
+                    ?
+                    <TouchableOpacity style={styles.containerDetailData}> 
+                      <View style={{width:wp('70%')}}>
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.MITRA}</Text>
+                      </View>
+                      <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.jumlah}M</Text>                    
+                      </View>
+                    </TouchableOpacity>
+                    :
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModalMitra(item.MITRA,'EBIS','ALL')}> 
                       <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
                         <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
                       </View>
@@ -429,16 +960,32 @@ class DbsDetailScreens extends Component{
                     </TouchableOpacity>
                   )}
                 />
+                <Modal 
+                  isVisible={this.state.visibleModal === true}
+                  onBackdropPress={() => this.setState({ visibleModal: false })}>
+                  {this.renderModalContentMitra()}
+                </Modal>
               </View>
             )}
 
             {renderIf(!statusTelkom)(
               <View>
                 <FlatList
-                  data={dataTelkom}
+                  data={(dataTelkom.length>0) ? dataTelkom : []}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this.renderMovePage(item.MITRA, dataDivisi='EBIS', dataKategoriMitra='TELKOM')}> 
+                    item.MITRA=='TOTAL'
+                    ?
+                    <TouchableOpacity style={styles.containerDetailData}> 
+                      <View style={{width:wp('70%')}}>
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.MITRA}</Text>
+                      </View>
+                      <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.jumlah}M</Text>                    
+                      </View>
+                    </TouchableOpacity>
+                    :
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModalTelkom(item.MITRA,'EBIS','ALL')}> 
                       <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
                         <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
                       </View>
@@ -451,6 +998,11 @@ class DbsDetailScreens extends Component{
                     </TouchableOpacity>
                   )}
                 />
+                <Modal 
+                  isVisible={this.state.visibleModal === true}
+                  onBackdropPress={() => this.setState({ visibleModal: false })}>
+                  {this.renderModalContentTelkom()}
+                </Modal>
               </View>
             )}
           </Content>
@@ -500,12 +1052,16 @@ class DbsDetailScreens extends Component{
 
     const{
       //prospect
-      ebisProspectREVENUE2,ebisProspectProject2,dataAll2,dataSubs2,dataMitra2,dataTelkom2
+      loaderTampil, ebisProspectREVENUE2,ebisProspectProject2,dataAll2,dataSubs2,dataMitra2,dataTelkom2
     } = this.props;
 
-    const {statusAll, statusSubs, statusMitra, statusTelkom} = this.state;
+    const {reg, witel, statusAll, statusSubs, statusMitra, statusTelkom} = this.state;
 
     return(
+      loaderTampil
+      ?
+      <ActivityIndicator size={'large'} color={'#ffddcc'} style={{margin:hp('5%')}}/>
+      :
       <View style={{backgroundColor:'#FFF', flex:1}}>
         <View style={styles.wrapperArrow}>
           <Image 
@@ -596,13 +1152,13 @@ class DbsDetailScreens extends Component{
         </View>
 
         <View style={styles.buttonTab}>
-          <TouchableOpacity style={styles.buttonTabStyle} onPress={() => this.props.navigation.navigate('MonitorKB')}>
+          <TouchableOpacity style={styles.buttonTabStyle} onPress={() => this.props.navigation.navigate('MonitorKB',{treg:reg,witel:witel,start_date:this.state.startdate,end_date:this.state.enddate})}>
             <Text>Monitor KB</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.buttonTabStyle} onPress={() => this.props.navigation.navigate('MonitorKL')}>
+          <TouchableOpacity style={styles.buttonTabStyle} onPress={() => this.props.navigation.navigate('MonitorKL',{treg:reg,witel:witel,start_date:this.state.startdate,end_date:this.state.enddate})}>
             <Text>Monitor KL</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.buttonTabStyle} onPress={() => this.props.navigation.navigate('MonitorDev')}>
+          <TouchableOpacity style={styles.buttonTabStyle} onPress={() => this.props.navigation.navigate('MonitorDev',{treg:reg,witel:witel,start_date:this.state.startdate,end_date:this.state.enddate})}>
             <Text>Monitor Delivery</Text>
           </TouchableOpacity>
         </View>
@@ -635,10 +1191,21 @@ class DbsDetailScreens extends Component{
             {renderIf(!statusAll)(
               <View>
                 <FlatList
-                  data={dataAll2}
+                  data={(dataAll2.length>0) ? dataAll2 : []}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this.renderMovePage(item.MITRA, dataDivisi='DES', dataKategoriMitra='ALL')}> 
+                    item.MITRA=='TOTAL'
+                    ?
+                    <TouchableOpacity style={styles.containerDetailData}> 
+                      <View style={{width:wp('70%')}}>
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.MITRA}</Text>
+                      </View>
+                      <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.jumlah}M</Text>                    
+                      </View>
+                    </TouchableOpacity>
+                    :
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModal(item.MITRA,'DES','DES')}> 
                       <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
                         <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
                       </View>
@@ -651,16 +1218,32 @@ class DbsDetailScreens extends Component{
                     </TouchableOpacity>
                   )}
                 />
+                <Modal 
+                  isVisible={this.state.visibleModal === true}
+                  onBackdropPress={() => this.setState({ visibleModal: false })}>
+                  {this.renderModalContent()}
+                </Modal>
               </View>
             )}
 
             {renderIf(!statusSubs)(
               <View>
                 <FlatList
-                  data={dataSubs2}
+                  data={(dataSubs2.length>0) ? dataSubs2 : []}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this.renderMovePage(item.MITRA, dataDivisi='DES', dataKategoriMitra='CFU')}> 
+                    item.MITRA=='TOTAL'
+                    ?
+                    <TouchableOpacity style={styles.containerDetailData}> 
+                      <View style={{width:wp('70%')}}>
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.MITRA}</Text>
+                      </View>
+                      <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.jumlah}M</Text>                    
+                      </View>
+                    </TouchableOpacity>
+                    :
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModalSubs(item.MITRA,'DES','DES')}> 
                       <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
                         <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
                       </View>
@@ -673,16 +1256,32 @@ class DbsDetailScreens extends Component{
                     </TouchableOpacity>
                   )}
                 />
+                <Modal 
+                  isVisible={this.state.visibleModal === true}
+                  onBackdropPress={() => this.setState({ visibleModal: false })}>
+                  {this.renderModalContentSubs()}
+                </Modal>
               </View>
             )}
 
             {renderIf(!statusMitra)(
               <View>
                 <FlatList
-                  data={dataMitra2}
+                  data={(dataMitra2.length>0) ? dataMitra2 : []}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this.renderMovePage(item.MITRA, dataDivisi='DES', dataKategoriMitra='MITRA')}> 
+                    item.MITRA=='TOTAL'
+                    ?
+                    <TouchableOpacity style={styles.containerDetailData}> 
+                      <View style={{width:wp('70%')}}>
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.MITRA}</Text>
+                      </View>
+                      <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.jumlah}M</Text>                    
+                      </View>
+                    </TouchableOpacity>
+                    :
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModalMitra(item.MITRA,'DES','DES')}> 
                       <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
                         <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
                       </View>
@@ -695,16 +1294,32 @@ class DbsDetailScreens extends Component{
                     </TouchableOpacity>
                   )}
                 />
+                <Modal 
+                  isVisible={this.state.visibleModal === true}
+                  onBackdropPress={() => this.setState({ visibleModal: false })}>
+                  {this.renderModalContentMitra()}
+                </Modal>
               </View>
             )}
 
             {renderIf(!statusTelkom)(
               <View>
                 <FlatList
-                  data={dataTelkom2}
+                  data={(dataTelkom2.length>0) ? dataTelkom2 : []}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this.renderMovePage(item.MITRA, dataDivisi='DES', dataKategoriMitra='TELKOM')}> 
+                    item.MITRA=='TOTAL'
+                    ?
+                    <TouchableOpacity style={styles.containerDetailData}> 
+                      <View style={{width:wp('70%')}}>
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.MITRA}</Text>
+                      </View>
+                      <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.jumlah}M</Text>                    
+                      </View>
+                    </TouchableOpacity>
+                    :
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModalTelkom(item.MITRA,'DES','DES')}> 
                       <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
                         <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
                       </View>
@@ -717,6 +1332,11 @@ class DbsDetailScreens extends Component{
                     </TouchableOpacity>
                   )}
                 />
+                <Modal 
+                  isVisible={this.state.visibleModal === true}
+                  onBackdropPress={() => this.setState({ visibleModal: false })}>
+                  {this.renderModalContentTelkom()}
+                </Modal>
               </View>
             )}
           </Content>
@@ -766,12 +1386,16 @@ class DbsDetailScreens extends Component{
 
     const{
       //prospect
-      ebisProspectREVENUE3,ebisProspectProject3,dataAll3,dataSubs3,dataMitra3,dataTelkom3
+      loaderTampil, ebisProspectREVENUE3,ebisProspectProject3,dataAll3,dataSubs3,dataMitra3,dataTelkom3
     } = this.props;
 
-    const {statusAll, statusSubs, statusMitra, statusTelkom} = this.state;
+    const {reg,witel,statusAll, statusSubs, statusMitra, statusTelkom} = this.state;
 
     return(
+      loaderTampil
+      ?
+      <ActivityIndicator size={'large'} color={'#ffddcc'} style={{margin:hp('5%')}}/>
+      :
       <View style={{backgroundColor:'#FFF', flex:1}}>
         <View style={styles.wrapperArrow}>
           <Image 
@@ -862,13 +1486,13 @@ class DbsDetailScreens extends Component{
         </View>
 
         <View style={styles.buttonTab}>
-          <TouchableOpacity style={styles.buttonTabStyle} onPress={() => this.props.navigation.navigate('MonitorKB')}>
+          <TouchableOpacity style={styles.buttonTabStyle} onPress={() => this.props.navigation.navigate('MonitorKB',{treg:reg,witel:witel,start_date:this.state.startdate,end_date:this.state.enddate})}>
             <Text>Monitor KB</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.buttonTabStyle} onPress={() => this.props.navigation.navigate('MonitorKL')}>
+          <TouchableOpacity style={styles.buttonTabStyle} onPress={() => this.props.navigation.navigate('MonitorKL',{treg:reg,witel:witel,start_date:this.state.startdate,end_date:this.state.enddate})}>
             <Text>Monitor KL</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.buttonTabStyle} onPress={() => this.props.navigation.navigate('MonitorDev')}>
+          <TouchableOpacity style={styles.buttonTabStyle} onPress={() => this.props.navigation.navigate('MonitorDev',{treg:reg,witel:witel,start_date:this.state.startdate,end_date:this.state.enddate})}>
             <Text>Monitor Delivery</Text>
           </TouchableOpacity>
         </View>
@@ -901,10 +1525,21 @@ class DbsDetailScreens extends Component{
             {renderIf(!statusAll)(
               <View>
                 <FlatList
-                  data={dataAll3}
+                  data={(dataAll3.length>0) ? dataAll3 : []}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this.renderMovePage(item.MITRA, dataDivisi='DBS', dataKategoriMitra='ALL')}> 
+                    item.MITRA=='TOTAL'
+                    ?
+                    <TouchableOpacity style={styles.containerDetailData}> 
+                      <View style={{width:wp('70%')}}>
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.MITRA}</Text>
+                      </View>
+                      <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.jumlah}M</Text>                    
+                      </View>
+                    </TouchableOpacity>
+                    :
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModal(item.MITRA,'DBS','DBS')}> 
                       <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
                         <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
                       </View>
@@ -917,16 +1552,32 @@ class DbsDetailScreens extends Component{
                     </TouchableOpacity>
                   )}
                 />
+                <Modal 
+                  isVisible={this.state.visibleModal === true}
+                  onBackdropPress={() => this.setState({ visibleModal: false })}>
+                  {this.renderModalContent()}
+                </Modal>
               </View>
             )}
 
             {renderIf(!statusSubs)(
               <View>
                 <FlatList
-                  data={dataSubs3}
+                  data={(dataSubs3.length>0) ? dataSubs3 : []}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this.renderMovePage(item.MITRA, dataDivisi='DBS', dataKategoriMitra='CFU')}> 
+                    item.MITRA=='TOTAL'
+                    ?
+                    <TouchableOpacity style={styles.containerDetailData}> 
+                      <View style={{width:wp('70%')}}>
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.MITRA}</Text>
+                      </View>
+                      <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.jumlah}M</Text>                    
+                      </View>
+                    </TouchableOpacity>
+                    :
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModalSubs(item.MITRA,'DBS','DBS')}> 
                       <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
                         <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
                       </View>
@@ -939,16 +1590,32 @@ class DbsDetailScreens extends Component{
                     </TouchableOpacity>
                   )}
                 />
+                <Modal 
+                  isVisible={this.state.visibleModal === true}
+                  onBackdropPress={() => this.setState({ visibleModal: false })}>
+                  {this.renderModalContentSubs()}
+                </Modal>
               </View>
             )}
 
             {renderIf(!statusMitra)(
               <View>
                 <FlatList
-                  data={dataMitra3}
+                  data={(dataMitra3.length>0) ? dataMitra3 : []}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this.renderMovePage(item.MITRA, dataDivisi='DBS', dataKategoriMitra='MITRA')}> 
+                    item.MITRA=='TOTAL'
+                    ?
+                    <TouchableOpacity style={styles.containerDetailData}> 
+                      <View style={{width:wp('70%')}}>
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.MITRA}</Text>
+                      </View>
+                      <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.jumlah}M</Text>                    
+                      </View>
+                    </TouchableOpacity>
+                    :
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModalMitra(item.MITRA,'DBS','DBS')}> 
                       <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
                         <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
                       </View>
@@ -961,16 +1628,32 @@ class DbsDetailScreens extends Component{
                     </TouchableOpacity>
                   )}
                 />
+                <Modal 
+                  isVisible={this.state.visibleModal === true}
+                  onBackdropPress={() => this.setState({ visibleModal: false })}>
+                  {this.renderModalContentMitra()}
+                </Modal>
               </View>
             )}
 
             {renderIf(!statusTelkom)(
               <View>
                 <FlatList
-                  data={dataTelkom3}
+                  data={(dataTelkom3.length>0) ? dataTelkom3 : []}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this.renderMovePage(item.MITRA, dataDivisi='DBS', dataKategoriMitra='TELKOM')}> 
+                    item.MITRA=='TOTAL'
+                    ?
+                    <TouchableOpacity style={styles.containerDetailData}> 
+                      <View style={{width:wp('70%')}}>
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.MITRA}</Text>
+                      </View>
+                      <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.jumlah}M</Text>                    
+                      </View>
+                    </TouchableOpacity>
+                    :
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModalTelkom(item.MITRA,'DBS','DBS')}> 
                       <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
                         <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
                       </View>
@@ -983,6 +1666,11 @@ class DbsDetailScreens extends Component{
                     </TouchableOpacity>
                   )}
                 />
+                <Modal 
+                  isVisible={this.state.visibleModal === true}
+                  onBackdropPress={() => this.setState({ visibleModal: false })}>
+                  {this.renderModalContentTelkom()}
+                </Modal>
               </View>
             )}
           </Content>
@@ -1032,12 +1720,16 @@ class DbsDetailScreens extends Component{
 
     const{
       //prospect
-      ebisProspectREVENUE4,ebisProspectProject4,dataAll4,dataSubs4,dataMitra4,dataTelkom4
+      loaderTampil, ebisProspectREVENUE4,ebisProspectProject4,dataAll4,dataSubs4,dataMitra4,dataTelkom4
     } = this.props;
 
-    const {statusAll, statusSubs, statusMitra, statusTelkom} = this.state;
+    const {reg,witel,statusAll, statusSubs, statusMitra, statusTelkom} = this.state;
 
     return(
+      loaderTampil
+      ?
+      <ActivityIndicator size={'large'} color={'#ffddcc'} style={{margin:hp('5%')}}/>
+      :
       <View style={{backgroundColor:'#FFF', flex:1}}>
         <View style={styles.wrapperArrow}>
           <Image 
@@ -1128,13 +1820,13 @@ class DbsDetailScreens extends Component{
         </View>
 
         <View style={styles.buttonTab}>
-          <TouchableOpacity style={styles.buttonTabStyle} onPress={() => this.props.navigation.navigate('MonitorKB')}>
+          <TouchableOpacity style={styles.buttonTabStyle} onPress={() => this.props.navigation.navigate('MonitorKB',{treg:reg,witel:witel,start_date:this.state.startdate,end_date:this.state.enddate})}>
             <Text>Monitor KB</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.buttonTabStyle} onPress={() => this.props.navigation.navigate('MonitorKL')}>
+          <TouchableOpacity style={styles.buttonTabStyle} onPress={() => this.props.navigation.navigate('MonitorKL',{treg:reg,witel:witel,start_date:this.state.startdate,end_date:this.state.enddate})}>
             <Text>Monitor KL</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.buttonTabStyle} onPress={() => this.props.navigation.navigate('MonitorDev')}>
+          <TouchableOpacity style={styles.buttonTabStyle} onPress={() => this.props.navigation.navigate('MonitorDev',{treg:reg,witel:witel,start_date:this.state.startdate,end_date:this.state.enddate})}>
             <Text>Monitor Delivery</Text>
           </TouchableOpacity>
         </View>
@@ -1164,13 +1856,25 @@ class DbsDetailScreens extends Component{
         
         {/* <ScrollView> */}
           <Content style={{backgroundColor:'#FFF'}}>
+          
             {renderIf(!statusAll)(
               <View>
                 <FlatList
-                  data={dataAll4}
+                  data={(dataAll4.length>0) ? dataAll4 : []}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this.renderMovePage(item.MITRA, dataDivisi='DGS', dataKategoriMitra='ALL')}> 
+                    item.MITRA=='TOTAL'
+                    ?
+                    <TouchableOpacity style={styles.containerDetailData}> 
+                      <View style={{width:wp('70%')}}>
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.MITRA}</Text>
+                      </View>
+                      <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.jumlah}M</Text>                    
+                      </View>
+                    </TouchableOpacity>
+                    :
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModal(item.MITRA,'DGS','DGS')}> 
                       <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
                         <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
                       </View>
@@ -1183,16 +1887,32 @@ class DbsDetailScreens extends Component{
                     </TouchableOpacity>
                   )}
                 />
+                <Modal 
+                  isVisible={this.state.visibleModal === true}
+                  onBackdropPress={() => this.setState({ visibleModal: false })}>
+                  {this.renderModalContent()}
+                </Modal>
               </View>
             )}
 
             {renderIf(!statusSubs)(
               <View>
                 <FlatList
-                  data={dataSubs4}
+                  data={(dataSubs4.length>0) ? dataSubs4 : []}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this.renderMovePage(item.MITRA, dataDivisi='DGS', dataKategoriMitra='CFU')}> 
+                    item.MITRA=='TOTAL'
+                    ?
+                    <TouchableOpacity style={styles.containerDetailData}> 
+                      <View style={{width:wp('70%')}}>
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.MITRA}</Text>
+                      </View>
+                      <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.jumlah}M</Text>                    
+                      </View>
+                    </TouchableOpacity>
+                    :
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModalSubs(item.MITRA,'DGS','DGS')}> 
                       <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
                         <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
                       </View>
@@ -1205,16 +1925,32 @@ class DbsDetailScreens extends Component{
                     </TouchableOpacity>
                   )}
                 />
+                <Modal 
+                  isVisible={this.state.visibleModal === true}
+                  onBackdropPress={() => this.setState({ visibleModal: false })}>
+                  {this.renderModalContentSubs()}
+                </Modal>
               </View>
             )}
 
             {renderIf(!statusMitra)(
               <View>
                 <FlatList
-                  data={dataMitra4}
+                  data={(dataMitra4.length>0) ? dataMitra4 : []}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this.renderMovePage(item.MITRA, dataDivisi='DGS', dataKategoriMitra='MITRA')}> 
+                    item.MITRA=='TOTAL'
+                    ?
+                    <TouchableOpacity style={styles.containerDetailData}> 
+                      <View style={{width:wp('70%')}}>
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.MITRA}</Text>
+                      </View>
+                      <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.jumlah}M</Text>                    
+                      </View>
+                    </TouchableOpacity>
+                    :
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModalMitra(item.MITRA,'DGS','DGS')}> 
                       <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
                         <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
                       </View>
@@ -1227,16 +1963,32 @@ class DbsDetailScreens extends Component{
                     </TouchableOpacity>
                   )}
                 />
+                <Modal 
+                  isVisible={this.state.visibleModal === true}
+                  onBackdropPress={() => this.setState({ visibleModal: false })}>
+                  {this.renderModalContentMitra()}
+                </Modal>
               </View>
             )}
 
             {renderIf(!statusTelkom)(
               <View>
                 <FlatList
-                  data={dataTelkom4}
+                  data={(dataTelkom4.length>0) ? dataTelkom4 : []}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this.renderMovePage(item.MITRA, dataDivisi='DGS', dataKategoriMitra='TELKOM')}> 
+                    item.MITRA=='TOTAL'
+                    ?
+                    <TouchableOpacity style={styles.containerDetailData}> 
+                      <View style={{width:wp('70%')}}>
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.MITRA}</Text>
+                      </View>
+                      <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.jumlah}M</Text>                    
+                      </View>
+                    </TouchableOpacity>
+                    :
+                    <TouchableOpacity style={styles.containerDetailData} onPress={() => this._toggleModalTelkom(item.MITRA,'DGS','DGS')}> 
                       <View style={{width:wp('5%'), justifyContent:'center', alignSelf:'center'}}>
                         <Icon type={'MaterialIcons'} name={'play-arrow'} style={{fontSize:14}} />
                       </View>
@@ -1249,6 +2001,11 @@ class DbsDetailScreens extends Component{
                     </TouchableOpacity>
                   )}
                 />
+                <Modal 
+                  isVisible={this.state.visibleModal === true}
+                  onBackdropPress={() => this.setState({ visibleModal: false })}>
+                  {this.renderModalContentTelkom()}
+                </Modal>
               </View>
             )}
           </Content>
@@ -1256,15 +2013,11 @@ class DbsDetailScreens extends Component{
       </View>
     )
   }
-
-
   
   render() {
     var date = new Date().getDate();
     var month = new Date().getMonth() + 1;
     var year = new Date().getFullYear();
-
-    var dateNow = `${date}-${month}-${year}`
 
     const {
       //navigasi props
@@ -1307,49 +2060,42 @@ class DbsDetailScreens extends Component{
 }
 
 const mapStateToProps = (state) => ({
-  //EBIS
-  ebisProspectREVENUE:state.EbisReducer.ebisWinREVENUE,
-  ebisProspectProject:state.EbisReducer.ebisWinProject,
-  ebisProspectTarget:state.EbisReducer.ebisWinTarget,
-  
-  //DES
-  ebisProspectREVENUE2:state.DesReducer.ebisWinREVENUE,
-  ebisProspectProject2:state.DesReducer.ebisWinProject,
-  ebisProspectTarget2:state.DesReducer.ebisWinTarget,
 
-  //DBS
-  ebisProspectREVENUE3:state.DbsReducer.ebisWinREVENUE,
-  ebisProspectProject3:state.DbsReducer.ebisWinProject,
-  ebisProspectTarget3:state.DbsReducer.ebisWinTarget,
+  ebisProspectREVENUE: state.DbsDetailReducer.winrevEbis,
+  ebisProspectProject: state.DbsDetailReducer.winprojectEbis,
 
-  //DGS
-  ebisProspectREVENUE4:state.DgsReducer.ebisWinREVENUE,
-  ebisProspectProject4:state.DgsReducer.ebisWinProject,
-  ebisProspectTarget4:state.DgsReducer.ebisWinTarget,
+  ebisProspectREVENUE2:state.DbsDetailReducer.winrevDes,
+  ebisProspectProject2:state.DbsDetailReducer.winprojectDes,
+
+  ebisProspectREVENUE3:state.DbsDetailReducer.winrevDbs,
+  ebisProspectProject3:state.DbsDetailReducer.winprojectDbs,
+
+  ebisProspectREVENUE4:state.DbsDetailReducer.winrevDgs,
+  ebisProspectProject4:state.DbsDetailReducer.winprojectDgs,
 
   //data All
-  dataAll:state.EbisDetailReducer.dataAll3,
-  dataAll2:state.DesDetailReducer.dataAll3,
-  dataAll3:state.DbsDetailReducer.dataAll3,
-  dataAll4:state.DgsDetailReducer.dataAll3,
+  dataAll: state.DbsDetailReducer.dataEbisAll,
+  dataAll2:state.DbsDetailReducer.dataDesAll,
+  dataAll3:state.DbsDetailReducer.dataDbsAll,
+  dataAll4:state.DbsDetailReducer.dataDgsAll,
 
   //data subs
-  dataSubs:state.EbisDetailReducer.dataSubs3,
-  dataSubs2:state.DesDetailReducer.dataSubs3,
-  dataSubs3:state.DbsDetailReducer.dataSubs3,
-  dataSubs4:state.DgsDetailReducer.dataSubs3,
+  dataSubs: state.DbsDetailReducer.dataEbisSubs,
+  dataSubs2:state.DbsDetailReducer.dataDesSubs,
+  dataSubs3:state.DbsDetailReducer.dataDbsSubs,
+  dataSubs4:state.DbsDetailReducer.dataDgsSubs,
 
   //data mitra
-  dataMitra:state.EbisDetailReducer.dataMitra3,
-  dataMitra2:state.DesDetailReducer.dataMitra3,
-  dataMitra3:state.DbsDetailReducer.dataMitra3,
-  dataMitra4:state.DgsDetailReducer.dataMitra3,
+  dataMitra: state.DbsDetailReducer.dataEbisMitra,
+  dataMitra2:state.DbsDetailReducer.dataDesMitra,
+  dataMitra3:state.DbsDetailReducer.dataDbsMitra,
+  dataMitra4:state.DbsDetailReducer.dataDgsMitra,
 
   //data telkom
-  dataTelkom:state.EbisDetailReducer.dataTelkom3,
-  dataTelkom2:state.DesDetailReducer.dataTelkom3,
-  dataTelkom3:state.DbsDetailReducer.dataTelkom3,
-  dataTelkom4:state.DgsDetailReducer.dataTelkom3,
+  dataTelkom: state.DbsDetailReducer.dataEbisTelkom,
+  dataTelkom2:state.DbsDetailReducer.dataDesTelkom,
+  dataTelkom3:state.DbsDetailReducer.dataDbsTelkom,
+  dataTelkom4:state.DbsDetailReducer.dataDgsTelkom,
 })
 
 export default connect(mapStateToProps)(DbsDetailScreens);

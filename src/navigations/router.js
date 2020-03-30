@@ -21,17 +21,31 @@ import DgsDetailScreen from '../pages/dashboard/screens/homeScreens/screens/LOP/
 import MonitorKB from '../pages/dashboard/screens/homeScreens/screens/LOP/screens/monitorkb_screen/index.js';
 import DetailMonitorDone from '../pages/dashboard/screens/homeScreens/screens/LOP/screens/monitorkb_screen/detailMonitor';
 import DetailMonitorOgp from '../pages/dashboard/screens/homeScreens/screens/LOP/screens/monitorkb_screen/detailMonitorOgp';
+import DetailMonitorProgressOgp3 from '../pages/dashboard/screens/homeScreens/screens/LOP/screens/monitorkb_screen/detailMonitorProgressOgp3';
+import DetailMonitorProgressOgp6 from '../pages/dashboard/screens/homeScreens/screens/LOP/screens/monitorkb_screen/detailMonitorProgressOgp6';
+import DetailMonitorProgressOgp7 from '../pages/dashboard/screens/homeScreens/screens/LOP/screens/monitorkb_screen/detailMonitorProgressOgp7';
 
 //monitor_kl LOP
-import MonitorKL from '../pages/dashboard/screens/homeScreens/screens/LOP/screens/monitorkl_screen/index.js';
-import DetailMonitorDoneKL from '../pages/dashboard/screens/homeScreens/screens/LOP/screens/monitorkl_screen/detailMonitor';
-import DetailMonitorOgpKL from '../pages/dashboard/screens/homeScreens/screens/LOP/screens/monitorkl_screen/detailMonitorOgp';
+import MonitorKL from                   '../pages/dashboard/screens/homeScreens/screens/LOP/screens/monitorkl_screen/index.js';
+import DetailMonitorDoneKL from         '../pages/dashboard/screens/homeScreens/screens/LOP/screens/monitorkl_screen/detailMonitor';
+import DetailMonitorOgpKL from          '../pages/dashboard/screens/homeScreens/screens/LOP/screens/monitorkl_screen/detailMonitorOgp';
+import DetailMonitorProgressOgp3KL from '../pages/dashboard/screens/homeScreens/screens/LOP/screens/monitorkl_screen/detailMonitorProgressOgp3';
+import DetailMonitorProgressOgp6KL from '../pages/dashboard/screens/homeScreens/screens/LOP/screens/monitorkl_screen/detailMonitorProgressOgp6';
+import DetailMonitorProgressOgp7KL from '../pages/dashboard/screens/homeScreens/screens/LOP/screens/monitorkl_screen/detailMonitorProgressOgp7';
 
-//detail level 2
-import EbisDetailLevel2 from '../pages/dashboard/screens/homeScreens/screens/LOP/screens/detail_screens/detail_level2/EbisDetail_level2';
-import DesDetailLevel2  from '../pages/dashboard/screens/homeScreens/screens/LOP/screens/detail_screens/detail_level2/DesDetail_level2';
-import DbsDetailLevel2  from '../pages/dashboard/screens/homeScreens/screens/LOP/screens/detail_screens/detail_level2/DbsDetail_level2';
-import DgsDetailLevel2  from '../pages/dashboard/screens/homeScreens/screens/LOP/screens/detail_screens/detail_level2/DgsDetail_level2';
+//monitor-dev LOP
+import MonitorDev                      from '../pages/dashboard/screens/homeScreens/screens/LOP/screens/monitordev_screen/index.js';
+import DetailMonitorDev                from '../pages/dashboard/screens/homeScreens/screens/LOP/screens/monitordev_screen/detailMonitorDev';
+import DetailMonitorProgressOnSchedule from '../pages/dashboard/screens/homeScreens/screens/LOP/screens/monitordev_screen/detailMonitorProgressOnSchedule';
+import DetailMonitorProgressDelay      from '../pages/dashboard/screens/homeScreens/screens/LOP/screens/monitordev_screen/detailMonitorProgressDelay';
+
+//REKAP
+import detailRekapWin  from '../pages/dashboard/screens/rekapScreens/rekap_screens/detailRekapWin'
+import detailRekapLose from '../pages/dashboard/screens/rekapScreens/rekap_screens/detailRekapLose'
+
+// chat
+import roomList from '../pages/dashboard/screens/chatScreens/roomList'
+import detailChatRoomScreens from '../pages/dashboard/screens/chatScreens/detailChatRoomScreens'
 
 const noTransitionConfig = () => ({
   transitionSpec: {
@@ -44,18 +58,12 @@ const noTransitionConfig = () => ({
 // Drawer stack
 const MainStack = StackNavigator({
   MainDashboard: { screen: Dashboard},
-
+  roomList: { screen: roomList},
   //detail screen
   EbisDetailLOP:{screen:EbisDetailScreen},
   DesDetailLOP :{screen:DesDetailScreen},
   DbsDetailLOP :{screen:DbsDetailScreen},
   DgsDetailLOP :{screen:DgsDetailScreen},
-
-  //detail level 2
-  EbisDetailLevel2 : {screen:EbisDetailLevel2},
-  DesDetailLevel2  : {screen:DesDetailLevel2},
-  DbsDetailLevel2  : {screen:DbsDetailLevel2},
-  DgsDetailLevel2  : {screen:DgsDetailLevel2},
 },{
   navigationOptions:{
     header:null
@@ -76,6 +84,20 @@ const navigator = StackNavigator({
       header:null
     }
   },
+   roomList:{
+    screen:roomList
+    //,
+    // navigationOptions:{
+    //   header:null
+    // }
+  },
+     detailChatRoomScreens:{
+    screen:detailChatRoomScreens
+    //,
+    // navigationOptions:{
+    //   header:null
+    // }
+  },
   MonitorKB: {
     screen: MonitorKB,
     navigationOptions: {
@@ -90,6 +112,24 @@ const navigator = StackNavigator({
   },
   DetailMonitorOgp: {
     screen: DetailMonitorOgp,
+    navigationOptions: {
+      header: null
+    }
+  },
+  DetailMonitorProgressOgp3: {
+    screen: DetailMonitorProgressOgp3,
+    navigationOptions: {
+      header: null
+    }
+  },
+  DetailMonitorProgressOgp6: {
+    screen: DetailMonitorProgressOgp6,
+    navigationOptions: {
+      header: null
+    }
+  },
+  DetailMonitorProgressOgp7: {
+    screen: DetailMonitorProgressOgp7,
     navigationOptions: {
       header: null
     }
@@ -111,7 +151,62 @@ const navigator = StackNavigator({
     navigationOptions: {
       header: null
     }
-  }
+  },
+  DetailMonitorProgressOgp3KL: {
+    screen: DetailMonitorProgressOgp3KL,
+    navigationOptions: {
+      header: null
+    }
+  },
+  DetailMonitorProgressOgp6KL: {
+    screen: DetailMonitorProgressOgp6KL,
+    navigationOptions: {
+      header: null
+    }
+  },
+  DetailMonitorProgressOgp7KL: {
+    screen: DetailMonitorProgressOgp7KL,
+    navigationOptions: {
+      header: null
+    }
+  },
+  MonitorDev: {
+    screen: MonitorDev,
+    navigationOptions: {
+      header: null
+    }
+  },
+  DetailMonitorDev: {
+    screen: DetailMonitorDev,
+    navigationOptions: {
+      header: null
+    }
+  },
+  DetailMonitorProgressOnSchedule: {
+    screen: DetailMonitorProgressOnSchedule,
+    navigationOptions: {
+      header: null
+    }
+  },
+  DetailMonitorProgressDelay: {
+    screen: DetailMonitorProgressDelay,
+    navigationOptions: {
+      header: null
+    }
+  },
+  detailRekapWin: {
+    screen: detailRekapWin,
+    navigationOptions: {
+      header: null
+    }
+  },
+  detailRekapLose: {
+    screen: detailRekapLose,
+    navigationOptions: {
+      header: null
+    }
+  },
+
 },{
   transitionConfig: noTransitionConfig
 });

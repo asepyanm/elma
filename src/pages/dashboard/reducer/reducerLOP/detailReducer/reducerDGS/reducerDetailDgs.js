@@ -1,393 +1,246 @@
 const initialState = { 
   loaderStatus:false,
 
-  //data DGS prospect
-  dataAll:'',
-  dataSubs:'',
-  dataMitra:'',
-  dataTelkom:'',
+  //BILLCOM
+  //EBIS
+  headerEbisValue: '0',
+  headerEbisProject: '0',
+  //DES
+  headerDesValue: '0',
+  headerDesProject: '0',
+  //DBS
+  headerDbsValue: '0',
+  headerDbsProject: '0',
+  //DGS
+  headerDgsValue: '0',
+  headerDgsProject: '0',       
+ 
+ //data ebis
+ dataEbisAll:[],
+ dataEbisSubs:[],
+ dataEbisMitra:[],
+ dataEbisTelkom:[],
 
-  //data DGS submission
-  dataAll2:'',
-  dataSubs2:'',
-  dataMitra2:'',
-  dataTelkom2:'',
+ //data des
+ dataDesAll:[],
+ dataDesSubs:[],
+ dataDesMitra:[],
+ dataDesTelkom:[],
 
-  //data DGS win
-  dataAll3:'',
-  dataSubs3:'',
-  dataMitra3:'',
-  dataTelkom3:'',
+ //data dbs
+ dataDbsAll:[],
+ dataDbsSubs:[],
+ dataDbsMitra:[],
+ dataDbsTelkom:[],
 
-  //data DGS billcom
-  dataAll4:'',
-  dataSubs4:'',
-  dataMitra4:'',
-  dataTelkom4:'',
+ //data dgs
+ dataDgsAll:[],
+ dataDgsSubs:[],
+ dataDgsMitra:[],
+ dataDgsTelkom:[],
 };
 
 const DgsDetailReducer = (state = initialState, action) => {
   switch (action.type) {
 
-    //detail all
-    case 'DETAIL_PROSPECT_DGS_REJECTED':
+    //Header status
+    case 'HEADER_BILLCOM_EBIS_FULFILLED':
       return{
         ...state, 
+        headerEbisValue: action.payload.data[0].lop_13_2,
+        headerEbisProject: action.payload.data[0].lop_13_3,
       }
-    break; 
-    case 'DETAIL_PROSPECT_DGS_PENDING':
+      break;
+    case 'HEADER_BILLCOM_DES_FULFILLED':
       return{
         ...state, 
+        headerDesValue: action.payload.data[0].lop_13_2,
+        headerDesProject: action.payload.data[0].lop_13_3,
       }
-    break;
-    case 'DETAIL_PROSPECT_DGS_FULFILLED':
+      break;
+    case 'HEADER_BILLCOM_DBS_FULFILLED':
       return{
         ...state, 
-        //Current status
-        dataAll:action.payload.data,
+        headerDbsValue: action.payload.data[0].lop_13_2,
+        headerDbsProject: action.payload.data[0].lop_13_3,
       }
-    break;
+      break;
+    case 'HEADER_BILLCOM_DGS_FULFILLED':
+      return{
+        ...state, 
+        headerDgsValue: action.payload.data[0].lop_13_2,
+        headerDgsProject: action.payload.data[0].lop_13_3,
+      }
+      break;
 
-    //detail SUBS
-    case 'DETAIL_SUBS_PROSPECT_DGS_REJECTED':
-      return{
-        ...state, 
-      }
-    break;
-    case 'DETAIL_SUBS_PROSPECT_DGS_PENDING':
-      return{
-        ...state, 
-      }
-    break;
-    case 'DETAIL_SUBS_PROSPECT_DGS_FULFILLED':
-      return{
-        ...state, 
-        //Current status
-        dataSubs:action.payload.data,
-      }
-    break;
+      //--------------------------prospect
+      //detail ALL
+      case 'DETAIL_BILLCOM_EBIS_REJECTED':
+        return{
+          ...state, 
+        }
+      break;
+      case 'DETAIL_BILLCOM_EBIS_PENDING':
+        return{
+          ...state, 
+        }
+      break;
+      case 'DETAIL_BILLCOM_EBIS_FULFILLED':
+        return{
+          ...state, 
+          //Current status
+          dataEbisAll:action.payload.data,
+        }
+      break;
 
-    //detail MITRA
-    case 'DETAIL_MITRA_PROSPECT_DGS_REJECTED':
-      return{
-        ...state, 
-      }
-    break;
-    case 'DETAIL_MITRA_PROSPECT_DGS_PENDING':
-      return{
-        ...state, 
-      }
-    break;
-    case 'DETAIL_MITRA_PROSPECT_DGS_FULFILLED':
-      return{
-        ...state, 
-        //Current status
-        dataMitra:action.payload.data,
-      }
-    break;
-
-    //detail TELKOM
-    case 'DETAIL_TELKOM_PROSPECT_DGS_REJECTED':
-      return{
-        ...state, 
-      }
-    break;
-    case 'DETAIL_TELKOM_PROSPECT_DGS_PENDING':
-      return{
-        ...state, 
-      }
-    break;
-    case 'DETAIL_TELKOM_PROSPECT_DGS_FULFILLED':
-      return{
-        ...state, 
-        //Current status
-        dataTelkom:action.payload.data,
-      }
-    break;
-  //--------------------------prospect
+      case 'DETAIL_BILLCOM_DES_FULFILLED':
+        return{
+          ...state, 
+          //Current status
+          dataDesAll:action.payload.data,
+        }
+      break;
+      case 'DETAIL_BILLCOM_DBS_FULFILLED':
+        return{
+          ...state, 
+          //Current status
+          dataDbsAll:action.payload.data,
+        }
+      break;
+      case 'DETAIL_BILLCOM_DGS_FULFILLED':
+        return{
+          ...state, 
+          //Current status
+          dataDgsAll:action.payload.data,
+        }
+      break;
 
 
+      //detail SUBS
+      case 'DETAIL_SUBS_BILLCOM_EBIS_REJECTED':
+        return{
+          ...state, 
+        }
+      break;
+      case 'DETAIL_SUBS_BILLCOM_EBIS_PENDING':
+        return{
+          ...state, 
+        }
+      break;
+      case 'DETAIL_SUBS_BILLCOM_EBIS_FULFILLED':
+        return{
+          ...state, 
+          //Current status
+          dataEbisSubs:action.payload.data,
+        }
+      break;
+      case 'DETAIL_SUBS_BILLCOM_DES_FULFILLED':
+        return{
+          ...state, 
+          //Current status
+          dataDesSubs:action.payload.data,
+        }
+      break;
+      case 'DETAIL_SUBS_BILLCOM_DBS_FULFILLED':
+        return{
+          ...state, 
+          //Current status
+          dataDbsSubs:action.payload.data,
+        }
+      break;
+      case 'DETAIL_SUBS_BILLCOM_DGS_FULFILLED':
+        return{
+          ...state, 
+          //Current status
+          dataDgsSubs:action.payload.data,
+        }
+      break;
 
+      //detail MITRA
+      case 'DETAIL_MITRA_BILLCOM_EBIS_REJECTED':
+        return{
+          ...state, 
+        }
+      break;
+      case 'DETAIL_MITRA_BILLCOM_EBIS_PENDING':
+        return{
+          ...state, 
+        }
+      break;
+      case 'DETAIL_MITRA_BILLCOM_EBIS_FULFILLED':
+        return{
+          ...state, 
+          //Current status
+          dataEbisMitra:action.payload.data,
+        }
+      break;
+      case 'DETAIL_MITRA_BILLCOM_DES_FULFILLED':
+        return{
+          ...state, 
+          //Current status
+          dataDesMitra:action.payload.data,
+        }
+      break;
+      case 'DETAIL_MITRA_BILLCOM_DBS_FULFILLED':
+        return{
+          ...state, 
+          //Current status
+          dataDbsMitra:action.payload.data,
+        }
+      break;
+      case 'DETAIL_MITRA_BILLCOM_DGS_FULFILLED':
+        return{
+          ...state, 
+          //Current status
+          dataDgsMitra:action.payload.data,
+        }
+      break;
 
+      //detail TELKOM
+      case 'DETAIL_TELKOM_BILLCOM_EBIS_REJECTED':
+        return{
+          ...state, 
+        }
+      break;
+      case 'DETAIL_TELKOM_BILLCOM_EBIS_PENDING':
+        return{
+          ...state, 
+        }
+      break;
+      case 'DETAIL_TELKOM_BILLCOM_EBIS_FULFILLED':
+        return{
+          ...state, 
+          //Current status
+          dataEbisTelkom:action.payload.data,
+        }
+      break;
+      case 'DETAIL_TELKOM_BILLCOM_DES_FULFILLED':
+        return{
+          ...state, 
+          //Current status
+          dataDesTelkom:action.payload.data,
+        }
+      break;
+      case 'DETAIL_TELKOM_BILLCOM_DBS_FULFILLED':
+        return{
+          ...state, 
+          //Current status
+          dataDbsTelkom:action.payload.data,
+        }
+      break;
+      case 'DETAIL_TELKOM_BILLCOM_DGS_FULFILLED':
+        return{
+          ...state, 
+          //Current status
+          dataDgsTelkom:action.payload.data,
+        }
+      break;
 
-
-
-
-  //--------------------------submission
-    //detail ALL
-    case 'DETAIL_SUBMISSION_DGS_REJECTED':
-      return{
-        ...state, 
-      }
-    break;
-    case 'DETAIL_SUBMISSION_DGS_PENDING':
-      return{
-        ...state, 
-      }
-    break;
-    case 'DETAIL_SUBMISSION_DGS_FULFILLED':
-      return{
-        ...state, 
-        //Current status
-        dataAll2:action.payload.data,
-      }
-    break;
-
-    //detail SUBS
-    case 'DETAIL_SUBS_SUBMISSION_DGS_REJECTED':
-      return{
-        ...state, 
-      }
-    break;
-    case 'DETAIL_SUBS_SUBMISSION_DGS_PENDING':
-      return{
-        ...state, 
-      }
-    break;
-    case 'DETAIL_SUBS_SUBMISSION_DGS_FULFILLED':
-      return{
-        ...state, 
-        //Current status
-        dataSubs2:action.payload.data,
-      }
-    break;
-
-    //detail MITRA
-    case 'DETAIL_MITRA_SUBMISSION_DGS_REJECTED':
-      return{
-        ...state, 
-      }
-    break;
-    case 'DETAIL_MITRA_SUBMISSION_DGS_PENDING':
-      return{
-        ...state, 
-      }
-    break;
-    case 'DETAIL_MITRA_SUBMISSION_DGS_FULFILLED':
-      return{
-        ...state, 
-        //Current status
-        dataMitra2:action.payload.data,
-      }
-    break;
-
-    //detail TELKOM
-    case 'DETAIL_TELKOM_SUBMISSION_DGS_REJECTED':
-      return{
-        ...state, 
-      }
-    break;
-    case 'DETAIL_TELKOM_SUBMISSION_DGS_PENDING':
-      return{
-        ...state, 
-      }
-    break;
-    case 'DETAIL_TELKOM_SUBMISSION_DGS_FULFILLED':
-      return{
-        ...state, 
-        //Current status
-        dataTelkom2:action.payload.data,
-      }
-    break;
-  //--------------------------submission
-
-
-
-
-
-
-
-
-  //---------------------------win
-    //detail ALL
-    case 'DETAIL_WIN_DGS_REJECTED':
-      return{
-        ...state, 
-      }
-    break;
-    case 'DETAIL_WIN_DGS_PENDING':
-      return{
-        ...state, 
-      }
-    break;
-    case 'DETAIL_WIN_DGS_FULFILLED':
-      return{
-        ...state, 
-        //Current status
-        dataAll3:action.payload.data,
-      }
-    break;
-
-    //detail SUBS
-    case 'DETAIL_SUBS_WIN_DGS_REJECTED':
-      return{
-        ...state, 
-      }
-    break;
-    case 'DETAIL_SUBS_WIN_DGS_PENDING':
-      return{
-        ...state, 
-      }
-    break;
-    case 'DETAIL_SUBS_WIN_DGS_FULFILLED':
-      return{
-        ...state, 
-        //Current status
-        dataSubs3:action.payload.data,
-      }
-    break;
-
-    //detail MITRA
-    case 'DETAIL_MITRA_WIN_DGS_REJECTED':
-      return{
-        ...state, 
-      }
-    break;
-    case 'DETAIL_MITRA_WIN_DGS_PENDING':
-      return{
-        ...state, 
-      }
-    break;
-    case 'DETAIL_MITRA_WIN_DGS_FULFILLED':
-      return{
-        ...state, 
-        //Current status
-        dataMitra3:action.payload.data,
-      }
-    break;
-
-    //detail TELKOM
-    case 'DETAIL_TELKOM_WIN_DGS_REJECTED':
-      return{
-        ...state, 
-      }
-    break;
-    case 'DETAIL_TELKOM_WIN_DGS_PENDING':
-      return{
-        ...state, 
-      }
-    break;
-    case 'DETAIL_TELKOM_WIN_DGS_FULFILLED':
-      return{
-        ...state, 
-        //Current status
-        dataTelkom3:action.payload.data,
-      }
-    break;
-  //---------------------------win
-
-
-
-
-
-
-
-
-
-  //----------------------------billcom
-    //detail ALL
-    case 'DETAIL_BILLCOM_DGS_REJECTED':
-      return{
-        ...state, 
-      }
-    break;
-    case 'DETAIL_BILLCOM_DGS_PENDING':
-      return{
-        ...state, 
-      }
-    break;
-    case 'DETAIL_BILLCOM_DGS_FULFILLED':
-      return{
-        ...state, 
-        //Current status
-        dataAll4:action.payload.data,
-      }
-    break;
-
-    //detail SUBS
-    case 'DETAIL_SUBS_BILLCOM_DGS_REJECTED':
-      return{
-        ...state, 
-      }
-    break;
-    case 'DETAIL_SUBS_BILLCOM_DGS_PENDING':
-      return{
-        ...state, 
-      }
-    break;
-    case 'DETAIL_SUBS_BILLCOM_DGS_FULFILLED':
-      return{
-        ...state, 
-        //Current status
-        dataSubs4:action.payload.data,
-      }
-    break;
-
-    //detail MITRA
-    case 'DETAIL_MITRA_BILLCOM_DGS_REJECTED':
-      return{
-        ...state, 
-      }
-    break;
-    case 'DETAIL_MITRA_BILLCOM_DGS_PENDING':
-      return{
-        ...state, 
-      }
-    break;
-    case 'DETAIL_MITRA_BILLCOM_DGS_FULFILLED':
-      return{
-        ...state, 
-        //Current status
-        dataMitra4:action.payload.data,
-      }
-    break;
-
-    //detail TELKOM
-    case 'DETAIL_TELKOM_BILLCOM_DGS_REJECTED':
-      return{
-        ...state, 
-      }
-    break;
-    case 'DETAIL_TELKOM_BILLCOM_DGS_PENDING':
-      return{
-        ...state, 
-      }
-    break;
-    case 'DETAIL_TELKOM_BILLCOM_DGS_FULFILLED':
-      return{
-        ...state, 
-        //Current status
-        dataTelkom4:action.payload.data,
-      }
-    break;
-  //----------------------------billcom
-
-
-  //----------------------------detail level 3
-    case 'DETAIL_LEVEL_3_DGS_REJECTED':
-      return{
-        ...state, 
-        loaderStatus:false
-      }
-    break;
-    case 'DETAIL_LEVEL_3_DGS_PENDING':
-      return{
-        ...state, 
-        loaderStatus:true
-      }
-    break;
-    case 'DETAIL_LEVEL_3_DGS_FULFILLED':
-      return{
-        ...state, 
-        loaderStatus:false,
-        //Current status
-        dataDetailLevel3:action.payload.data,
-      }
-    break;
-    
+ 
     default:
       return state;
   }
+  
 };
 
 export default DgsDetailReducer;
