@@ -8,9 +8,10 @@ import {
 import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Icon, Text, Segment } from 'native-base';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
-//screen
+//import screen
 import LOPscreen from './screens/LOP/lopScreens';
 import ABCscreen from './screens/ABC/abcScreens';
+import ChannelScreen from './screens/CHANNEL/channelScreens';
 
 export default class HomeScreens extends Component{
   constructor(props){
@@ -35,6 +36,12 @@ export default class HomeScreens extends Component{
       case 'abc':
         return (<ABCscreen/>);
       break;
+      case 'channel':
+        return (<ChannelScreen/>);
+      break;
+      case 'bmd':
+        return (<ABCscreen/>);
+      break;
       default:
     }
   }
@@ -51,7 +58,7 @@ export default class HomeScreens extends Component{
             />
           </Left>
           <Body/>
-          <Right style={{flex:2}}>
+          <Right style={{flex:3}}>
             <Segment style={{backgroundColor:'transparent'}}>
               <Button 
                 first 
@@ -68,6 +75,22 @@ export default class HomeScreens extends Component{
                 onPress={() => this.setState({selectedTab: 'abc'})} 
               >
                 <Text style={selectedTab === 'abc' ? styles.segmentTextActive : styles.segmentTextNonActive}>ABC</Text>
+              </Button>
+              <Button 
+                last
+                active={selectedTab==='channel'} 
+                style={selectedTab === 'channel' ? styles.segmentButtonActive : styles.segmentButtonNonActive}                
+                onPress={() => this.setState({selectedTab: 'channel'})} 
+              >
+                <Text style={selectedTab === 'channel' ? styles.segmentTextActive : styles.segmentTextNonActive}>CHNL</Text>
+              </Button>
+              <Button 
+                last
+                active={selectedTab==='bmd'} 
+                style={selectedTab === 'bmd' ? styles.segmentButtonActive : styles.segmentButtonNonActive}                
+                onPress={() => this.setState({selectedTab: 'bmd'})} 
+              >
+                <Text style={selectedTab === 'bmd' ? styles.segmentTextActive : styles.segmentTextNonActive}>BMD</Text>
               </Button>
             </Segment>
           </Right>
