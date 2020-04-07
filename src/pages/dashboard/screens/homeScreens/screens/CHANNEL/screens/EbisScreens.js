@@ -40,12 +40,6 @@ class EbisScreens extends Component{
       winAlertTP:'',winAlertNP:'',
       loseAlertTP:'',loseAlertNP:'',
 
-      dataCobaDownload:[
-        [ "id",    "name", "value" ],
-        [    1, "sheetjs",    7262 ],
-        [    2, "js-xlsx",    6969 ]
-      ],
-
       //group:'G1',
       
       tampilActivityIndicator: false,
@@ -169,6 +163,11 @@ class EbisScreens extends Component{
     });
 
     this.props.dispatch({
+      type:'EBIS_HOME_DOWNLOAD_CHANNEL',
+      payload:axios.get(`${url.API2}/ebis_getchannelrawdata/startdate/${sDate}/enddate/${eDate}/div/EBIS/treg/${sTreg}/witel/${sWitel}`)
+    });
+
+    this.props.dispatch({
       type:'EBIS_LASTUPDATE_CHANNEL',
       payload:axios.get(`${url.API2}/ebis_lastime`)
     });
@@ -176,8 +175,60 @@ class EbisScreens extends Component{
   }
 
   downloadFileExcel(){
+    const {dataDownloadEbis} = this.props;
+    let dataMap = [
+      [ 
+        "Nama Project",
+        "Nama CC",
+        "Nilai Project", 
+        "Lama Kontrak", 
+        "Divisi", 
+        "Segment", 
+        "Deliver", 
+        "Payment Method", 
+        "Channel", 
+        "GPM", 
+        "Status KB",
+        "No. KB",
+        "Durasi",
+        "Status PO/P1",
+        "Dokumen PO/P1",
+        "LOPID",
+        "WITEL",
+        "Status",
+        "Sympton",
+        "TREG",
+        "Nama Mitra",
+      ],
+    ];
+    for (var i = 0; i < dataDownloadEbis.length; i++) {
+      dataMap.push([
+          dataDownloadEbis[i].NAMAPROJECT,
+          dataDownloadEbis[i].NAMACC,
+          dataDownloadEbis[i].REVENUE,
+          dataDownloadEbis[i].LAMAKONTRAK,
+          dataDownloadEbis[i].DIVISI,
+          dataDownloadEbis[i].SEGMEN,
+          dataDownloadEbis[i].DELIVER,
+          dataDownloadEbis[i].PAYMENT_METHODE,
+          dataDownloadEbis[i].KATEGORI_CHANNEL,
+          dataDownloadEbis[i].GPM,
+          dataDownloadEbis[i].STATUS_KB,
+          dataDownloadEbis[i].NO_KB,
+          dataDownloadEbis[i].DURASI,
+          dataDownloadEbis[i].STATUS_JUST_P0_P1,
+          dataDownloadEbis[i].DOKUMEN,
+          dataDownloadEbis[i].LOPID,
+          dataDownloadEbis[i].WITEL,
+          dataDownloadEbis[i].STATUS,
+          dataDownloadEbis[i].SYMPTON,
+          dataDownloadEbis[i].TREG,
+          dataDownloadEbis[i].NAMA_MITRA,
+      ]);
+    };
+
     /* convert AOA back to worksheet */
-		const ws = XLSX.utils.aoa_to_sheet(this.state.dataCobaDownload);
+		const ws = XLSX.utils.aoa_to_sheet(dataMap);
 
 		/* build new workbook */
 		const wb = XLSX.utils.book_new();
@@ -185,11 +236,11 @@ class EbisScreens extends Component{
 
 		/* write file */
 		const wbout = XLSX.write(wb, {type:'binary', bookType:"xlsx"});
-		const file = DDP + "channel.xlsx";
+		const file = DDP + `channel-ebis.xlsx`;
 		writeFile(file, output(wbout), 'ascii').then((res) =>{
 			Alert.alert("exportFile success", "Exported to " + file);
 		}).catch((err) => { 
-      Alert.alert("Terjadi kesalah, silahkan berikan izin kepada aplikasi terlebih dahulu"); 
+      Alert.alert("Terjadi kesalah, silahkan coba lagi beberapa saat"); 
     });
   }
 
@@ -302,9 +353,6 @@ class EbisScreens extends Component{
       currentSubmissionRevenue,currentSubmissionProject,
       currentWINRevenue,currentWINProject,
       currentBIllcomRevenue,currentBillcomProject,
-
-      //data download 
-      dataDownloadEbis,
     } = this.props;
 
     SPRratio = (parseInt(ebisSubmisionREVENUE) / parseInt(ebisProspectREVENUE))*100;

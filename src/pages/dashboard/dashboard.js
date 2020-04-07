@@ -115,7 +115,7 @@ class Dashboard extends Component {
     });
 
     //get data Channel -----------------------
-    //EBIS HOME 
+    //EBIS CHANNEL 
     this.props.dispatch({
       type:'EBIS_HOME_CHANNEL',
       payload:axios.get(`${url.API2}/ebis_getchannelmain/div/EBIS/startdate/${date1}/enddate/${date2}/treg/ALL/witel/ALL/`)
@@ -131,6 +131,60 @@ class Dashboard extends Component {
     this.props.dispatch({
       type:'EBIS_HOME_DOWNLOAD_CHANNEL',
       payload:axios.get(`${url.API2}/ebis_getchannelrawdata/startdate/${date1}/enddate/${date2}/div/EBIS/treg/ALL/witel/ALL`)
+    });
+
+    //DES CHANNEL 
+    this.props.dispatch({
+      type:'DES_HOME_CHANNEL',
+      payload:axios.get(`${url.API2}/ebis_getchannelmain/div/DES/startdate/${date1}/enddate/${date2}/treg/ALL/witel/ALL/`)
+    });
+    this.props.dispatch({
+      type:'DES_HOME_CURRENT_CHANNEL',
+      payload:axios.get(`${url.API2}/ebis_getchannelcurr/div/DES/treg/ALL/witel/ALL/`)
+    });
+    this.props.dispatch({
+      type:'DES_HOME_SUBMISSION_CHANNEL',
+      payload:axios.get(`${url.API2}/ebis_getchannelsub/startdate/${date1}/enddate/${date2}/div/DES/treg/ALL/witel/ALL/`)
+    });
+    this.props.dispatch({
+      type:'DES_HOME_DOWNLOAD_CHANNEL',
+      payload:axios.get(`${url.API2}/ebis_getchannelrawdata/startdate/${date1}/enddate/${date2}/div/DES/treg/ALL/witel/ALL`)
+    });
+
+    //DBS CHANNEL 
+    this.props.dispatch({
+      type:'DBS_HOME_CHANNEL',
+      payload:axios.get(`${url.API2}/ebis_getchannelmain/div/DBS/startdate/${date1}/enddate/${date2}/treg/ALL/witel/ALL/`)
+    });
+    this.props.dispatch({
+      type:'DBS_HOME_CURRENT_CHANNEL',
+      payload:axios.get(`${url.API2}/ebis_getchannelcurr/div/DBS/treg/ALL/witel/ALL/`)
+    });
+    this.props.dispatch({
+      type:'DBS_HOME_SUBMISSION_CHANNEL',
+      payload:axios.get(`${url.API2}/ebis_getchannelsub/startdate/${date1}/enddate/${date2}/div/DBS/treg/ALL/witel/ALL/`)
+    });
+    this.props.dispatch({
+      type:'DBS_HOME_DOWNLOAD_CHANNEL',
+      payload:axios.get(`${url.API2}/ebis_getchannelrawdata/startdate/${date1}/enddate/${date2}/div/DBS/treg/ALL/witel/ALL`)
+    });
+
+    //DGS CHANNEL 
+    this.props.dispatch({
+      type:'DGS_HOME_CHANNEL',
+      payload:axios.get(`${url.API2}/ebis_getchannelmain/div/DGS/startdate/${date1}/enddate/${date2}/treg/ALL/witel/ALL/`)
+    });
+    this.props.dispatch({
+      type:'DGS_HOME_CURRENT_CHANNEL',
+      payload:axios.get(`${url.API2}/ebis_getchannelcurr/div/DGS/treg/ALL/witel/ALL/`)
+    });
+    this.props.dispatch({
+      type:'DGS_HOME_SUBMISSION_CHANNEL',
+      payload:axios.get(`${url.API2}/ebis_getchannelsub/startdate/${date1}/enddate/${date2}/div/DGS/treg/ALL/witel/ALL/`)
+    });
+    this.props.dispatch({
+      type:'DGS_HOME_DOWNLOAD_CHANNEL',
+      payload:axios.get(`${url.API2}/ebis_getchannelrawdata/startdate/${date1}/enddate/${date2}/div/DGS/treg/ALL/witel/ALL`)
     });
   }
 

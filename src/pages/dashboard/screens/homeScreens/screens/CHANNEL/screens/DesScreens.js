@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {
+  Alert,
   Platform,
   StyleSheet,
   Text,
@@ -16,6 +17,12 @@ import axios from 'axios';
 //global
 import url from '../../../../../../../config/api_service';
 
+//export file
+import XLSX from 'xlsx';
+import { writeFile, ExternalStorageDirectoryPath } from 'react-native-fs';
+const DDP = ExternalStorageDirectoryPath + "/";
+const output = str => str;
+
 class DesScreens extends Component{
   constructor(props){
     super(props);
@@ -30,18 +37,103 @@ class DesScreens extends Component{
     }
   }
 
-  refreshPeriode(sDate,eDate){
+  refreshPeriode(sDate,eDate,sTreg,sWitel){
     this.setState({date1:sDate,date2:eDate})
+
     this.props.dispatch({
-      type:'DES_HOME_FILTER_PERIODE',
-      payload:axios.get(`${url.API}/ebis_getlopmain_ytd/div/DES/date1/${sDate}/date2/${eDate}/treg/ALL/witel/ALL`)
+      type:'DES_HOME_CHANNEL',
+      payload:axios.get(`${url.API2}/ebis_getchannelmain/div/DES/startdate/${sDate}/enddate/${eDate}/treg/ALL/witel/ALL/`)
+    });
+    this.props.dispatch({
+      type:'DES_HOME_CURRENT_CHANNEL',
+      payload:axios.get(`${url.API2}/ebis_getchannelcurr/div/DES/treg/ALL/witel/ALL/`)
+    });
+    this.props.dispatch({
+      type:'DES_HOME_SUBMISSION_CHANNEL',
+      payload:axios.get(`${url.API2}/ebis_getchannelsub/startdate/${sDate}/enddate/${eDate}/div/DES/treg/ALL/witel/ALL/`)
     });
 
     this.props.dispatch({
-      type:'DES_LASTUPDATE',
-      payload:axios.get(`${url.API}/ebis_lastime`)
+      type:'DES_HOME_DOWNLOAD_CHANNEL',
+      payload:axios.get(`${url.API2}/ebis_getchannelrawdata/startdate/${sDate}/enddate/${eDate}/div/DES/treg/ALL/witel/ALL`)
     });
 
+    this.props.dispatch({
+      type:'DES_LASTUPDATE_CHANNEL',
+      payload:axios.get(`${url.API2}/ebis_lastime`)
+    });
+
+
+  }
+
+  downloadFileExcel(){
+    const {dataDownloadEbis} = this.props;
+    let dataMap = [
+      [ 
+        "Nama Project",
+        "Nama CC",
+        "Nilai Project", 
+        "Lama Kontrak", 
+        "Divisi", 
+        "Segment", 
+        "Deliver", 
+        "Payment Method", 
+        "Channel", 
+        "GPM", 
+        "Status KB",
+        "No. KB",
+        "Durasi",
+        "Status PO/P1",
+        "Dokumen PO/P1",
+        "LOPID",
+        "WITEL",
+        "Status",
+        "Sympton",
+        "TREG",
+        "Nama Mitra",
+      ],
+    ];
+    for (var i = 0; i < dataDownloadEbis.length; i++) {
+      dataMap.push([
+          dataDownloadEbis[i].NAMAPROJECT,
+          dataDownloadEbis[i].NAMACC,
+          dataDownloadEbis[i].REVENUE,
+          dataDownloadEbis[i].LAMAKONTRAK,
+          dataDownloadEbis[i].DIVISI,
+          dataDownloadEbis[i].SEGMEN,
+          dataDownloadEbis[i].DELIVER,
+          dataDownloadEbis[i].PAYMENT_METHODE,
+          dataDownloadEbis[i].KATEGORI_CHANNEL,
+          dataDownloadEbis[i].GPM,
+          dataDownloadEbis[i].STATUS_KB,
+          dataDownloadEbis[i].NO_KB,
+          dataDownloadEbis[i].DURASI,
+          dataDownloadEbis[i].STATUS_JUST_P0_P1,
+          dataDownloadEbis[i].DOKUMEN,
+          dataDownloadEbis[i].LOPID,
+          dataDownloadEbis[i].WITEL,
+          dataDownloadEbis[i].STATUS,
+          dataDownloadEbis[i].SYMPTON,
+          dataDownloadEbis[i].TREG,
+          dataDownloadEbis[i].NAMA_MITRA,
+      ]);
+    };
+
+    /* convert AOA back to worksheet */
+		const ws = XLSX.utils.aoa_to_sheet(dataMap);
+
+		/* build new workbook */
+		const wb = XLSX.utils.book_new();
+		XLSX.utils.book_append_sheet(wb, ws, "SheetJS");
+
+		/* write file */
+		const wbout = XLSX.write(wb, {type:'binary', bookType:"xlsx"});
+		const file = DDP + `channel-des.xlsx`;
+		writeFile(file, output(wbout), 'ascii').then((res) =>{
+			Alert.alert("exportFile success", "Exported to " + file);
+		}).catch((err) => { 
+      Alert.alert("Terjadi kesalah, silahkan coba lagi beberapa saat"); 
+    });
   }
   
   render() {
@@ -98,16 +190,46 @@ class DesScreens extends Component{
       sDate, eDate,
       //navigation
       navigation,
-      //prospect
-      ebisProspectREVENUE,ebisProspectProject,ebisProspectTarget,
-      //submission
-      ebisSubmisionREVENUE,ebisSubmissionProject,ebisSubmissionTarget,
-      //win
-      ebisWinREVENUE,ebisWinProject,ebisWinTarget,
-      //billcom
-      ebisBillcomREVENUE,ebisBillcomeProject,ebisBillcommTarget,
 
-      ProspectREVENUE,ProspectProject,ProspectTarget,ProspectREVENUE2,
+      //prospect
+      ebisProspectREVENUE,
+      ebisProspectProject,
+      ebisPROSPECT_GTMA,
+      ebisPROSPECT_GTMA_PROJECT,
+      ebisPROSPECT_NGTMA,
+      ebisPROSPECT_NGTMA_PROJECT,
+      PROSPECT_OC,
+      PROSPECT_OC_PROJECT,
+
+      //submission
+      ebisSubmisionREVENUE,
+      ebisSubmissionProject,
+      ebisSUBMISSION_GTMA,
+      ebisSUBMISSION_GTMA_PROJECT,
+      ebisSUBMISSION_NGTMA,
+      ebisSUBMISSION_NGTMA_PROJECT,
+      ebisSUBMISSION_OC,
+      ebisSUBMISSION_OC_PROJECT,
+
+      //win
+      ebisWinREVENUE,
+      ebisWinProject,
+      ebisWIN_GTMA,
+      ebisWIN_GTMA_PROJECT,
+      ebisWIN_NGTMA,
+      ebisWIN_NGTMA_PROJECT,
+      ebisWIN_OC,
+      ebisWIN_OC_PROJECT,
+
+      //billcom
+      ebisBillcomREVENUE,
+      ebisBillcomeProject,
+      ebisBILLCOM_GTMA,
+      ebisBILLCOM_GTMA_PROJECT,
+      ebisBILLCOM_NGTMA,
+      ebisBILLCOM_NGTMA_PROJECT,
+      ebisBILLCOM_OC,
+      ebisBILLCOM_OC_PROJECT,
     
       //submission status
       SubmissionWINRevenue,SubmissionWINProject,
@@ -121,11 +243,6 @@ class DesScreens extends Component{
       currentWINRevenue,currentWINProject,
       currentBIllcomRevenue,currentBillcomProject,
     } = this.props;
-
-    const ebisPresentase = (parseInt(ebisProspectREVENUE) / parseInt(ebisProspectTarget))*100;
-    const ebisPresentase2 = (parseInt(ebisSubmisionREVENUE) / parseInt(ebisSubmissionTarget))*100;
-    const ebisPresentase3 = (parseInt(ebisWinREVENUE) / parseInt(ebisWinTarget))*100;
-    const ebisPresentase4 = (parseInt(ebisBillcomREVENUE) / parseInt(ebisBillcommTarget))*100;
 
     SPRratio = (parseInt(ebisSubmisionREVENUE) / parseInt(ebisProspectREVENUE))*100;
     WSRratio = (parseInt(ebisWinREVENUE) / parseInt(ebisSubmisionREVENUE))*100;
@@ -150,8 +267,23 @@ class DesScreens extends Component{
    
     return (
       <View style={styles.container}>
-
         <ScrollView>
+          <View style={styles.wrapperArrow}>
+            <View style={{width:wp('42%'), height:hp('5%')}}/>
+
+            <View style={styles.containerTitle3Data}>
+              <Text style={styles.text3Judul}>GTMA</Text>
+            </View>
+
+            <View style={styles.containerTitle3Data}>
+              <Text style={styles.text3Judul}>OC</Text>
+            </View>
+
+            <View style={styles.containerTitle3Data}>
+              <Text style={styles.text3Judul}>NEW GTMA</Text>
+            </View>
+          </View>
+
           <View style={styles.wrapperArrow}>
             <Image 
               source={images.prospect.arrowProspect1}
@@ -159,7 +291,7 @@ class DesScreens extends Component{
               resizeMode={'stretch'}
             />
 
-            <TouchableOpacity onPress={() => navigation.navigate('EbisDetailLOP',{start_date:this.state.date1,end_date:this.state.date2,reg:'ALL',witel:'ALL'})} style={styles.containerArrowProspect}>
+            <TouchableOpacity onPress={() => navigation.navigate('EbisDetailLOP',{start_date:this.state.date1,end_date:this.state.date2,reg:'ALL',witel:'ALL'})} style={styles.containerArrowProspect} underlayColor="#ffffff00">
               <Text style={styles.textJudul}>PROSPECT</Text>
               <Text style={styles.textIsi}>{ebisProspectREVENUE}M</Text>
               <Text style={styles.textKeterangan}>per {ebisProspectProject} Project</Text>
@@ -171,36 +303,19 @@ class DesScreens extends Component{
               resizeMode={'stretch'}
             />
 
-            <View style={styles.containerArrowProspect2}>
-              <Text style={styles.textJudul}>Target</Text>
-              <Text style={styles.textIsi}>{ebisProspectTarget}M</Text>
+            <View style={styles.container3dataProspect}>
+              <Text style={styles.textJudul}>{ebisPROSPECT_GTMA} M</Text>
+              <Text style={styles.textIsi}>{ebisPROSPECT_GTMA_PROJECT} Projects</Text>
             </View>
 
-            <Image 
-              source={images.arrowGrey}
-              style={styles.imageStyle}
-              resizeMode={'stretch'}
-            />
+            <View style={styles.container3dataProspect}>
+              <Text style={styles.textJudul}>{ebisPROSPECT_NGTMA} M</Text>
+              <Text style={styles.textIsi}>{ebisPROSPECT_NGTMA_PROJECT} Projects</Text>
+            </View>
 
-            <View style={styles.wrapperPresentase}>
-              {
-                ebisPresentase < 100 
-                  ?
-                  <Image 
-                    source={images.presentase.arrowDown}
-                    style={styles.imagesStylePresentase}
-                    resizeMode={'stretch'}
-                  />
-                  :
-                  <Image 
-                    source={images.presentase.arrowUp}
-                    style={styles.imagesStylePresentase}
-                    resizeMode={'stretch'}
-                  />
-              }
-              <View style={styles.wrapperTextPresentase}>
-                <Text style={styles.textJudul}>{Math.ceil(ebisPresentase)}%</Text>
-              </View>
+            <View style={styles.container3dataProspect}>
+              <Text style={styles.textJudul}>{ebisSUBMISSION_OC} M</Text>
+              <Text style={styles.textIsi}>{ebisSUBMISSION_OC_PROJECT} Projects</Text>
             </View>
           </View>
 
@@ -223,36 +338,19 @@ class DesScreens extends Component{
               resizeMode={'stretch'}
             />
 
-            <View style={styles.containerArrowSubmission2}>
-              <Text style={styles.textJudul}>Target</Text>
-              <Text style={styles.textIsi}>{ebisSubmissionTarget}M</Text>
+            <View style={styles.container3dataSubmission}>
+              <Text style={styles.textJudul}>{ebisSUBMISSION_GTMA} M</Text>
+              <Text style={styles.textIsi}>{ebisSUBMISSION_GTMA_PROJECT} Projects</Text>
             </View>
 
-            <Image 
-              source={images.arrowGrey}
-              style={styles.imageStyle}
-              resizeMode={'stretch'}
-            />
+            <View style={styles.container3dataSubmission}>
+              <Text style={styles.textJudul}>{ebisSUBMISSION_NGTMA} M</Text>
+              <Text style={styles.textIsi}>{ebisPROSPECT_GTMA} Projects</Text>
+            </View>
 
-            <View style={styles.wrapperPresentase}>
-              {
-                ebisPresentase2 < 100 
-                  ?
-                  <Image 
-                    source={images.presentase.arrowDown}
-                    style={styles.imagesStylePresentase}
-                    resizeMode={'stretch'}
-                  />
-                  :
-                  <Image 
-                    source={images.presentase.arrowUp}
-                    style={styles.imagesStylePresentase}
-                    resizeMode={'stretch'}
-                  />
-              }
-              <View style={styles.wrapperTextPresentase}>
-                <Text style={styles.textJudul}>{Math.ceil(ebisPresentase2)}%</Text>
-              </View>
+            <View style={styles.container3dataSubmission}>
+              <Text style={styles.textJudul}>{ebisSUBMISSION_OC} M</Text>
+              <Text style={styles.textIsi}>{ebisSUBMISSION_OC_PROJECT} Projects</Text>
             </View>
           </View>
 
@@ -275,36 +373,19 @@ class DesScreens extends Component{
               resizeMode={'stretch'}
             />
 
-            <View style={styles.containerArrowWin2}>
-              <Text style={styles.textJudul}>Target</Text>
-              <Text style={styles.textIsi}>{ebisWinTarget}M</Text>
+            <View style={styles.container3dataWIN}>
+              <Text style={styles.textJudul}>{ebisWIN_GTMA} M</Text>
+              <Text style={styles.textIsi}>{ebisWIN_GTMA_PROJECT} Projects</Text>
             </View>
 
-            <Image 
-              source={images.arrowGrey}
-              style={styles.imageStyle}
-              resizeMode={'stretch'}
-            />
+            <View style={styles.container3dataWIN}>
+              <Text style={styles.textJudul}>{ebisWIN_NGTMA} M</Text>
+              <Text style={styles.textIsi}>{ebisWIN_NGTMA_PROJECT} Projects</Text>
+            </View>
 
-            <View style={styles.wrapperPresentase}>
-              {
-                ebisPresentase3 < 100 
-                  ?
-                  <Image 
-                    source={images.presentase.arrowDown}
-                    style={styles.imagesStylePresentase}
-                    resizeMode={'stretch'}
-                  />
-                  :
-                  <Image 
-                    source={images.presentase.arrowUp}
-                    style={styles.imagesStylePresentase}
-                    resizeMode={'stretch'}
-                  />
-              }
-              <View style={styles.wrapperTextPresentase}>
-                <Text style={styles.textJudul}>{Math.ceil(ebisPresentase3)}%</Text>
-              </View>
+            <View style={styles.container3dataWIN}>
+              <Text style={styles.textJudul}>{ebisWIN_OC} M</Text>
+              <Text style={styles.textIsi}>{ebisWIN_OC_PROJECT} Projects</Text>
             </View>
           </View>
 
@@ -327,41 +408,32 @@ class DesScreens extends Component{
               resizeMode={'stretch'}
             />
 
-            <View style={styles.containerArrowBill2}>
-              <Text style={styles.textJudul}>Target</Text>
-              <Text style={styles.textIsi}>{ebisBillcommTarget}M</Text>
+            <View style={styles.container3dataBillcom}>
+              <Text style={styles.textJudul}>{ebisBILLCOM_GTMA} M</Text>
+              <Text style={styles.textIsi}>{ebisBILLCOM_GTMA_PROJECT} Projects</Text>
             </View>
 
-            <Image 
-              source={images.arrowGrey}
-              style={styles.imageStyle}
-              resizeMode={'stretch'}
-            />
+            <View style={styles.container3dataBillcom}>
+              <Text style={styles.textJudul}>{ebisBILLCOM_NGTMA} M</Text>
+              <Text style={styles.textIsi}>{ebisBILLCOM_NGTMA_PROJECT} Projects</Text>
+            </View>
 
-            <View style={styles.wrapperPresentase}>
-              {
-                ebisPresentase4 < 100 
-                  ?
-                  <Image 
-                    source={images.presentase.arrowDown}
-                    style={styles.imagesStylePresentase}
-                    resizeMode={'stretch'}
-                  />
-                  :
-                  <Image 
-                    source={images.presentase.arrowUp}
-                    style={styles.imagesStylePresentase}
-                    resizeMode={'stretch'}
-                  />
-              }
-              <View style={styles.wrapperTextPresentase}>
-                <Text style={styles.textJudul}>{Math.ceil(ebisPresentase4)}%</Text>
-              </View>
+            <View style={styles.container3dataBillcom}>
+              <Text style={styles.textJudul}>{ebisBILLCOM_OC} M</Text>
+              <Text style={styles.textIsi}>{ebisBILLCOM_OC_PROJECT} Projects</Text>
             </View>
           </View>
 
           <View>
             <Text style={{fontSize:9,marginLeft:wp('2%')}}>Lastupdate: {lastUpdated}</Text>
+          </View>
+
+          <View style={styles.wrapperArrow}>
+            <View style={{width:wp('42%'), height:hp('5%')}}/>
+
+            <TouchableOpacity onPress={() => this.downloadFileExcel()} style={styles.containerButtonDownload}>
+              <Text style={styles.textDownload}>Download File</Text>
+            </TouchableOpacity>
           </View>
         
           <View style={styles.wrapperRatio}>
@@ -556,48 +628,67 @@ class DesScreens extends Component{
 }
 
 const mapStateToProps = (state) => ({
-  lastUpdated: state.DesReducer.ebisLastupdate,
+  lastUpdated: state.DesReducerChannel.ebisLastupdate,
 
-  ebisProspectREVENUE:state.DesReducer.ebisProspectREVENUE,
-  ebisProspectProject:state.DesReducer.ebisProspectProject,
-  ebisProspectTarget:state.DesReducer.ebisProspectTarget,
+  //data des
+  ebisProspectREVENUE:state.DesReducerChannel.ebisProspectREVENUE,
+  ebisProspectProject:state.DesReducerChannel.ebisProspectProject,
+  ebisPROSPECT_GTMA: state.DesReducerChannel.ebisPROSPECT_GTMA,
+  ebisPROSPECT_GTMA_PROJECT: state.DesReducerChannel.ebisPROSPECT_GTMA_PROJECT,
+  ebisPROSPECT_NGTMA: state.DesReducerChannel.ebisPROSPECT_NGTMA,
+  ebisPROSPECT_NGTMA_PROJECT: state.DesReducerChannel.ebisPROSPECT_NGTMA_PROJECT,
+  PROSPECT_OC: state.DesReducerChannel.PROSPECT_OC,
+  PROSPECT_OC_PROJECT: state.DesReducerChannel.PROSPECT_OC_PROJECT,
 
-  ebisSubmisionREVENUE:state.DesReducer.ebisSubmisionREVENUE,
-  ebisSubmissionProject:state.DesReducer.ebisSubmissionProject,
-  ebisSubmissionTarget:state.DesReducer.ebisSubmissionTarget,
+  ebisSubmisionREVENUE:state.DesReducerChannel.ebisSubmisionREVENUE,
+  ebisSubmissionProject:state.DesReducerChannel.ebisSubmissionProject,
+  ebisSUBMISSION_GTMA:state.DesReducerChannel.ebisSUBMISSION_GTMA,
+  ebisSUBMISSION_GTMA_PROJECT:state.DesReducerChannel.ebisSUBMISSION_GTMA_PROJECT,
+  ebisSUBMISSION_NGTMA:state.DesReducerChannel.ebisSUBMISSION_NGTMA,
+  ebisSUBMISSION_NGTMA_PROJECT:state.DesReducerChannel.ebisSUBMISSION_NGTMA_PROJECT,
+  ebisSUBMISSION_OC: state.DesReducerChannel.ebisSUBMISSION_OC,
+  ebisSUBMISSION_OC_PROJECT: state.DesReducerChannel.ebisSUBMISSION_OC_PROJECT,
 
-  ebisWinREVENUE:state.DesReducer.ebisWinREVENUE,
-  ebisWinProject:state.DesReducer.ebisWinProject,
-  ebisWinTarget:state.DesReducer.ebisWinTarget,
+  ebisWinREVENUE:state.DesReducerChannel.ebisWinREVENUE,
+  ebisWinProject:state.DesReducerChannel.ebisWinProject,
+  ebisWIN_GTMA: state.DesReducerChannel.ebisWIN_GTMA,
+  ebisWIN_GTMA_PROJECT: state.DesReducerChannel.ebisWIN_GTMA_PROJECT,
+  ebisWIN_NGTMA: state.DesReducerChannel.ebisWIN_NGTMA,
+  ebisWIN_NGTMA_PROJECT: state.DesReducerChannel.ebisWIN_NGTMA_PROJECT,
+  ebisWIN_OC: state.DesReducerChannel.ebisWIN_OC,
+  ebisWIN_OC_PROJECT: state.DesReducerChannel.ebisWIN_OC_PROJECT,
 
-  ebisBillcomREVENUE:state.DesReducer.ebisBillcomREVENUE,
-  ebisBillcomeProject:state.DesReducer.ebisBillcomeProject,
-  ebisBillcommTarget:state.DesReducer.ebisBillcommTarget,
-
-  ProspectREVENUE:state.DesReducer.ProspectREVENUE,
-  ProspectProject:state.DesReducer.ProspectProject,
-  ProspectTarget:state.DesReducer.ProspectTarget,
-  ProspectREVENUE2:state.DesReducer.ProspectREVENUE2,
+  ebisBillcomREVENUE:state.DesReducerChannel.ebisBillcomREVENUE,
+  ebisBillcomeProject:state.DesReducerChannel.ebisBillcomeProject,
+  ebisBILLCOM_GTMA: state.DesReducerChannel.ebisBILLCOM_GTMA,
+  ebisBILLCOM_GTMA_PROJECT: state.DesReducerChannel.ebisBILLCOM_GTMA_PROJECT,
+  ebisBILLCOM_NGTMA: state.DesReducerChannel.ebisBILLCOM_NGTMA,
+  ebisBILLCOM_NGTMA_PROJECT: state.DesReducerChannel.ebisBILLCOM_NGTMA_PROJECT,
+  ebisBILLCOM_OC: state.DesReducerChannel.ebisBILLCOM_OC,
+  ebisBILLCOM_OC_PROJECT: state.DesReducerChannel.ebisBILLCOM_OC_PROJECT,
 
   //submission status
-  SubmissionWINRevenue:state.DesReducer.SubmissionWINRevenue,
-  SubmissionWINProject:state.DesReducer.SubmissionWINProject,
-  SubmissionLOOSERevenue:state.DesReducer.SubmissionLOOSERevenue,
-  SubmissionLooseProject:state.DesReducer.SubmissionLooseProject,
-  SubmissionWaitingRevenue:state.DesReducer.SubmissionWaitingRevenue,
-  SubmissionWaitingProject:state.DesReducer.SubmissionWaitingProject,
-  SubmissionCancelRevenue:state.DesReducer.SubmissionCancelRevenue,
-  SubmissionCancekProject:state.DesReducer.SubmissionCancekProject,
+  SubmissionWINRevenue:state.DesReducerChannel.SubmissionWINRevenue,
+  SubmissionWINProject:state.DesReducerChannel.SubmissionWINProject,
+  SubmissionLOOSERevenue:state.DesReducerChannel.SubmissionLOOSERevenue,
+  SubmissionLooseProject:state.DesReducerChannel.SubmissionLooseProject,
+  SubmissionWaitingRevenue:state.DesReducerChannel.SubmissionWaitingRevenue,
+  SubmissionWaitingProject:state.DesReducerChannel.SubmissionWaitingProject,
+  SubmissionCancelRevenue:state.DesReducerChannel.SubmissionCancelRevenue,
+  SubmissionCancekProject:state.DesReducerChannel.SubmissionCancekProject,
 
   //current status
-  currentProspectRevenue:state.DesReducer.currentProspectRevenue,
-  currentProspectProject:state.DesReducer.currentProspectProject,
-  currentSubmissionRevenue:state.DesReducer.currentSubmissionRevenue,
-  currentSubmissionProject:state.DesReducer.currentSubmissionProject,
-  currentWINRevenue:state.DesReducer.currentWINRevenue,
-  currentWINProject:state.DesReducer.currentWINProject,
-  currentBIllcomRevenue:state.DesReducer.currentBIllcomRevenue,
-  currentBillcomProject:state.DesReducer.currentBillcomProject,
+  currentProspectRevenue:state.DesReducerChannel.currentProspectRevenue,
+  currentProspectProject:state.DesReducerChannel.currentProspectProject,
+  currentSubmissionRevenue:state.DesReducerChannel.currentSubmissionRevenue,
+  currentSubmissionProject:state.DesReducerChannel.currentSubmissionProject,
+  currentWINRevenue:state.DesReducerChannel.currentWINRevenue,
+  currentWINProject:state.DesReducerChannel.currentWINProject,
+  currentBIllcomRevenue:state.DesReducerChannel.currentBIllcomRevenue,
+  currentBillcomProject:state.DesReducerChannel.currentBillcomProject,
+
+  //data file download
+  dataDownloadEbis:state.DesReducerChannel.dataDownloadEbis,
 })
 
 export default connect(mapStateToProps)(DesScreens);
@@ -657,6 +748,19 @@ const styles = StyleSheet.create({
     width:wp('9%'), 
     height:hp('9%')
   },
+  containerTitle3Data:{
+    height:hp('5%'), 
+    width:wp('17%'), 
+    backgroundColor:'#000000',
+    justifyContent:'center',
+    alignItems:'center',
+    marginLeft:wp('1%')
+  },
+  text3Judul:{
+    fontWeight:'bold',
+    fontSize:10,
+    color:'#FFFFFF'
+  },
   containerArrowProspect:{
     height:hp('9%'), 
     width:wp('24%'), 
@@ -670,6 +774,14 @@ const styles = StyleSheet.create({
     backgroundColor:'#dfdfdd',
     justifyContent:'center',
     alignItems:'center'
+  },
+  container3dataProspect:{
+    height:hp('9%'), 
+    width:wp('17%'), 
+    backgroundColor:'#ddc8df',
+    justifyContent:'center',
+    alignItems:'center',
+    marginLeft:wp('1%')
   },
   containerArrowSubmission:{
     height:hp('9%'), 
@@ -685,6 +797,14 @@ const styles = StyleSheet.create({
     justifyContent:'center',
     alignItems:'center'
   },
+  container3dataSubmission:{
+    height:hp('9%'), 
+    width:wp('17%'), 
+    backgroundColor:'#ecb889',
+    justifyContent:'center',
+    alignItems:'center',
+    marginLeft:wp('1%')
+  },
   containerArrowWin:{
     height:hp('9%'), 
     width:wp('24%'), 
@@ -698,6 +818,14 @@ const styles = StyleSheet.create({
     backgroundColor:'#dfdfdd',
     justifyContent:'center',
     alignItems:'center'
+  },
+  container3dataWIN:{
+    height:hp('9%'), 
+    width:wp('17%'), 
+    backgroundColor:'#c7eecc',
+    justifyContent:'center',
+    alignItems:'center',
+    marginLeft:wp('1%')
   },
   containerArrowBill:{
     height:hp('9%'), 
@@ -713,13 +841,34 @@ const styles = StyleSheet.create({
     justifyContent:'center',
     alignItems:'center'
   },
+  container3dataBillcom:{
+    height:hp('9%'), 
+    width:wp('17%'), 
+    backgroundColor:'#a9c1fb',
+    justifyContent:'center',
+    alignItems:'center',
+    marginLeft:wp('1%')
+  },
+  containerButtonDownload:{
+    height:hp('5%'), 
+    width:wp('51%'), 
+    backgroundColor:'#4E7CB3',
+    justifyContent:'center',
+    alignItems:'center',
+    marginLeft:wp('1%')
+  },
+  textDownload:{
+    fontWeight:'bold',
+    fontSize:13,
+    color:'#FFFFFF'
+  },
   textJudul:{
     fontWeight:'bold',
     fontSize:13
   },
   textIsi:{
     fontWeight:'700',
-    fontSize:11
+    fontSize:9,
   },
   textKeterangan:{
     fontSize:9,

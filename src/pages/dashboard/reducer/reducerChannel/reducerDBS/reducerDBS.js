@@ -4,23 +4,42 @@ const initialState = {
   ebisProspectREVENUE:'',
   ebisProspectProject:'',
   ebisProspectTarget:'',
+  ebisPROSPECT_GTMA: '',
+  ebisPROSPECT_GTMA_PROJECT: '',
+  ebisPROSPECT_NGTMA: '',
+  ebisPROSPECT_NGTMA_PROJECT: '',
+  PROSPECT_OC: '',
+  PROSPECT_OC_PROJECT: '',
 
   ebisSubmisionREVENUE:'',
   ebisSubmissionProject:'',
   ebisSubmissionTarget:'',
+  ebisSUBMISSION_GTMA:'',
+  ebisSUBMISSION_GTMA_PROJECT:'',
+  ebisSUBMISSION_NGTMA:'',
+  ebisSUBMISSION_NGTMA_PROJECT:'',
+  ebisSUBMISSION_OC: '',
+  ebisSUBMISSION_OC_PROJECT: '',
 
   ebisWinREVENUE:'',
   ebisWinProject:'',
   ebisWinTarget:'',
+  ebisWIN_GTMA: '',
+  ebisWIN_GTMA_PROJECT: '',
+  ebisWIN_NGTMA: '',
+  ebisWIN_NGTMA_PROJECT: '',
+  ebisWIN_OC: '',
+  ebisWIN_OC_PROJECT: '',
 
   ebisBillcomREVENUE:'',
   ebisBillcomeProject:'',
   ebisBillcommTarget:'',
-
-  ProspectREVENUE:'',
-  ProspectProject:'',
-  ProspectTarget:'',
-  ProspectREVENUE2:'',
+  ebisBILLCOM_GTMA: '',
+  ebisBILLCOM_GTMA_PROJECT: '',
+  ebisBILLCOM_NGTMA: '',
+  ebisBILLCOM_NGTMA_PROJECT: '',
+  ebisBILLCOM_OC: '',
+  ebisBILLCOM_OC_PROJECT: '',
 
   SubmissionWINRevenue:'',
   SubmissionWINProject:'',
@@ -39,21 +58,25 @@ const initialState = {
   currentWINProject:'',
   currentBIllcomRevenue:'',
   currentBillcomProject:'',
+
   ebisLastupdate: '',
 
+  dataDownloadEbis:null,
 };
 
 const DbsReducerChannel = (state = initialState, action) => {
   switch (action.type) {
 
-    case 'DBS_LASTUPDATE_FULFILLED':
+    //data last update 
+    case 'DBS_LASTUPDATE_CHANNEL_FULFILLED':
       return {
         ...state, 
         ebisLastupdate: action.payload.data[0].RECTIME,
       }
     break;
-
-    case 'DBS_HOME_REJECTED':
+    
+    //reducer data ebis
+    case 'DBS_HOME_CHANNEL_REJECTED':
       return{
         ...state, 
         loaderStatus:false,
@@ -61,132 +84,139 @@ const DbsReducerChannel = (state = initialState, action) => {
       }
     break;
     
-    case 'DBS_HOME_PENDING':
+    case 'DBS_HOME_CHANNEL_PENDING':
       return{
         ...state, 
         loaderStatus:true,
       }
     break;
 
-    case 'DBS_HOME_FULFILLED':
+    case 'DBS_HOME_CHANNEL_FULFILLED':
       return {
         ...state, 
         loaderStatus:false,
 
-        ebisProspectREVENUE:action.payload.data[0].lop_11_1,
-        ebisProspectProject:action.payload.data[0].lop_11_2,
-        ebisProspectTarget:action.payload.data[0].lop_11_3,
+        ebisProspectREVENUE:action.payload.data.PROSPECT.TOTAL,
+        ebisProspectProject:action.payload.data.PROSPECT.JML_PROJECT,
+        ebisPROSPECT_GTMA: action.payload.data.PROSPECT_GTMA.TOTAL,
+        ebisPROSPECT_GTMA_PROJECT: action.payload.data.PROSPECT_GTMA.JML_PROJECT,
+        ebisPROSPECT_NGTMA: action.payload.data.PROSPECT_NGTMA.TOTAL,
+        ebisPROSPECT_NGTMA_PROJECT: action.payload.data.PROSPECT_NGTMA.JML_PROJECT,
+        PROSPECT_OC: action.payload.data.PROSPECT_OC.TOTAL,
+        PROSPECT_OC_PROJECT: action.payload.data.PROSPECT_OC.JML_PROJECT,
 
-        ebisSubmisionREVENUE:action.payload.data[0].lop_11_6,
-        ebisSubmissionProject:action.payload.data[0].lop_12_1,
-        ebisSubmissionTarget:action.payload.data[0].lop_12_2,
+        ebisSubmisionREVENUE:action.payload.data.SUBMISSION.TOTAL,
+        ebisSubmissionProject:action.payload.data.SUBMISSION.JML_PROJECT,
+        ebisSUBMISSION_GTMA:action.payload.data.SUBMISSION_GTMA.TOTAL,
+        ebisSUBMISSION_GTMA_PROJECT:action.payload.data.SUBMISSION_GTMA.JML_PROJECT,
+        ebisSUBMISSION_NGTMA:action.payload.data.SUBMISSION_NGTMA.TOTAL,
+        ebisSUBMISSION_NGTMA_PROJECT:action.payload.data.SUBMISSION_NGTMA.JML_PROJECT,
+        ebisSUBMISSION_OC: action.payload.data.SUBMISSION_OC.TOTAL,
+        ebisSUBMISSION_OC_PROJECT: action.payload.data.SUBMISSION_OC.JML_PROJECT,
 
-        ebisWinREVENUE:action.payload.data[0].lop_12_3,
-        ebisWinProject:action.payload.data[0].lop_12_6,
-        ebisWinTarget:action.payload.data[0].lop_13_1,
-
-        ebisBillcomREVENUE:action.payload.data[0].lop_13_2,
-        ebisBillcomeProject:action.payload.data[0].lop_13_3,
-        ebisBillcommTarget:action.payload.data[0].lop_13_6,
-
-        ProspectREVENUE:action.payload.data[0].lop_14_1,
-        ProspectProject:action.payload.data[0].lop_14_2,
-        ProspectTarget:action.payload.data[0].lop_14_3,
-        ProspectREVENUE2:action.payload.data[0].lop_14_6,
-
-        //submission status
-        SubmissionWINRevenue:action.payload.data[0].lop_21_1,
-        SubmissionWINProject:action.payload.data[0].lop_21_2,
-
-        SubmissionLOOSERevenue:action.payload.data[0].lop_22_1,
-        SubmissionLooseProject:action.payload.data[0].lop_22_2,
-
-        SubmissionWaitingRevenue:action.payload.data[0].lop_23_1,
-        SubmissionWaitingProject:action.payload.data[0].lop_23_2,
-
-        SubmissionCancelRevenue:action.payload.data[0].lop_24_1,
-        SubmissionCancekProject:action.payload.data[0].lop_24_2,
+        ebisWinREVENUE:action.payload.data.WIN.TOTAL,
+        ebisWinProject:action.payload.data.WIN.JML_PROJECT,
+        ebisWIN_GTMA: action.payload.data.WIN_GTMA.TOTAL,
+        ebisWIN_GTMA_PROJECT: action.payload.data.WIN_GTMA.JML_PROJECT,
+        ebisWIN_NGTMA: action.payload.data.WIN_NGTMA.TOTAL,
+        ebisWIN_NGTMA_PROJECT: action.payload.data.WIN_NGTMA.JML_PROJECT,
+        ebisWIN_OC: action.payload.data.WIN_OC.TOTAL,
+        ebisWIN_OC_PROJECT: action.payload.data.WIN_OC.JML_PROJECT,
+      
+        ebisBillcomREVENUE:action.payload.data.BILLCOM.TOTAL,
+        ebisBillcomeProject:action.payload.data.BILLCOM.JML_PROJECT,
+        ebisBILLCOM_GTMA: action.payload.data.BILLCOM_GTMA.TOTAL,
+        ebisBILLCOM_GTMA_PROJECT: action.payload.data.BILLCOM_GTMA.JML_PROJECT,
+        ebisBILLCOM_NGTMA: action.payload.data.BILLCOM_NGTMA.TOTAL,
+        ebisBILLCOM_NGTMA_PROJECT: action.payload.data.BILLCOM_NGTMA.JML_PROJECT,
+        ebisBILLCOM_OC: action.payload.data.BILLCOM_OC.TOTAL,
+        ebisBILLCOM_OC_PROJECT: action.payload.data.BILLCOM_OC.JML_PROJECT,
       }
     break;
 
-    case 'DBS_HOME_CURRENT_REJECTED':
+    //reducer submission 
+    case 'DBS_HOME_SUBMISSION_CHANNEL_REJECTED':
       return{
         ...state, 
-      }
-    break;
-    
-    case 'DBS_HOME_CURRENT_PENDING':
-      return{
-        ...state, 
-      }
-    break;
-
-    case 'DBS_HOME_CURRENT_FULFILLED':
-      return{
-        ...state, 
-        //Current status
-        currentProspectRevenue:action.payload.data[0].lop_01_1,
-        currentProspectProject:action.payload.data[0].lop_01_2,
-        currentSubmissionRevenue:action.payload.data[0].lop_02_1,
-        currentSubmissionProject:action.payload.data[0].lop_02_2,
-        currentWINRevenue:action.payload.data[0].lop_03_1,
-        currentWINProject:action.payload.data[0].lop_03_2,
-        currentBIllcomRevenue:action.payload.data[0].lop_04_1,
-        currentBillcomProject:action.payload.data[0].lop_04_2,
-      }
-    break;
-
-    //--------------------------------------------filter periode
-
-    case 'DBS_HOME_FILTER_PERIODE_REJECTED':
-      return{
-        ...state, 
+        loaderStatus:false,
         statusErrorFrom:false,
       }
     break;
     
-    case 'DBS_HOME_FILTER_PERIODE_PENDING':
+    case 'DBS_HOME_SUBMISSION_CHANNEL_PENDING':
+      return{
+        ...state, 
+        loaderStatus:true,
+      }
+    break;
+
+    case 'DBS_HOME_SUBMISSION_CHANNEL_FULFILLED':
+      return{
+        ...state, 
+        //Current status
+        SubmissionWINRevenue:action.payload.data.WIN.TOTAL,
+        SubmissionWINProject:action.payload.data.WIN.JML_PROJECT,
+
+        SubmissionLOOSERevenue:action.payload.data.LOSE.TOTAL,
+        SubmissionLooseProject:action.payload.data.LOSE.JML_PROJECT,
+
+        SubmissionWaitingRevenue:action.payload.data.WAITING.TOTAL,
+        SubmissionWaitingProject:action.payload.data.WAITING.JML_PROJECT,
+
+        SubmissionCancelRevenue:action.payload.data.CANCEL.TOTAL,
+        SubmissionCancekProject:action.payload.data.CANCEL.JML_PROJECT,
+      }
+    break;
+
+    //reducer current
+    case 'DBS_HOME_CURRENT_CHANNEL_REJECTED':
+      return{
+        ...state, 
+        loaderStatus:false,
+        statusErrorFrom:false,
+      }
+    break;
+    
+    case 'DBS_HOME_CURRENT_CHANNEL_PENDING':
+      return{
+        ...state, 
+        loaderStatus:true,
+      }
+    break;
+
+    case 'DBS_HOME_CURRENT_CHANNEL_FULFILLED':
+      return{
+        ...state, 
+        //Current status
+        currentProspectRevenue:action.payload.data.PROSPECT.TOTAL,
+        currentProspectProject:action.payload.data.PROSPECT.JML_PROJECT,
+        currentSubmissionRevenue:action.payload.data.SUBMISSION.TOTAL,
+        currentSubmissionProject:action.payload.data.SUBMISSION.JML_PROJECT,
+        currentWINRevenue:action.payload.data.WIN.TOTAL,
+        currentWINProject:action.payload.data.WIN.JML_PROJECT,
+        currentBIllcomRevenue:action.payload.data.BILLCOM.TOTAL,
+        currentBillcomProject:action.payload.data.BILLCOM.JML_PROJECT,
+      }
+    break;
+
+    //--------------------------------------------download excel periode
+    
+    case 'DBS_HOME_DOWNLOAD_CHANNEL_REJECTED':
+      return{
+        ...state, 
+      }
+    break;
+    
+    case 'DBS_HOME_DOWNLOAD_CHANNEL_PENDING':
       return{
         ...state, 
       }
     break;
 
-    case 'DBS_HOME_FILTER_PERIODE_FULFILLED':
+    case 'DBS_HOME_DOWNLOAD_CHANNEL_FULFILLED':
       return {
-        ...state,
-        ebisProspectREVENUE:action.payload.data[0].lop_11_1,
-        ebisProspectProject:action.payload.data[0].lop_11_2,
-        ebisProspectTarget:action.payload.data[0].lop_11_3,
-
-        ebisSubmisionREVENUE:action.payload.data[0].lop_11_6,
-        ebisSubmissionProject:action.payload.data[0].lop_12_1,
-        ebisSubmissionTarget:action.payload.data[0].lop_12_2,
-
-        ebisWinREVENUE:action.payload.data[0].lop_12_3,
-        ebisWinProject:action.payload.data[0].lop_12_6,
-        ebisWinTarget:action.payload.data[0].lop_13_1,
-
-        ebisBillcomREVENUE:action.payload.data[0].lop_13_2,
-        ebisBillcomeProject:action.payload.data[0].lop_13_3,
-        ebisBillcommTarget:action.payload.data[0].lop_13_6,
-
-        ProspectREVENUE:action.payload.data[0].lop_14_1,
-        ProspectProject:action.payload.data[0].lop_14_2,
-        ProspectTarget:action.payload.data[0].lop_14_3,
-        ProspectREVENUE2:action.payload.data[0].lop_14_6,
-
-        //submission status
-        SubmissionWINRevenue:action.payload.data[0].lop_21_1,
-        SubmissionWINProject:action.payload.data[0].lop_21_2,
-
-        SubmissionLOOSERevenue:action.payload.data[0].lop_22_1,
-        SubmissionLooseProject:action.payload.data[0].lop_22_2,
-
-        SubmissionWaitingRevenue:action.payload.data[0].lop_23_1,
-        SubmissionWaitingProject:action.payload.data[0].lop_23_2,
-
-        SubmissionCancelRevenue:action.payload.data[0].lop_24_1,
-        SubmissionCancekProject:action.payload.data[0].lop_24_2,
+        ...state, 
+        dataDownloadEbis:action.payload.data,
       }
     break;
 
@@ -194,5 +224,6 @@ const DbsReducerChannel = (state = initialState, action) => {
       return state;
   }
 };
+
 
 export default DbsReducerChannel;
