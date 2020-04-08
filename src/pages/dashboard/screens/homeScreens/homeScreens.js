@@ -12,6 +12,7 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 import LOPscreen from './screens/LOP/lopScreens';
 import ABCscreen from './screens/ABC/abcScreens';
 import ChannelScreen from './screens/CHANNEL/channelScreens';
+import BigMegaDealScreen from './screens/BIGMEGADEAL/bigMegaDealScreens';
 
 export default class HomeScreens extends Component{
   constructor(props){
@@ -40,7 +41,7 @@ export default class HomeScreens extends Component{
         return (<ChannelScreen navigation={this.props.navigation}/>);
       break;
       case 'bmd':
-        return (<ABCscreen navigation={this.props.navigation}/>);
+        return (<BigMegaDealScreen navigation={this.props.navigation}/>);
       break;
       default:
     }

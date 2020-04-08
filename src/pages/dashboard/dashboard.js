@@ -186,6 +186,79 @@ class Dashboard extends Component {
       type:'DGS_HOME_DOWNLOAD_CHANNEL',
       payload:axios.get(`${url.API2}/ebis_getchannelrawdata/startdate/${date1}/enddate/${date2}/div/DGS/treg/ALL/witel/ALL`)
     });
+
+    //get data Big Mega Deal -----------------------
+    //EBIS BIG MEGA DEAL 
+    this.props.dispatch({
+      type:'EBIS_HOME_BMD',
+      payload:axios.get(`${url.API2}/ebis_getdealmain/div/EBIS/startdate/${date1}/enddate/${date2}/treg/ALL/witel/ALL/`)
+    });
+    this.props.dispatch({
+      type:'EBIS_HOME_CURRENT_BMD',
+      payload:axios.get(`${url.API2}/ebis_getdealcurr/div/EBIS/treg/ALL/witel/ALL/`)
+    });
+    this.props.dispatch({
+      type:'EBIS_HOME_SUBMISSION_BMD',
+      payload:axios.get(`${url.API2}/ebis_getdealsub/startdate/${date1}/enddate/${date2}/div/EBIS/treg/ALL/witel/ALL/`)
+    });
+    this.props.dispatch({
+      type:'EBIS_HOME_DOWNLOAD_BMD',
+      payload:axios.get(`${url.API2}/ebis_getdealrawdata/startdate/${date1}/enddate/${date2}/div/EBIS/treg/ALL/witel/ALL`)
+    });
+
+    //DES BIG MEGA DEAL 
+    this.props.dispatch({
+      type:'DES_HOME_BMD',
+      payload:axios.get(`${url.API2}/ebis_getdealmain/div/DES/startdate/${date1}/enddate/${date2}/treg/ALL/witel/ALL/`)
+    });
+    this.props.dispatch({
+      type:'DES_HOME_CURRENT_BMD',
+      payload:axios.get(`${url.API2}/ebis_getdealcurr/div/DES/treg/ALL/witel/ALL/`)
+    });
+    this.props.dispatch({
+      type:'DES_HOME_SUBMISSION_BMD',
+      payload:axios.get(`${url.API2}/ebis_getdealsub/startdate/${date1}/enddate/${date2}/div/DES/treg/ALL/witel/ALL/`)
+    });
+    this.props.dispatch({
+      type:'DES_HOME_DOWNLOAD_BMD',
+      payload:axios.get(`${url.API2}/ebis_getdealrawdata/startdate/${date1}/enddate/${date2}/div/DES/treg/ALL/witel/ALL`)
+    });
+
+    //DBS BIG MEGA DEAL 
+    this.props.dispatch({
+      type:'DBS_HOME_BMD',
+      payload:axios.get(`${url.API2}/ebis_getdealmain/div/DBS/startdate/${date1}/enddate/${date2}/treg/ALL/witel/ALL/`)
+    });
+    this.props.dispatch({
+      type:'DBS_HOME_CURRENT_BMD',
+      payload:axios.get(`${url.API2}/ebis_getdealcurr/div/DBS/treg/ALL/witel/ALL/`)
+    });
+    this.props.dispatch({
+      type:'DBS_HOME_SUBMISSION_BMD',
+      payload:axios.get(`${url.API2}/ebis_getdealsub/startdate/${date1}/enddate/${date2}/div/DBS/treg/ALL/witel/ALL/`)
+    });
+    this.props.dispatch({
+      type:'DBS_HOME_DOWNLOAD_CHANNEL',
+      payload:axios.get(`${url.API2}/ebis_getdealrawdata/startdate/${date1}/enddate/${date2}/div/DBS/treg/ALL/witel/ALL`)
+    });
+
+    //DGS BIG MEGA DEAL 
+    this.props.dispatch({
+      type:'DGS_HOME_BMD',
+      payload:axios.get(`${url.API2}/ebis_getdealmain/div/DGS/startdate/${date1}/enddate/${date2}/treg/ALL/witel/ALL/`)
+    });
+    this.props.dispatch({
+      type:'DGS_HOME_CURRENT_BMD',
+      payload:axios.get(`${url.API2}/ebis_getdealcurr/div/DGS/treg/ALL/witel/ALL/`)
+    });
+    this.props.dispatch({
+      type:'DGS_HOME_SUBMISSION_BMD',
+      payload:axios.get(`${url.API2}/ebis_getdealsub/startdate/${date1}/enddate/${date2}/div/DGS/treg/ALL/witel/ALL/`)
+    });
+    this.props.dispatch({
+      type:'DGS_HOME_DOWNLOAD_BMD',
+      payload:axios.get(`${url.API2}/ebis_getdealrawdata/startdate/${date1}/enddate/${date2}/div/DGS/treg/ALL/witel/ALL`)
+    });
   }
 
   render() {

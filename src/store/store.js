@@ -35,7 +35,13 @@ import DesReducerChannel from '../pages/dashboard/reducer/reducerChannel/reducer
 import DbsReducerChannel from '../pages/dashboard/reducer/reducerChannel/reducerDBS/reducerDBS';
 import DgsReducerChannel from '../pages/dashboard/reducer/reducerChannel/reducerDGS/reducerDGS';
 
-//reducer detail 
+//reducer home Big Mega Deal
+import EbisReducerBMD from '../pages/dashboard/reducer/reducerBigMegaDeal/reducerEBIS/reducerEBIS';
+import DesReducerBMD from '../pages/dashboard/reducer/reducerBigMegaDeal/reducerDES/reducerDES';
+import DbsReducerBMD from '../pages/dashboard/reducer/reducerBigMegaDeal/reducerDBS/reducerDBS';
+import DgsReducerBMD from '../pages/dashboard/reducer/reducerBigMegaDeal/reducerDGS/reducerDGS';
+
+//reducer detail
 import EbisDetailReducer from '../pages/dashboard/reducer/reducerLOP/detailReducer/reducerEBIS/reducerDetailEbis';
 import DesDetailReducer from '../pages/dashboard/reducer/reducerLOP/detailReducer/reducerDES/reducerDetailDes';
 import DbsDetailReducer from '../pages/dashboard/reducer/reducerLOP/detailReducer/reducerDBS/reducerDetailDbs';
@@ -116,6 +122,12 @@ const rootReducer = combineReducers({
   DesReducerChannel,
   DbsReducerChannel,
   DgsReducerChannel,
+
+  //reducer home Big Mega Deal
+  EbisReducerBMD,
+  DesReducerBMD,
+  DbsReducerBMD,
+  DgsReducerBMD,
 
   //reducer detail
   EbisDetailReducer,
