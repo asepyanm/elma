@@ -55,94 +55,76 @@ class DesDetailScreens extends Component{
       loaderTampil:false,
     })    
 
-    //get header ALL
-    this.props.dispatch({
-      type:'HEADER_SUBMISSION_EBIS',
-      payload:axios.get(`${url.API}/ebis_getlopmain_ytd/div/EBIS/date1/${this.state.startdate}/date2/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
-    });
-    this.props.dispatch({
-      type:'HEADER_SUBMISSION_DES',
-      payload:axios.get(`${url.API}/ebis_getlopmain_ytd/div/DES/date1/${this.state.startdate}/date2/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
-    });
-    this.props.dispatch({
-      type:'HEADER_SUBMISSION_DBS',
-      payload:axios.get(`${url.API}/ebis_getlopmain_ytd/div/DBS/date1/${this.state.startdate}/date2/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
-    });
-    this.props.dispatch({
-      type:'HEADER_SUBMISSION_DGS',
-      payload:axios.get(`${url.API}/ebis_getlopmain_ytd/div/DGS/date1/${this.state.startdate}/date2/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
-    });
-
     //get data ALL
     this.props.dispatch({
       type:'DETAIL_SUBMISSION_EBIS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/SUBMISSION/div/EBIS/maindiv/ALL/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/mitra/ALL/reg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/SUBMISSION/channel/ALL/div/EBIS/categ/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
     });
     this.props.dispatch({
       type:'DETAIL_SUBMISSION_DES',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/SUBMISSION/div/DES/maindiv/DES/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/mitra/ALL/reg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:axios.get(`${url.API2}//ebis_getchannellistsub/stage/SUBMISSION/channel/ALL/div/DES/categ/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
     });
     this.props.dispatch({
       type:'DETAIL_SUBMISSION_DBS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/SUBMISSION/div/DBS/maindiv/DBS/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/mitra/ALL/reg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/SUBMISSION/channel/ALL/div/DBS/categ/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
     });
     this.props.dispatch({
       type:'DETAIL_SUBMISSION_DGS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/SUBMISSION/div/DGS/maindiv/DGS/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/mitra/ALL/reg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/SUBMISSION/channel/ALL/div/DGS/categ/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
     });
      
   //get data detail SUBS
     this.props.dispatch({
       type:'DETAIL_SUBS_SUBMISSION_EBIS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/SUBMISSION/div/EBIS/maindiv/ALL/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/mitra/CFU/reg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/SUBMISSION/channel/ALL/div/EBIS/categ/SUBS/start_date/${this.state.startdate}/end_date/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
     });
     this.props.dispatch({
       type:'DETAIL_SUBS_SUBMISSION_DES',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/SUBMISSION/div/DES/maindiv/DES/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/mitra/CFU/reg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/SUBMISSION/channel/ALL/div/DES/categ/SUBS/start_date/${this.state.startdate}/end_date/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
     });
     this.props.dispatch({
       type:'DETAIL_SUBS_SUBMISSION_DBS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/SUBMISSION/div/DBS/maindiv/DBS/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/mitra/CFU/reg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/SUBMISSION/channel/ALL/div/DBS/categ/SUBS/start_date/${this.state.startdate}/end_date/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
     });
     this.props.dispatch({
       type:'DETAIL_SUBS_SUBMISSION_DGS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/SUBMISSION/div/DGS/maindiv/DGS/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/mitra/CFU/reg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/SUBMISSION/channel/ALL/div/DGS/categ/SUBS/start_date/${this.state.startdate}/end_date/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
     });
 
     //get data detail MITRA
     this.props.dispatch({
       type:'DETAIL_MITRA_SUBMISSION_EBIS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/SUBMISSION/div/EBIS/maindiv/ALL/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/mitra/MITRA/reg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/SUBMISSION/channel/ALL/div/EBIS/categ/MITRA/start_date/${this.state.startdate}/end_date/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
     });
     this.props.dispatch({
       type:'DETAIL_MITRA_SUBMISSION_DES',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/SUBMISSION/div/DES/maindiv/DES/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/mitra/MITRA/reg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/SUBMISSION/channel/ALL/div/DES/categ/MITRA/start_date/${this.state.startdate}/end_date/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
     });
     this.props.dispatch({
       type:'DETAIL_MITRA_SUBMISSION_DBS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/SUBMISSION/div/DBS/maindiv/DBS/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/mitra/MITRA/reg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/SUBMISSION/channel/ALL/div/DBS/categ/MITRA/start_date/${this.state.startdate}/end_date/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
     });
     this.props.dispatch({
       type:'DETAIL_MITRA_SUBMISSION_DGS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/SUBMISSION/div/DGS/maindiv/DGS/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/mitra/MITRA/reg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/SUBMISSION/channel/ALL/div/DGS/categ/MITRA/start_date/${this.state.startdate}/end_date/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
     });
     
     //get data detail TELKOM
     this.props.dispatch({
       type:'DETAIL_TELKOM_SUBMISSION_EBIS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/SUBMISSION/div/EBIS/maindiv/ALL/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/mitra/TELKOM/reg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/SUBMISSION/channel/ALL/div/EBIS/categ/TELKOM/start_date/${this.state.startdate}/end_date/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
     });
     this.props.dispatch({
       type:'DETAIL_TELKOM_SUBMISSION_DES',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/SUBMISSION/div/DES/maindiv/DES/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/mitra/TELKOM/reg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/SUBMISSION/channel/ALL/div/DES/categ/TELKOM/start_date/${this.state.startdate}/end_date/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
     });
     this.props.dispatch({
       type:'DETAIL_TELKOM_SUBMISSION_DBS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/SUBMISSION/div/DBS/maindiv/DBS/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/mitra/TELKOM/reg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/SUBMISSION/channel/ALL/div/DBS/categ/TELKOM/start_date/${this.state.startdate}/end_date/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
     });
     this.props.dispatch({
       type:'DETAIL_TELKOM_SUBMISSION_DGS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/SUBMISSION/div/DGS/maindiv/DGS/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/mitra/TELKOM/reg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/SUBMISSION/channel/ALL/div/DGS/categ/TELKOM/start_date/${this.state.startdate}/end_date/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
     }); 
 
   }
@@ -154,7 +136,7 @@ class DesDetailScreens extends Component{
       //visibleModalDetail:false,
       loaderTampilDetailDetail:true
     })
-    axios.get(`${url.API}/ebis_getstage5/stage/SUBMISSION/div/ALL/maindiv/ALL/mitra/ALL/nmitra/${item.stage_01}/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/cc/${item.stage_06}/project/${item.stage_07}`).then((res) => {
+    axios.get(`${url.API2}/ebis_getdetchannelcc/lopid/${item.LOPID}`).then((res) => {
       this.setState({dataTampungDetail:res.data, loaderTampilDetailDetail:false });
     }).catch((err) => {
       this.setState({
@@ -186,98 +168,138 @@ class DesDetailScreens extends Component{
             keyExtractor={(item, index) => index.toString()}
             renderItem={({ item }) => (
               <TouchableOpacity style={styles.containerDetailData} > 
-              <View style={{flex: 1, flexDirection: 'row', flexWrap: 'wrap'}}>
+                <View style={{flex: 1, flexDirection: 'row', flexWrap: 'wrap'}}>
+                  <View style={{width:wp('15%'), alignSelf:'center' }}>
+                    <Text style={{fontSize:10}}>Nama Project</Text>
+                  </View>
+                  <View style={{width:wp('2%'), alignSelf:'center' }}>
+                    <Text style={{fontSize:10}}>:</Text>
+                  </View>
+                  <View style={{width:wp('60%'), alignSelf:'center' }}>
+                    <Text style={{fontSize:11}}>{item.NAMAPROJECT}</Text>
+                  </View>
 
-                <View style={{width:wp('15%'), alignSelf:'center' }}>
-                  <Text style={{fontSize:10}}>Nama CC</Text>
-                </View>
-                <View style={{width:wp('2%'), alignSelf:'center' }}>
-                  <Text style={{fontSize:10}}>:</Text>
-                </View>
-                <View style={{width:wp('60%'), alignSelf:'center' }}>
-                  <Text style={{fontSize:11}}>{item.stage_06}</Text>
-                </View>
+                  <View style={{width:wp('15%'), alignSelf:'center' }}>
+                    <Text style={{fontSize:10}}>Nama CC</Text>
+                  </View>
+                  <View style={{width:wp('2%'), alignSelf:'center' }}>
+                    <Text style={{fontSize:10}}>:</Text>
+                  </View>
+                  <View style={{width:wp('60%'), alignSelf:'center' }}>
+                    <Text style={{fontSize:11}}>{item.NAMACC}</Text>
+                  </View>
 
-                <View style={{width:wp('15%'), alignSelf:'center' }}>
-                  <Text style={{fontSize:10}}>Project</Text>
-                </View>
-                <View style={{width:wp('2%'), alignSelf:'center' }}>
-                  <Text style={{fontSize:10}}>:</Text>
-                </View>
-                <View style={{width:wp('60%'), alignSelf:'center' }}>
-                  <Text style={{fontSize:11}}>{item.stage_07}</Text>
-                </View>
+                  <View style={{width:wp('15%'), alignSelf:'center' }}>
+                    <Text style={{fontSize:10}}>Nilai Project</Text>
+                  </View>
+                  <View style={{width:wp('2%'), alignSelf:'center' }}>
+                    <Text style={{fontSize:10}}>:</Text>
+                  </View>
+                  <View style={{width:wp('60%'), alignSelf:'center' }}>
+                    <Text style={{fontSize:11}}>{parseFloat(item.REVENUE)} M</Text>
+                  </View>
 
-                <View style={{width:wp('15%'), alignSelf:'center' }}>
-                  <Text style={{fontSize:10}}>Nilai</Text>
-                </View>
-                <View style={{width:wp('2%'), alignSelf:'center' }}>
-                  <Text style={{fontSize:10}}>:</Text>
-                </View>
-                <View style={{width:wp('60%'), alignSelf:'center' }}>
-                  <Text style={{fontSize:11}}>{item.stage_02}M</Text>
-                </View>
+                  <View style={{width:wp('15%'), alignSelf:'center' }}>
+                    <Text style={{fontSize:10}}>Lama Kontrak</Text>
+                  </View>
+                  <View style={{width:wp('2%'), alignSelf:'center' }}>
+                    <Text style={{fontSize:10}}>:</Text>
+                  </View>
+                  <View style={{width:wp('60%'), alignSelf:'center' }}>
+                    <Text style={{fontSize:11}}>{item.LAMAKONTRAK}</Text>
+                  </View>
 
-                <View style={{width:wp('15%'), alignSelf:'center' }}>
-                  <Text style={{fontSize:10}}>RevOTC</Text>
-                </View>
-                <View style={{width:wp('2%'), alignSelf:'center' }}>
-                  <Text style={{fontSize:10}}>:</Text>
-                </View>
-                <View style={{width:wp('60%'), alignSelf:'center' }}>
-                  <Text style={{fontSize:11}}>{item.stage_11}</Text>
-                </View>
-                <View style={{width:wp('15%'), alignSelf:'center' }}>
-                  <Text style={{fontSize:10}}>RevMo</Text>
-                </View>
-                <View style={{width:wp('2%'), alignSelf:'center' }}>
-                  <Text style={{fontSize:10}}>:</Text>
-                </View>
-                <View style={{width:wp('60%'), alignSelf:'center' }}>
-                  <Text style={{fontSize:11}}>{item.stage_12}</Text>
-                </View>
+                  <View style={{width:wp('15%'), alignSelf:'center' }}>
+                    <Text style={{fontSize:10}}>Divisi</Text>
+                  </View>
+                  <View style={{width:wp('2%'), alignSelf:'center' }}>
+                    <Text style={{fontSize:10}}>:</Text>
+                  </View>
+                  <View style={{width:wp('60%'), alignSelf:'center' }}>
+                    <Text style={{fontSize:11}}>{item.DIVISI}</Text>
+                  </View>
+
+                  <View style={{width:wp('15%'), alignSelf:'center' }}>
+                    <Text style={{fontSize:10}}>Segmen</Text>
+                  </View>
+                  <View style={{width:wp('2%'), alignSelf:'center' }}>
+                    <Text style={{fontSize:10}}>:</Text>
+                  </View>
+                  <View style={{width:wp('60%'), alignSelf:'center' }}>
+                    <Text style={{fontSize:11}}>{item.SEGMEN}</Text>
+                  </View>
+
+                  <View style={{width:wp('15%'), alignSelf:'center' }}>
+                    <Text style={{fontSize:10}}>Deliver</Text>
+                  </View>
+                  <View style={{width:wp('2%'), alignSelf:'center' }}>
+                    <Text style={{fontSize:10}}>:</Text>
+                  </View>
+                  <View style={{width:wp('60%'), alignSelf:'center' }}>
+                    <Text style={{fontSize:11}}>{item.DELIVER}</Text>
+                  </View>
+
+                  <View style={{width:wp('15%'), alignSelf:'center' }}>
+                    <Text style={{fontSize:10}}>Payment Method</Text>
+                  </View>
+                  <View style={{width:wp('2%'), alignSelf:'center' }}>
+                    <Text style={{fontSize:10}}>:</Text>
+                  </View>
+                  <View style={{width:wp('60%'), alignSelf:'center' }}>
+                    <Text style={{fontSize:11}}>{item.PAYMENT_METHOD}</Text>
+                  </View>
+
+                  <View style={{width:wp('15%'), alignSelf:'center' }}>
+                    <Text style={{fontSize:10}}>Channel</Text>
+                  </View>
+                  <View style={{width:wp('2%'), alignSelf:'center' }}>
+                    <Text style={{fontSize:10}}>:</Text>
+                  </View>
+                  <View style={{width:wp('60%'), alignSelf:'center' }}>
+                    <Text style={{fontSize:11}}>{item.KATEGORI_CHANNEL}</Text>
+                  </View>
+
+                  <View style={{width:wp('15%'), alignSelf:'center' }}>
+                    <Text style={{fontSize:10}}>GPM</Text>
+                  </View>
+                  <View style={{width:wp('2%'), alignSelf:'center' }}>
+                    <Text style={{fontSize:10}}>:</Text>
+                  </View>
+                  <View style={{width:wp('60%'), alignSelf:'center' }}>
+                    <Text style={{fontSize:11}}>{item.GPM}</Text>
+                  </View>
+
+                  <View style={{width:wp('60%'), alignSelf:'center' }}>
+                    <Text style={{fontSize:10, fontWeight:'bold'}}>Administration Progress</Text>
+                  </View>
+
+                  <View style={{width:wp('60%'), alignSelf:'center', marginLeft:'5%' }}>
+                    <Text style={{fontSize:10}}>Kontrak Berlangganan :</Text>
+                  </View>
+
+                  <View style={{width:wp('60%'), alignSelf:'center', marginLeft:'10%' }}>
+                    <Text style={{fontSize:10}}>Status KB : {item.STATUS_KB}</Text>
+                  </View>
+                  <View style={{width:wp('60%'), alignSelf:'center', marginLeft:'10%' }}>
+                    <Text style={{fontSize:10}}>No KB : {item.NO_KB}</Text>
+                  </View>
+                  <View style={{width:wp('60%'), alignSelf:'center', marginLeft:'10%' }}>
+                    <Text style={{fontSize:10}}>Durasi : {item.DURASI}</Text>
+                  </View>
 
 
-                <View style={{width:wp('15%'), alignSelf:'center' }}>
-                  <Text style={{fontSize:10}}>Mitra</Text>
-                </View>
-                <View style={{width:wp('2%'), alignSelf:'center' }}>
-                  <Text style={{fontSize:10}}>:</Text>
-                </View>
-                <View style={{width:wp('60%'), alignSelf:'center' }}>
-                  <Text style={{fontSize:11}}>{item.stage_01}</Text>
-                </View>
+                  <View style={{width:wp('60%'), alignSelf:'center', marginLeft:'5%' }}>
+                    <Text style={{fontSize:10}}>Justifikasi PO/P1 :</Text>
+                  </View>
 
-                <View style={{width:wp('15%'), alignSelf:'center' }}>
-                  <Text style={{fontSize:10}}>Segmen</Text>
-                </View>
-                <View style={{width:wp('2%'), alignSelf:'center' }}>
-                  <Text style={{fontSize:10}}>:</Text>
-                </View>
-                <View style={{width:wp('60%'), alignSelf:'center' }}>
-                  <Text style={{fontSize:11}}>{item.stage_05}</Text>
-                </View>
+                  <View style={{width:wp('60%'), alignSelf:'center', marginLeft:'10%' }}>
+                    <Text style={{fontSize:10}}>Status : {item.STATUS}</Text>
+                  </View>
+                  <View style={{width:wp('60%'), alignSelf:'center', marginLeft:'10%' }}>
+                    <Text style={{fontSize:10}}>Dokumen : {item.DOKUMEN}</Text>
+                  </View>
 
-                <View style={{width:wp('15%'), alignSelf:'center' }}>
-                  <Text style={{fontSize:10}}>Status</Text>
-                </View>
-                <View style={{width:wp('2%'), alignSelf:'center' }}>
-                  <Text style={{fontSize:10}}>:</Text>
-                </View>
-                <View style={{width:wp('60%'), alignSelf:'center' }}>
-                  <Text style={{fontSize:11}}>{item.stage_09}</Text>
-                </View>
-
-                <View style={{width:wp('15%'), alignSelf:'center' }}>
-                  <Text style={{fontSize:10}}>Keterangan</Text>
-                </View>
-                <View style={{width:wp('2%'), alignSelf:'center' }}>
-                  <Text style={{fontSize:10}}>:</Text>
-                </View>
-                <View style={{width:wp('60%'), alignSelf:'center' }}>
-                  <Text style={{fontSize:11}}>{item.stage_14}</Text>
-                </View>
-              </View>
+                  </View>
               </TouchableOpacity > 
             )}
             style={{height:hp('35%'), marginBottom:hp('2%')}}
@@ -311,7 +333,7 @@ class DesDetailScreens extends Component{
       visibleModal: !this.state.visibleModal,
       loaderTampilDetail:true
     })
-    axios.get(`${url.API}/ebis_getstage5/stage/SUBMISSION/div/${div}/maindiv/${maindiv}/mainseg/ALL/mitra/ALL/nmitra/${item}/start_date/${this.state.startdate}/end_date/${this.state.enddate}`).then((res) => {
+    axios.get(`${url.API2}/ebis_getdeallistcc/stage/SUBMISSION/categ/${maindiv}/channel/ALL/div/${div}/start_date/${this.state.startdate}/end_date/${this.state.enddate}/treg/ALL/witel/ALL/mitra/${item}`).then((res) => {
       this.setState({dataTampung:res.data, loaderTampilDetail:false });
     }).catch((err) => {
       this.setState({
@@ -351,13 +373,13 @@ class DesDetailScreens extends Component{
               <TouchableOpacity onPress={() => this._toggleModalDetail(item)}> 
                 <View style={styles.containerDetailData}> 
                   <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                    <Text style={{fontSize:10}}>{item.stage_06}</Text>
+                    <Text style={{fontSize:10}}>{item.NAMACC}</Text>
                   </View>
                   <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                    <Text style={{fontSize:10}}>{item.stage_07}</Text>
+                    <Text style={{fontSize:10}}>{item.NAMAPROJECT}</Text>
                   </View>
                   <View style={{width:wp('10%'), alignSelf:'center', justifyContent:'center', alignItems:'center'}}>
-                    <Text style={{textAlign:'center', fontSize:10}}>{parseFloat(item.stage_10)}M</Text>  
+                    <Text style={{textAlign:'center', fontSize:10}}>{parseFloat(item.JUMLAH)}M</Text>  
                   </View>
                 </View>
               </TouchableOpacity>
@@ -397,7 +419,7 @@ class DesDetailScreens extends Component{
       visibleModal: !this.state.visibleModal,
       loaderTampilDetail:true
     })
-    axios.get(`${url.API}/ebis_getstage5/stage/SUBMISSION/div/${div}/maindiv/${maindiv}/mainseg/ALL/mitra/CFU/nmitra/${item}/start_date/${this.state.startdate}/end_date/${this.state.enddate}`).then((res) => {
+    axios.get(`${url.API2}/ebis_getdeallistcc/stage/SUBMISSION/categ/${maindiv}/channel/ALL/div/${div}/start_date/${this.state.startdate}/end_date/${this.state.enddate}/treg/ALL/witel/ALL/mitra/${item}`).then((res) => {
       this.setState({dataTampung:res.data, loaderTampilDetail:false });
     }).catch((err) => {
       this.setState({
@@ -436,13 +458,13 @@ class DesDetailScreens extends Component{
               <TouchableOpacity onPress={() => this._toggleModalDetail(item)}> 
                 <View style={styles.containerDetailData}> 
                   <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                    <Text style={{fontSize:10}}>{item.stage_06}</Text>
+                    <Text style={{fontSize:10}}>{item.NAMACC}</Text>
                   </View>
                   <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                    <Text style={{fontSize:10}}>{item.stage_07}</Text>
+                    <Text style={{fontSize:10}}>{item.NAMAPROJECT}</Text>
                   </View>
                   <View style={{width:wp('10%'), alignSelf:'center', justifyContent:'center', alignItems:'center'}}>
-                    <Text style={{textAlign:'center', fontSize:10}}>{parseFloat(item.stage_10)}M</Text>  
+                    <Text style={{textAlign:'center', fontSize:10}}>{parseFloat(item.JUMLAH)}M</Text>  
                   </View>
                 </View>
               </TouchableOpacity>
@@ -482,7 +504,7 @@ class DesDetailScreens extends Component{
       visibleModal: !this.state.visibleModal,
       loaderTampilDetail:true
     })
-    axios.get(`${url.API}/ebis_getstage5/stage/SUBMISSION/div/${div}/maindiv/${maindiv}/mainseg/ALL/mitra/MITRA/nmitra/${item}/start_date/${this.state.startdate}/end_date/${this.state.enddate}`).then((res) => {
+    axios.get(`${url.API2}/ebis_getdeallistcc/stage/SUBMISSION/categ/${maindiv}/channel/ALL/div/${div}/start_date/${this.state.startdate}/end_date/${this.state.enddate}/treg/ALL/witel/ALL/mitra/${item}`).then((res) => {
       this.setState({dataTampung:res.data, loaderTampilDetail:false });
     }).catch((err) => {
       this.setState({
@@ -521,13 +543,13 @@ class DesDetailScreens extends Component{
               <TouchableOpacity onPress={() => this._toggleModalDetail(item)}> 
                 <View style={styles.containerDetailData}> 
                   <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                    <Text style={{fontSize:10}}>{item.stage_06}</Text>
+                    <Text style={{fontSize:10}}>{item.NAMACC}</Text>
                   </View>
                   <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                    <Text style={{fontSize:10}}>{item.stage_07}</Text>
+                    <Text style={{fontSize:10}}>{item.NAMAPROJECT}</Text>
                   </View>
                   <View style={{width:wp('10%'), alignSelf:'center', justifyContent:'center', alignItems:'center'}}>
-                    <Text style={{textAlign:'center', fontSize:10}}>{parseFloat(item.stage_10)}M</Text>  
+                    <Text style={{textAlign:'center', fontSize:10}}>{parseFloat(item.JUMLAH)}M</Text>  
                   </View>
                 </View>
               </TouchableOpacity>
@@ -567,8 +589,7 @@ class DesDetailScreens extends Component{
       visibleModal: !this.state.visibleModal,
       loaderTampilDetail:true
     })
-    console.log('jrk',`${url.API}/ebis_getstage5/stage/SUBMISSION/div/${div}/maindiv/${maindiv}/mainseg/ALL/mitra/TELKOM/nmitra/${item}/start_date/${this.state.startdate}/end_date/${this.state.enddate}`)
-    axios.get(`${url.API}/ebis_getstage5/stage/SUBMISSION/div/${div}/maindiv/${maindiv}/mainseg/ALL/mitra/TELKOM/nmitra/${item}/start_date/${this.state.startdate}/end_date/${this.state.enddate}`).then((res) => {
+    axios.get(`${url.API2}/ebis_getdeallistcc/stage/SUBMISSION/categ/${maindiv}/channel/ALL/div/${div}/start_date/${this.state.startdate}/end_date/${this.state.enddate}/treg/ALL/witel/ALL/mitra/${item}`).then((res) => {
       this.setState({dataTampung:res.data, loaderTampilDetail:false });
     }).catch((err) => {
       this.setState({
@@ -607,13 +628,13 @@ class DesDetailScreens extends Component{
               <TouchableOpacity onPress={() => this._toggleModalDetail(item)}> 
                 <View style={styles.containerDetailData}> 
                   <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                    <Text style={{fontSize:10}}>{item.stage_06}</Text>
+                    <Text style={{fontSize:10}}>{item.NAMACC}</Text>
                   </View>
                   <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                    <Text style={{fontSize:10}}>{item.stage_07}</Text>
+                    <Text style={{fontSize:10}}>{item.NAMAPROJECT}</Text>
                   </View>
                   <View style={{width:wp('10%'), alignSelf:'center', justifyContent:'center', alignItems:'center'}}>
-                    <Text style={{textAlign:'center', fontSize:10}}>{parseFloat(item.stage_10)}M</Text>  
+                    <Text style={{textAlign:'center', fontSize:10}}>{parseFloat(item.JUMLAH)}M</Text>  
                   </View>
                 </View>
               </TouchableOpacity>
@@ -671,19 +692,19 @@ class DesDetailScreens extends Component{
 
       //logo
       allImage:{
-        allAktif: require('../../../../../../../../assets/detailKonten/stage-on10.png'),
+        allAktif: require('../../../../../../../../assets/detailKonten/stage-on20.png'),
         allNon  : require('../../../../../../../../assets/detailKonten/stage-off00.png'),
       },
       subsImage:{
-        subsAktif: require('../../../../../../../../assets/detailKonten/stage-on11.png'),
+        subsAktif: require('../../../../../../../../assets/detailKonten/stage-on21.png'),
         subsNon  : require('../../../../../../../../assets/detailKonten/stage-off01.png'),
       },
       mitraImage:{
-        mitraAktif: require('../../../../../../../../assets/detailKonten/stage-on12.png'),
+        mitraAktif: require('../../../../../../../../assets/detailKonten/stage-on22.png'),
         mitraNon  : require('../../../../../../../../assets/detailKonten/stage-off02.png'),
       },
       telkomImage:{
-        telkomAktif: require('../../../../../../../../assets/detailKonten/stage-on13.png'),
+        telkomAktif: require('../../../../../../../../assets/detailKonten/stage-on23.png'),
         telkomNon  : require('../../../../../../../../assets/detailKonten/stage-off03.png'),
       }
     };
@@ -704,19 +725,19 @@ class DesDetailScreens extends Component{
 
         <View style={styles.wrapperArrow}>
         <Image 
-          source={images.prospect.arrowProspect1}
+          source={images.Submission.arrowSub1}
           style={styles.imageStyle}
           resizeMode={'stretch'}
         />
 
-        <View style={styles.containerArrowProspect}>
+        <View style={styles.containerArrowSubmission}>
           <Text style={styles.textJudul}>SUBMISSION</Text>
           <Text style={styles.textIsi}>{ebisProspectREVENUE}M</Text>
           <Text style={styles.textKeterangan}>per {ebisProspectProject} Project</Text>
         </View>
 
         <Image 
-          source={images.prospect.arrowProspect2}
+          source={images.Submission.arrowSub2}
           style={styles.imageStyle}
           resizeMode={'stretch'}
         />
@@ -832,7 +853,7 @@ class DesDetailScreens extends Component{
                         <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.MITRA}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.jumlah}M</Text>                    
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.JUMLAH}M</Text>                    
                       </View>
                     </TouchableOpacity>
                     :
@@ -844,7 +865,7 @@ class DesDetailScreens extends Component{
                         <Text>{item.MITRA}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center'}}>{item.jumlah}M</Text>                    
+                        <Text style={{textAlign:'center'}}>{item.JUMLAH}M</Text>                    
                       </View>
                     </TouchableOpacity>
                   )}
@@ -870,7 +891,7 @@ class DesDetailScreens extends Component{
                         <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.MITRA}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.jumlah}M</Text>                    
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.JUMLAH}M</Text>                    
                       </View>
                     </TouchableOpacity>
                     :
@@ -882,7 +903,7 @@ class DesDetailScreens extends Component{
                         <Text>{item.MITRA}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center'}}>{item.jumlah}M</Text>                    
+                        <Text style={{textAlign:'center'}}>{item.JUMLAH}M</Text>                    
                       </View>
                     </TouchableOpacity>
                   )}
@@ -908,7 +929,7 @@ class DesDetailScreens extends Component{
                         <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.MITRA}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.jumlah}M</Text>                    
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.JUMLAH}M</Text>                    
                       </View>
                     </TouchableOpacity>
                     :
@@ -920,7 +941,7 @@ class DesDetailScreens extends Component{
                         <Text>{item.MITRA}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center'}}>{item.jumlah}M</Text>                    
+                        <Text style={{textAlign:'center'}}>{item.JUMLAH}M</Text>                    
                       </View>
                     </TouchableOpacity>
                   )}
@@ -946,7 +967,7 @@ class DesDetailScreens extends Component{
                         <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.MITRA}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.jumlah}M</Text>                    
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.JUMLAH}M</Text>                    
                       </View>
                     </TouchableOpacity>
                     :
@@ -958,7 +979,7 @@ class DesDetailScreens extends Component{
                         <Text>{item.MITRA}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center'}}>{item.jumlah}M</Text>                    
+                        <Text style={{textAlign:'center'}}>{item.JUMLAH}M</Text>                    
                       </View>
                     </TouchableOpacity>
                   )}
@@ -998,19 +1019,19 @@ class DesDetailScreens extends Component{
 
       //logo
       allImage:{
-        allAktif: require('../../../../../../../../assets/detailKonten/stage-on10.png'),
+        allAktif: require('../../../../../../../../assets/detailKonten/stage-on20.png'),
         allNon  : require('../../../../../../../../assets/detailKonten/stage-off00.png'),
       },
       subsImage:{
-        subsAktif: require('../../../../../../../../assets/detailKonten/stage-on11.png'),
+        subsAktif: require('../../../../../../../../assets/detailKonten/stage-on21.png'),
         subsNon  : require('../../../../../../../../assets/detailKonten/stage-off01.png'),
       },
       mitraImage:{
-        mitraAktif: require('../../../../../../../../assets/detailKonten/stage-on12.png'),
+        mitraAktif: require('../../../../../../../../assets/detailKonten/stage-on22.png'),
         mitraNon  : require('../../../../../../../../assets/detailKonten/stage-off02.png'),
       },
       telkomImage:{
-        telkomAktif: require('../../../../../../../../assets/detailKonten/stage-on13.png'),
+        telkomAktif: require('../../../../../../../../assets/detailKonten/stage-on23.png'),
         telkomNon  : require('../../../../../../../../assets/detailKonten/stage-off03.png'),
       }
     };
@@ -1030,19 +1051,19 @@ class DesDetailScreens extends Component{
       <View style={{backgroundColor:'#FFF', flex:1}}>
         <View style={styles.wrapperArrow}>
           <Image 
-            source={images.prospect.arrowProspect1}
+            source={images.Submission.arrowSub1}
             style={styles.imageStyle}
             resizeMode={'stretch'}
           />
 
-          <View style={styles.containerArrowProspect}>
+          <View style={styles.containerArrowSubmission}>
             <Text style={styles.textJudul}>SUBMISSION</Text>
             <Text style={styles.textIsi}>{ebisProspectREVENUE2}M</Text>
             <Text style={styles.textKeterangan}>per {ebisProspectProject2} Project</Text>
           </View>
 
           <Image 
-            source={images.prospect.arrowProspect2}
+            source={images.Submission.arrowSub2}
             style={styles.imageStyle}
             resizeMode={'stretch'}
           />
@@ -1154,7 +1175,7 @@ class DesDetailScreens extends Component{
                         <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.MITRA}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.jumlah}M</Text>                    
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.JUMLAH}M</Text>                    
                       </View>
                     </TouchableOpacity>
                     :
@@ -1166,7 +1187,7 @@ class DesDetailScreens extends Component{
                         <Text>{item.MITRA}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center'}}>{item.jumlah}M</Text>                    
+                        <Text style={{textAlign:'center'}}>{item.JUMLAH}M</Text>                    
                       </View>
                     </TouchableOpacity>
                   )}
@@ -1192,7 +1213,7 @@ class DesDetailScreens extends Component{
                         <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.MITRA}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.jumlah}M</Text>                    
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.JUMLAH}M</Text>                    
                       </View>
                     </TouchableOpacity>
                     :
@@ -1204,7 +1225,7 @@ class DesDetailScreens extends Component{
                         <Text>{item.MITRA}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center'}}>{item.jumlah}M</Text>                    
+                        <Text style={{textAlign:'center'}}>{item.JUMLAH}M</Text>                    
                       </View>
                     </TouchableOpacity>
                   )}
@@ -1230,7 +1251,7 @@ class DesDetailScreens extends Component{
                       <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.MITRA}</Text>
                     </View>
                     <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                      <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.jumlah}M</Text>                    
+                      <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.JUMLAH}M</Text>                    
                     </View>
                   </TouchableOpacity>
                   :
@@ -1242,7 +1263,7 @@ class DesDetailScreens extends Component{
                       <Text>{item.MITRA}</Text>
                     </View>
                     <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                      <Text style={{textAlign:'center'}}>{item.jumlah}M</Text>                    
+                      <Text style={{textAlign:'center'}}>{item.JUMLAH}M</Text>                    
                     </View>
                   </TouchableOpacity>
               )}
@@ -1268,7 +1289,7 @@ class DesDetailScreens extends Component{
                       <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.MITRA}</Text>
                     </View>
                     <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                      <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.jumlah}M</Text>                    
+                      <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.JUMLAH}M</Text>                    
                     </View>
                   </TouchableOpacity>
                   :
@@ -1280,7 +1301,7 @@ class DesDetailScreens extends Component{
                       <Text>{item.MITRA}</Text>
                     </View>
                     <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                      <Text style={{textAlign:'center'}}>{item.jumlah}M</Text>                    
+                      <Text style={{textAlign:'center'}}>{item.JUMLAH}M</Text>                    
                     </View>
                   </TouchableOpacity>
               )}
@@ -1320,19 +1341,19 @@ class DesDetailScreens extends Component{
 
       //logo
       allImage:{
-        allAktif: require('../../../../../../../../assets/detailKonten/stage-on10.png'),
+        allAktif: require('../../../../../../../../assets/detailKonten/stage-on20.png'),
         allNon  : require('../../../../../../../../assets/detailKonten/stage-off00.png'),
       },
       subsImage:{
-        subsAktif: require('../../../../../../../../assets/detailKonten/stage-on11.png'),
+        subsAktif: require('../../../../../../../../assets/detailKonten/stage-on21.png'),
         subsNon  : require('../../../../../../../../assets/detailKonten/stage-off01.png'),
       },
       mitraImage:{
-        mitraAktif: require('../../../../../../../../assets/detailKonten/stage-on12.png'),
+        mitraAktif: require('../../../../../../../../assets/detailKonten/stage-on22.png'),
         mitraNon  : require('../../../../../../../../assets/detailKonten/stage-off02.png'),
       },
       telkomImage:{
-        telkomAktif: require('../../../../../../../../assets/detailKonten/stage-on13.png'),
+        telkomAktif: require('../../../../../../../../assets/detailKonten/stage-on23.png'),
         telkomNon  : require('../../../../../../../../assets/detailKonten/stage-off03.png'),
       }
     };
@@ -1352,19 +1373,19 @@ class DesDetailScreens extends Component{
       <View style={{backgroundColor:'#FFF', flex:1}}>
         <View style={styles.wrapperArrow}>
           <Image 
-            source={images.prospect.arrowProspect1}
+            source={images.Submission.arrowSub1}
             style={styles.imageStyle}
             resizeMode={'stretch'}
           />
 
-          <View style={styles.containerArrowProspect}>
+          <View style={styles.containerArrowSubmission}>
             <Text style={styles.textJudul}>SUBMISSION</Text>
             <Text style={styles.textIsi}>{ebisProspectREVENUE3}M</Text>
             <Text style={styles.textKeterangan}>per {ebisProspectProject3} Project</Text>
           </View>
 
           <Image 
-            source={images.prospect.arrowProspect2}
+            source={images.Submission.arrowSub2}
             style={styles.imageStyle}
             resizeMode={'stretch'}
           />
@@ -1476,7 +1497,7 @@ class DesDetailScreens extends Component{
                         <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.MITRA}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.jumlah}M</Text>                    
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.JUMLAH}M</Text>                    
                       </View>
                     </TouchableOpacity>
                     :
@@ -1488,7 +1509,7 @@ class DesDetailScreens extends Component{
                         <Text>{item.MITRA}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center'}}>{item.jumlah}M</Text>                    
+                        <Text style={{textAlign:'center'}}>{item.JUMLAH}M</Text>                    
                       </View>
                     </TouchableOpacity>
                   )}
@@ -1514,7 +1535,7 @@ class DesDetailScreens extends Component{
                         <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.MITRA}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.jumlah}M</Text>                    
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.JUMLAH}M</Text>                    
                       </View>
                     </TouchableOpacity>
                     :
@@ -1526,7 +1547,7 @@ class DesDetailScreens extends Component{
                         <Text>{item.MITRA}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center'}}>{item.jumlah}M</Text>                    
+                        <Text style={{textAlign:'center'}}>{item.JUMLAH}M</Text>                    
                       </View>
                     </TouchableOpacity>
                   )}
@@ -1552,7 +1573,7 @@ class DesDetailScreens extends Component{
                         <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.MITRA}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.jumlah}M</Text>                    
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.JUMLAH}M</Text>                    
                       </View>
                     </TouchableOpacity>
                     :
@@ -1564,7 +1585,7 @@ class DesDetailScreens extends Component{
                         <Text>{item.MITRA}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center'}}>{item.jumlah}M</Text>                    
+                        <Text style={{textAlign:'center'}}>{item.JUMLAH}M</Text>                    
                       </View>
                     </TouchableOpacity>
                   )}
@@ -1590,7 +1611,7 @@ class DesDetailScreens extends Component{
                         <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.MITRA}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.jumlah}M</Text>                    
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.JUMLAH}M</Text>                    
                       </View>
                     </TouchableOpacity>
                     :
@@ -1602,7 +1623,7 @@ class DesDetailScreens extends Component{
                         <Text>{item.MITRA}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center'}}>{item.jumlah}M</Text>                    
+                        <Text style={{textAlign:'center'}}>{item.JUMLAH}M</Text>                    
                       </View>
                     </TouchableOpacity>
                   )}
@@ -1642,19 +1663,19 @@ class DesDetailScreens extends Component{
 
       //logo
       allImage:{
-        allAktif: require('../../../../../../../../assets/detailKonten/stage-on10.png'),
+        allAktif: require('../../../../../../../../assets/detailKonten/stage-on20.png'),
         allNon  : require('../../../../../../../../assets/detailKonten/stage-off00.png'),
       },
       subsImage:{
-        subsAktif: require('../../../../../../../../assets/detailKonten/stage-on11.png'),
+        subsAktif: require('../../../../../../../../assets/detailKonten/stage-on21.png'),
         subsNon  : require('../../../../../../../../assets/detailKonten/stage-off01.png'),
       },
       mitraImage:{
-        mitraAktif: require('../../../../../../../../assets/detailKonten/stage-on12.png'),
+        mitraAktif: require('../../../../../../../../assets/detailKonten/stage-on22.png'),
         mitraNon  : require('../../../../../../../../assets/detailKonten/stage-off02.png'),
       },
       telkomImage:{
-        telkomAktif: require('../../../../../../../../assets/detailKonten/stage-on13.png'),
+        telkomAktif: require('../../../../../../../../assets/detailKonten/stage-on23.png'),
         telkomNon  : require('../../../../../../../../assets/detailKonten/stage-off03.png'),
       }
     };
@@ -1674,19 +1695,19 @@ class DesDetailScreens extends Component{
       <View style={{backgroundColor:'#FFF', flex:1}}>
         <View style={styles.wrapperArrow}>
           <Image 
-            source={images.prospect.arrowProspect1}
+            source={images.Submission.arrowSub1}
             style={styles.imageStyle}
             resizeMode={'stretch'}
           />
 
-          <View style={styles.containerArrowProspect}>
+          <View style={styles.containerArrowSubmission}>
             <Text style={styles.textJudul}>SUBMISSION</Text>
             <Text style={styles.textIsi}>{ebisProspectREVENUE4}M</Text>
             <Text style={styles.textKeterangan}>per {ebisProspectProject4} Project</Text>
           </View>
 
           <Image 
-            source={images.prospect.arrowProspect2}
+            source={images.Submission.arrowSub2}
             style={styles.imageStyle}
             resizeMode={'stretch'}
           />
@@ -1798,7 +1819,7 @@ class DesDetailScreens extends Component{
                         <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.MITRA}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.jumlah}M</Text>                    
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.JUMLAH}M</Text>                    
                       </View>
                     </TouchableOpacity>
                     :
@@ -1810,7 +1831,7 @@ class DesDetailScreens extends Component{
                         <Text>{item.MITRA}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center'}}>{item.jumlah}M</Text>                    
+                        <Text style={{textAlign:'center'}}>{item.JUMLAH}M</Text>                    
                       </View>
                     </TouchableOpacity>
                   )}
@@ -1836,7 +1857,7 @@ class DesDetailScreens extends Component{
                         <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.MITRA}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.jumlah}M</Text>                    
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.JUMLAH}M</Text>                    
                       </View>
                     </TouchableOpacity>
                     :
@@ -1848,7 +1869,7 @@ class DesDetailScreens extends Component{
                         <Text>{item.MITRA}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center'}}>{item.jumlah}M</Text>                    
+                        <Text style={{textAlign:'center'}}>{item.JUMLAH}M</Text>                    
                       </View>
                     </TouchableOpacity>
                   )}
@@ -1874,7 +1895,7 @@ class DesDetailScreens extends Component{
                         <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.MITRA}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.jumlah}M</Text>                    
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.JUMLAH}M</Text>                    
                       </View>
                     </TouchableOpacity>
                     :
@@ -1886,7 +1907,7 @@ class DesDetailScreens extends Component{
                         <Text>{item.MITRA}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center'}}>{item.jumlah}M</Text>                    
+                        <Text style={{textAlign:'center'}}>{item.JUMLAH}M</Text>                    
                       </View>
                     </TouchableOpacity>
                   )}
@@ -1912,7 +1933,7 @@ class DesDetailScreens extends Component{
                         <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.MITRA}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.jumlah}M</Text>                    
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.JUMLAH}M</Text>                    
                       </View>
                     </TouchableOpacity>
                     :
@@ -1924,7 +1945,7 @@ class DesDetailScreens extends Component{
                         <Text>{item.MITRA}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center'}}>{item.jumlah}M</Text>                    
+                        <Text style={{textAlign:'center'}}>{item.JUMLAH}M</Text>                    
                       </View>
                     </TouchableOpacity>
                   )}
@@ -1989,17 +2010,17 @@ class DesDetailScreens extends Component{
 
 const mapStateToProps = (state) => ({
 
-  ebisProspectREVENUE: state.DesDetailReducer.headerEbisValue,
-  ebisProspectProject: state.DesDetailReducer.headerEbisProject,
+  ebisProspectREVENUE:state.EbisReducerChannel.ebisSubmisionREVENUE,
+  ebisProspectProject:state.EbisReducerChannel.ebisSubmissionProject,
 
-  ebisProspectREVENUE2:state.DesDetailReducer.headerDesValue,
-  ebisProspectProject2:state.DesDetailReducer.headerDesProject,
+  ebisProspectREVENUE2:state.DesReducerChannel.ebisSubmisionREVENUE,
+  ebisProspectProject2:state.DesReducerChannel.ebisSubmissionProject,
 
-  ebisProspectREVENUE3:state.DesDetailReducer.headerDbsValue,
-  ebisProspectProject3:state.DesDetailReducer.headerDbsProject,
+  ebisProspectREVENUE3:state.DbsReducerChannel.ebisSubmisionREVENUE,
+  ebisProspectProject3:state.DbsReducerChannel.ebisSubmissionProject,
  
-  ebisProspectREVENUE4:state.DesDetailReducer.headerDgsValue,
-  ebisProspectProject4:state.DesDetailReducer.headerDgsProject,
+  ebisProspectREVENUE4:state.DgsReducerChannel.ebisSubmisionREVENUE,
+  ebisProspectProject4:state.DgsReducerChannel.ebisSubmissionProject,
  
   //data All
   dataAll: state.DesDetailReducer.dataEbisAll,

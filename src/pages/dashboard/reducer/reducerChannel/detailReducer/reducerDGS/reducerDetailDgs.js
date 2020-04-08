@@ -43,36 +43,6 @@ const initialState = {
 const DgsDetailReducer = (state = initialState, action) => {
   switch (action.type) {
 
-    //Header status
-    case 'HEADER_BILLCOM_EBIS_FULFILLED':
-      return{
-        ...state, 
-        headerEbisValue: action.payload.data[0].lop_13_2,
-        headerEbisProject: action.payload.data[0].lop_13_3,
-      }
-      break;
-    case 'HEADER_BILLCOM_DES_FULFILLED':
-      return{
-        ...state, 
-        headerDesValue: action.payload.data[0].lop_13_2,
-        headerDesProject: action.payload.data[0].lop_13_3,
-      }
-      break;
-    case 'HEADER_BILLCOM_DBS_FULFILLED':
-      return{
-        ...state, 
-        headerDbsValue: action.payload.data[0].lop_13_2,
-        headerDbsProject: action.payload.data[0].lop_13_3,
-      }
-      break;
-    case 'HEADER_BILLCOM_DGS_FULFILLED':
-      return{
-        ...state, 
-        headerDgsValue: action.payload.data[0].lop_13_2,
-        headerDgsProject: action.payload.data[0].lop_13_3,
-      }
-      break;
-
       //--------------------------prospect
       //detail ALL
       case 'DETAIL_BILLCOM_EBIS_REJECTED':

@@ -1,19 +1,5 @@
 const initialState = { 
-  loaderStatus:false,
-
-  //PROSPECT
-  //EBIS
-  headerEbisValue: '0',
-  headerEbisProject: '0',
-  //DES
-  headerDesValue: '0',
-  headerDesProject: '0',
-  //DBS
-  headerDbsValue: '0',
-  headerDbsProject: '0',
-  //DGS
-  headerDgsValue: '0',
-  headerDgsProject: '0',        
+  loaderStatus:false,     
  
   //data ebis
   dataEbisAll:[],
@@ -42,36 +28,6 @@ const initialState = {
 
 const DesDetailReducer = (state = initialState, action) => {
   switch (action.type) {
-
-    //Header status
-    case 'HEADER_SUBMISSION_EBIS_FULFILLED':
-      return{
-        ...state, 
-        headerEbisValue: action.payload.data[0].lop_11_6,
-        headerEbisProject: action.payload.data[0].lop_12_1,
-      }
-      break;
-    case 'HEADER_SUBMISSION_DES_FULFILLED':
-      return{
-        ...state, 
-        headerDesValue: action.payload.data[0].lop_11_6,
-        headerDesProject: action.payload.data[0].lop_12_1,
-      }
-      break;
-    case 'HEADER_SUBMISSION_DBS_FULFILLED':
-      return{
-        ...state, 
-        headerDbsValue: action.payload.data[0].lop_11_6,
-        headerDbsProject: action.payload.data[0].lop_12_1,
-      }
-      break;
-    case 'HEADER_SUBMISSION_DGS_FULFILLED':
-      return{
-        ...state, 
-        headerDgsValue: action.payload.data[0].lop_11_6,
-        headerDgsProject: action.payload.data[0].lop_12_1,
-      }
-      break;
 
       //--------------------------prospect
       //detail ALL

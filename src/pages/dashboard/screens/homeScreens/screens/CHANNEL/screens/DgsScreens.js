@@ -145,19 +145,19 @@ class DgsScreens extends Component{
     const images = {
       prospect: {
         arrowProspect1: require('../../../../../../../assets/Arrow/arrowProspect.png'),
-        arrowProspect2: require('../../../../../../../assets/Arrow/arrowProspect2.png'),
+        arrowProspect2: require('../../../../../../../assets/Arrow/arrowProspect3.png'),
       },
       Submission: {
         arrowSub1: require('../../../../../../../assets/Arrow/arrowSub.png'),
-        arrowSub2: require('../../../../../../../assets/Arrow/arrowSub2.png'),
+        arrowSub2: require('../../../../../../../assets/Arrow/arrowSub3.png'),
       },
       Win: {
         arrowWin1: require('../../../../../../../assets/Arrow/arrowWin.png'),
-        arrowWin2: require('../../../../../../../assets/Arrow/arrowWin2.png'),
+        arrowWin2: require('../../../../../../../assets/Arrow/arrowWin3.png'),
       },
       Billcom: {
         arrowBil1: require('../../../../../../../assets/Arrow/arrowBillcom.png'),
-        arrowBil2: require('../../../../../../../assets/Arrow/arrowBillcom2.png'),
+        arrowBil2: require('../../../../../../../assets/Arrow/arrowBillcom3.png'),
       },
       arrowGrey:require('../../../../../../../assets/Arrow/arrowGrey.png'),
 
@@ -289,7 +289,7 @@ class DgsScreens extends Component{
               resizeMode={'stretch'}
             />
 
-            <TouchableOpacity onPress={() => navigation.navigate('EbisDetailLOP',{start_date:this.state.date1,end_date:this.state.date2,reg:'ALL',witel:'ALL'})} style={styles.containerArrowProspect} underlayColor="#ffffff00">
+            <TouchableOpacity onPress={() => navigation.navigate('EbisDetailChannel',{start_date:this.state.date1,end_date:this.state.date2,reg:'ALL',witel:'ALL'})} style={styles.containerArrowProspect} underlayColor="#ffffff00">
               <Text style={styles.textJudul}>PROSPECT</Text>
               <Text style={styles.textIsi}>{ebisProspectREVENUE}M</Text>
               <Text style={styles.textKeterangan}>per {ebisProspectProject} Project</Text>
@@ -301,20 +301,20 @@ class DgsScreens extends Component{
               resizeMode={'stretch'}
             />
 
-            <View style={styles.container3dataProspect}>
+            <TouchableOpacity onPress={() => navigation.navigate('EbisDetailColumnProspect', {nameChannel:'GTMA',start_date:this.state.date1,end_date:this.state.date2,reg:'ALL',witel:'ALL', })}  style={styles.container3dataProspect}>
               <Text style={styles.textJudul}>{ebisPROSPECT_GTMA} M</Text>
               <Text style={styles.textIsi}>{ebisPROSPECT_GTMA_PROJECT} Projects</Text>
-            </View>
+            </TouchableOpacity>
 
-            <View style={styles.container3dataProspect}>
+            <TouchableOpacity onPress={() => navigation.navigate('EbisDetailColumnProspect', {nameChannel:'OC',start_date:this.state.date1,end_date:this.state.date2,reg:'ALL',witel:'ALL', })}  style={styles.container3dataProspect}>
+              <Text style={styles.textJudul}>{PROSPECT_OC} M</Text>
+              <Text style={styles.textIsi}>{PROSPECT_OC_PROJECT} Projects</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress={() => navigation.navigate('EbisDetailColumnProspect', {nameChannel:'NEW GTMA',start_date:this.state.date1,end_date:this.state.date2,reg:'ALL',witel:'ALL', })}  style={styles.container3dataProspect}>
               <Text style={styles.textJudul}>{ebisPROSPECT_NGTMA} M</Text>
               <Text style={styles.textIsi}>{ebisPROSPECT_NGTMA_PROJECT} Projects</Text>
-            </View>
-
-            <View style={styles.container3dataProspect}>
-              <Text style={styles.textJudul}>{ebisSUBMISSION_OC} M</Text>
-              <Text style={styles.textIsi}>{ebisSUBMISSION_OC_PROJECT} Projects</Text>
-            </View>
+            </TouchableOpacity>
           </View>
 
           <View style={styles.wrapperArrow}>
@@ -324,7 +324,7 @@ class DgsScreens extends Component{
               resizeMode={'stretch'}
             />
 
-            <TouchableOpacity onPress={() => navigation.navigate('DesDetailLOP',{start_date:this.state.date1,end_date:this.state.date2,reg:'ALL',witel:'ALL'})} style={styles.containerArrowSubmission}>
+            <TouchableOpacity onPress={() => navigation.navigate('DesDetailChannel',{start_date:this.state.date1,end_date:this.state.date2,reg:'ALL',witel:'ALL'})} style={styles.containerArrowSubmission}>
               <Text style={styles.textJudul}>SUBMISSION</Text>
               <Text style={styles.textIsi}>{ebisSubmisionREVENUE}M</Text>
               <Text style={styles.textKeterangan}>per {ebisSubmissionProject} Project</Text>
@@ -336,20 +336,20 @@ class DgsScreens extends Component{
               resizeMode={'stretch'}
             />
 
-            <View style={styles.container3dataSubmission}>
+            <TouchableOpacity onPress={() => navigation.navigate('SubmissionDetailColumnProspect', {nameChannel:'GTMA',start_date:this.state.date1,end_date:this.state.date2,reg:'ALL',witel:'ALL', })}  style={styles.container3dataSubmission}>
               <Text style={styles.textJudul}>{ebisSUBMISSION_GTMA} M</Text>
               <Text style={styles.textIsi}>{ebisSUBMISSION_GTMA_PROJECT} Projects</Text>
-            </View>
+            </TouchableOpacity>
 
-            <View style={styles.container3dataSubmission}>
-              <Text style={styles.textJudul}>{ebisSUBMISSION_NGTMA} M</Text>
-              <Text style={styles.textIsi}>{ebisPROSPECT_GTMA} Projects</Text>
-            </View>
-
-            <View style={styles.container3dataSubmission}>
+            <TouchableOpacity onPress={() => navigation.navigate('SubmissionDetailColumnProspect', {nameChannel:'OC',start_date:this.state.date1,end_date:this.state.date2,reg:'ALL',witel:'ALL', })}  style={styles.container3dataSubmission}>
               <Text style={styles.textJudul}>{ebisSUBMISSION_OC} M</Text>
               <Text style={styles.textIsi}>{ebisSUBMISSION_OC_PROJECT} Projects</Text>
-            </View>
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress={() => navigation.navigate('SubmissionDetailColumnProspect', {nameChannel:'NEW GTMA',start_date:this.state.date1,end_date:this.state.date2,reg:'ALL',witel:'ALL', })}  style={styles.container3dataSubmission}>
+              <Text style={styles.textJudul}>{ebisSUBMISSION_NGTMA} M</Text>  
+              <Text style={styles.textIsi}>{ebisSUBMISSION_NGTMA_PROJECT} Projects</Text>
+            </TouchableOpacity>
           </View>
 
           <View style={styles.wrapperArrow}>
@@ -359,7 +359,7 @@ class DgsScreens extends Component{
               resizeMode={'stretch'}
             />
 
-            <TouchableOpacity onPress={() => navigation.navigate('DbsDetailLOP',{start_date:this.state.date1,end_date:this.state.date2,reg:'ALL',witel:'ALL'})} style={styles.containerArrowWin}>
+            <TouchableOpacity onPress={() => navigation.navigate('DbsDetailChannel',{start_date:this.state.date1,end_date:this.state.date2,reg:'ALL',witel:'ALL'})}  style={styles.containerArrowWin}>
               <Text style={styles.textJudul}>WIN</Text>
               <Text style={styles.textIsi}>{ebisWinREVENUE}M</Text>
               <Text style={styles.textKeterangan}>per {ebisWinProject} Project</Text>
@@ -371,20 +371,20 @@ class DgsScreens extends Component{
               resizeMode={'stretch'}
             />
 
-            <View style={styles.container3dataWIN}>
+            <TouchableOpacity onPress={() => navigation.navigate('WinDetailColumnProspect', {nameChannel:'GTMA',start_date:this.state.date1,end_date:this.state.date2,reg:'ALL',witel:'ALL', })}  style={styles.container3dataWIN}>
               <Text style={styles.textJudul}>{ebisWIN_GTMA} M</Text>
               <Text style={styles.textIsi}>{ebisWIN_GTMA_PROJECT} Projects</Text>
-            </View>
+            </TouchableOpacity>
 
-            <View style={styles.container3dataWIN}>
-              <Text style={styles.textJudul}>{ebisWIN_NGTMA} M</Text>
-              <Text style={styles.textIsi}>{ebisWIN_NGTMA_PROJECT} Projects</Text>
-            </View>
-
-            <View style={styles.container3dataWIN}>
+            <TouchableOpacity onPress={() => navigation.navigate('WinDetailColumnProspect', {nameChannel:'OC',start_date:this.state.date1,end_date:this.state.date2,reg:'ALL',witel:'ALL', })}  style={styles.container3dataWIN}>
               <Text style={styles.textJudul}>{ebisWIN_OC} M</Text>
               <Text style={styles.textIsi}>{ebisWIN_OC_PROJECT} Projects</Text>
-            </View>
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress={() => navigation.navigate('WinDetailColumnProspect', {nameChannel:'NEW GTMA',start_date:this.state.date1,end_date:this.state.date2,reg:'ALL',witel:'ALL', })}  style={styles.container3dataWIN}>
+              <Text style={styles.textJudul}>{ebisWIN_NGTMA} M</Text>
+              <Text style={styles.textIsi}>{ebisWIN_NGTMA_PROJECT} Projects</Text>
+            </TouchableOpacity>
           </View>
 
           <View style={styles.wrapperArrow}>
@@ -394,7 +394,7 @@ class DgsScreens extends Component{
               resizeMode={'stretch'}
             />
 
-            <TouchableOpacity onPress={() => navigation.navigate('DgsDetailLOP',{start_date:this.state.date1,end_date:this.state.date2,reg:'ALL',witel:'ALL'})} style={styles.containerArrowBill}>
+            <TouchableOpacity onPress={() => navigation.navigate('DgsDetailChannel',{start_date:this.state.date1,end_date:this.state.date2,reg:'ALL',witel:'ALL'})} style={styles.containerArrowBill}>
               <Text style={styles.textJudul}>BILLCOM</Text>
               <Text style={styles.textIsi}>{ebisBillcomREVENUE}M</Text>
               <Text style={styles.textKeterangan}>per {ebisBillcomeProject} Project</Text>
@@ -406,20 +406,20 @@ class DgsScreens extends Component{
               resizeMode={'stretch'}
             />
 
-            <View style={styles.container3dataBillcom}>
+            <TouchableOpacity onPress={() => navigation.navigate('BillcomDetailColumnProspect', {nameChannel:'GTMA',start_date:this.state.date1,end_date:this.state.date2,reg:'ALL',witel:'ALL', })} style={styles.container3dataBillcom}>
               <Text style={styles.textJudul}>{ebisBILLCOM_GTMA} M</Text>
               <Text style={styles.textIsi}>{ebisBILLCOM_GTMA_PROJECT} Projects</Text>
-            </View>
+            </TouchableOpacity>
 
-            <View style={styles.container3dataBillcom}>
-              <Text style={styles.textJudul}>{ebisBILLCOM_NGTMA} M</Text>
-              <Text style={styles.textIsi}>{ebisBILLCOM_NGTMA_PROJECT} Projects</Text>
-            </View>
-
-            <View style={styles.container3dataBillcom}>
+            <TouchableOpacity onPress={() => navigation.navigate('BillcomDetailColumnProspect', {nameChannel:'OC',start_date:this.state.date1,end_date:this.state.date2,reg:'ALL',witel:'ALL', })} style={styles.container3dataBillcom}>
               <Text style={styles.textJudul}>{ebisBILLCOM_OC} M</Text>
               <Text style={styles.textIsi}>{ebisBILLCOM_OC_PROJECT} Projects</Text>
-            </View>
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress={() => navigation.navigate('BillcomDetailColumnProspect', {nameChannel:'NEW GTMA',start_date:this.state.date1,end_date:this.state.date2,reg:'ALL',witel:'ALL', })} style={styles.container3dataBillcom}>
+              <Text style={styles.textJudul}>{ebisBILLCOM_NGTMA} M</Text>
+              <Text style={styles.textIsi}>{ebisBILLCOM_NGTMA_PROJECT} Projects</Text>
+            </TouchableOpacity>
           </View>
 
           <View>

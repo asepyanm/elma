@@ -1,15 +1,5 @@
 const initialState = { 
   loaderStatus:false,
-
-  winrevEbis: '0',
-  winrevDes: '0',
-  winrevDbs: '0',
-  winrevDgs: '0',
-
-  winprojectEbis: '0',
-  winprojectDes: '0',
-  winprojectDbs: '0',
-  winprojectDgs: '0',
  
   //data ebis
   dataEbisAll:[],
@@ -37,84 +27,7 @@ const initialState = {
 };
 
 const DbsDetailReducer = (state = initialState, action) => {
-  switch (action.type) {
-
-    //---------------------------total
-    case 'TOTAL_WIN_EBIS_REJECTED':
-      return{
-        ...state, 
-      }
-    break;
-    case 'TOTAL_WIN_EBIS_PENDING':
-      return{
-        ...state, 
-      }
-    break;
-    case 'TOTAL_WIN_EBIS_FULFILLED':
-      return{
-        ...state, 
-        //Current status
-        winrevEbis:action.payload.data[0].WINREV,
-        winprojectEbis:action.payload.data[0].WINPROJECT,
-      }
-    break;
-
-    case 'TOTAL_WIN_DES_REJECTED':
-      return{
-        ...state, 
-      }
-    break;
-    case 'TOTAL_WIN_DES_PENDING':
-      return{
-        ...state, 
-      }
-    break;
-    case 'TOTAL_WIN_DES_FULFILLED':
-      return{
-        ...state, 
-        //Current status
-        winrevDes:action.payload.data[0].WINREV,
-        winprojectDes:action.payload.data[0].WINPROJECT,
-      }
-    break;
-    
-    case 'TOTAL_WIN_DBS_REJECTED':
-      return{
-        ...state, 
-      }
-    break;
-    case 'TOTAL_WIN_DBS_PENDING':
-      return{
-        ...state, 
-      }
-    break;
-    case 'TOTAL_WIN_DBS_FULFILLED':
-      return{
-        ...state, 
-        //Current status
-        winrevDbs:action.payload.data[0].WINREV,
-        winprojectDbs:action.payload.data[0].WINPROJECT,
-      }
-    break;
-
-    case 'TOTAL_WIN_DGS_REJECTED':
-      return{
-        ...state, 
-      }
-    break;
-    case 'TOTAL_WIN_DGS_PENDING':
-      return{
-        ...state, 
-      }
-    break;
-    case 'TOTAL_WIN_DGS_FULFILLED':
-      return{
-        ...state, 
-        //Current status
-        winrevDgs:action.payload.data[0].WINREV,
-        winprojectDgs:action.payload.data[0].WINPROJECT,
-      }
-    break;    
+  switch (action.type) { 
 
     //--------------------------prospect
       //detail ALL

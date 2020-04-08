@@ -54,95 +54,77 @@ class DbsDetailScreens extends Component{
       loaderTampil:false,
     })    
 
-    //get header ALL
-    this.props.dispatch({
-      type:'HEADER_BILLCOM_EBIS',
-      payload:axios.get(`${url.API}/ebis_getlopmain_ytd/div/EBIS/date1/${this.state.startdate}/date2/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
-    });
-    this.props.dispatch({
-      type:'HEADER_BILLCOM_DES',
-      payload:axios.get(`${url.API}/ebis_getlopmain_ytd/div/DES/date1/${this.state.startdate}/date2/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
-    });
-    this.props.dispatch({
-      type:'HEADER_BILLCOM_DBS',
-      payload:axios.get(`${url.API}/ebis_getlopmain_ytd/div/DBS/date1/${this.state.startdate}/date2/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
-    });
-    this.props.dispatch({
-      type:'HEADER_BILLCOM_DGS',
-      payload:axios.get(`${url.API}/ebis_getlopmain_ytd/div/DGS/date1/${this.state.startdate}/date2/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
-    });
-
     //get data ALL
     this.props.dispatch({
       type:'DETAIL_BILLCOM_EBIS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/BILLCOM/div/EBIS/maindiv/ALL/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/mitra/ALL/reg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/BILLCOM/channel/ALL/div/EBIS/categ/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
     });
     this.props.dispatch({
       type:'DETAIL_BILLCOM_DES',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/BILLCOM/div/DES/maindiv/DES/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/mitra/ALL/reg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/BILLCOM/channel/ALL/div/DES/categ/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
     });
     this.props.dispatch({
       type:'DETAIL_BILLCOM_DBS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/BILLCOM/div/DBS/maindiv/DBS/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/mitra/ALL/reg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/BILLCOM/channel/ALL/div/DBS/categ/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
     });
     this.props.dispatch({
       type:'DETAIL_BILLCOM_DGS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/BILLCOM/div/DGS/maindiv/DGS/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/mitra/ALL/reg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/BILLCOM/channel/ALL/div/DGS/categ/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
     });
 
     //get data detail SUBS
     this.props.dispatch({
       type:'DETAIL_SUBS_BILLCOM_EBIS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/BILLCOM/div/EBIS/maindiv/ALL/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/mitra/CFU/reg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/BILLCOM/channel/ALL/div/EBIS/categ/SUBS/start_date/${this.state.startdate}/end_date/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
     });
     this.props.dispatch({
       type:'DETAIL_SUBS_BILLCOM_DES',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/BILLCOM/div/DES/maindiv/DES/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/mitra/CFU/reg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/BILLCOM/channel/ALL/div/DES/categ/SUBS/start_date/${this.state.startdate}/end_date/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
     });
     this.props.dispatch({
       type:'DETAIL_SUBS_BILLCOM_DBS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/BILLCOM/div/DBS/maindiv/DBS/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/mitra/CFU/reg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/BILLCOM/channel/ALL/div/DBS/categ/SUBS/start_date/${this.state.startdate}/end_date/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
     });
     this.props.dispatch({
       type:'DETAIL_SUBS_BILLCOM_DGS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/BILLCOM/div/DGS/maindiv/DGS/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/mitra/CFU/reg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/BILLCOM/channel/ALL/div/DGS/categ/SUBS/start_date/${this.state.startdate}/end_date/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
     });
 
     //get data detail MITRA
     this.props.dispatch({
       type:'DETAIL_MITRA_BILLCOM_EBIS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/BILLCOM/div/EBIS/maindiv/ALL/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/mitra/MITRA/reg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/BILLCOM/channel/ALL/div/EBIS/categ/MITRA/start_date/${this.state.startdate}/end_date/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
     });
     this.props.dispatch({
       type:'DETAIL_MITRA_BILLCOM_DES',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/BILLCOM/div/DES/maindiv/DES/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/mitra/MITRA/reg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/BILLCOM/channel/ALL/div/DES/categ/MITRA/start_date/${this.state.startdate}/end_date/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
     });
     this.props.dispatch({
       type:'DETAIL_MITRA_BILLCOM_DBS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/BILLCOM/div/DBS/maindiv/DBS/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/mitra/MITRA/reg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/BILLCOM/channel/ALL/div/DBS/categ/MITRA/start_date/${this.state.startdate}/end_date/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
     });
     this.props.dispatch({
       type:'DETAIL_MITRA_BILLCOM_DGS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/BILLCOM/div/DGS/maindiv/DGS/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/mitra/MITRA/reg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/BILLCOM/channel/ALL/div/DGS/categ/MITRA/start_date/${this.state.startdate}/end_date/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
     });
-
+    
     //get data detail TELKOM
     this.props.dispatch({
       type:'DETAIL_TELKOM_BILLCOM_EBIS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/BILLCOM/div/EBIS/maindiv/ALL/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/mitra/TELKOM/reg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/BILLCOM/channel/ALL/div/EBIS/categ/TELKOM/start_date/${this.state.startdate}/end_date/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
     });
     this.props.dispatch({
       type:'DETAIL_TELKOM_BILLCOM_DES',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/BILLCOM/div/DES/maindiv/DES/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/mitra/TELKOM/reg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/BILLCOM/channel/ALL/div/DES/categ/TELKOM/start_date/${this.state.startdate}/end_date/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
     });
     this.props.dispatch({
       type:'DETAIL_TELKOM_BILLCOM_DBS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/BILLCOM/div/DBS/maindiv/DBS/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/mitra/TELKOM/reg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/BILLCOM/channel/ALL/div/DBS/categ/TELKOM/start_date/${this.state.startdate}/end_date/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
     });
     this.props.dispatch({
       type:'DETAIL_TELKOM_BILLCOM_DGS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/BILLCOM/div/DGS/maindiv/DGS/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/mitra/TELKOM/reg/${this.state.reg}/witel/${this.state.witel}`)
-    });       
+      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/BILLCOM/channel/ALL/div/DGS/categ/TELKOM/start_date/${this.state.startdate}/end_date/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
+    });   
   }
 
     //pop up and detail L4
@@ -152,8 +134,8 @@ class DbsDetailScreens extends Component{
         //visibleModalDetail:false,
         loaderTampilDetailDetail:true
       })
-      console.log('jrk',`${url.API}/ebis_getstage5/stage/BILLCOM/div/ALL/maindiv/ALL/mitra/ALL/nmitra/${item.stage_01}/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/cc/${item.stage_06}/project/${item.stage_07}`)
-      axios.get(`${url.API}/ebis_getstage5/stage/BILLCOM/div/ALL/maindiv/ALL/mitra/ALL/nmitra/${item.stage_01}/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/cc/${item.stage_06}/project/${item.stage_07}`).then((res) => {
+      
+      axios.get(`${url.API2}/ebis_getdetchannelcc/lopid/${item.LOPID}`).then((res) => {
         this.setState({dataTampungDetail:res.data, loaderTampilDetailDetail:false });
       }).catch((err) => {
         this.setState({
@@ -185,98 +167,137 @@ class DbsDetailScreens extends Component{
               keyExtractor={(item, index) => index.toString()}
               renderItem={({ item }) => (
                 <TouchableOpacity style={styles.containerDetailData} > 
-                <View style={{flex: 1, flexDirection: 'row', flexWrap: 'wrap'}}>
-  
-                  <View style={{width:wp('15%'), alignSelf:'center' }}>
-                    <Text style={{fontSize:10}}>Nama CC</Text>
-                  </View>
-                  <View style={{width:wp('2%'), alignSelf:'center' }}>
-                    <Text style={{fontSize:10}}>:</Text>
-                  </View>
-                  <View style={{width:wp('60%'), alignSelf:'center' }}>
-                    <Text style={{fontSize:11}}>{item.stage_06}</Text>
-                  </View>
-  
-                  <View style={{width:wp('15%'), alignSelf:'center' }}>
-                    <Text style={{fontSize:10}}>Project</Text>
-                  </View>
-                  <View style={{width:wp('2%'), alignSelf:'center' }}>
-                    <Text style={{fontSize:10}}>:</Text>
-                  </View>
-                  <View style={{width:wp('60%'), alignSelf:'center' }}>
-                    <Text style={{fontSize:11}}>{item.stage_07}</Text>
-                  </View>
-  
-                  <View style={{width:wp('15%'), alignSelf:'center' }}>
-                    <Text style={{fontSize:10}}>Nilai</Text>
-                  </View>
-                  <View style={{width:wp('2%'), alignSelf:'center' }}>
-                    <Text style={{fontSize:10}}>:</Text>
-                  </View>
-                  <View style={{width:wp('60%'), alignSelf:'center' }}>
-                    <Text style={{fontSize:11}}>{item.stage_02}M</Text>
-                  </View>
+                  <View style={{flex: 1, flexDirection: 'row', flexWrap: 'wrap'}}>
+                    <View style={{width:wp('15%'), alignSelf:'center' }}>
+                      <Text style={{fontSize:10}}>Nama Project</Text>
+                    </View>
+                    <View style={{width:wp('2%'), alignSelf:'center' }}>
+                      <Text style={{fontSize:10}}>:</Text>
+                    </View>
+                    <View style={{width:wp('60%'), alignSelf:'center' }}>
+                      <Text style={{fontSize:11}}>{item.NAMAPROJECT}</Text>
+                    </View>
 
-                  <View style={{width:wp('15%'), alignSelf:'center' }}>
-                    <Text style={{fontSize:10}}>RevOTC</Text>
-                  </View>
-                  <View style={{width:wp('2%'), alignSelf:'center' }}>
-                    <Text style={{fontSize:10}}>:</Text>
-                  </View>
-                  <View style={{width:wp('60%'), alignSelf:'center' }}>
-                    <Text style={{fontSize:11}}>{item.stage_11}</Text>
-                  </View>
-                  <View style={{width:wp('15%'), alignSelf:'center' }}>
-                    <Text style={{fontSize:10}}>RevMo</Text>
-                  </View>
-                  <View style={{width:wp('2%'), alignSelf:'center' }}>
-                    <Text style={{fontSize:10}}>:</Text>
-                  </View>
-                  <View style={{width:wp('60%'), alignSelf:'center' }}>
-                    <Text style={{fontSize:11}}>{item.stage_12}</Text>
-                  </View>
-  
+                    <View style={{width:wp('15%'), alignSelf:'center' }}>
+                      <Text style={{fontSize:10}}>Nama CC</Text>
+                    </View>
+                    <View style={{width:wp('2%'), alignSelf:'center' }}>
+                      <Text style={{fontSize:10}}>:</Text>
+                    </View>
+                    <View style={{width:wp('60%'), alignSelf:'center' }}>
+                      <Text style={{fontSize:11}}>{item.NAMACC}</Text>
+                    </View>
 
-                  <View style={{width:wp('15%'), alignSelf:'center' }}>
-                    <Text style={{fontSize:10}}>Mitra</Text>
+                    <View style={{width:wp('15%'), alignSelf:'center' }}>
+                      <Text style={{fontSize:10}}>Nilai Project</Text>
+                    </View>
+                    <View style={{width:wp('2%'), alignSelf:'center' }}>
+                      <Text style={{fontSize:10}}>:</Text>
+                    </View>
+                    <View style={{width:wp('60%'), alignSelf:'center' }}>
+                      <Text style={{fontSize:11}}>{parseFloat(item.REVENUE)} M</Text>
+                    </View>
+
+                    <View style={{width:wp('15%'), alignSelf:'center' }}>
+                      <Text style={{fontSize:10}}>Lama Kontrak</Text>
+                    </View>
+                    <View style={{width:wp('2%'), alignSelf:'center' }}>
+                      <Text style={{fontSize:10}}>:</Text>
+                    </View>
+                    <View style={{width:wp('60%'), alignSelf:'center' }}>
+                      <Text style={{fontSize:11}}>{item.LAMAKONTRAK}</Text>
+                    </View>
+
+                    <View style={{width:wp('15%'), alignSelf:'center' }}>
+                      <Text style={{fontSize:10}}>Divisi</Text>
+                    </View>
+                    <View style={{width:wp('2%'), alignSelf:'center' }}>
+                      <Text style={{fontSize:10}}>:</Text>
+                    </View>
+                    <View style={{width:wp('60%'), alignSelf:'center' }}>
+                      <Text style={{fontSize:11}}>{item.DIVISI}</Text>
+                    </View>
+
+                    <View style={{width:wp('15%'), alignSelf:'center' }}>
+                      <Text style={{fontSize:10}}>Segmen</Text>
+                    </View>
+                    <View style={{width:wp('2%'), alignSelf:'center' }}>
+                      <Text style={{fontSize:10}}>:</Text>
+                    </View>
+                    <View style={{width:wp('60%'), alignSelf:'center' }}>
+                      <Text style={{fontSize:11}}>{item.SEGMEN}</Text>
+                    </View>
+
+                    <View style={{width:wp('15%'), alignSelf:'center' }}>
+                      <Text style={{fontSize:10}}>Deliver</Text>
+                    </View>
+                    <View style={{width:wp('2%'), alignSelf:'center' }}>
+                      <Text style={{fontSize:10}}>:</Text>
+                    </View>
+                    <View style={{width:wp('60%'), alignSelf:'center' }}>
+                      <Text style={{fontSize:11}}>{item.DELIVER}</Text>
+                    </View>
+
+                    <View style={{width:wp('15%'), alignSelf:'center' }}>
+                      <Text style={{fontSize:10}}>Payment Method</Text>
+                    </View>
+                    <View style={{width:wp('2%'), alignSelf:'center' }}>
+                      <Text style={{fontSize:10}}>:</Text>
+                    </View>
+                    <View style={{width:wp('60%'), alignSelf:'center' }}>
+                      <Text style={{fontSize:11}}>{item.PAYMENT_METHOD}</Text>
+                    </View>
+
+                    <View style={{width:wp('15%'), alignSelf:'center' }}>
+                      <Text style={{fontSize:10}}>Channel</Text>
+                    </View>
+                    <View style={{width:wp('2%'), alignSelf:'center' }}>
+                      <Text style={{fontSize:10}}>:</Text>
+                    </View>
+                    <View style={{width:wp('60%'), alignSelf:'center' }}>
+                      <Text style={{fontSize:11}}>{item.KATEGORI_CHANNEL}</Text>
+                    </View>
+
+                    <View style={{width:wp('15%'), alignSelf:'center' }}>
+                      <Text style={{fontSize:10}}>GPM</Text>
+                    </View>
+                    <View style={{width:wp('2%'), alignSelf:'center' }}>
+                      <Text style={{fontSize:10}}>:</Text>
+                    </View>
+                    <View style={{width:wp('60%'), alignSelf:'center' }}>
+                      <Text style={{fontSize:11}}>{item.GPM}</Text>
+                    </View>
+
+                    <View style={{width:wp('60%'), alignSelf:'center' }}>
+                      <Text style={{fontSize:10, fontWeight:'bold'}}>Administration Progress</Text>
+                    </View>
+
+                    <View style={{width:wp('60%'), alignSelf:'center', marginLeft:'5%' }}>
+                      <Text style={{fontSize:10}}>Kontrak Berlangganan :</Text>
+                    </View>
+
+                    <View style={{width:wp('60%'), alignSelf:'center', marginLeft:'10%' }}>
+                      <Text style={{fontSize:10}}>Status KB : {item.STATUS_KB}</Text>
+                    </View>
+                    <View style={{width:wp('60%'), alignSelf:'center', marginLeft:'10%' }}>
+                      <Text style={{fontSize:10}}>No KB : {item.NO_KB}</Text>
+                    </View>
+                    <View style={{width:wp('60%'), alignSelf:'center', marginLeft:'10%' }}>
+                      <Text style={{fontSize:10}}>Durasi : {item.DURASI}</Text>
+                    </View>
+
+
+                    <View style={{width:wp('60%'), alignSelf:'center', marginLeft:'5%' }}>
+                      <Text style={{fontSize:10}}>Justifikasi PO/P1 :</Text>
+                    </View>
+
+                    <View style={{width:wp('60%'), alignSelf:'center', marginLeft:'10%' }}>
+                      <Text style={{fontSize:10}}>Status : {item.STATUS}</Text>
+                    </View>
+                    <View style={{width:wp('60%'), alignSelf:'center', marginLeft:'10%' }}>
+                      <Text style={{fontSize:10}}>Dokumen : {item.DOKUMEN}</Text>
+                    </View>
                   </View>
-                  <View style={{width:wp('2%'), alignSelf:'center' }}>
-                    <Text style={{fontSize:10}}>:</Text>
-                  </View>
-                  <View style={{width:wp('60%'), alignSelf:'center' }}>
-                    <Text style={{fontSize:11}}>{item.stage_01}</Text>
-                  </View>
-  
-                  <View style={{width:wp('15%'), alignSelf:'center' }}>
-                    <Text style={{fontSize:10}}>Segmen</Text>
-                  </View>
-                  <View style={{width:wp('2%'), alignSelf:'center' }}>
-                    <Text style={{fontSize:10}}>:</Text>
-                  </View>
-                  <View style={{width:wp('60%'), alignSelf:'center' }}>
-                    <Text style={{fontSize:11}}>{item.stage_05}</Text>
-                  </View>
-  
-                  <View style={{width:wp('15%'), alignSelf:'center' }}>
-                    <Text style={{fontSize:10}}>Status</Text>
-                  </View>
-                  <View style={{width:wp('2%'), alignSelf:'center' }}>
-                    <Text style={{fontSize:10}}>:</Text>
-                  </View>
-                  <View style={{width:wp('60%'), alignSelf:'center' }}>
-                    <Text style={{fontSize:11}}>{item.stage_09}</Text>
-                  </View>
-  
-                  <View style={{width:wp('15%'), alignSelf:'center' }}>
-                    <Text style={{fontSize:10}}>Keterangan</Text>
-                  </View>
-                  <View style={{width:wp('2%'), alignSelf:'center' }}>
-                    <Text style={{fontSize:10}}>:</Text>
-                  </View>
-                  <View style={{width:wp('60%'), alignSelf:'center' }}>
-                    <Text style={{fontSize:11}}>{item.stage_14}</Text>
-                  </View>
-                </View>
                 </TouchableOpacity > 
               )}
               style={{height:hp('35%'), marginBottom:hp('2%')}}
@@ -309,7 +330,7 @@ class DbsDetailScreens extends Component{
       visibleModal: !this.state.visibleModal,
       loaderTampilDetail:true
     })
-    axios.get(`${url.API}/ebis_getstage5/stage/BILLCOM/div/${div}/maindiv/${maindiv}/mainseg/ALL/mitra/ALL/nmitra/${item}/start_date/${this.state.startdate}/end_date/${this.state.enddate}`).then((res) => {
+    axios.get(`${url.API2}/ebis_getdeallistcc/stage/BILLCOM/categ/${maindiv}/channel/ALL/div/${div}/start_date/${this.state.startdate}/end_date/${this.state.enddate}/treg/ALL/witel/ALL/mitra/${item}`).then((res) => {
       this.setState({dataTampung:res.data, loaderTampilDetail:false });
     }).catch((err) => {
       this.setState({
@@ -348,13 +369,13 @@ class DbsDetailScreens extends Component{
               <TouchableOpacity onPress={() => this._toggleModalDetail(item)}> 
               <View style={styles.containerDetailData}> 
                 <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                  <Text style={{fontSize:10}}>{item.stage_06}</Text>
+                  <Text style={{fontSize:10}}>{item.NAMACC}</Text>
                 </View>
                 <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                  <Text style={{fontSize:10}}>{item.stage_07}</Text>
+                  <Text style={{fontSize:10}}>{item.NAMAPROJECT}</Text>
                 </View>
                 <View style={{width:wp('10%'), alignSelf:'center', justifyContent:'center', alignItems:'center'}}>
-                  <Text style={{textAlign:'center', fontSize:10}}>{parseFloat(item.stage_10)}M</Text>                    
+                  <Text style={{textAlign:'center', fontSize:10}}>{parseFloat(item.JUMLAH)}M</Text>                    
                 </View>
               </View>
               </TouchableOpacity>
@@ -393,7 +414,7 @@ class DbsDetailScreens extends Component{
       visibleModal: !this.state.visibleModal,
       loaderTampilDetail:true
     })
-    axios.get(`${url.API}/ebis_getstage5/stage/BILLCOM/div/${div}/maindiv/${maindiv}/mainseg/ALL/mitra/CFU/nmitra/${item}/start_date/${this.state.startdate}/end_date/${this.state.enddate}`).then((res) => {
+    axios.get(`${url.API2}/ebis_getdeallistcc/stage/BILLCOM/categ/${maindiv}/channel/ALL/div/${div}/start_date/${this.state.startdate}/end_date/${this.state.enddate}/treg/ALL/witel/ALL/mitra/${item}`).then((res) => {
       this.setState({dataTampung:res.data, loaderTampilDetail:false });
     }).catch((err) => {
       this.setState({
@@ -432,13 +453,13 @@ class DbsDetailScreens extends Component{
               <TouchableOpacity onPress={() => this._toggleModalDetail(item)}> 
               <View style={styles.containerDetailData}> 
                 <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                  <Text style={{fontSize:10}}>{item.stage_06}</Text>
+                  <Text style={{fontSize:10}}>{item.NAMACC}</Text>
                 </View>
                 <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                  <Text style={{fontSize:10}}>{item.stage_07}</Text>
+                  <Text style={{fontSize:10}}>{item.NAMAPROJECT}</Text>
                 </View>
                 <View style={{width:wp('10%'), alignSelf:'center', justifyContent:'center', alignItems:'center'}}>
-                  <Text style={{textAlign:'center', fontSize:10}}>{parseFloat(item.stage_10)}M</Text>                    
+                  <Text style={{textAlign:'center', fontSize:10}}>{parseFloat(item.JUMLAH)}M</Text>                    
                 </View>
               </View>
               </TouchableOpacity>
@@ -477,7 +498,7 @@ class DbsDetailScreens extends Component{
       visibleModal: !this.state.visibleModal,
       loaderTampilDetail:true
     })
-    axios.get(`${url.API}/ebis_getstage5/stage/BILLCOM/div/${div}/maindiv/${maindiv}/mainseg/ALL/mitra/MITRA/nmitra/${item}/start_date/${this.state.startdate}/end_date/${this.state.enddate}`).then((res) => {
+    axios.get(`${url.API2}/ebis_getdeallistcc/stage/BILLCOM/categ/${maindiv}/channel/ALL/div/${div}/start_date/${this.state.startdate}/end_date/${this.state.enddate}/treg/ALL/witel/ALL/mitra/${item}`).then((res) => {
       this.setState({dataTampung:res.data, loaderTampilDetail:false });
     }).catch((err) => {
       this.setState({
@@ -516,13 +537,13 @@ class DbsDetailScreens extends Component{
               <TouchableOpacity onPress={() => this._toggleModalDetail(item)}> 
               <View style={styles.containerDetailData}> 
                 <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                  <Text style={{fontSize:10}}>{item.stage_06}</Text>
+                  <Text style={{fontSize:10}}>{item.NAMACC}</Text>
                 </View>
                 <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                  <Text style={{fontSize:10}}>{item.stage_07}</Text>
+                  <Text style={{fontSize:10}}>{item.NAMAPROJECT}</Text>
                 </View>
                 <View style={{width:wp('10%'), alignSelf:'center', justifyContent:'center', alignItems:'center'}}>
-                  <Text style={{textAlign:'center', fontSize:10}}>{parseFloat(item.stage_10)}M</Text>                    
+                  <Text style={{textAlign:'center', fontSize:10}}>{parseFloat(item.JUMLAH)}M</Text>                    
                 </View>
               </View>
               </TouchableOpacity>
@@ -561,7 +582,7 @@ class DbsDetailScreens extends Component{
       visibleModal: !this.state.visibleModal,
       loaderTampilDetail:true
     })
-    axios.get(`${url.API}/ebis_getstage5/stage/BILLCOM/div/${div}/maindiv/${maindiv}/mainseg/ALL/mitra/TELKOM/nmitra/${item}/start_date/${this.state.startdate}/end_date/${this.state.enddate}`).then((res) => {
+    axios.get(`${url.API2}/ebis_getdeallistcc/stage/BILLCOM/categ/${maindiv}/channel/ALL/div/${div}/start_date/${this.state.startdate}/end_date/${this.state.enddate}/treg/ALL/witel/ALL/mitra/${item}`).then((res) => {
       this.setState({dataTampung:res.data, loaderTampilDetail:false });
     }).catch((err) => {
       this.setState({
@@ -600,13 +621,13 @@ class DbsDetailScreens extends Component{
               <TouchableOpacity onPress={() => this._toggleModalDetail(item)}> 
               <View style={styles.containerDetailData}> 
                 <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                  <Text style={{fontSize:10}}>{item.stage_06}</Text>
+                  <Text style={{fontSize:10}}>{item.NAMACC}</Text>
                 </View>
                 <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                  <Text style={{fontSize:10}}>{item.stage_07}</Text>
+                  <Text style={{fontSize:10}}>{item.NAMAPROJECT}</Text>
                 </View>
                 <View style={{width:wp('10%'), alignSelf:'center', justifyContent:'center', alignItems:'center'}}>
-                  <Text style={{textAlign:'center', fontSize:10}}>{parseFloat(item.stage_10)}M</Text>                    
+                  <Text style={{textAlign:'center', fontSize:10}}>{parseFloat(item.JUMLAH)}M</Text>                    
                 </View>
               </View>
               </TouchableOpacity>
@@ -820,7 +841,7 @@ class DbsDetailScreens extends Component{
                         <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.MITRA}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.jumlah}M</Text>                    
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.JUMLAH}M</Text>                    
                       </View>
                     </TouchableOpacity>
                     :
@@ -832,7 +853,7 @@ class DbsDetailScreens extends Component{
                         <Text>{item.MITRA}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center'}}>{item.jumlah}M</Text>                    
+                        <Text style={{textAlign:'center'}}>{item.JUMLAH}M</Text>                    
                       </View>
                     </TouchableOpacity>
                   )}
@@ -858,7 +879,7 @@ class DbsDetailScreens extends Component{
                         <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.MITRA}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.jumlah}M</Text>                    
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.JUMLAH}M</Text>                    
                       </View>
                     </TouchableOpacity>
                     :
@@ -870,7 +891,7 @@ class DbsDetailScreens extends Component{
                         <Text>{item.MITRA}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center'}}>{item.jumlah}M</Text>                    
+                        <Text style={{textAlign:'center'}}>{item.JUMLAH}M</Text>                    
                       </View>
                     </TouchableOpacity>
                   )}
@@ -896,7 +917,7 @@ class DbsDetailScreens extends Component{
                         <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.MITRA}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.jumlah}M</Text>                    
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.JUMLAH}M</Text>                    
                       </View>
                     </TouchableOpacity>
                     :
@@ -908,7 +929,7 @@ class DbsDetailScreens extends Component{
                         <Text>{item.MITRA}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center'}}>{item.jumlah}M</Text>                    
+                        <Text style={{textAlign:'center'}}>{item.JUMLAH}M</Text>                    
                       </View>
                     </TouchableOpacity>
                   )}
@@ -934,7 +955,7 @@ class DbsDetailScreens extends Component{
                         <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.MITRA}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.jumlah}M</Text>                    
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.JUMLAH}M</Text>                    
                       </View>
                     </TouchableOpacity>
                     :
@@ -946,7 +967,7 @@ class DbsDetailScreens extends Component{
                         <Text>{item.MITRA}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center'}}>{item.jumlah}M</Text>                    
+                        <Text style={{textAlign:'center'}}>{item.JUMLAH}M</Text>                    
                       </View>
                     </TouchableOpacity>
                   )}
@@ -1142,7 +1163,7 @@ class DbsDetailScreens extends Component{
                         <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.MITRA}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.jumlah}M</Text>                    
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.JUMLAH}M</Text>                    
                       </View>
                     </TouchableOpacity>
                     :
@@ -1154,7 +1175,7 @@ class DbsDetailScreens extends Component{
                         <Text>{item.MITRA}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center'}}>{item.jumlah}M</Text>                    
+                        <Text style={{textAlign:'center'}}>{item.JUMLAH}M</Text>                    
                       </View>
                     </TouchableOpacity>
                   )}
@@ -1180,7 +1201,7 @@ class DbsDetailScreens extends Component{
                         <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.MITRA}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.jumlah}M</Text>                    
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.JUMLAH}M</Text>                    
                       </View>
                     </TouchableOpacity>
                     :
@@ -1192,7 +1213,7 @@ class DbsDetailScreens extends Component{
                         <Text>{item.MITRA}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center'}}>{item.jumlah}M</Text>                    
+                        <Text style={{textAlign:'center'}}>{item.JUMLAH}M</Text>                    
                       </View>
                     </TouchableOpacity>
                   )}
@@ -1218,7 +1239,7 @@ class DbsDetailScreens extends Component{
                         <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.MITRA}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.jumlah}M</Text>                    
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.JUMLAH}M</Text>                    
                       </View>
                     </TouchableOpacity>
                     :
@@ -1230,7 +1251,7 @@ class DbsDetailScreens extends Component{
                         <Text>{item.MITRA}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center'}}>{item.jumlah}M</Text>                    
+                        <Text style={{textAlign:'center'}}>{item.JUMLAH}M</Text>                    
                       </View>
                     </TouchableOpacity>
                   )}
@@ -1256,7 +1277,7 @@ class DbsDetailScreens extends Component{
                       <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.MITRA}</Text>
                     </View>
                     <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                      <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.jumlah}M</Text>                    
+                      <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.JUMLAH}M</Text>                    
                     </View>
                   </TouchableOpacity>
                   :
@@ -1268,7 +1289,7 @@ class DbsDetailScreens extends Component{
                       <Text>{item.MITRA}</Text>
                     </View>
                     <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                      <Text style={{textAlign:'center'}}>{item.jumlah}M</Text>                    
+                      <Text style={{textAlign:'center'}}>{item.JUMLAH}M</Text>                    
                     </View>
                   </TouchableOpacity>
               )}
@@ -1464,7 +1485,7 @@ class DbsDetailScreens extends Component{
                         <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.MITRA}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.jumlah}M</Text>                    
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.JUMLAH}M</Text>                    
                       </View>
                     </TouchableOpacity>
                     :
@@ -1476,7 +1497,7 @@ class DbsDetailScreens extends Component{
                         <Text>{item.MITRA}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center'}}>{item.jumlah}M</Text>                    
+                        <Text style={{textAlign:'center'}}>{item.JUMLAH}M</Text>                    
                       </View>
                     </TouchableOpacity>
                   )}
@@ -1502,7 +1523,7 @@ class DbsDetailScreens extends Component{
                         <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.MITRA}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.jumlah}M</Text>                    
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.JUMLAH}M</Text>                    
                       </View>
                     </TouchableOpacity>
                     :
@@ -1514,7 +1535,7 @@ class DbsDetailScreens extends Component{
                         <Text>{item.MITRA}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center'}}>{item.jumlah}M</Text>                    
+                        <Text style={{textAlign:'center'}}>{item.JUMLAH}M</Text>                    
                       </View>
                     </TouchableOpacity>
                   )}
@@ -1540,7 +1561,7 @@ class DbsDetailScreens extends Component{
                         <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.MITRA}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.jumlah}M</Text>                    
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.JUMLAH}M</Text>                    
                       </View>
                     </TouchableOpacity>
                     :
@@ -1552,7 +1573,7 @@ class DbsDetailScreens extends Component{
                         <Text>{item.MITRA}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center'}}>{item.jumlah}M</Text>                    
+                        <Text style={{textAlign:'center'}}>{item.JUMLAH}M</Text>                    
                       </View>
                     </TouchableOpacity>
                   )}
@@ -1578,7 +1599,7 @@ class DbsDetailScreens extends Component{
                         <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.MITRA}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.jumlah}M</Text>                    
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.JUMLAH}M</Text>                    
                       </View>
                     </TouchableOpacity>
                     :
@@ -1590,7 +1611,7 @@ class DbsDetailScreens extends Component{
                         <Text>{item.MITRA}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center'}}>{item.jumlah}M</Text>                    
+                        <Text style={{textAlign:'center'}}>{item.JUMLAH}M</Text>                    
                       </View>
                     </TouchableOpacity>
                   )}
@@ -1786,7 +1807,7 @@ class DbsDetailScreens extends Component{
                         <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.MITRA}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.jumlah}M</Text>                    
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.JUMLAH}M</Text>                    
                       </View>
                     </TouchableOpacity>
                     :
@@ -1798,7 +1819,7 @@ class DbsDetailScreens extends Component{
                         <Text>{item.MITRA}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center'}}>{item.jumlah}M</Text>                    
+                        <Text style={{textAlign:'center'}}>{item.JUMLAH}M</Text>                    
                       </View>
                     </TouchableOpacity>
                   )}
@@ -1824,7 +1845,7 @@ class DbsDetailScreens extends Component{
                         <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.MITRA}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.jumlah}M</Text>                    
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.JUMLAH}M</Text>                    
                       </View>
                     </TouchableOpacity>
                     :
@@ -1836,7 +1857,7 @@ class DbsDetailScreens extends Component{
                         <Text>{item.MITRA}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center'}}>{item.jumlah}M</Text>                    
+                        <Text style={{textAlign:'center'}}>{item.JUMLAH}M</Text>                    
                       </View>
                     </TouchableOpacity>
                   )}
@@ -1862,7 +1883,7 @@ class DbsDetailScreens extends Component{
                         <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.MITRA}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.jumlah}M</Text>                    
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.JUMLAH}M</Text>                    
                       </View>
                     </TouchableOpacity>
                     :
@@ -1874,7 +1895,7 @@ class DbsDetailScreens extends Component{
                         <Text>{item.MITRA}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center'}}>{item.jumlah}M</Text>                    
+                        <Text style={{textAlign:'center'}}>{item.JUMLAH}M</Text>                    
                       </View>
                     </TouchableOpacity>
                   )}
@@ -1900,7 +1921,7 @@ class DbsDetailScreens extends Component{
                         <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.MITRA}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.jumlah}M</Text>                    
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.JUMLAH}M</Text>                    
                       </View>
                     </TouchableOpacity>
                     :
@@ -1912,7 +1933,7 @@ class DbsDetailScreens extends Component{
                         <Text>{item.MITRA}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center'}}>{item.jumlah}M</Text>                    
+                        <Text style={{textAlign:'center'}}>{item.JUMLAH}M</Text>                    
                       </View>
                     </TouchableOpacity>
                   )}
@@ -1977,17 +1998,17 @@ class DbsDetailScreens extends Component{
 
 const mapStateToProps = (state) => ({
 
-  ebisProspectREVENUE: state.DgsDetailReducer.headerEbisValue,
-  ebisProspectProject: state.DgsDetailReducer.headerEbisProject,
+  ebisProspectREVENUE: state.EbisReducerChannel.ebisBillcomREVENUE,
+  ebisProspectProject: state.EbisReducerChannel.ebisBillcomeProject,
 
-  ebisProspectREVENUE2:state.DgsDetailReducer.headerDesValue,
-  ebisProspectProject2:state.DgsDetailReducer.headerDesProject,
+  ebisProspectREVENUE2:state.DesReducerChannel.ebisBillcomREVENUE,
+  ebisProspectProject2:state.DesReducerChannel.ebisBillcomeProject,
 
-  ebisProspectREVENUE3:state.DgsDetailReducer.headerDbsValue,
-  ebisProspectProject3:state.DgsDetailReducer.headerDbsProject,
+  ebisProspectREVENUE3:state.DbsReducerChannel.ebisBillcomREVENUE,
+  ebisProspectProject3:state.DbsReducerChannel.ebisBillcomeProject,
  
-  ebisProspectREVENUE4:state.DgsDetailReducer.headerDgsValue,
-  ebisProspectProject4:state.DgsDetailReducer.headerDgsProject,
+  ebisProspectREVENUE4:state.DgsReducerChannel.ebisBillcomREVENUE,
+  ebisProspectProject4:state.DgsReducerChannel.ebisBillcomeProject,
   
   //data All
   dataAll: state.DgsDetailReducer.dataEbisAll,

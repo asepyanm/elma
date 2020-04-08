@@ -37,10 +37,10 @@ export default class HomeScreens extends Component{
         return (<ABCscreen/>);
       break;
       case 'channel':
-        return (<ChannelScreen/>);
+        return (<ChannelScreen navigation={this.props.navigation}/>);
       break;
       case 'bmd':
-        return (<ABCscreen/>);
+        return (<ABCscreen navigation={this.props.navigation}/>);
       break;
       default:
     }
