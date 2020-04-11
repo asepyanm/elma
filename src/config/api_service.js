@@ -3,6 +3,7 @@ module.exports = {
   API:'http://myadais.com/jenal/api',
    //API:'http://192.168.8.7/elmaapi/api'
   //  API:'http://192.168.8.101/api',
-   APITELKOM:'https://apifactory.telkom.co.id:8243'
+   APITELKOM:'https://apifactory.telkom.co.id:8243',
+   API2:'http://myadais.com/elma/api',
 };
 

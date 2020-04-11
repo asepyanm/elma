@@ -29,7 +29,19 @@ import DESReducerABC from '../pages/dashboard/reducer/reducerABC/redcuerDES/redu
 import DBSReducerABC from '../pages/dashboard/reducer/reducerABC/reducerDBS/reducerDBS';
 import DGSReducerABC from '../pages/dashboard/reducer/reducerABC/reducerDGS/reducerDGS';
 
-//reducer detail 
+//reducer home Channel
+import EbisReducerChannel from '../pages/dashboard/reducer/reducerChannel/reducerEBIS/reducerEBIS';
+import DesReducerChannel from '../pages/dashboard/reducer/reducerChannel/reducerDES/reducerDES';
+import DbsReducerChannel from '../pages/dashboard/reducer/reducerChannel/reducerDBS/reducerDBS';
+import DgsReducerChannel from '../pages/dashboard/reducer/reducerChannel/reducerDGS/reducerDGS';
+
+//reducer home Big Mega Deal
+import EbisReducerBMD from '../pages/dashboard/reducer/reducerBigMegaDeal/reducerEBIS/reducerEBIS';
+import DesReducerBMD from '../pages/dashboard/reducer/reducerBigMegaDeal/reducerDES/reducerDES';
+import DbsReducerBMD from '../pages/dashboard/reducer/reducerBigMegaDeal/reducerDBS/reducerDBS';
+import DgsReducerBMD from '../pages/dashboard/reducer/reducerBigMegaDeal/reducerDGS/reducerDGS';
+
+//reducer detail
 import EbisDetailReducer from '../pages/dashboard/reducer/reducerLOP/detailReducer/reducerEBIS/reducerDetailEbis';
 import DesDetailReducer from '../pages/dashboard/reducer/reducerLOP/detailReducer/reducerDES/reducerDetailDes';
 import DbsDetailReducer from '../pages/dashboard/reducer/reducerLOP/detailReducer/reducerDBS/reducerDetailDbs';
@@ -105,6 +117,18 @@ const rootReducer = combineReducers({
   DBSReducerABC,
   DGSReducerABC,
 
+  //reducer home Channel
+  EbisReducerChannel,
+  DesReducerChannel,
+  DbsReducerChannel,
+  DgsReducerChannel,
+
+  //reducer home Big Mega Deal
+  EbisReducerBMD,
+  DesReducerBMD,
+  DbsReducerBMD,
+  DgsReducerBMD,
+
   //reducer detail
   EbisDetailReducer,
   DesDetailReducer,
@@ -156,7 +180,7 @@ const rootReducer = combineReducers({
 
 const middlewares = applyMiddleware( 
   promiseMiddleware(),
-  // logger
+  logger
 );
 
 function configureStore() {

@@ -17,6 +17,30 @@ import DesDetailScreen from '../pages/dashboard/screens/homeScreens/screens/LOP/
 import DbsDetailScreen from '../pages/dashboard/screens/homeScreens/screens/LOP/screens/detail_screens/DbsDetail';
 import DgsDetailScreen from '../pages/dashboard/screens/homeScreens/screens/LOP/screens/detail_screens/DgsDetail';
 
+//detail screen Channel
+import EbisDetailChannelScreen from '../pages/dashboard/screens/homeScreens/screens/CHANNEL/screens/detail_screens/EbisDetail';
+import DesDetailChannelScreen from '../pages/dashboard/screens/homeScreens/screens/CHANNEL/screens/detail_screens/DesDetail';
+import DbsDetailChannelScreen from '../pages/dashboard/screens/homeScreens/screens/CHANNEL/screens/detail_screens/DbsDetail';
+import DgsDetailChannelScreen from '../pages/dashboard/screens/homeScreens/screens/CHANNEL/screens/detail_screens/DgsDetail';
+
+//detail screen kolom ebis channel
+import ProspectDetailColumnProspectScreens from '../pages/dashboard/screens/homeScreens/screens/CHANNEL/screens/detail_screens/prospectChannel/prospectDetailColomn';
+import SubmissionDetailColumnProspectScreens from '../pages/dashboard/screens/homeScreens/screens/CHANNEL/screens/detail_screens/prospectChannel/submissionDetailColomn';
+import WinDetailColumnProspectScreens from '../pages/dashboard/screens/homeScreens/screens/CHANNEL/screens/detail_screens/prospectChannel/winDetailColomn';
+import BillcomDetailColumnProspectScreens from '../pages/dashboard/screens/homeScreens/screens/CHANNEL/screens/detail_screens/prospectChannel/billcomDetailColomn';
+
+//detail screen BIG MEGA DEAL
+import EbisDetailBMDScreen from '../pages/dashboard/screens/homeScreens/screens/BIGMEGADEAL/screens/detail_screens/EbisDetail';
+import DesDetailBMDScreen from '../pages/dashboard/screens/homeScreens/screens/BIGMEGADEAL/screens/detail_screens/DesDetail';
+import DbsDetailBMDScreen from '../pages/dashboard/screens/homeScreens/screens/BIGMEGADEAL/screens/detail_screens/DbsDetail';
+import DgsDetailBMDScreen from '../pages/dashboard/screens/homeScreens/screens/BIGMEGADEAL/screens/detail_screens/DgsDetail';
+
+//detail screen kolom ebis BIG MEGA DEAL
+import ProspectDetailColumnProspectBMDScreens from '../pages/dashboard/screens/homeScreens/screens/BIGMEGADEAL/screens/detail_screens/prospectChannel/prospectDetailColomn';
+import SubmissionDetailColumnProspectBMDScreens from '../pages/dashboard/screens/homeScreens/screens/BIGMEGADEAL/screens/detail_screens/prospectChannel/submissionDetailColomn';
+import WinDetailColumnProspectBMDScreens from '../pages/dashboard/screens/homeScreens/screens/BIGMEGADEAL/screens/detail_screens/prospectChannel/winDetailColomn';
+import BillcomDetailColumnProspectBMDScreens from '../pages/dashboard/screens/homeScreens/screens/BIGMEGADEAL/screens/detail_screens/prospectChannel/billcomDetailColomn';
+
 //monitor_kb LOP
 import MonitorKB from '../pages/dashboard/screens/homeScreens/screens/LOP/screens/monitorkb_screen/index.js';
 import DetailMonitorDone from '../pages/dashboard/screens/homeScreens/screens/LOP/screens/monitorkb_screen/detailMonitor';
@@ -64,6 +88,31 @@ const MainStack = StackNavigator({
   DesDetailLOP :{screen:DesDetailScreen},
   DbsDetailLOP :{screen:DbsDetailScreen},
   DgsDetailLOP :{screen:DgsDetailScreen},
+
+  //detail screen Channel
+  EbisDetailChannel:{screen:EbisDetailChannelScreen},
+  DesDetailChannel :{screen:DesDetailChannelScreen},
+  DbsDetailChannel :{screen:DbsDetailChannelScreen},
+  DgsDetailChannel :{screen:DgsDetailChannelScreen},
+
+  //detail screen kolom ebis channel
+  EbisDetailColumnProspect:{screen:ProspectDetailColumnProspectScreens},
+  SubmissionDetailColumnProspect:{screen:SubmissionDetailColumnProspectScreens},
+  WinDetailColumnProspect:{screen:WinDetailColumnProspectScreens},
+  BillcomDetailColumnProspect:{screen:BillcomDetailColumnProspectScreens},
+
+  //detail screen BIG MEGA DEAL
+  EbisDetailBMD :{screen:EbisDetailBMDScreen},
+  DesDetailBMD :{screen:DesDetailBMDScreen},
+  DbsDetailBMD :{screen:DbsDetailBMDScreen},
+  DgsDetailBMD :{screen:DgsDetailBMDScreen},
+
+  //detail screen kolom ebis BIG MEGA DEAL
+  EbisDetailColumnProspectBMD:{screen:ProspectDetailColumnProspectBMDScreens},
+  SubmissionDetailColumnProspectBMD:{screen:SubmissionDetailColumnProspectBMDScreens},
+  WinDetailColumnProspectBMD:{screen:WinDetailColumnProspectBMDScreens},
+  BillcomDetailColumnProspectBMD:{screen:BillcomDetailColumnProspectBMDScreens},
+  
 },{
   navigationOptions:{
     header:null
@@ -206,6 +255,7 @@ const navigator = StackNavigator({
       header: null
     }
   },
+
 
 },{
   transitionConfig: noTransitionConfig
