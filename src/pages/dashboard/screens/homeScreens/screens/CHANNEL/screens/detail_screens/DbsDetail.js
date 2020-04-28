@@ -57,73 +57,73 @@ class DbsDetailScreens extends Component{
     //get data ALL
     this.props.dispatch({
       type:'DETAIL_WIN_EBIS',
-      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/WIN/channel/ALL/div/EBIS/categ/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/WIN/channel/ALL/div/EBIS/categ/ALL/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
     });
     this.props.dispatch({
       type:'DETAIL_WIN_DES',
-      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/WIN/channel/ALL/div/DES/categ/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/WIN/channel/ALL/div/DES/categ/ALL/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
     });
     this.props.dispatch({
       type:'DETAIL_WIN_DBS',
-      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/WIN/channel/ALL/div/DBS/categ/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/WIN/channel/ALL/div/DBS/categ/ALL/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
     });
     this.props.dispatch({
       type:'DETAIL_WIN_DGS',
-      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/WIN/channel/ALL/div/DGS/categ/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/WIN/channel/ALL/div/DGS/categ/ALL/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
     });
 
     //get data detail SUBS
     this.props.dispatch({
       type:'DETAIL_SUBS_WIN_EBIS',
-      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/WIN/channel/ALL/div/EBIS/categ/SUBS/start_date/${this.state.startdate}/end_date/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/WIN/channel/ALL/div/EBIS/categ/SUBS/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
     });
     this.props.dispatch({
       type:'DETAIL_SUBS_WIN_DES',
-      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/WIN/channel/ALL/div/DES/categ/SUBS/start_date/${this.state.startdate}/end_date/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/WIN/channel/ALL/div/DES/categ/SUBS/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
     });
     this.props.dispatch({
       type:'DETAIL_SUBS_WIN_DBS',
-      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/WIN/channel/ALL/div/DBS/categ/SUBS/start_date/${this.state.startdate}/end_date/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/WIN/channel/ALL/div/DBS/categ/SUBS/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
     });
     this.props.dispatch({
       type:'DETAIL_SUBS_WIN_DGS',
-      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/WIN/channel/ALL/div/DGS/categ/SUBS/start_date/${this.state.startdate}/end_date/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/WIN/channel/ALL/div/DGS/categ/SUBS/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
     });
 
     //get data detail MITRA
     this.props.dispatch({
       type:'DETAIL_MITRA_WIN_EBIS',
-      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/WIN/channel/ALL/div/EBIS/categ/MITRA/start_date/${this.state.startdate}/end_date/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/WIN/channel/ALL/div/EBIS/categ/MITRA/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
     });
     this.props.dispatch({
       type:'DETAIL_MITRA_WIN_DES',
-      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/WIN/channel/ALL/div/DES/categ/MITRA/start_date/${this.state.startdate}/end_date/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/WIN/channel/ALL/div/DES/categ/MITRA/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
     });
     this.props.dispatch({
       type:'DETAIL_MITRA_WIN_DBS',
-      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/WIN/channel/ALL/div/DBS/categ/MITRA/start_date/${this.state.startdate}/end_date/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/WIN/channel/ALL/div/DBS/categ/MITRA/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
     });
     this.props.dispatch({
       type:'DETAIL_MITRA_WIN_DGS',
-      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/WIN/channel/ALL/div/DGS/categ/MITRA/start_date/${this.state.startdate}/end_date/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/WIN/channel/ALL/div/DGS/categ/MITRA/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
     });
     
     //get data detail TELKOM
     this.props.dispatch({
       type:'DETAIL_TELKOM_WIN_EBIS',
-      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/WIN/channel/ALL/div/EBIS/categ/TELKOM/start_date/${this.state.startdate}/end_date/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/WIN/channel/ALL/div/EBIS/categ/TELKOM/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
     });
     this.props.dispatch({
       type:'DETAIL_TELKOM_WIN_DES',
-      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/WIN/channel/ALL/div/DES/categ/TELKOM/start_date/${this.state.startdate}/end_date/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/WIN/channel/ALL/div/DES/categ/TELKOM/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
     });
     this.props.dispatch({
       type:'DETAIL_TELKOM_WIN_DBS',
-      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/WIN/channel/ALL/div/DBS/categ/TELKOM/start_date/${this.state.startdate}/end_date/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/WIN/channel/ALL/div/DBS/categ/TELKOM/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
     });
     this.props.dispatch({
       type:'DETAIL_TELKOM_WIN_DGS',
-      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/WIN/channel/ALL/div/DGS/categ/TELKOM/start_date/${this.state.startdate}/end_date/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/WIN/channel/ALL/div/DGS/categ/TELKOM/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
     }); 
 
   }
@@ -137,7 +137,7 @@ class DbsDetailScreens extends Component{
     })
     console.log('jrk',`${url.API2}/ebis_getdetchannelcc/lopid/${item.LOPID}`)
     
-    axios.get(`${url.API}/ebis_getstage5/stage/WIN/div/ALL/maindiv/ALL/mitra/ALL/nmitra/${item.stage_01}/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/cc/${item.stage_06}/project/${item.stage_07}`).then((res) => {
+    axios.get(`${url.API}/ebis_getstage5/stage/WIN/div/ALL/maindiv/ALL/mitra/ALL/nmitra/${item.stage_01}/mainseg/ALL/startdate/${this.state.startdate}/enddate/${this.state.enddate}/cc/${item.stage_06}/project/${item.stage_07}`).then((res) => {
       this.setState({dataTampungDetail:res.data, loaderTampilDetailDetail:false });
     }).catch((err) => {
       this.setState({
@@ -334,7 +334,7 @@ class DbsDetailScreens extends Component{
       visibleModal: !this.state.visibleModal,
       loaderTampilDetail:true
     })
-    axios.get(`${url.API2}/ebis_getdeallistcc/stage/WIN/categ/${maindiv}/channel/ALL/div/${div}/start_date/${this.state.startdate}/end_date/${this.state.enddate}/treg/ALL/witel/ALL/mitra/${item}`).then((res) => {
+    axios.get(`${url.API2}/ebis_getdeallistcc/stage/WIN/categ/${maindiv}/channel/ALL/div/${div}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/ALL/witel/ALL/mitra/${item}`).then((res) => {
       this.setState({dataTampung:res.data, loaderTampilDetail:false });
     }).catch((err) => {
       this.setState({
@@ -419,7 +419,7 @@ class DbsDetailScreens extends Component{
       visibleModal: !this.state.visibleModal,
       loaderTampilDetail:true
     })
-    axios.get(`${url.API2}/ebis_getdeallistcc/stage/WIN/categ/${maindiv}/channel/ALL/div/${div}/start_date/${this.state.startdate}/end_date/${this.state.enddate}/treg/ALL/witel/ALL/mitra/${item}`).then((res) => {
+    axios.get(`${url.API2}/ebis_getdeallistcc/stage/WIN/categ/${maindiv}/channel/ALL/div/${div}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/ALL/witel/ALL/mitra/${item}`).then((res) => {
       this.setState({dataTampung:res.data, loaderTampilDetail:false });
     }).catch((err) => {
       this.setState({
@@ -503,7 +503,7 @@ class DbsDetailScreens extends Component{
       visibleModal: !this.state.visibleModal,
       loaderTampilDetail:true
     })
-    axios.get(`${url.API2}/ebis_getdeallistcc/stage/WIN/categ/${maindiv}/channel/ALL/div/${div}/start_date/${this.state.startdate}/end_date/${this.state.enddate}/treg/ALL/witel/ALL/mitra/${item}`).then((res) => {
+    axios.get(`${url.API2}/ebis_getdeallistcc/stage/WIN/categ/${maindiv}/channel/ALL/div/${div}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/ALL/witel/ALL/mitra/${item}`).then((res) => {
       this.setState({dataTampung:res.data, loaderTampilDetail:false });
     }).catch((err) => {
       this.setState({
@@ -588,7 +588,7 @@ class DbsDetailScreens extends Component{
       loaderTampilDetail:true
     })
 
-    axios.get(`${url.API2}/ebis_getdeallistcc/stage/WIN/categ/${maindiv}/channel/ALL/div/${div}/start_date/${this.state.startdate}/end_date/${this.state.enddate}/treg/ALL/witel/ALL/mitra/${item}`).then((res) => {
+    axios.get(`${url.API2}/ebis_getdeallistcc/stage/WIN/categ/${maindiv}/channel/ALL/div/${div}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/ALL/witel/ALL/mitra/${item}`).then((res) => {
       this.setState({dataTampung:res.data, loaderTampilDetail:false });
     }).catch((err) => {
       this.setState({
