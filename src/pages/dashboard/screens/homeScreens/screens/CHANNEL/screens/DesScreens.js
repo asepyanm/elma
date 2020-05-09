@@ -7,7 +7,8 @@ import {
   View,
   ScrollView,
   Image,
-  TouchableOpacity
+  TouchableOpacity,
+  PermissionsAndroid
 } from 'react-native';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import ModalSelector from 'react-native-modal-selector';
@@ -19,8 +20,10 @@ import url from '../../../../../../../config/api_service';
 
 //export file
 import XLSX from 'xlsx';
-import { writeFile, ExternalStorageDirectoryPath } from 'react-native-fs';
+import { writeFile, ExternalStorageDirectoryPath, DocumentDirectoryPath } from 'react-native-fs';
 const DDP = ExternalStorageDirectoryPath + "/";
+const DDP2 = DocumentDirectoryPath + "/";
+
 const output = str => str;
 
 class DesScreens extends Component{
@@ -66,74 +69,163 @@ class DesScreens extends Component{
 
   }
 
-  downloadFileExcel(){
-    const {dataDownloadEbis} = this.props;
-    let dataMap = [
-      [ 
-        "Nama Project",
-        "Nama CC",
-        "Nilai Project", 
-        "Lama Kontrak", 
-        "Divisi", 
-        "Segment", 
-        "Deliver", 
-        "Payment Method", 
-        "Channel", 
-        "GPM", 
-        "Status KB",
-        "No. KB",
-        "Durasi",
-        "Status PO/P1",
-        "Dokumen PO/P1",
-        "LOPID",
-        "WITEL",
-        "Status",
-        "Sympton",
-        "TREG",
-        "Nama Mitra",
-      ],
-    ];
-    for (var i = 0; i < dataDownloadEbis.length; i++) {
-      dataMap.push([
-          dataDownloadEbis[i].NAMAPROJECT,
-          dataDownloadEbis[i].NAMACC,
-          dataDownloadEbis[i].REVENUE,
-          dataDownloadEbis[i].LAMAKONTRAK,
-          dataDownloadEbis[i].DIVISI,
-          dataDownloadEbis[i].SEGMEN,
-          dataDownloadEbis[i].DELIVER,
-          dataDownloadEbis[i].PAYMENT_METHODE,
-          dataDownloadEbis[i].KATEGORI_CHANNEL,
-          dataDownloadEbis[i].GPM,
-          dataDownloadEbis[i].STATUS_KB,
-          dataDownloadEbis[i].NO_KB,
-          dataDownloadEbis[i].DURASI,
-          dataDownloadEbis[i].STATUS_JUST_P0_P1,
-          dataDownloadEbis[i].DOKUMEN,
-          dataDownloadEbis[i].LOPID,
-          dataDownloadEbis[i].WITEL,
-          dataDownloadEbis[i].STATUS,
-          dataDownloadEbis[i].SYMPTON,
-          dataDownloadEbis[i].TREG,
-          dataDownloadEbis[i].NAMA_MITRA,
-      ]);
-    };
-
-    /* convert AOA back to worksheet */
-		const ws = XLSX.utils.aoa_to_sheet(dataMap);
-
-		/* build new workbook */
-		const wb = XLSX.utils.book_new();
-		XLSX.utils.book_append_sheet(wb, ws, "SheetJS");
-
-		/* write file */
-		const wbout = XLSX.write(wb, {type:'binary', bookType:"xlsx"});
-		const file = DDP + `channel-des.xlsx`;
-		writeFile(file, output(wbout), 'ascii').then((res) =>{
-			Alert.alert("exportFile success", "Exported to " + file);
-		}).catch((err) => { 
-      Alert.alert("Terjadi kesalah, silahkan coba lagi beberapa saat"); 
-    });
+  downloadFileExcel= async () =>{
+    if(Platform.OS == 'ios'){
+        const {dataDownloadEbis} = this.props;
+        let dataMap = [
+          [ 
+            "Nama Project",
+            "Nama CC",
+            "Nilai Project", 
+            "Lama Kontrak", 
+            "Divisi", 
+            "Segment", 
+            "Deliver", 
+            "Payment Method", 
+            "Channel", 
+            "GPM", 
+            "Status KB",
+            "No. KB",
+            "Durasi",
+            "Status PO/P1",
+            "Dokumen PO/P1",
+            "LOPID",
+            "WITEL",
+            "Status",
+            "Sympton",
+            "TREG",
+            "Nama Mitra",
+          ],
+        ];
+        for (var i = 0; i < dataDownloadEbis.length; i++) {
+          dataMap.push([
+              dataDownloadEbis[i].NAMAPROJECT,
+              dataDownloadEbis[i].NAMACC,
+              dataDownloadEbis[i].REVENUE,
+              dataDownloadEbis[i].LAMAKONTRAK,
+              dataDownloadEbis[i].DIVISI,
+              dataDownloadEbis[i].SEGMEN,
+              dataDownloadEbis[i].DELIVER,
+              dataDownloadEbis[i].PAYMENT_METHODE,
+              dataDownloadEbis[i].KATEGORI_CHANNEL,
+              dataDownloadEbis[i].GPM,
+              dataDownloadEbis[i].STATUS_KB,
+              dataDownloadEbis[i].NO_KB,
+              dataDownloadEbis[i].DURASI,
+              dataDownloadEbis[i].STATUS_JUST_P0_P1,
+              dataDownloadEbis[i].DOKUMEN,
+              dataDownloadEbis[i].LOPID,
+              dataDownloadEbis[i].WITEL,
+              dataDownloadEbis[i].STATUS,
+              dataDownloadEbis[i].SYMPTON,
+              dataDownloadEbis[i].TREG,
+              dataDownloadEbis[i].NAMA_MITRA,
+          ]);
+        };
+    
+        /* convert AOA back to worksheet */
+        const ws = XLSX.utils.aoa_to_sheet(dataMap);
+    
+        /* build new workbook */
+        const wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, "SheetJS");
+    
+        /* write file */
+        const wbout = XLSX.write(wb, {type:'binary', bookType:"xlsx"});
+        const file = DDP2 + `channel-des.xlsx`;
+        writeFile(file, output(wbout), 'ascii').then((res) =>{
+          Alert.alert("exportFile success", "Exported to " + file);
+        }).catch((err) => { 
+          Alert.alert("Terjadi kesalah, silahkan coba lagi beberapa saat"); 
+        });
+    } else {
+      try {
+        const granted = await PermissionsAndroid.request(
+          PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
+          {
+            title: "Download Permission",
+            message:
+              "Untuk mendownload, kami meminta izin untuk meakses penyimpanan anda " +
+              "sehingga anda dapat mendownload data dari aplikasi ini.",
+            buttonNegative: "Cancel",
+            buttonPositive: "Izinkan"
+          }
+        );
+        if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+          const {dataDownloadEbis} = this.props;
+          let dataMap = [
+            [ 
+              "Nama Project",
+              "Nama CC",
+              "Nilai Project", 
+              "Lama Kontrak", 
+              "Divisi", 
+              "Segment", 
+              "Deliver", 
+              "Payment Method", 
+              "Channel", 
+              "GPM", 
+              "Status KB",
+              "No. KB",
+              "Durasi",
+              "Status PO/P1",
+              "Dokumen PO/P1",
+              "LOPID",
+              "WITEL",
+              "Status",
+              "Sympton",
+              "TREG",
+              "Nama Mitra",
+            ],
+          ];
+          for (var i = 0; i < dataDownloadEbis.length; i++) {
+            dataMap.push([
+                dataDownloadEbis[i].NAMAPROJECT,
+                dataDownloadEbis[i].NAMACC,
+                dataDownloadEbis[i].REVENUE,
+                dataDownloadEbis[i].LAMAKONTRAK,
+                dataDownloadEbis[i].DIVISI,
+                dataDownloadEbis[i].SEGMEN,
+                dataDownloadEbis[i].DELIVER,
+                dataDownloadEbis[i].PAYMENT_METHODE,
+                dataDownloadEbis[i].KATEGORI_CHANNEL,
+                dataDownloadEbis[i].GPM,
+                dataDownloadEbis[i].STATUS_KB,
+                dataDownloadEbis[i].NO_KB,
+                dataDownloadEbis[i].DURASI,
+                dataDownloadEbis[i].STATUS_JUST_P0_P1,
+                dataDownloadEbis[i].DOKUMEN,
+                dataDownloadEbis[i].LOPID,
+                dataDownloadEbis[i].WITEL,
+                dataDownloadEbis[i].STATUS,
+                dataDownloadEbis[i].SYMPTON,
+                dataDownloadEbis[i].TREG,
+                dataDownloadEbis[i].NAMA_MITRA,
+            ]);
+          };
+      
+          /* convert AOA back to worksheet */
+          const ws = XLSX.utils.aoa_to_sheet(dataMap);
+      
+          /* build new workbook */
+          const wb = XLSX.utils.book_new();
+          XLSX.utils.book_append_sheet(wb, ws, "SheetJS");
+      
+          /* write file */
+          const wbout = XLSX.write(wb, {type:'binary', bookType:"xlsx"});
+          const file = DDP + `channel-des.xlsx`;
+          writeFile(file, output(wbout), 'ascii').then((res) =>{
+            Alert.alert("exportFile success", "Exported to " + file);
+          }).catch((err) => { 
+            Alert.alert("Terjadi kesalah, silahkan coba lagi beberapa saat"); 
+          });
+        } else {
+          console.log("Camera permission denied");
+        }
+      } catch (err) {
+        console.warn(err);
+      }
+    }
   }
   
   render() {

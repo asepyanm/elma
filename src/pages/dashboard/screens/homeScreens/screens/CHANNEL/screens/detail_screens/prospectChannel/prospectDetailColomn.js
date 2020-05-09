@@ -60,73 +60,73 @@ class EbisDetailColumnProspectScreens extends Component{
     //get data ALL
     this.props.dispatch({
       type:'DETAIL_PROSPECT_EBIS',
-      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/PROSPECT/channel/${nameChannel}/div/EBIS/categ/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/PROSPECT/channel/${nameChannel}/div/EBIS/categ/ALL/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
     });
     this.props.dispatch({
       type:'DETAIL_PROSPECT_DES',
-      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/PROSPECT/channel/${nameChannel}/div/DES/categ/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/PROSPECT/channel/${nameChannel}/div/DES/categ/ALL/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
     });
     this.props.dispatch({
       type:'DETAIL_PROSPECT_DBS',
-      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/PROSPECT/channel/${nameChannel}/div/DBS/categ/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/PROSPECT/channel/${nameChannel}/div/DBS/categ/ALL/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
     });
     this.props.dispatch({
       type:'DETAIL_PROSPECT_DGS',
-      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/PROSPECT/channel/${nameChannel}/div/DGS/categ/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/PROSPECT/channel/${nameChannel}/div/DGS/categ/ALL/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
     });
 
     //get data detail SUBS
     this.props.dispatch({
       type:'DETAIL_SUBS_PROSPECT_EBIS',
-      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/PROSPECT/channel/${nameChannel}/div/EBIS/categ/SUBS/start_date/${this.state.startdate}/end_date/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/PROSPECT/channel/${nameChannel}/div/EBIS/categ/SUBS/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
     });
     this.props.dispatch({
       type:'DETAIL_SUBS_PROSPECT_DES',
-      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/PROSPECT/channel/${nameChannel}/div/DES/categ/SUBS/start_date/${this.state.startdate}/end_date/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/PROSPECT/channel/${nameChannel}/div/DES/categ/SUBS/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
     });
     this.props.dispatch({
       type:'DETAIL_SUBS_PROSPECT_DBS',
-      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/PROSPECT/channel/${nameChannel}/div/DBS/categ/SUBS/start_date/${this.state.startdate}/end_date/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/PROSPECT/channel/${nameChannel}/div/DBS/categ/SUBS/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
     });
     this.props.dispatch({
       type:'DETAIL_SUBS_PROSPECT_DGS',
-      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/PROSPECT/channel/${nameChannel}/div/DGS/categ/SUBS/start_date/${this.state.startdate}/end_date/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/PROSPECT/channel/${nameChannel}/div/DGS/categ/SUBS/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
     });
 
     //get data detail MITRA
     this.props.dispatch({
       type:'DETAIL_MITRA_PROSPECT_EBIS',
-      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/PROSPECT/channel/${nameChannel}/div/EBIS/categ/MITRA/start_date/${this.state.startdate}/end_date/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/PROSPECT/channel/${nameChannel}/div/EBIS/categ/MITRA/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
     });
     this.props.dispatch({
       type:'DETAIL_MITRA_PROSPECT_DES',
-      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/PROSPECT/channel/${nameChannel}/div/DES/categ/MITRA/start_date/${this.state.startdate}/end_date/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/PROSPECT/channel/${nameChannel}/div/DES/categ/MITRA/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
     });
     this.props.dispatch({
       type:'DETAIL_MITRA_PROSPECT_DBS',
-      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/PROSPECT/channel/${nameChannel}/div/DBS/categ/MITRA/start_date/${this.state.startdate}/end_date/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/PROSPECT/channel/${nameChannel}/div/DBS/categ/MITRA/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
     });
     this.props.dispatch({
       type:'DETAIL_MITRA_PROSPECT_DGS',
-      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/PROSPECT/channel/${nameChannel}/div/DGS/categ/MITRA/start_date/${this.state.startdate}/end_date/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/PROSPECT/channel/${nameChannel}/div/DGS/categ/MITRA/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
     });
     
     //get data detail TELKOM
     this.props.dispatch({
       type:'DETAIL_TELKOM_PROSPECT_EBIS',
-      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/PROSPECT/channel/${nameChannel}/div/EBIS/categ/TELKOM/start_date/${this.state.startdate}/end_date/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/PROSPECT/channel/${nameChannel}/div/EBIS/categ/TELKOM/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
     });
     this.props.dispatch({
       type:'DETAIL_TELKOM_PROSPECT_DES',
-      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/PROSPECT/channel/${nameChannel}/div/DES/categ/TELKOM/start_date/${this.state.startdate}/end_date/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/PROSPECT/channel/${nameChannel}/div/DES/categ/TELKOM/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
     });
     this.props.dispatch({
       type:'DETAIL_TELKOM_PROSPECT_DBS',
-      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/PROSPECT/channel/${nameChannel}/div/DBS/categ/TELKOM/start_date/${this.state.startdate}/end_date/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/PROSPECT/channel/${nameChannel}/div/DBS/categ/TELKOM/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
     });
     this.props.dispatch({
       type:'DETAIL_TELKOM_PROSPECT_DGS',
-      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/PROSPECT/channel/${nameChannel}/div/DGS/categ/TELKOM/start_date/${this.state.startdate}/end_date/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:axios.get(`${url.API2}/ebis_getchannellistsub/stage/PROSPECT/channel/${nameChannel}/div/DGS/categ/TELKOM/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
     });
   }
 
@@ -171,112 +171,112 @@ class EbisDetailColumnProspectScreens extends Component{
               <TouchableOpacity style={styles.containerDetailData} > 
               <View style={{flex: 1, flexDirection: 'row', flexWrap: 'wrap'}}>
 
-                <View style={{width:wp('15%'), alignSelf:'center' }}>
-                  <Text style={{fontSize:10}}>Nama Project</Text>
+                <View style={{width:wp('18%'), alignSelf:'center' }}>
+                  <Text style={{fontSize:10}}>A. Nama Project</Text>
+                </View>
+                <View style={{width:wp('2%'), alignSelf:'center'}}>
+                  <Text style={{fontSize:10}}>:</Text>
+                </View>
+                <View style={{width:wp('50%'), alignSelf:'center'}}>
+                  <Text style={{fontSize:10}}>{item.NAMAPROJECT}</Text>
+                </View>
+
+                <View style={{width:wp('18%'), alignSelf:'center' }}>
+                  <Text style={{fontSize:10}}>B. Nama CC</Text>
                 </View>
                 <View style={{width:wp('2%'), alignSelf:'center' }}>
                   <Text style={{fontSize:10}}>:</Text>
                 </View>
-                <View style={{width:wp('60%'), alignSelf:'center' }}>
-                  <Text style={{fontSize:11}}>{item.NAMAPROJECT}</Text>
+                <View style={{width:wp('50%'), alignSelf:'center' }}>
+                  <Text style={{fontSize:10}}>{item.NAMACC}</Text>
                 </View>
 
-                <View style={{width:wp('15%'), alignSelf:'center' }}>
-                  <Text style={{fontSize:10}}>Nama CC</Text>
+                <View style={{width:wp('18%'), alignSelf:'center' }}>
+                  <Text style={{fontSize:10}}>C. Nilai Project</Text>
                 </View>
                 <View style={{width:wp('2%'), alignSelf:'center' }}>
                   <Text style={{fontSize:10}}>:</Text>
                 </View>
-                <View style={{width:wp('60%'), alignSelf:'center' }}>
-                  <Text style={{fontSize:11}}>{item.NAMACC}</Text>
+                <View style={{width:wp('50%'), alignSelf:'center' }}>
+                  <Text style={{fontSize:10}}>{parseFloat(item.REVENUE)} M</Text>
                 </View>
 
-                <View style={{width:wp('15%'), alignSelf:'center' }}>
-                  <Text style={{fontSize:10}}>Nilai Project</Text>
+                <View style={{width:wp('18%'), alignSelf:'center' }}>
+                  <Text style={{fontSize:10}}>D. Lama Kontrak</Text>
                 </View>
                 <View style={{width:wp('2%'), alignSelf:'center' }}>
                   <Text style={{fontSize:10}}>:</Text>
                 </View>
-                <View style={{width:wp('60%'), alignSelf:'center' }}>
-                  <Text style={{fontSize:11}}>{parseFloat(item.REVENUE)} M</Text>
+                <View style={{width:wp('50%'), alignSelf:'center' }}>
+                  <Text style={{fontSize:10}}>{item.LAMAKONTRAK}</Text>
                 </View>
 
-                <View style={{width:wp('15%'), alignSelf:'center' }}>
-                  <Text style={{fontSize:10}}>Lama Kontrak</Text>
+                <View style={{width:wp('18%'), alignSelf:'center' }}>
+                  <Text style={{fontSize:10}}>E. Divisi</Text>
                 </View>
                 <View style={{width:wp('2%'), alignSelf:'center' }}>
                   <Text style={{fontSize:10}}>:</Text>
                 </View>
-                <View style={{width:wp('60%'), alignSelf:'center' }}>
-                  <Text style={{fontSize:11}}>{item.LAMAKONTRAK}</Text>
+                <View style={{width:wp('50%'), alignSelf:'center' }}>
+                  <Text style={{fontSize:10}}>{item.DIVISI}</Text>
                 </View>
 
-                <View style={{width:wp('15%'), alignSelf:'center' }}>
-                  <Text style={{fontSize:10}}>Divisi</Text>
+                <View style={{width:wp('18%'), alignSelf:'center' }}>
+                  <Text style={{fontSize:10}}>F. Segmen</Text>
                 </View>
                 <View style={{width:wp('2%'), alignSelf:'center' }}>
                   <Text style={{fontSize:10}}>:</Text>
                 </View>
-                <View style={{width:wp('60%'), alignSelf:'center' }}>
-                  <Text style={{fontSize:11}}>{item.DIVISI}</Text>
+                <View style={{width:wp('50%'), alignSelf:'center' }}>
+                  <Text style={{fontSize:10}}>{item.SEGMEN}</Text>
                 </View>
 
-                <View style={{width:wp('15%'), alignSelf:'center' }}>
-                  <Text style={{fontSize:10}}>Segmen</Text>
+                <View style={{width:wp('18%'), alignSelf:'center' }}>
+                  <Text style={{fontSize:10}}>G. Deliver</Text>
                 </View>
                 <View style={{width:wp('2%'), alignSelf:'center' }}>
                   <Text style={{fontSize:10}}>:</Text>
                 </View>
-                <View style={{width:wp('60%'), alignSelf:'center' }}>
-                  <Text style={{fontSize:11}}>{item.SEGMEN}</Text>
+                <View style={{width:wp('50%'), alignSelf:'center' }}>
+                  <Text style={{fontSize:10}}>{item.DELIVER}</Text>
                 </View>
 
-                <View style={{width:wp('15%'), alignSelf:'center' }}>
-                  <Text style={{fontSize:10}}>Deliver</Text>
+                <View style={{width:wp('18%'), alignSelf:'center' }}>
+                  <Text style={{fontSize:10}}>H. Payment Method</Text>
                 </View>
                 <View style={{width:wp('2%'), alignSelf:'center' }}>
                   <Text style={{fontSize:10}}>:</Text>
                 </View>
-                <View style={{width:wp('60%'), alignSelf:'center' }}>
-                  <Text style={{fontSize:11}}>{item.DELIVER}</Text>
+                <View style={{width:wp('50%'), alignSelf:'center' }}>
+                  <Text style={{fontSize:10}}>{item.PAYMENT_METHOD}</Text>
                 </View>
 
-                <View style={{width:wp('15%'), alignSelf:'center' }}>
-                  <Text style={{fontSize:10}}>Payment Method</Text>
+                <View style={{width:wp('18%'), alignSelf:'center' }}>
+                  <Text style={{fontSize:10}}>I. Channel</Text>
                 </View>
                 <View style={{width:wp('2%'), alignSelf:'center' }}>
                   <Text style={{fontSize:10}}>:</Text>
                 </View>
-                <View style={{width:wp('60%'), alignSelf:'center' }}>
-                  <Text style={{fontSize:11}}>{item.PAYMENT_METHOD}</Text>
+                <View style={{width:wp('50%'), alignSelf:'center' }}>
+                  <Text style={{fontSize:10}}>{item.KATEGORI_CHANNEL}</Text>
                 </View>
 
-                <View style={{width:wp('15%'), alignSelf:'center' }}>
-                  <Text style={{fontSize:10}}>Channel</Text>
+                <View style={{width:wp('18%'), alignSelf:'center' }}>
+                  <Text style={{fontSize:10}}>J. GPM</Text>
                 </View>
                 <View style={{width:wp('2%'), alignSelf:'center' }}>
                   <Text style={{fontSize:10}}>:</Text>
                 </View>
-                <View style={{width:wp('60%'), alignSelf:'center' }}>
-                  <Text style={{fontSize:11}}>{item.KATEGORI_CHANNEL}</Text>
-                </View>
-
-                <View style={{width:wp('15%'), alignSelf:'center' }}>
-                  <Text style={{fontSize:10}}>GPM</Text>
-                </View>
-                <View style={{width:wp('2%'), alignSelf:'center' }}>
-                  <Text style={{fontSize:10}}>:</Text>
-                </View>
-                <View style={{width:wp('60%'), alignSelf:'center' }}>
-                  <Text style={{fontSize:11}}>{item.GPM}</Text>
+                <View style={{width:wp('50%'), alignSelf:'center' }}>
+                  <Text style={{fontSize:10}}>{item.GPM}</Text>
                 </View>
 
                 <View style={{width:wp('60%'), alignSelf:'center' }}>
-                  <Text style={{fontSize:10, fontWeight:'bold'}}>Administration Progress</Text>
+                  <Text style={{fontSize:10, fontWeight:'bold'}}>K. Administration Progress</Text>
                 </View>
 
                 <View style={{width:wp('60%'), alignSelf:'center', marginLeft:'5%' }}>
-                  <Text style={{fontSize:10}}>Kontrak Berlangganan :</Text>
+                  <Text style={{fontSize:10}}>a. Kontrak Berlangganan :</Text>
                 </View>
 
                 <View style={{width:wp('60%'), alignSelf:'center', marginLeft:'10%' }}>
@@ -291,7 +291,7 @@ class EbisDetailColumnProspectScreens extends Component{
 
 
                 <View style={{width:wp('60%'), alignSelf:'center', marginLeft:'5%' }}>
-                  <Text style={{fontSize:10}}>Justifikasi PO/P1 :</Text>
+                  <Text style={{fontSize:10}}>b. Justifikasi PO/P1 :</Text>
                 </View>
 
                 <View style={{width:wp('60%'), alignSelf:'center', marginLeft:'10%' }}>
@@ -336,8 +336,9 @@ class EbisDetailColumnProspectScreens extends Component{
       visibleModal: !this.state.visibleModal,
       loaderTampilDetail:true
     })
-    axios.get(`${url.API2}/ebis_getdeallistcc/stage/PROSPECT/categ/${maindiv}/channel/${nameChannel}/div/${div}/start_date/${this.state.startdate}/end_date/${this.state.enddate}/treg/ALL/witel/ALL/mitra/${item}`).then((res) => {
+    axios.get(`${url.API2}/ebis_getchannellistcc/stage/PROSPECT/categ/${maindiv}/channel/${nameChannel}/div/${div}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/ALL/witel/ALL/mitra/${item}`).then((res) => {
       this.setState({dataTampung:res.data, loaderTampilDetail:false });
+      console.log(res)
     }).catch((err) => {
       this.setState({
         loaderTampilDetail:false
@@ -423,8 +424,9 @@ class EbisDetailColumnProspectScreens extends Component{
       visibleModal: !this.state.visibleModal,
       loaderTampilDetail:true
     })
-    axios.get(`${url.API2}/ebis_getdeallistcc/stage/PROSPECT/categ/${maindiv}/channel/${nameChannel}/div/${div}/start_date/${this.state.startdate}/end_date/${this.state.enddate}/treg/ALL/witel/ALL/mitra/${item}`).then((res) => {
+    axios.get(`${url.API2}/ebis_getchannellistcc/stage/PROSPECT/categ/${maindiv}/channel/${nameChannel}/div/${div}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/ALL/witel/ALL/mitra/${item}`).then((res) => {
       this.setState({dataTampung:res.data, loaderTampilDetail:false });
+      console.log(res)
     }).catch((err) => {
       this.setState({
         loaderTampilDetail:false
@@ -509,7 +511,7 @@ class EbisDetailColumnProspectScreens extends Component{
       visibleModal: !this.state.visibleModal,
       loaderTampilDetail:true
     })
-    axios.get(`${url.API2}/ebis_getdeallistcc/stage/PROSPECT/categ/${maindiv}/channel/${nameChannel}/div/${div}/start_date/${this.state.startdate}/end_date/${this.state.enddate}/treg/ALL/witel/ALL/mitra/${item}`).then((res) => {
+    axios.get(`${url.API2}/ebis_getchannellistcc/stage/PROSPECT/categ/${maindiv}/channel/${nameChannel}/div/${div}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/ALL/witel/ALL/mitra/${item}`).then((res) => {
       this.setState({dataTampung:res.data, loaderTampilDetail:false });
     }).catch((err) => {
       this.setState({
@@ -595,7 +597,7 @@ class EbisDetailColumnProspectScreens extends Component{
       visibleModal: !this.state.visibleModal,
       loaderTampilDetail:true
     })
-    axios.get(`${url.API2}/ebis_getdeallistcc/stage/PROSPECT/categ/${maindiv}/channel/${nameChannel}/div/${div}/start_date/${this.state.startdate}/end_date/${this.state.enddate}/treg/ALL/witel/ALL/mitra/${item}`).then((res) => {
+    axios.get(`${url.API2}/ebis_getchannellistcc/stage/PROSPECT/categ/${maindiv}/channel/${nameChannel}/div/${div}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/ALL/witel/ALL/mitra/${item}`).then((res) => {
       this.setState({dataTampung:res.data, loaderTampilDetail:false });
     }).catch((err) => {
       this.setState({
@@ -1229,7 +1231,7 @@ class EbisDetailColumnProspectScreens extends Component{
                         <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.MITRA}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.jumlah}M</Text>                    
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.JUMLAH}M</Text>                    
                       </View>
                     </TouchableOpacity>
                     :
@@ -1241,7 +1243,7 @@ class EbisDetailColumnProspectScreens extends Component{
                         <Text>{item.MITRA}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center'}}>{item.jumlah}M</Text>                    
+                        <Text style={{textAlign:'center'}}>{item.JUMLAH}M</Text>                    
                       </View>
                     </TouchableOpacity>
                   )}
@@ -1267,7 +1269,7 @@ class EbisDetailColumnProspectScreens extends Component{
                         <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.MITRA}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.jumlah}M</Text>                    
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.JUMLAH}M</Text>                    
                       </View>
                     </TouchableOpacity>
                     :
@@ -1279,7 +1281,7 @@ class EbisDetailColumnProspectScreens extends Component{
                         <Text>{item.MITRA}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center'}}>{item.jumlah}M</Text>                    
+                        <Text style={{textAlign:'center'}}>{item.JUMLAH}M</Text>                    
                       </View>
                     </TouchableOpacity>
                   )}
@@ -1305,7 +1307,7 @@ class EbisDetailColumnProspectScreens extends Component{
                       <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.MITRA}</Text>
                     </View>
                     <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                      <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.jumlah}M</Text>                    
+                      <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.JUMLAH}M</Text>                    
                     </View>
                   </TouchableOpacity>
                   :
@@ -1317,7 +1319,7 @@ class EbisDetailColumnProspectScreens extends Component{
                       <Text>{item.MITRA}</Text>
                     </View>
                     <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                      <Text style={{textAlign:'center'}}>{item.jumlah}M</Text>                    
+                      <Text style={{textAlign:'center'}}>{item.JUMLAH}M</Text>                    
                     </View>
                   </TouchableOpacity>
               )}
@@ -1343,7 +1345,7 @@ class EbisDetailColumnProspectScreens extends Component{
                       <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.MITRA}</Text>
                     </View>
                     <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                      <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.jumlah}M</Text>                    
+                      <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.JUMLAH}M</Text>                    
                     </View>
                   </TouchableOpacity>
                   :
@@ -1355,7 +1357,7 @@ class EbisDetailColumnProspectScreens extends Component{
                       <Text>{item.MITRA}</Text>
                     </View>
                     <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                      <Text style={{textAlign:'center'}}>{item.jumlah}M</Text>                    
+                      <Text style={{textAlign:'center'}}>{item.JUMLAH}M</Text>                    
                     </View>
                   </TouchableOpacity>
               )}
@@ -1575,7 +1577,7 @@ class EbisDetailColumnProspectScreens extends Component{
                         <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.MITRA}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.jumlah}M</Text>                    
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.JUMLAH}M</Text>                    
                       </View>
                     </TouchableOpacity>
                     :
@@ -1587,7 +1589,7 @@ class EbisDetailColumnProspectScreens extends Component{
                         <Text>{item.MITRA}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center'}}>{item.jumlah}M</Text>                    
+                        <Text style={{textAlign:'center'}}>{item.JUMLAH}M</Text>                    
                       </View>
                     </TouchableOpacity>
                   )}
@@ -1613,7 +1615,7 @@ class EbisDetailColumnProspectScreens extends Component{
                         <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.MITRA}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.jumlah}M</Text>                    
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.JUMLAH}M</Text>                    
                       </View>
                     </TouchableOpacity>
                     :
@@ -1625,7 +1627,7 @@ class EbisDetailColumnProspectScreens extends Component{
                         <Text>{item.MITRA}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center'}}>{item.jumlah}M</Text>                    
+                        <Text style={{textAlign:'center'}}>{item.JUMLAH}M</Text>                    
                       </View>
                     </TouchableOpacity>
                   )}
@@ -1651,7 +1653,7 @@ class EbisDetailColumnProspectScreens extends Component{
                         <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.MITRA}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.jumlah}M</Text>                    
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.JUMLAH}M</Text>                    
                       </View>
                     </TouchableOpacity>
                     :
@@ -1663,7 +1665,7 @@ class EbisDetailColumnProspectScreens extends Component{
                         <Text>{item.MITRA}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center'}}>{item.jumlah}M</Text>                    
+                        <Text style={{textAlign:'center'}}>{item.JUMLAH}M</Text>                    
                       </View>
                     </TouchableOpacity>
                   )}
@@ -1689,7 +1691,7 @@ class EbisDetailColumnProspectScreens extends Component{
                         <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.MITRA}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.jumlah}M</Text>                    
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.JUMLAH}M</Text>                    
                       </View>
                     </TouchableOpacity>
                     :
@@ -1701,7 +1703,7 @@ class EbisDetailColumnProspectScreens extends Component{
                         <Text>{item.MITRA}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center'}}>{item.jumlah}M</Text>                    
+                        <Text style={{textAlign:'center'}}>{item.JUMLAH}M</Text>                    
                       </View>
                     </TouchableOpacity>
                   )}
@@ -1921,7 +1923,7 @@ class EbisDetailColumnProspectScreens extends Component{
                         <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.MITRA}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.jumlah}M</Text>                    
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.JUMLAH}M</Text>                    
                       </View>
                     </TouchableOpacity>
                     :
@@ -1933,7 +1935,7 @@ class EbisDetailColumnProspectScreens extends Component{
                         <Text>{item.MITRA}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center'}}>{item.jumlah}M</Text>                    
+                        <Text style={{textAlign:'center'}}>{item.JUMLAH}M</Text>                    
                       </View>
                     </TouchableOpacity>
                   )}
@@ -1959,7 +1961,7 @@ class EbisDetailColumnProspectScreens extends Component{
                         <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.MITRA}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.jumlah}M</Text>                    
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.JUMLAH}M</Text>                    
                       </View>
                     </TouchableOpacity>
                     :
@@ -1971,7 +1973,7 @@ class EbisDetailColumnProspectScreens extends Component{
                         <Text>{item.MITRA}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center'}}>{item.jumlah}M</Text>                    
+                        <Text style={{textAlign:'center'}}>{item.JUMLAH}M</Text>                    
                       </View>
                     </TouchableOpacity>
                   )}
@@ -1997,7 +1999,7 @@ class EbisDetailColumnProspectScreens extends Component{
                         <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.MITRA}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.jumlah}M</Text>                    
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.JUMLAH}M</Text>                    
                       </View>
                     </TouchableOpacity>
                     :
@@ -2009,7 +2011,7 @@ class EbisDetailColumnProspectScreens extends Component{
                         <Text>{item.MITRA}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center'}}>{item.jumlah}M</Text>                    
+                        <Text style={{textAlign:'center'}}>{item.JUMLAH}M</Text>                    
                       </View>
                     </TouchableOpacity>
                   )}
@@ -2035,7 +2037,7 @@ class EbisDetailColumnProspectScreens extends Component{
                         <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.MITRA}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.jumlah}M</Text>                    
+                        <Text style={{textAlign:'center', fontWeight: 'bold'}}>{item.JUMLAH}M</Text>                    
                       </View>
                     </TouchableOpacity>
                     :
@@ -2047,7 +2049,7 @@ class EbisDetailColumnProspectScreens extends Component{
                         <Text>{item.MITRA}</Text>
                       </View>
                       <View style={{width:wp('30%'), alignSelf:'center', justifyContent:'center'}}>
-                        <Text style={{textAlign:'center'}}>{item.jumlah}M</Text>                    
+                        <Text style={{textAlign:'center'}}>{item.JUMLAH}M</Text>                    
                       </View>
                     </TouchableOpacity>
                   )}

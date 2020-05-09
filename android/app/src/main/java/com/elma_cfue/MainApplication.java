@@ -3,8 +3,9 @@ package com.elma_cfue;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
-import com.rnfs.RNFSPackage;
 import io.realm.react.RealmReactPackage;
+import com.transistorsoft.rnbackgroundfetch.RNBackgroundFetchPackage;
+import com.rnfs.RNFSPackage;
 import com.ocetnik.timer.BackgroundTimerPackage;
 import com.jamesisaac.rnbackgroundtask.BackgroundTaskPackage;
 import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
@@ -29,8 +30,9 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new RNFSPackage(),
             new RealmReactPackage(),
+            new RNBackgroundFetchPackage(),
+            new RNFSPackage(),
             new BackgroundTimerPackage(),
             new BackgroundTaskPackage(),
             new ReactNativePushNotificationPackage(),

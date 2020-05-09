@@ -3,7 +3,7 @@ import {
   Platform,
   StyleSheet,
   View,
-  Image
+  Image,
 } from 'react-native';
 import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Icon, Text, Segment } from 'native-base';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
@@ -72,7 +72,15 @@ export default class HomeScreens extends Component{
               <Button 
                 last
                 active={selectedTab==='abc'} 
-                style={selectedTab === 'abc' ? styles.segmentButtonActive : styles.segmentButtonNonActive}                
+                style={
+                  [
+                    selectedTab === 'abc' 
+                      ? 
+                        styles.segmentButtonActive 
+                      : 
+                        styles.segmentButtonNonActive, {borderTopRightRadius:0, borderBottomRightRadius:0}
+                  ]
+                }                
                 onPress={() => this.setState({selectedTab: 'abc'})} 
               >
                 <Text style={selectedTab === 'abc' ? styles.segmentTextActive : styles.segmentTextNonActive}>ABC</Text>
@@ -80,7 +88,15 @@ export default class HomeScreens extends Component{
               <Button 
                 last
                 active={selectedTab==='channel'} 
-                style={selectedTab === 'channel' ? styles.segmentButtonActive : styles.segmentButtonNonActive}                
+                style={
+                  [
+                    selectedTab === 'channel' 
+                      ? 
+                        styles.segmentButtonActive 
+                      : 
+                        styles.segmentButtonNonActive, {borderTopRightRadius:0, borderBottomRightRadius:0}
+                  ]
+                }                
                 onPress={() => this.setState({selectedTab: 'channel'})} 
               >
                 <Text style={selectedTab === 'channel' ? styles.segmentTextActive : styles.segmentTextNonActive}>CHNL</Text>
