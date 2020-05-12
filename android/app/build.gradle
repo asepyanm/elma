@@ -148,6 +148,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-background-fetch')
     compile project(':realm')
     compile project(':react-native-fs')
     compile project(':react-native-background-timer')
