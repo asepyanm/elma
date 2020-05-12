@@ -3,8 +3,8 @@ package com.elma_cfue;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
-import io.realm.react.RealmReactPackage;
 import com.transistorsoft.rnbackgroundfetch.RNBackgroundFetchPackage;
+import io.realm.react.RealmReactPackage;
 import com.rnfs.RNFSPackage;
 import com.ocetnik.timer.BackgroundTimerPackage;
 import com.jamesisaac.rnbackgroundtask.BackgroundTaskPackage;
@@ -30,8 +30,8 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new RealmReactPackage(),
             new RNBackgroundFetchPackage(),
+            new RealmReactPackage(),
             new RNFSPackage(),
             new BackgroundTimerPackage(),
             new BackgroundTaskPackage(),

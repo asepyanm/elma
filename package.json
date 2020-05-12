@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest"
+    "test": "jest",
+    "postinstall": "npx jetify"
   },
   "dependencies": {
     "@react-native-community/push-notification-ios": "^1.1.1",
@@ -38,6 +39,7 @@
   "devDependencies": {
     "babel-jest": "23.6.0",
     "jest": "23.6.0",
+    "jetifier": "^1.6.5",
     "metro-react-native-babel-preset": "0.48.3",
     "react-test-renderer": "16.6.0-alpha.8af6728"
   },
