@@ -4,7 +4,6 @@ import android.app.Application;
 
 import com.facebook.react.ReactApplication;
 import io.realm.react.RealmReactPackage;
-import com.transistorsoft.rnbackgroundfetch.RNBackgroundFetchPackage;
 import com.rnfs.RNFSPackage;
 import com.ocetnik.timer.BackgroundTimerPackage;
 import com.jamesisaac.rnbackgroundtask.BackgroundTaskPackage;
@@ -31,7 +30,6 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
             new RealmReactPackage(),
-            new RNBackgroundFetchPackage(),
             new RNFSPackage(),
             new BackgroundTimerPackage(),
             new BackgroundTaskPackage(),
