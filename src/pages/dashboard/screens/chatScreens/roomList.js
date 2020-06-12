@@ -17,6 +17,8 @@ import {
 import {Header, Icon, Left, Right, Body, Title, Tab, Tabs, Content, Segment, Container} from 'native-base';
 import url from '../../../../config/api_service';
 import Axios from "axios";
+import RNFetchBlob from 'react-native-fetch-blob'
+
 export default class roomList extends Component {
  static navigationOptions = {
     title: "List Group Chat"
@@ -80,7 +82,10 @@ getRooms= async(id)=>{
         else{
            console.log('groupchat bawah',result)
            console.log(`isi url : ${url.API}/chatroombyuser/${id}`)
-           Axios.get(`${url.API}/chatroombyuser/${id}`)
+          //  Axios.get(`${url.API}/chatroombyuser/${id}`)
+          RNFetchBlob.config({
+            trusty:true
+          }). fetch('GET', `${url.API}/chatroombyuser/${id}`)
             .then(response => {
               // console.log(response.data);
                this.setState({

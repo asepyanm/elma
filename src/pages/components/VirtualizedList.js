@@ -17,6 +17,7 @@ import { Divider, Button } from 'react-native-elements';
 import {connect} from 'react-redux';
 import Modal from "react-native-modal";
 import axios from 'axios';
+import RNFetchBlob from 'react-native-fetch-blob'
 
 //global
 import {renderIf} from '../components/renderIf'
@@ -89,7 +90,10 @@ import url from '../../config/api_service'
                 group: result
               });
               var urlgroupdata=url.API+'/groupdetailbyid/'+result;
-       await axios.get(`${urlgroupdata}`)
+      //  await axios.get(`${urlgroupdata}`)
+        RNFetchBlob.config({
+          trusty:true
+        }). fetch('GET', `${urlgroupdata}`)
         .then((response) => {
           const res =response.data
           if(res.status=="success"){
@@ -122,7 +126,10 @@ import url from '../../config/api_service'
       }else{
         // console.log('login bro')
         var urlgroupdata=url.API+'/groupdetailbyid/'+this.state.group;
-        await axios.get(`${urlgroupdata}`)
+        // await axios.get(`${urlgroupdata}`)
+        RNFetchBlob.config({
+          trusty:true
+        }). fetch('GET', `${urlgroupdata}`)
         .then((response) => {
           const res =response.data
           if(res.status=="success"){
@@ -238,15 +245,24 @@ enterChat = async (user_id,idroom,namaroom,deskripsiroom) => {
     if(status==='ALL'){
       const urlSumarynotif=url.API+"/ebis_getnotificationsummaryrekap/group/"+group;
 // console.log('urlallsumary',urlSumarynotif);
-      axios.get(`${urlSumarynotif}`)
+      // axios.get(`${urlSumarynotif}`)
+      RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${urlSumarynotif}`)
         .then((res) => {this.setState({allTOTALPROJECT: res.data[0].TOTALREV,
                                        allTOTALREV: res.data[0].TOTALPROJECT })}) 
 
-      axios.get(`${urlSumarynotif}`)
+      // axios.get(`${urlSumarynotif}`)
+      RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${urlSumarynotif}`)
         .then((res) => {this.setState({winTOTALPROJECT: res.data[1].TOTALREV,
                                        winTOTALREV: res.data[1].TOTALPROJECT })}) 
                                
-      axios.get(`${urlSumarynotif}`)
+      // axios.get(`${urlSumarynotif}`)
+      RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${urlSumarynotif}`)
         .then((res) => {this.setState({loseTOTALPROJECT: res.data[2].TOTALREV,
                                        loseTOTALREV: res.data[2].TOTALPROJECT })}) 
 
@@ -254,11 +270,17 @@ enterChat = async (user_id,idroom,namaroom,deskripsiroom) => {
     } else {
       const urlSumarynotifWinLose=url.API+"/ebis_getnotificationsummaryrekap/group/"+group+"/status/"+status;
       // console.log('urlwinlosesumary',urlSumarynotifWinLose);
-      axios.get(`${urlSumarynotifWinLose}`)
+      // axios.get(`${urlSumarynotifWinLose}`)
+      RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${urlSumarynotif}`)
         .then((res) => {this.setState({headerTOTALREV: res.data[0].TOTALREV,
                                       headerTOTALPROJECT: res.data[0].TOTALPROJECT })}) 
       //if(this.state.headerTOTALPROJECT>0){
-      axios.get(`${urlSumarynotifWinLose}`)
+      // axios.get(`${urlSumarynotifWinLose}`)
+      RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${urlSumarynotif}`)
         .then((res) => {this.setState({dataDetail: res.data,loaderDetail:false})}) 
       //} else {
       //  this.setState({dataDetail: []})
@@ -290,7 +312,11 @@ enterChat = async (user_id,idroom,namaroom,deskripsiroom) => {
       loaderTampilPopup: true
     })
 
-    axios.get(`${url.API}/ebis_getnotificationproject/status/${status}/notifid/${this.state.notifid}`).then((res) => {
+    // axios.get(`${url.API}/ebis_getnotificationproject/status/${status}/notifid/${this.state.notifid}`)
+    RNFetchBlob.config({
+      trusty:true
+    }). fetch('GET', `${url.API}/ebis_getnotificationproject/status/${status}/notifid/${this.state.notifid}`)
+    .then((res) => {
         this.setState({ dataPopup:res.data, loaderTampilPopup:false })
       }).catch((err) => {
         this.setState({
@@ -299,7 +325,11 @@ enterChat = async (user_id,idroom,namaroom,deskripsiroom) => {
         //alert(err + `: 17 ${status} ${notifid}`)
       })
 
-    axios.get(`${url.API}/ebis_getnotificationusergroup/status/${status}/notifid/${this.state.notifid}`).then((res) => {
+    // axios.get(`${url.API}/ebis_getnotificationusergroup/status/${status}/notifid/${this.state.notifid}`)
+    RNFetchBlob.config({
+      trusty:true
+    }). fetch('GET', `${url.API}/ebis_getnotificationusergroup/status/${status}/notifid/${this.state.notifid}`)
+    .then((res) => {
         this.setState({ dataMember:res.data, loaderTampilPopup:false })
       }).catch((err) => {
         this.setState({

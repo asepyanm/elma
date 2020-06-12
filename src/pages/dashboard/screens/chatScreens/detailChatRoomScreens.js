@@ -17,6 +17,7 @@ import PropTypes from 'prop-types'
 import emojiUtils from 'emoji-utils'
 import url from '../../../../config/api_service';
 import Axios from "axios";
+import RNFetchBlob from 'react-native-fetch-blob'
 import { GiftedChat } from 'react-native-gifted-chat'
 import BackgroundTimer from 'react-native-background-timer';
 import SlackMessage from './SlackMessage'
@@ -72,7 +73,10 @@ export default class detailChatRoomScreens extends Component {
 getmessageRooms=async()=>{
     // console.log('run get message')
     if(this.state.firstload){
-      Axios.get(`${url.API}/chatroommessagebyroomid/${this.props.navigation.state.params.room_id}`)
+      // Axios.get(`${url.API}/chatroommessagebyroomid/${this.props.navigation.state.params.room_id}`)
+      RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/chatroommessagebyroomid/${this.props.navigation.state.params.room_id}`)
       .then(response => {
          // console.log(` isi response ${JSON.stringify(response.data.data)}`);
          AsyncStorage.setItem('pesangroupchat',JSON.stringify(response.data.data));
@@ -95,7 +99,10 @@ getmessageRooms=async()=>{
       }
         else{
            // console.log('groupchat bawah',result)
-            Axios.get(`${url.API}/chatroommessagebyroomid/${this.props.navigation.state.params.room_id}`)
+            // Axios.get(`${url.API}/chatroommessagebyroomid/${this.props.navigation.state.params.room_id}`)
+            RNFetchBlob.config({
+              trusty:true
+            }). fetch('GET', `${url.API}/chatroommessagebyroomid/${this.props.navigation.state.params.room_id}`)
                 .then(response => {
                    // console.log(` isi response ${JSON.stringify(response.data.data)}`);
                    this.setState({
@@ -121,10 +128,13 @@ saveKeserver (pesan) {
   //       this.response = response.data
   //       return this.response[0].name
   //     })
-  return Axios.post(`${url.API}/savechatroom/${this.props.navigation.state.params.room_id}`, {
-    room_id: this.props.navigation.state.params.room_id,
-    text: pesan[0].text,
-    sender: this.props.navigation.state.params.user_id
+  // return Axios.post(`${url.API}/savechatroom/${this.props.navigation.state.params.room_id}`, {
+    return             RNFetchBlob.config({
+      trusty:true
+    }). fetch('POST', `${url.API}/savechatroom/${this.props.navigation.state.params.room_id}`,{
+      room_id: this.props.navigation.state.params.room_id,
+      text: pesan[0].text,
+      sender: this.props.navigation.state.params.user_id
   })
   .then(function (response) {
    return true
@@ -157,7 +167,10 @@ saveKeserver (pesan) {
   .then(async data => {
           let urlgroupchatmessage=url.API+'/chatroommessagebyuserid/'+this.props.navigation.state.params.user_id;
           
-            Axios.get(`${urlgroupchatmessage}`)
+            // Axios.get(`${urlgroupchatmessage}`)
+            RNFetchBlob.config({
+              trusty:true
+            }). fetch('GET', `${urlgroupchatmessage}`)
             .then(async response => {
               AsyncStorage.setItem('pesangroupchat',JSON.stringify(response.data.data));
             }).catch(error => {

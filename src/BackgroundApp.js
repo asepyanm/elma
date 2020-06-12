@@ -7,6 +7,7 @@ import { PersistGate } from "redux-persist/es/integration/react";
 import PushNotification from 'react-native-push-notification';
 import notificationActionHandler from './helpers/notificationActionHandler'
 import BackgroundTimer from 'react-native-background-timer';
+import RNFetchBlob from 'react-native-fetch-blob'
 
 import url from './config/api_service';
 import AppNavigation from "./navigations";
@@ -241,7 +242,10 @@ _saveToken=async(token)=>{
                                 });
             });   
           }
-          await Axios.get(`${url.API}/fcmsavetoken/${token}/${this.state.user_id}/${this.state.group}/ya`)
+          // await Axios.get(`${url.API}/fcmsavetoken/${token}/${this.state.user_id}/${this.state.group}/ya`)
+          await RNFetchBlob.config({
+            trusty:true
+          }). fetch('GET', `${url.API}/fcmsavetoken/${token}/${this.state.user_id}/${this.state.group}/ya`)
 }
 _saveLogNotif= async (statusNotif,totalvalue,title,jenis) =>{
   if(this.state.token==''){
@@ -255,7 +259,11 @@ _saveLogNotif= async (statusNotif,totalvalue,title,jenis) =>{
     }    
     let body=statusNotif+"-"+totalvalue;
     let payload=statusNotif+"_kres_"+totalvalue+"_titikkoma_";
-    await Axios.get(`${url.API}/savenotiflog/${this.state.token}/${title}/${body}/notif/berhasil/${jenis}/${payload}`)
+    // await Axios.get(`${url.API}/savenotiflog/${this.state.token}/${title}/${body}/notif/berhasil/${jenis}/${payload}`)
+
+    await RNFetchBlob.config({
+      trusty:true
+    }). fetch('GET', `${url.API}/savenotiflog/${this.state.token}/${title}/${body}/notif/berhasil/${jenis}/${payload}`)
 }
   _storeData = async () => {
     const {status} = this.state;
@@ -327,7 +335,11 @@ _saveLogNotif= async (statusNotif,totalvalue,title,jenis) =>{
               this.setState({token: result})
             }
           });   
-          notif = await Axios.get(`${url.API}/getnotification/userid/${this.state.user_id}/token/${this.state.token}`)
+          // notif = await Axios.get(`${url.API}/getnotification/userid/${this.state.user_id}/token/${this.state.token}`)
+
+          notif = await RNFetchBlob.config({
+            trusty:true
+          }). fetch('GET', `${url.API}/getnotification/userid/${this.state.user_id}/token/${this.state.token}`)
       } 
       await notif.data.forEach((element, index) => {
           if(jenis=="rekap"){
