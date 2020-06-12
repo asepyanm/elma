@@ -15,6 +15,7 @@ import {Header, Icon, Left, Right, Body, Button, Title, Tab, Tabs, Content, Cont
 import {connect} from 'react-redux';
 import Modal from "react-native-modal";
 import axios from 'axios';
+import RNFetchBlob from 'react-native-fetch-blob'
 
 //global
 import renderIf from '../../../../../../../components/renderIf';
@@ -58,73 +59,105 @@ class DesDetailScreens extends Component{
     //get data ALL
     this.props.dispatch({
       type:'DETAIL_SUBMISSION_EBIS',
-      payload:axios.get(`${url.API2}/ebis_getdeallistsub/stage/SUBMISSION/deal/ALL/div/EBIS/categ/ALL/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API2}/ebis_getdeallistsub/stage/SUBMISSION/deal/ALL/div/EBIS/categ/ALL/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`),
     });
     this.props.dispatch({
       type:'DETAIL_SUBMISSION_DES',
-      payload:axios.get(`${url.API2}//ebis_getdeallistsub/stage/SUBMISSION/deal/ALL/div/DES/categ/ALL/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API2}/ebis_getdeallistsub/stage/SUBMISSION/deal/ALL/div/DES/categ/ALL/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`),
     });
     this.props.dispatch({
       type:'DETAIL_SUBMISSION_DBS',
-      payload:axios.get(`${url.API2}/ebis_getdeallistsub/stage/SUBMISSION/deal/ALL/div/DBS/categ/ALL/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API2}/ebis_getdeallistsub/stage/SUBMISSION/deal/ALL/div/DBS/categ/ALL/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`),
     });
     this.props.dispatch({
       type:'DETAIL_SUBMISSION_DGS',
-      payload:axios.get(`${url.API2}/ebis_getdeallistsub/stage/SUBMISSION/deal/ALL/div/DGS/categ/ALL/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API2}/ebis_getdeallistsub/stage/SUBMISSION/deal/ALL/div/DGS/categ/ALL/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`),
     });
      
-  //get data detail SUBS
+    //get data detail SUBS
     this.props.dispatch({
       type:'DETAIL_SUBS_SUBMISSION_EBIS',
-      payload:axios.get(`${url.API2}/ebis_getdeallistsub/stage/SUBMISSION/deal/ALL/div/EBIS/categ/SUBS/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API2}/ebis_getdeallistsub/stage/SUBMISSION/deal/ALL/div/EBIS/categ/SUBS/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`),
     });
     this.props.dispatch({
       type:'DETAIL_SUBS_SUBMISSION_DES',
-      payload:axios.get(`${url.API2}/ebis_getdeallistsub/stage/SUBMISSION/deal/ALL/div/DES/categ/SUBS/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API2}/ebis_getdeallistsub/stage/SUBMISSION/deal/ALL/div/DES/categ/SUBS/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`),
     });
     this.props.dispatch({
       type:'DETAIL_SUBS_SUBMISSION_DBS',
-      payload:axios.get(`${url.API2}/ebis_getdeallistsub/stage/SUBMISSION/deal/ALL/div/DBS/categ/SUBS/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API2}/ebis_getdeallistsub/stage/SUBMISSION/deal/ALL/div/DBS/categ/SUBS/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`),
     });
     this.props.dispatch({
       type:'DETAIL_SUBS_SUBMISSION_DGS',
-      payload:axios.get(`${url.API2}/ebis_getdeallistsub/stage/SUBMISSION/deal/ALL/div/DGS/categ/SUBS/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API2}/ebis_getdeallistsub/stage/SUBMISSION/deal/ALL/div/DGS/categ/SUBS/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`),
     });
 
     //get data detail MITRA
     this.props.dispatch({
       type:'DETAIL_MITRA_SUBMISSION_EBIS',
-      payload:axios.get(`${url.API2}/ebis_getdeallistsub/stage/SUBMISSION/deal/ALL/div/EBIS/categ/MITRA/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API2}/ebis_getdeallistsub/stage/SUBMISSION/deal/ALL/div/EBIS/categ/MITRA/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`),
     });
     this.props.dispatch({
       type:'DETAIL_MITRA_SUBMISSION_DES',
-      payload:axios.get(`${url.API2}/ebis_getdeallistsub/stage/SUBMISSION/deal/ALL/div/DES/categ/MITRA/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API2}/ebis_getdeallistsub/stage/SUBMISSION/deal/ALL/div/DES/categ/MITRA/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`),
     });
     this.props.dispatch({
       type:'DETAIL_MITRA_SUBMISSION_DBS',
-      payload:axios.get(`${url.API2}/ebis_getdeallistsub/stage/SUBMISSION/deal/ALL/div/DBS/categ/MITRA/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API2}/ebis_getdeallistsub/stage/SUBMISSION/deal/ALL/div/DBS/categ/MITRA/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`),
     });
     this.props.dispatch({
       type:'DETAIL_MITRA_SUBMISSION_DGS',
-      payload:axios.get(`${url.API2}/ebis_getdeallistsub/stage/SUBMISSION/deal/ALL/div/DGS/categ/MITRA/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API2}/ebis_getdeallistsub/stage/SUBMISSION/deal/ALL/div/DGS/categ/MITRA/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`),
     });
     
     //get data detail TELKOM
     this.props.dispatch({
       type:'DETAIL_TELKOM_SUBMISSION_EBIS',
-      payload:axios.get(`${url.API2}/ebis_getdeallistsub/stage/SUBMISSION/deal/ALL/div/EBIS/categ/TELKOM/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API2}/ebis_getdeallistsub/stage/SUBMISSION/deal/ALL/div/EBIS/categ/TELKOM/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`),
     });
     this.props.dispatch({
       type:'DETAIL_TELKOM_SUBMISSION_DES',
-      payload:axios.get(`${url.API2}/ebis_getdeallistsub/stage/SUBMISSION/deal/ALL/div/DES/categ/TELKOM/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API2}/ebis_getdeallistsub/stage/SUBMISSION/deal/ALL/div/DES/categ/TELKOM/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`),
     });
     this.props.dispatch({
       type:'DETAIL_TELKOM_SUBMISSION_DBS',
-      payload:axios.get(`${url.API2}/ebis_getdeallistsub/stage/SUBMISSION/deal/ALL/div/DBS/categ/TELKOM/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API2}/ebis_getdeallistsub/stage/SUBMISSION/deal/ALL/div/DBS/categ/TELKOM/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`),
     });
     this.props.dispatch({
       type:'DETAIL_TELKOM_SUBMISSION_DGS',
-      payload:axios.get(`${url.API2}/ebis_getdeallistsub/stage/SUBMISSION/deal/ALL/div/DGS/categ/TELKOM/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API2}/ebis_getdeallistsub/stage/SUBMISSION/deal/ALL/div/DGS/categ/TELKOM/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`),
     }); 
 
   }
@@ -136,7 +169,10 @@ class DesDetailScreens extends Component{
       //visibleModalDetail:false,
       loaderTampilDetailDetail:true
     })
-    axios.get(`${url.API2}/ebis_getdetdealcc/lopid/${item.LOPID}`).then((res) => {
+    RNFetchBlob.config({
+      trusty:true
+    }). fetch('GET', `${url.API2}/ebis_getdetdealcc/lopid/${item.LOPID}`)
+    .then((res) => {
       this.setState({dataTampungDetail:res.data, loaderTampilDetailDetail:false });
     }).catch((err) => {
       this.setState({
@@ -333,7 +369,10 @@ class DesDetailScreens extends Component{
       visibleModal: !this.state.visibleModal,
       loaderTampilDetail:true
     })
-    axios.get(`${url.API2}/ebis_getdeallistcc/stage/SUBMISSION/categ/${maindiv}/deal/ALL/div/${div}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/ALL/witel/ALL/mitra/${item}`).then((res) => {
+    RNFetchBlob.config({
+      trusty:true
+    }). fetch('GET', `${url.API2}/ebis_getdeallistcc/stage/SUBMISSION/categ/${maindiv}/deal/ALL/div/${div}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/ALL/witel/ALL/mitra/${item}`)
+    .then((res) => {
       this.setState({dataTampung:res.data, loaderTampilDetail:false });
     }).catch((err) => {
       this.setState({
@@ -419,7 +458,10 @@ class DesDetailScreens extends Component{
       visibleModal: !this.state.visibleModal,
       loaderTampilDetail:true
     })
-    axios.get(`${url.API2}/ebis_getdeallistcc/stage/SUBMISSION/categ/${maindiv}/deal/ALL/div/${div}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/ALL/witel/ALL/mitra/${item}`).then((res) => {
+    RNFetchBlob.config({
+      trusty:true
+    }). fetch('GET', `${url.API2}/ebis_getdeallistcc/stage/SUBMISSION/categ/${maindiv}/deal/ALL/div/${div}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/ALL/witel/ALL/mitra/${item}`)
+    .then((res) => {
       this.setState({dataTampung:res.data, loaderTampilDetail:false });
     }).catch((err) => {
       this.setState({
@@ -504,7 +546,10 @@ class DesDetailScreens extends Component{
       visibleModal: !this.state.visibleModal,
       loaderTampilDetail:true
     })
-    axios.get(`${url.API2}/ebis_getdeallistcc/stage/SUBMISSION/categ/${maindiv}/deal/ALL/div/${div}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/ALL/witel/ALL/mitra/${item}`).then((res) => {
+    RNFetchBlob.config({
+      trusty:true
+    }). fetch('GET', `${url.API2}/ebis_getdeallistcc/stage/SUBMISSION/categ/${maindiv}/deal/ALL/div/${div}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/ALL/witel/ALL/mitra/${item}`)
+    .then((res) => {
       this.setState({dataTampung:res.data, loaderTampilDetail:false });
     }).catch((err) => {
       this.setState({
@@ -589,7 +634,10 @@ class DesDetailScreens extends Component{
       visibleModal: !this.state.visibleModal,
       loaderTampilDetail:true
     })
-    axios.get(`${url.API2}/ebis_getdeallistcc/stage/SUBMISSION/categ/${maindiv}/deal/ALL/div/${div}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/ALL/witel/ALL/mitra/${item}`).then((res) => {
+    RNFetchBlob.config({
+      trusty:true
+    }). fetch('GET', `${url.API2}/ebis_getdeallistcc/stage/SUBMISSION/categ/${maindiv}/deal/ALL/div/${div}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/ALL/witel/ALL/mitra/${item}`)
+    .then((res) => {
       this.setState({dataTampung:res.data, loaderTampilDetail:false });
     }).catch((err) => {
       this.setState({

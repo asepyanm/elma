@@ -16,6 +16,7 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 import axios from 'axios';
 import { connect } from "react-redux";
 
+import RNFetchBlob from 'react-native-fetch-blob'
 
 //global component
 import renderIf from '../../../components/renderIf';
@@ -142,16 +143,25 @@ _saveToken=async(token)=>{
     console.log(error);
   });
   }
+
+
   getLogin(){
     const {username, password} = this.state;  
       // console.log(`value username ${username}`);
       // console.log(`value password ${password}`);
       // console.log(`value state ${JSON.stringify(this.state)}`);
+
+    // this.props.dispatch({
+    //   type:'LOGIN',
+    //   payload:axios.get(`${url.API}/ebis_getlogin?user_id=${username}&user_pass=${password}`),
+    // })
+
     this.props.dispatch({
       type:'LOGIN',
-      payload:axios.get(`${url.API}/ebis_getlogin?user_id=${username}&user_pass=${password}`),
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getlogin?user_id=${username}&user_pass=${password}`),
     })
-    // console.log(`value props ${JSON.stringify(this.props)}`);
 
   }
 

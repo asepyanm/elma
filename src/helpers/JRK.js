@@ -1,6 +1,9 @@
 import axios from 'axios';
 import {AsyncStorage} from "react-native";
 import url from "../config/api_service"
+
+import RNFetchBlob from 'react-native-fetch-blob'
+
 class JRK{
     tokentelkom;
     userid="";
@@ -14,7 +17,11 @@ class JRK{
       let userid = await AsyncStorage.getItem('user_id')
       let urldata=url.API+"/backgroundnotif/"+userid+"/"+fcmtoken
       // console.log(urldata)
-      return axios.get(urldata)
+      // return axios.get(urldata)
+
+      return RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', urldata)
     }
     async _getStorageValue(key){
       try{
@@ -58,26 +65,42 @@ class JRK{
         // console.log(value);
         let urlstate=url.API+"/fcmdevicestate/"+value+"/"+status
         // console.log(urlstate)
-        return axios.get(urlstate)
-      
+        // return axios.get(urlstate)
+        return RNFetchBlob.config({
+          trusty:true
+        }). fetch('GET', urldata)
       }
     telkomToken(){
         var postData = {
             'grant_type':'client_credentials',
             'mode':'x-www-form-urlencoded'
           }
-          axios({
-            method: 'post',
-            url: url.APITELKOM+'/token/',
+          // axios({
+          //   method: 'post',
+          //   url: url.APITELKOM+'/token/',
+          //   headers:{
+          //       'Content-Type':'application/x-www-form-urlencoded',
+          //       'Authorization': 'Basic Y3QyM3p6Z1NMVVI5M1J6WWREUENyZ0VYU25zYTpTSXNzVVdNdzdOckhhNU9FUWgzNU1VN2NaVkVh:'
+          //   },
+          //   params:postData
+          // }).then((response) => {
+          //   console.log(response)
+          // })
+          // .catch( (error) =>   console.log(error) ) 
+
+          RNFetchBlob.config({
+            trusty:true
+          }). fetch('POST', `${url.API}/ebis_getlogin?user_id=${username}&user_pass=${password}`,{
             headers:{
-                'Content-Type':'application/x-www-form-urlencoded',
-                'Authorization': 'Basic Y3QyM3p6Z1NMVVI5M1J6WWREUENyZ0VYU25zYTpTSXNzVVdNdzdOckhhNU9FUWgzNU1VN2NaVkVh:'
+              'Content-Type':'application/x-www-form-urlencoded',
+              'Authorization': 'Basic Y3QyM3p6Z1NMVVI5M1J6WWREUENyZ0VYU25zYTpTSXNzVVdNdzdOckhhNU9FUWgzNU1VN2NaVkVh:'
             },
             params:postData
           }).then((response) => {
-            console.log(response)
-          })
-          .catch( (error) =>   console.log(error) ) 
+              console.log(response)
+            })
+            .catch( (error) =>   console.log(error) ) 
+    
          
     }
 

@@ -3,6 +3,7 @@ package com.elma_cfue;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.RNFetchBlob.RNFetchBlobPackage;
 import com.transistorsoft.rnbackgroundfetch.RNBackgroundFetchPackage;
 import io.realm.react.RealmReactPackage;
 import com.rnfs.RNFSPackage;
@@ -30,6 +31,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNFetchBlobPackage(),
             new RNBackgroundFetchPackage(),
             new RealmReactPackage(),
             new RNFSPackage(),

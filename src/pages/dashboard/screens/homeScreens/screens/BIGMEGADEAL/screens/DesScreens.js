@@ -14,6 +14,8 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 import ModalSelector from 'react-native-modal-selector';
 import {connect} from 'react-redux';
 import axios from 'axios';
+import RNFetchBlob from 'react-native-fetch-blob'
+
 
 //global
 import url from '../../../../../../../config/api_service';
@@ -45,26 +47,38 @@ class DesScreens extends Component{
 
     this.props.dispatch({
       type:'DES_HOME_BMD',
-      payload:axios.get(`${url.API2}/ebis_getdealmain/div/DES/startdate/${sDate}/enddate/${eDate}/treg/ALL/witel/ALL/`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getdealmain/div/DES/startdate/${sDate}/enddate/${eDate}/treg/ALL/witel/ALL/`),
     });
     this.props.dispatch({
       type:'DES_HOME_CURRENT_BMD',
-      payload:axios.get(`${url.API2}/ebis_getdealcurr/div/DES/treg/ALL/witel/ALL/`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getdealcurr/div/DES/treg/ALL/witel/ALL/`),
     });
     this.props.dispatch({
       type:'DES_HOME_SUBMISSION_BMD',
-      payload:axios.get(`${url.API2}/ebis_getdealsub/startdate/${sDate}/enddate/${eDate}/div/DES/treg/ALL/witel/ALL/`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getdealsub/startdate/${sDate}/enddate/${eDate}/div/DES/treg/ALL/witel/ALL/`),
     });
 
     this.props.dispatch({
       type:'DES_HOME_DOWNLOAD_BMD',
-      payload:axios.get(`${url.API2}/ebis_getdealrawdata/startdate/${sDate}/enddate/${eDate}/div/DES/treg/ALL/witel/ALL`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getdealrawdata/startdate/${sDate}/enddate/${eDate}/div/DES/treg/ALL/witel/ALL`),
     });
 
     this.props.dispatch({
       type:'DES_LASTUPDATE_BMD',
-      payload:axios.get(`${url.API2}/ebis_lastime`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_lastime`),
     });
+
+    
   }
 
   downloadFileExcel= async () =>{
