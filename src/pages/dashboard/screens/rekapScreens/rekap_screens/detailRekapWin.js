@@ -15,6 +15,7 @@ import { Header, Icon, Left, Right, Body, Button, Title, Tab, Tabs, Content, Con
 import { connect } from 'react-redux';
 import Modal from "react-native-modal";
 import axios from 'axios';
+import RNFetchBlob from 'react-native-fetch-blob'
 
 //global
 //import renderIf from '../../components/renderIf'
@@ -43,7 +44,9 @@ class detailRekapWin extends Component {
 
     this.props.dispatch({
       type: 'DETAIL_REKAP_WIN',
-      payload: axios.get(`${url.API}/ebis_getnotificationproject/status/${this.state.status}/group/${this.state.group}`)
+      payload: RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getnotificationproject/status/${this.state.status}/group/${this.state.group}`)
     })
    
   }
@@ -54,7 +57,9 @@ class detailRekapWin extends Component {
       loaderTampilDetail:true,
       pressed: false
     })
-    axios.get(`${url.API}/ebis_getnotificationproject/status/${this.state.status}/group/${this.state.group}/notifid/${this.state.id}`).then((res) => {
+    RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getnotificationproject/status/${this.state.status}/group/${this.state.group}/notifid/${this.state.id}`).then((res) => {
       this.setState({dataTampung:res.data, loaderTampilDetail:false });
     }).catch((err) => {
       this.setState({
@@ -70,7 +75,9 @@ class detailRekapWin extends Component {
       pressed: true,
       loaderTampilDetail: true
     })
-    axios.get(`${url.API}/ebis_getdeliveryproject/div/${level.level}/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/range/DELAY/nmitra/ALL/idproject/${level.id}`).then((res) => {
+    RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getdeliveryproject/div/${level.level}/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/range/DELAY/nmitra/ALL/idproject/${level.id}`).then((res) => {
       this.setState({ dataPopup: res.data, loaderTampilDetail: false });
     }).catch((err) => {
       this.setState({

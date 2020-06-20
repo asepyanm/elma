@@ -12,6 +12,7 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 import ModalSelector from 'react-native-modal-selector';
 import {connect} from 'react-redux';
 import axios from 'axios';
+import RNFetchBlob from 'react-native-fetch-blob'
 
 //global
 import url from '../../../../../../../config/api_service';
@@ -34,12 +35,16 @@ class DesScreens extends Component{
     this.setState({date1:sDate,date2:eDate})
     this.props.dispatch({
       type:'DES_HOME_FILTER_PERIODE',
-      payload:axios.get(`${url.API}/ebis_getlopmain_ytd/div/DES/date1/${sDate}/date2/${eDate}/treg/ALL/witel/ALL`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getlopmain_ytd/div/DES/date1/${sDate}/date2/${eDate}/treg/ALL/witel/ALL`)
     });
 
     this.props.dispatch({
       type:'DES_LASTUPDATE',
-      payload:axios.get(`${url.API}/ebis_lastime`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_lastime`)
     });
 
   }

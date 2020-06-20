@@ -14,6 +14,7 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 import ModalSelector from 'react-native-modal-selector';
 import {connect} from 'react-redux';
 import axios from 'axios';
+import RNFetchBlob from 'react-native-fetch-blob'
 
 //global
 import url from '../../../../../../../config/api_service';
@@ -43,25 +44,36 @@ class DgsScreens extends Component{
 
     this.props.dispatch({
       type:'DGS_HOME_BMD',
-      payload:axios.get(`${url.API2}/ebis_getdealmain/div/DGS/startdate/${sDate}/enddate/${eDate}/treg/ALL/witel/ALL/`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API2}/ebis_getdealmain/div/DGS/startdate/${sDate}/enddate/${eDate}/treg/ALL/witel/ALL/`)
+
     });
     this.props.dispatch({
       type:'DGS_HOME_CURRENT_BMD',
-      payload:axios.get(`${url.API2}/ebis_getdealcurr/div/DGS/treg/ALL/witel/ALL/`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API2}/ebis_getdealcurr/div/DGS/treg/ALL/witel/ALL/`)
     });
     this.props.dispatch({
       type:'DGS_HOME_SUBMISSION_BMD',
-      payload:axios.get(`${url.API2}/ebis_getdealsub/startdate/${sDate}/enddate/${eDate}/div/DGS/treg/ALL/witel/ALL/`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API2}/ebis_getdealsub/startdate/${sDate}/enddate/${eDate}/div/DGS/treg/ALL/witel/ALL/`)
     });
 
     this.props.dispatch({
       type:'DGS_HOME_DOWNLOAD_BMD',
-      payload:axios.get(`${url.API2}/ebis_getdealrawdata/startdate/${sDate}/enddate/${eDate}/div/DGS/treg/ALL/witel/ALL`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API2}/ebis_getdealrawdata/startdate/${sDate}/enddate/${eDate}/div/DGS/treg/ALL/witel/ALL`)
     });
 
     this.props.dispatch({
       type:'DGS_LASTUPDATE_BMD',
-      payload:axios.get(`${url.API2}/ebis_lastime`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API2}/ebis_lastime`)
     });
   }
 

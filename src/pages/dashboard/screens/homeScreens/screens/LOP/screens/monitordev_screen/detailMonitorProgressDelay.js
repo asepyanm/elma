@@ -15,6 +15,7 @@ import { Header, Icon, Left, Right, Body, Button, Title, Tab, Tabs, Content, Con
 import { connect } from 'react-redux';
 import Modal from "react-native-modal";
 import axios from 'axios';
+import RNFetchBlob from 'react-native-fetch-blob'
 
 //global
 import renderIf from '../../../../../../../components/renderIf';
@@ -88,92 +89,132 @@ class detailMonitorProgressDelay extends Component {
 
     this.props.dispatch({
       type: 'MONITOR_DLV_EBIS_DETAIL_OGP_DELAY',
-      payload: axios.get(`${url.API}/ebis_getdeliverycc/div/EBIS/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/state/OGP/nmitra/ALL/range/DELAY`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getdeliverycc/div/EBIS/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/state/OGP/nmitra/ALL/range/DELAY`)
     })
     this.props.dispatch({
       type: 'MONITOR_DLV_EBIS_DETAIL_OGP_DELAY_SUBS',
-      payload: axios.get(`${url.API}/ebis_getdeliverycc/div/EBIS/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/state/OGP/nmitra/CFU/range/DELAY`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getdeliverycc/div/EBIS/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/state/OGP/nmitra/CFU/range/DELAY`)
     })
     this.props.dispatch({
       type: 'MONITOR_DLV_EBIS_DETAIL_OGP_DELAY_MITRA',
-      payload: axios.get(`${url.API}/ebis_getdeliverycc/div/EBIS/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/state/OGP/nmitra/MITRA/range/DELAY`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getdeliverycc/div/EBIS/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/state/OGP/nmitra/MITRA/range/DELAY`)
     })
     this.props.dispatch({
       type: 'MONITOR_DLV_EBIS_DETAIL_OGP_DELAY_TELKOM',
-      payload: axios.get(`${url.API}/ebis_getdeliverycc/div/EBIS/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/state/OGP/nmitra/TELKOM/range/DELAY`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getdeliverycc/div/EBIS/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/state/OGP/nmitra/TELKOM/range/DELAY`)
     })
 
 
      //EBIS DETAIL DLV
      this.props.dispatch({
       type: 'MONITOR_DLV_EBIS_DETAIL_OGP_PROGRESS_7',
-      payload: axios.get(`${url.API}/ebis_getdeliverycc/div/EBIS/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/nmitra/ALL/range/DELAY`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getdeliverycc/div/EBIS/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/nmitra/ALL/range/DELAY`)
     })
     this.props.dispatch({
       type: 'MONITOR_DLV_EBIS_DETAIL_OGP_PROGRESS_7_SUBS',
-      payload: axios.get(`${url.API}/ebis_getdeliverycc/div/EBIS/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/nmitra/CFU/range/DELAY`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getdeliverycc/div/EBIS/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/nmitra/CFU/range/DELAY`)
     })
     this.props.dispatch({
       type: 'MONITOR_DLV_EBIS_DETAIL_OGP_PROGRESS_7_MITRA',
-      payload: axios.get(`${url.API}/ebis_getdeliverycc/div/EBIS/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/nmitra/MITRA/range/DELAY`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getdeliverycc/div/EBIS/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/nmitra/MITRA/range/DELAY`)
     })
     this.props.dispatch({
       type: 'MONITOR_DLV_EBIS_DETAIL_OGP_PROGRESS_7_TELKOM',
-      payload: axios.get(`${url.API}/ebis_getdeliverycc/div/EBIS/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/nmitra/TELKOM/range/DELAY`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getdeliverycc/div/EBIS/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/nmitra/TELKOM/range/DELAY`)
     })
 
     //DES DETAIL DLV
     this.props.dispatch({
       type: 'MONITOR_DLV_DES_DETAIL_OGP_PROGRESS_7',
-      payload: axios.get(`${url.API}/ebis_getdeliverycc/div/DES/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/nmitra/ALL/range/DELAY`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getdeliverycc/div/DES/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/nmitra/ALL/range/DELAY`)
     })
     this.props.dispatch({
       type: 'MONITOR_DLV_DES_DETAIL_OGP_PROGRESS_7_SUBS',
-      payload: axios.get(`${url.API}/ebis_getdeliverycc/div/DES/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/nmitra/CFU/range/DELAY`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getdeliverycc/div/DES/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/nmitra/CFU/range/DELAY`)
     })
     this.props.dispatch({
       type: 'MONITOR_DLV_DES_DETAIL_OGP_PROGRESS_7_MITRA',
-      payload: axios.get(`${url.API}/ebis_getdeliverycc/div/DES/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/nmitra/MITRA/range/DELAY`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getdeliverycc/div/DES/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/nmitra/MITRA/range/DELAY`)
     })
     this.props.dispatch({
       type: 'MONITOR_DLV_DES_DETAIL_OGP_PROGRESS_7_TELKOM',
-      payload: axios.get(`${url.API}/ebis_getdeliverycc/div/DES/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/nmitra/TELKOM/range/DELAY`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getdeliverycc/div/DES/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/nmitra/TELKOM/range/DELAY`)
     })
 
     //DBS DETAIL DLV
     this.props.dispatch({
       type: 'MONITOR_DLV_DBS_DETAIL_OGP_PROGRESS_7',
-      payload: axios.get(`${url.API}/ebis_getdeliverycc/div/DBS/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/nmitra/ALL/range/DELAY`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getdeliverycc/div/DBS/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/nmitra/ALL/range/DELAY`)
     })
     this.props.dispatch({
       type: 'MONITOR_DLV_DBS_DETAIL_OGP_PROGRESS_7_SUBS',
-      payload: axios.get(`${url.API}/ebis_getdeliverycc/div/DBS/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/nmitra/CFU/range/DELAY`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getdeliverycc/div/DBS/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/nmitra/CFU/range/DELAY`)
     })
     this.props.dispatch({
       type: 'MONITOR_DLV_DBS_DETAIL_OGP_PROGRESS_7_MITRA',
-      payload: axios.get(`${url.API}/ebis_getdeliverycc/div/DBS/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/nmitra/MITRA/range/DELAY`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getdeliverycc/div/DBS/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/nmitra/MITRA/range/DELAY`)
     })
     this.props.dispatch({
       type: 'MONITOR_DLV_DBS_DETAIL_OGP_PROGRESS_7_TELKOM',
-      payload: axios.get(`${url.API}/ebis_getdeliverycc/div/DBS/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/nmitra/TELKOM/range/DELAY`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getdeliverycc/div/DBS/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/nmitra/TELKOM/range/DELAY`)
     })
 
     //DGS DETAIL DLV
     this.props.dispatch({
       type: 'MONITOR_DLV_DGS_DETAIL_OGP_PROGRESS_7',
-      payload: axios.get(`${url.API}/ebis_getdeliverycc/div/DGS/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/nmitra/ALL/range/DELAY`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getdeliverycc/div/DGS/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/nmitra/ALL/range/DELAY`)
     })
     this.props.dispatch({
       type: 'MONITOR_DLV_DGS_DETAIL_OGP_PROGRESS_7_SUBS',
-      payload: axios.get(`${url.API}/ebis_getdeliverycc/div/DGS/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/nmitra/CFU/range/DELAY`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getdeliverycc/div/DGS/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/nmitra/CFU/range/DELAY`)
     })
     this.props.dispatch({
       type: 'MONITOR_DLV_DGS_DETAIL_OGP_PROGRESS_7_MITRA',
-      payload: axios.get(`${url.API}/ebis_getdeliverycc/div/DGS/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/nmitra/MITRA/range/DELAY`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getdeliverycc/div/DGS/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/nmitra/MITRA/range/DELAY`)
     })
     this.props.dispatch({
       type: 'MONITOR_DLV_DGS_DETAIL_OGP_PROGRESS_7_TELKOM',
-      payload: axios.get(`${url.API}/ebis_getdeliverycc/div/DGS/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/nmitra/TELKOM/range/DELAY`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getdeliverycc/div/DGS/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/nmitra/TELKOM/range/DELAY`)
     })
    
   }
@@ -184,7 +225,9 @@ class detailMonitorProgressDelay extends Component {
       loaderTampilDetail:true,
       pressed: false
     })
-    axios.get(`${url.API}/ebis_getdeliveryproject/div/${div}/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/range/DELAY/nmitra/${nmitra}/cc/${mitra}`).then((res) => {
+    RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getdeliveryproject/div/${div}/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/range/DELAY/nmitra/${nmitra}/cc/${mitra}`).then((res) => {
       this.setState({dataTampung:res.data, loaderTampilDetail:false });
     }).catch((err) => {
       this.setState({
@@ -200,7 +243,9 @@ class detailMonitorProgressDelay extends Component {
       pressed: true,
       loaderTampilDetail: true
     })
-    axios.get(`${url.API}/ebis_getdeliveryproject/div/${level.level}/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/range/DELAY/nmitra/ALL/idproject/${level.id}`).then((res) => {
+    RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getdeliveryproject/div/${level.level}/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/range/DELAY/nmitra/ALL/idproject/${level.id}`).then((res) => {
       this.setState({ OgpData: res.data, loaderTampilDetail: false });
     }).catch((err) => {
       this.setState({

@@ -15,6 +15,7 @@ import {Header, Icon, Left, Right, Body, Button, Title, Tab, Tabs, Content, Cont
 import {connect} from 'react-redux';
 import Modal from "react-native-modal";
 import axios from 'axios';
+import RNFetchBlob from 'react-native-fetch-blob'
 
 //global
 import renderIf from '../../../../../../../components/renderIf';
@@ -58,91 +59,131 @@ class DesDetailScreens extends Component{
     //get header ALL
     this.props.dispatch({
       type:'HEADER_SUBMISSION_EBIS',
-      payload:axios.get(`${url.API}/ebis_getlopmain_ytd/div/EBIS/date1/${this.state.startdate}/date2/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getlopmain_ytd/div/EBIS/date1/${this.state.startdate}/date2/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
     });
     this.props.dispatch({
       type:'HEADER_SUBMISSION_DES',
-      payload:axios.get(`${url.API}/ebis_getlopmain_ytd/div/DES/date1/${this.state.startdate}/date2/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getlopmain_ytd/div/DES/date1/${this.state.startdate}/date2/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
     });
     this.props.dispatch({
       type:'HEADER_SUBMISSION_DBS',
-      payload:axios.get(`${url.API}/ebis_getlopmain_ytd/div/DBS/date1/${this.state.startdate}/date2/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getlopmain_ytd/div/DBS/date1/${this.state.startdate}/date2/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
     });
     this.props.dispatch({
       type:'HEADER_SUBMISSION_DGS',
-      payload:axios.get(`${url.API}/ebis_getlopmain_ytd/div/DGS/date1/${this.state.startdate}/date2/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getlopmain_ytd/div/DGS/date1/${this.state.startdate}/date2/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
     });
 
     //get data ALL
     this.props.dispatch({
       type:'DETAIL_SUBMISSION_EBIS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/SUBMISSION/div/EBIS/maindiv/ALL/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/mitra/ALL/reg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getstage3/stage/SUBMISSION/div/EBIS/maindiv/ALL/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/mitra/ALL/reg/${this.state.reg}/witel/${this.state.witel}`)
     });
     this.props.dispatch({
       type:'DETAIL_SUBMISSION_DES',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/SUBMISSION/div/DES/maindiv/DES/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/mitra/ALL/reg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getstage3/stage/SUBMISSION/div/DES/maindiv/DES/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/mitra/ALL/reg/${this.state.reg}/witel/${this.state.witel}`)
     });
     this.props.dispatch({
       type:'DETAIL_SUBMISSION_DBS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/SUBMISSION/div/DBS/maindiv/DBS/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/mitra/ALL/reg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getstage3/stage/SUBMISSION/div/DBS/maindiv/DBS/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/mitra/ALL/reg/${this.state.reg}/witel/${this.state.witel}`)
     });
     this.props.dispatch({
       type:'DETAIL_SUBMISSION_DGS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/SUBMISSION/div/DGS/maindiv/DGS/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/mitra/ALL/reg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getstage3/stage/SUBMISSION/div/DGS/maindiv/DGS/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/mitra/ALL/reg/${this.state.reg}/witel/${this.state.witel}`)
     });
      
   //get data detail SUBS
     this.props.dispatch({
       type:'DETAIL_SUBS_SUBMISSION_EBIS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/SUBMISSION/div/EBIS/maindiv/ALL/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/mitra/CFU/reg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getstage3/stage/SUBMISSION/div/EBIS/maindiv/ALL/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/mitra/CFU/reg/${this.state.reg}/witel/${this.state.witel}`)
     });
     this.props.dispatch({
       type:'DETAIL_SUBS_SUBMISSION_DES',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/SUBMISSION/div/DES/maindiv/DES/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/mitra/CFU/reg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getstage3/stage/SUBMISSION/div/DES/maindiv/DES/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/mitra/CFU/reg/${this.state.reg}/witel/${this.state.witel}`)
     });
     this.props.dispatch({
       type:'DETAIL_SUBS_SUBMISSION_DBS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/SUBMISSION/div/DBS/maindiv/DBS/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/mitra/CFU/reg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getstage3/stage/SUBMISSION/div/DBS/maindiv/DBS/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/mitra/CFU/reg/${this.state.reg}/witel/${this.state.witel}`)
     });
     this.props.dispatch({
       type:'DETAIL_SUBS_SUBMISSION_DGS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/SUBMISSION/div/DGS/maindiv/DGS/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/mitra/CFU/reg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getstage3/stage/SUBMISSION/div/DGS/maindiv/DGS/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/mitra/CFU/reg/${this.state.reg}/witel/${this.state.witel}`)
     });
 
     //get data detail MITRA
     this.props.dispatch({
       type:'DETAIL_MITRA_SUBMISSION_EBIS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/SUBMISSION/div/EBIS/maindiv/ALL/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/mitra/MITRA/reg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getstage3/stage/SUBMISSION/div/EBIS/maindiv/ALL/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/mitra/MITRA/reg/${this.state.reg}/witel/${this.state.witel}`)
     });
     this.props.dispatch({
       type:'DETAIL_MITRA_SUBMISSION_DES',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/SUBMISSION/div/DES/maindiv/DES/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/mitra/MITRA/reg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getstage3/stage/SUBMISSION/div/DES/maindiv/DES/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/mitra/MITRA/reg/${this.state.reg}/witel/${this.state.witel}`)
     });
     this.props.dispatch({
       type:'DETAIL_MITRA_SUBMISSION_DBS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/SUBMISSION/div/DBS/maindiv/DBS/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/mitra/MITRA/reg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getstage3/stage/SUBMISSION/div/DBS/maindiv/DBS/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/mitra/MITRA/reg/${this.state.reg}/witel/${this.state.witel}`)
     });
     this.props.dispatch({
       type:'DETAIL_MITRA_SUBMISSION_DGS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/SUBMISSION/div/DGS/maindiv/DGS/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/mitra/MITRA/reg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getstage3/stage/SUBMISSION/div/DGS/maindiv/DGS/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/mitra/MITRA/reg/${this.state.reg}/witel/${this.state.witel}`)
     });
     
     //get data detail TELKOM
     this.props.dispatch({
       type:'DETAIL_TELKOM_SUBMISSION_EBIS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/SUBMISSION/div/EBIS/maindiv/ALL/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/mitra/TELKOM/reg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getstage3/stage/SUBMISSION/div/EBIS/maindiv/ALL/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/mitra/TELKOM/reg/${this.state.reg}/witel/${this.state.witel}`)
     });
     this.props.dispatch({
       type:'DETAIL_TELKOM_SUBMISSION_DES',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/SUBMISSION/div/DES/maindiv/DES/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/mitra/TELKOM/reg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getstage3/stage/SUBMISSION/div/DES/maindiv/DES/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/mitra/TELKOM/reg/${this.state.reg}/witel/${this.state.witel}`)
     });
     this.props.dispatch({
       type:'DETAIL_TELKOM_SUBMISSION_DBS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/SUBMISSION/div/DBS/maindiv/DBS/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/mitra/TELKOM/reg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getstage3/stage/SUBMISSION/div/DBS/maindiv/DBS/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/mitra/TELKOM/reg/${this.state.reg}/witel/${this.state.witel}`)
     });
     this.props.dispatch({
       type:'DETAIL_TELKOM_SUBMISSION_DGS',
-      payload:axios.get(`${url.API}/ebis_getstage3/stage/SUBMISSION/div/DGS/maindiv/DGS/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/mitra/TELKOM/reg/${this.state.reg}/witel/${this.state.witel}`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getstage3/stage/SUBMISSION/div/DGS/maindiv/DGS/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/mitra/TELKOM/reg/${this.state.reg}/witel/${this.state.witel}`)
     }); 
 
   }
@@ -154,7 +195,9 @@ class DesDetailScreens extends Component{
       //visibleModalDetail:false,
       loaderTampilDetailDetail:true
     })
-    axios.get(`${url.API}/ebis_getstage5/stage/SUBMISSION/div/ALL/maindiv/ALL/mitra/ALL/nmitra/${item.stage_01}/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/cc/${item.stage_06}/project/${item.stage_07}`).then((res) => {
+    RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getstage5/stage/SUBMISSION/div/ALL/maindiv/ALL/mitra/ALL/nmitra/${item.stage_01}/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/cc/${item.stage_06}/project/${item.stage_07}`).then((res) => {
       this.setState({dataTampungDetail:res.data, loaderTampilDetailDetail:false });
     }).catch((err) => {
       this.setState({
@@ -311,7 +354,9 @@ class DesDetailScreens extends Component{
       visibleModal: !this.state.visibleModal,
       loaderTampilDetail:true
     })
-    axios.get(`${url.API}/ebis_getstage5/stage/SUBMISSION/div/${div}/maindiv/${maindiv}/mainseg/ALL/mitra/ALL/nmitra/${item}/start_date/${this.state.startdate}/end_date/${this.state.enddate}`).then((res) => {
+    RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getstage5/stage/SUBMISSION/div/${div}/maindiv/${maindiv}/mainseg/ALL/mitra/ALL/nmitra/${item}/start_date/${this.state.startdate}/end_date/${this.state.enddate}`).then((res) => {
       this.setState({dataTampung:res.data, loaderTampilDetail:false });
     }).catch((err) => {
       this.setState({
@@ -397,7 +442,9 @@ class DesDetailScreens extends Component{
       visibleModal: !this.state.visibleModal,
       loaderTampilDetail:true
     })
-    axios.get(`${url.API}/ebis_getstage5/stage/SUBMISSION/div/${div}/maindiv/${maindiv}/mainseg/ALL/mitra/CFU/nmitra/${item}/start_date/${this.state.startdate}/end_date/${this.state.enddate}`).then((res) => {
+    RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getstage5/stage/SUBMISSION/div/${div}/maindiv/${maindiv}/mainseg/ALL/mitra/CFU/nmitra/${item}/start_date/${this.state.startdate}/end_date/${this.state.enddate}`).then((res) => {
       this.setState({dataTampung:res.data, loaderTampilDetail:false });
     }).catch((err) => {
       this.setState({
@@ -482,7 +529,9 @@ class DesDetailScreens extends Component{
       visibleModal: !this.state.visibleModal,
       loaderTampilDetail:true
     })
-    axios.get(`${url.API}/ebis_getstage5/stage/SUBMISSION/div/${div}/maindiv/${maindiv}/mainseg/ALL/mitra/MITRA/nmitra/${item}/start_date/${this.state.startdate}/end_date/${this.state.enddate}`).then((res) => {
+    RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getstage5/stage/SUBMISSION/div/${div}/maindiv/${maindiv}/mainseg/ALL/mitra/MITRA/nmitra/${item}/start_date/${this.state.startdate}/end_date/${this.state.enddate}`).then((res) => {
       this.setState({dataTampung:res.data, loaderTampilDetail:false });
     }).catch((err) => {
       this.setState({
@@ -568,7 +617,9 @@ class DesDetailScreens extends Component{
       loaderTampilDetail:true
     })
     console.log('jrk',`${url.API}/ebis_getstage5/stage/SUBMISSION/div/${div}/maindiv/${maindiv}/mainseg/ALL/mitra/TELKOM/nmitra/${item}/start_date/${this.state.startdate}/end_date/${this.state.enddate}`)
-    axios.get(`${url.API}/ebis_getstage5/stage/SUBMISSION/div/${div}/maindiv/${maindiv}/mainseg/ALL/mitra/TELKOM/nmitra/${item}/start_date/${this.state.startdate}/end_date/${this.state.enddate}`).then((res) => {
+    RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getstage5/stage/SUBMISSION/div/${div}/maindiv/${maindiv}/mainseg/ALL/mitra/TELKOM/nmitra/${item}/start_date/${this.state.startdate}/end_date/${this.state.enddate}`).then((res) => {
       this.setState({dataTampung:res.data, loaderTampilDetail:false });
     }).catch((err) => {
       this.setState({

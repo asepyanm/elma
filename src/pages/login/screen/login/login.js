@@ -83,7 +83,9 @@ _saveToken=async(token)=>{
                                 });
             });   
           }
-          await axios.get(`${url.API}/fcmsavetoken/${token}/${this.state.user_id}/${this.state.group}/ya`)
+          await RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/fcmsavetoken/${token}/${this.state.user_id}/${this.state.group}/ya`)
 }
   _cekSession= async () => {
     await AsyncStorage.getItem('user_id', (error, result) => {
@@ -123,7 +125,9 @@ _saveToken=async(token)=>{
   }
   setSessionLogin = () => {
     const {username, password} = this.state;
-    axios.get(`${url.API}/ebis_getlogin?user_id=${username}&user_pass=${password}`).then(async(response) => {
+    RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getlogin?user_id=${username}&user_pass=${password}`).then(async(response) => {
     console.log(`response.data login ${JSON.stringify(response.data)}`);
       const dataSession=response.data[0];
       AsyncStorage.setItem('user_id',response.data[0].USER_ID);

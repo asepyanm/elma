@@ -11,6 +11,7 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 import {connect} from 'react-redux';
 import ModalSelector from 'react-native-modal-selector';
 import axios from 'axios';
+import RNFetchBlob from 'react-native-fetch-blob'
 
 //global
 import url from '../../../../../../../config/api_service';
@@ -30,12 +31,16 @@ class DesScreens extends Component{
   componentWillMount(){
     this.props.dispatch({
       type:'DES_ABC_TREG',
-      payload:axios.get(`${url.API}/ebis_getlopmainabc_treg/witel/ALL/treg/ALL/div/DES`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getlopmainabc_treg/witel/ALL/treg/ALL/div/DES`)
     })
 
     this.props.dispatch({
       type:'DES_CURRENT_ABC_TREG',
-      payload:axios.get(`${url.API}/ebis_getlopmaincurrentabc_treg/witel/ALL/treg/ALL/div/DES`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getlopmaincurrentabc_treg/witel/ALL/treg/ALL/div/DES`)
     })
   }
 
@@ -48,12 +53,16 @@ class DesScreens extends Component{
     if(dataFilter === 'All'){
       this.props.dispatch({
         type:'DES_ABC_TREG',
-        payload:axios.get(`${url.API}/ebis_getlopmainabc_treg/witel/ALL/treg/ALL/div/DES`)
+        payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getlopmainabc_treg/witel/ALL/treg/ALL/div/DES`)
       })
   
       this.props.dispatch({
         type:'DES_CURRENT_ABC_TREG',
-        payload:axios.get(`${url.API}/ebis_getlopmaincurrentabc_treg/witel/ALL/treg/ALL/div/DES`)
+        payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getlopmaincurrentabc_treg/witel/ALL/treg/ALL/div/DES`)
       })
 
       this.setState({
@@ -61,7 +70,9 @@ class DesScreens extends Component{
         statusGetReg:false
       })
     } else {
-      axios.get(`${url.API}/ebis_getwitel/reg/${dataFilter}`).then((res)=>{
+      RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getwitel/reg/${dataFilter}`).then((res)=>{
         console.log(res);
         this.setState({
           statusRegTreg:dataFilter,
@@ -82,12 +93,16 @@ class DesScreens extends Component{
 
     this.props.dispatch({
       type:'DES_ABC_TREG',
-      payload:axios.get(`${url.API}/ebis_getlopmainabc_treg/witel/${dataWitel}/treg/${statusRegTreg}/div/DES`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getlopmainabc_treg/witel/${dataWitel}/treg/${statusRegTreg}/div/DES`)
     })
 
     this.props.dispatch({
       type:'DES_CURRENT_ABC_TREG',
-      payload:axios.get(`${url.API}/ebis_getlopmaincurrentabc_treg/witel/${dataWitel}/treg/${statusRegTreg}/div/DES`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getlopmaincurrentabc_treg/witel/${dataWitel}/treg/${statusRegTreg}/div/DES`)
     })
   }
   

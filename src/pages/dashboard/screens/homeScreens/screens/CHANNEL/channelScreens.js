@@ -12,7 +12,6 @@ import { Container, Header, Content, Tab, Tabs } from 'native-base';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import ModalSelector from 'react-native-modal-selector';
 import {connect} from 'react-redux';
-//import axios from 'axios';
 
 //global
 //import url from '../../../../../../config/api_service';

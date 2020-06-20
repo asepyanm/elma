@@ -14,6 +14,7 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 import ModalSelector from 'react-native-modal-selector';
 import {connect} from 'react-redux';
 import axios from 'axios';
+import RNFetchBlob from 'react-native-fetch-blob'
 
 
 //global
@@ -46,25 +47,39 @@ class DbsScreens extends Component{
 
     this.props.dispatch({
       type:'DBS_HOME_CHANNEL',
-      payload:axios.get(`${url.API2}/ebis_getchannelmain/div/DBS/startdate/${sDate}/enddate/${eDate}/treg/ALL/witel/ALL/`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API2}/ebis_getchannelmain/div/DBS/startdate/${sDate}/enddate/${eDate}/treg/ALL/witel/ALL/`)
+
     });
     this.props.dispatch({
       type:'DBS_HOME_CURRENT_CHANNEL',
-      payload:axios.get(`${url.API2}/ebis_getchannelcurr/div/DBS/treg/ALL/witel/ALL/`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API2}/ebis_getchannelcurr/div/DBS/treg/ALL/witel/ALL/`)
+
     });
     this.props.dispatch({
       type:'DBS_HOME_SUBMISSION_CHANNEL',
-      payload:axios.get(`${url.API2}/ebis_getchannelsub/startdate/${sDate}/enddate/${eDate}/div/DBS/treg/ALL/witel/ALL/`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API2}/ebis_getchannelsub/startdate/${sDate}/enddate/${eDate}/div/DBS/treg/ALL/witel/ALL/`)
+
     });
 
     this.props.dispatch({
       type:'DBS_HOME_DOWNLOAD_CHANNEL',
-      payload:axios.get(`${url.API2}/ebis_getchannelrawdata/startdate/${sDate}/enddate/${eDate}/div/DBS/treg/ALL/witel/ALL`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API2}/ebis_getchannelrawdata/startdate/${sDate}/enddate/${eDate}/div/DBS/treg/ALL/witel/ALL`)
     });
 
     this.props.dispatch({
       type:'DBS_LASTUPDATE_CHANNEL',
-      payload:axios.get(`${url.API2}/ebis_lastime`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API2}/ebis_lastime`)
+
     });
 
   }
