@@ -90,7 +90,7 @@ class JRK{
 
           RNFetchBlob.config({
             trusty:true
-          }). fetch('POST', `${url.API}/ebis_getlogin?user_id=${username}&user_pass=${password}`,{
+          }). fetch('POST', `${url.APITELKOM}/token/`,{
             headers:{
               'Content-Type':'application/x-www-form-urlencoded',
               'Authorization': 'Basic Y3QyM3p6Z1NMVVI5M1J6WWREUENyZ0VYU25zYTpTSXNzVVdNdzdOckhhNU9FUWgzNU1VN2NaVkVh:'
@@ -100,8 +100,6 @@ class JRK{
               console.log(response)
             })
             .catch( (error) =>   console.log(error) ) 
-    
-         
     }
 
 //    // Getter
