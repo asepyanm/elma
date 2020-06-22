@@ -15,6 +15,7 @@ import {connect} from 'react-redux';
 import Modal from "react-native-modal";
 
 import axios from 'axios';
+import RNFetchBlob from 'react-native-fetch-blob'
 
 //global
 import renderIf from '../../../../../../components/renderIf';
@@ -145,12 +146,16 @@ class EbisScreens extends Component{
 
     this.props.dispatch({
       type:'EBIS_HOME_FILTER_PERIODE',
-      payload:axios.get(`${url.API}/ebis_getlopmain_ytd/div/EBIS/date1/${sDate}/date2/${eDate}/treg/${sTreg}/witel/${sWitel}`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getlopmain_ytd/div/EBIS/date1/${sDate}/date2/${eDate}/treg/${sTreg}/witel/${sWitel}`)
     });
 
     this.props.dispatch({
       type:'EBIS_LASTUPDATE',
-      payload:axios.get(`${url.API}/ebis_lastime`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_lastime`)
     });
 
   }

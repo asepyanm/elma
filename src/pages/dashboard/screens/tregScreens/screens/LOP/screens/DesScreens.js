@@ -12,6 +12,7 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 import ModalSelector from 'react-native-modal-selector';
 import {connect} from 'react-redux';
 import axios from 'axios';
+import RNFetchBlob from 'react-native-fetch-blob'
 
 //global
 import url from '../../../../../../../config/api_service';
@@ -35,7 +36,9 @@ class DesScreens extends Component{
   componentWillMount(){
     this.props.dispatch({
       type:'DES_HOME_CURRENT_TREG',
-      payload:axios.get(`${url.API}/ebis_getlopmaincurrent_treg/witel/ALL/treg/ALL/div/DES`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getlopmaincurrent_treg/witel/ALL/treg/ALL/div/DES`)
     })
   }
 
@@ -53,23 +56,31 @@ class DesScreens extends Component{
      
       this.props.dispatch({
         type:'DES_HOME_TREG',
-        payload:axios.get(`${url.API}/ebis_getlopmain_ytd/date1/${sDate}/date2/${eDate}/div/DES/treg/ALL/witel/ALL`)
+        payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getlopmain_ytd/date1/${sDate}/date2/${eDate}/div/DES/treg/ALL/witel/ALL`)
       })
   
       this.props.dispatch({
         type:'DES_HOME_CURRENT_TREG',
-        payload:axios.get(`${url.API}/ebis_getlopmaincurrent_treg/witel/ALL/treg/ALL/div/DES`)
+        payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getlopmaincurrent_treg/witel/ALL/treg/ALL/div/DES`)
       })
     } else {
 
       this.props.dispatch({
         type:'DES_HOME_TREG',
-        payload:axios.get(`${url.API}/ebis_getlopmain_ytd/date1/${sDate}/date2/${eDate}/div/DES/treg/${sStatusRegTreg}/witel/${sDataWitel}`)
+        payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getlopmain_ytd/date1/${sDate}/date2/${eDate}/div/DES/treg/${sStatusRegTreg}/witel/${sDataWitel}`)
       })
   
       this.props.dispatch({
         type:'DES_HOME_CURRENT_TREG',
-        payload:axios.get(`${url.API}/ebis_getlopmaincurrent_treg/witel/${sDataWitel}/treg/${sStatusRegTreg}/div/DES`)
+        payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getlopmaincurrent_treg/witel/${sDataWitel}/treg/${sStatusRegTreg}/div/DES`)
       })
     }
   }

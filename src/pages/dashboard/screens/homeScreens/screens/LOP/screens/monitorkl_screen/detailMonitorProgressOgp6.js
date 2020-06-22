@@ -15,6 +15,7 @@ import { Header, Icon, Left, Right, Body, Button, Title, Tab, Tabs, Content, Con
 import { connect } from 'react-redux';
 import Modal from "react-native-modal";
 import axios from 'axios';
+import RNFetchBlob from 'react-native-fetch-blob'
 
 //global
 import renderIf from '../../../../../../../components/renderIf';
@@ -92,11 +93,15 @@ class detailMonitorProgressOgp6KL extends Component {
     })
     this.props.dispatch({
       type: 'MONITOR_KL_EBIS_DETAIL_OGP_PROGRESS_6_SUBS',
-      payload: axios.get(`${url.API}/ebis_getklcc/div/EBIS/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/state/OGP/nmitra/CFU/range/6`)
+      payload: RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getklcc/div/EBIS/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/state/OGP/nmitra/CFU/range/6`)
     })
     this.props.dispatch({
       type: 'MONITOR_KL_EBIS_DETAIL_OGP_PROGRESS_6_MITRA',
-      payload: axios.get(`${url.API}/ebis_getklcc/div/EBIS/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/state/OGP/nmitra/MITRA/range/6`)
+      payload: RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getklcc/div/EBIS/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/state/OGP/nmitra/MITRA/range/6`)
     })
     this.props.dispatch({
       type: 'MONITOR_KL_EBIS_DETAIL_OGP_PROGRESS_6_TELKOM',
@@ -109,11 +114,15 @@ class detailMonitorProgressOgp6KL extends Component {
     })
     this.props.dispatch({
       type: 'MONITOR_KL_DES_DETAIL_OGP_PROGRESS_6_SUBS',
-      payload: axios.get(`${url.API}/ebis_getklcc/div/DES/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/state/OGP/nmitra/CFU/range/6`)
+      payload: RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getklcc/div/DES/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/state/OGP/nmitra/CFU/range/6`)
     })
     this.props.dispatch({
       type: 'MONITOR_KL_DES_DETAIL_OGP_PROGRESS_6_MITRA',
-      payload: axios.get(`${url.API}/ebis_getklcc/div/DES/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/state/OGP/nmitra/MITRA/range/6`)
+      payload: RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getklcc/div/DES/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/state/OGP/nmitra/MITRA/range/6`)
     })
     this.props.dispatch({
       type: 'MONITOR_KL_DES_DETAIL_OGP_PROGRESS_6_TELKOM',
@@ -126,11 +135,15 @@ class detailMonitorProgressOgp6KL extends Component {
     })
     this.props.dispatch({
       type: 'MONITOR_KL_DBS_DETAIL_OGP_PROGRESS_6_SUBS',
-      payload: axios.get(`${url.API}/ebis_getklcc/div/DBS/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/state/OGP/nmitra/CFU/range/6`)
+      payload: RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getklcc/div/DBS/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/state/OGP/nmitra/CFU/range/6`)
     })
     this.props.dispatch({
       type: 'MONITOR_KL_DBS_DETAIL_OGP_PROGRESS_6_MITRA',
-      payload: axios.get(`${url.API}/ebis_getklcc/div/DBS/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/state/OGP/nmitra/MITRA/range/6`)
+      payload: RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getklcc/div/DBS/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/state/OGP/nmitra/MITRA/range/6`)
     })
     this.props.dispatch({
       type: 'MONITOR_KL_DGS_DETAIL_OGP_PROGRESS_6_TELKOM',
@@ -143,11 +156,15 @@ class detailMonitorProgressOgp6KL extends Component {
     })
     this.props.dispatch({
       type: 'MONITOR_KL_DGS_DETAIL_OGP_PROGRESS_6_SUBS',
-      payload: axios.get(`${url.API}/ebis_getklcc/div/DGS/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/state/OGP/nmitra/CFU/range/6`)
+      payload: RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getklcc/div/DGS/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/state/OGP/nmitra/CFU/range/6`)
     })
     this.props.dispatch({
       type: 'MONITOR_KL_DGS_DETAIL_OGP_PROGRESS_6_MITRA',
-      payload: axios.get(`${url.API}/ebis_getklcc/div/DGS/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/state/OGP/nmitra/MITRA/range/6`)
+      payload: RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getklcc/div/DGS/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/state/OGP/nmitra/MITRA/range/6`)
     })
     this.props.dispatch({
       type: 'MONITOR_KL_DGS_DETAIL_OGP_PROGRESS_6_TELKOM',
@@ -162,7 +179,9 @@ class detailMonitorProgressOgp6KL extends Component {
       loaderTampilDetail:true,
       pressed: false
     })
-    axios.get(`${url.API}/ebis_getklproject/div/${div}/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/state/OGP/range/6/nmitra/${nmitra}/mitra/${mitra}`).then((res) => {
+    RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getklproject/div/${div}/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/state/OGP/range/6/nmitra/${nmitra}/mitra/${mitra}`).then((res) => {
       this.setState({dataTampung:res.data, loaderTampilDetail:false });
     }).catch((err) => {
       this.setState({
@@ -179,7 +198,9 @@ class detailMonitorProgressOgp6KL extends Component {
       pressed: true,
       loaderTampilDetail: true
     })
-    axios.get(`${url.API}/ebis_getklproject/div/${level.level}/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/state/OGP/mitra/${level.mitra}/idproject/${level.id}`).then((res) => {
+    RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getklproject/div/${level.level}/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/state/OGP/mitra/${level.mitra}/idproject/${level.id}`).then((res) => {
       this.setState({ OgpData: res.data, loaderTampilDetail: false });
     }).catch((err) => {
       this.setState({

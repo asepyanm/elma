@@ -17,6 +17,7 @@ import {connect} from 'react-redux';
 import Modal from "react-native-modal";
 
 import axios from 'axios';
+import RNFetchBlob from 'react-native-fetch-blob'
 
 //global
 import renderIf from '../../../../../../components/renderIf';
@@ -153,25 +154,35 @@ class EbisScreens extends Component{
   refreshPeriode(sDate,eDate,sTreg,sWitel){
     this.props.dispatch({
       type:'EBIS_HOME_CHANNEL',
-      payload:axios.get(`${url.API2}/ebis_getchannelmain/div/EBIS/startdate/${sDate}/enddate/${eDate}/treg/${sTreg}/witel/${sWitel}/`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API2}/ebis_getchannelmain/div/EBIS/startdate/${sDate}/enddate/${eDate}/treg/${sTreg}/witel/${sWitel}/`)
     });
     this.props.dispatch({
       type:'EBIS_HOME_CURRENT_CHANNEL',
-      payload:axios.get(`${url.API2}/ebis_getchannelcurr/div/EBIS/treg/${sTreg}/witel/${sWitel}/`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API2}/ebis_getchannelcurr/div/EBIS/treg/${sTreg}/witel/${sWitel}/`)
     });
     this.props.dispatch({
       type:'EBIS_HOME_SUBMISSION_CHANNEL',
-      payload:axios.get(`${url.API2}/ebis_getchannelsub/startdate/${sDate}/enddate/${eDate}/div/EBIS/treg/${sTreg}/witel/${sWitel}/`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API2}/ebis_getchannelsub/startdate/${sDate}/enddate/${eDate}/div/EBIS/treg/${sTreg}/witel/${sWitel}/`)
     });
 
     this.props.dispatch({
       type:'EBIS_HOME_DOWNLOAD_CHANNEL',
-      payload:axios.get(`${url.API2}/ebis_getchannelrawdata/startdate/${sDate}/enddate/${eDate}/div/EBIS/treg/${sTreg}/witel/${sWitel}`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API2}/ebis_getchannelrawdata/startdate/${sDate}/enddate/${eDate}/div/EBIS/treg/${sTreg}/witel/${sWitel}`)
     });
 
     this.props.dispatch({
       type:'EBIS_LASTUPDATE_CHANNEL',
-      payload:axios.get(`${url.API2}/ebis_lastime`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API2}/ebis_lastime`)
     });
 
   }

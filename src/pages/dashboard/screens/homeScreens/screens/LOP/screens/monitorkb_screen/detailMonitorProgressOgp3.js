@@ -15,6 +15,7 @@ import { Header, Icon, Left, Right, Body, Button, Title, Tab, Tabs, Content, Con
 import { connect } from 'react-redux';
 import Modal from "react-native-modal";
 import axios from 'axios';
+import RNFetchBlob from 'react-native-fetch-blob'
 
 //global
 import renderIf from '../../../../../../../components/renderIf';
@@ -89,73 +90,105 @@ class detailMonitorProgressOgp3 extends Component {
     //EBIS DETAIL OGP PROGRESS
     this.props.dispatch({
       type: 'MONITOR_KB_EBIS_DETAIL_OGP_PROGRESS_3',
-      payload: axios.get(`${url.API}/ebis_getkbcc/div/EBIS/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/state/OGP/nmitra/ALL/range/3`)
+      payload:  RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getkbcc/div/EBIS/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/state/OGP/nmitra/ALL/range/3`)
     })
     this.props.dispatch({
       type: 'MONITOR_KB_EBIS_DETAIL_OGP_PROGRESS_3_SUBS',
-      payload: axios.get(`${url.API}/ebis_getkbcc/div/EBIS/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/state/OGP/nmitra/CFU/range/3`)
+      payload:  RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getkbcc/div/EBIS/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/state/OGP/nmitra/CFU/range/3`)
     })
     this.props.dispatch({
       type: 'MONITOR_KB_EBIS_DETAIL_OGP_PROGRESS_3_MITRA',
-      payload: axios.get(`${url.API}/ebis_getkbcc/div/EBIS/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/state/OGP/nmitra/MITRA/range/3`)
+      payload:  RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getkbcc/div/EBIS/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/state/OGP/nmitra/MITRA/range/3`)
     })
     this.props.dispatch({
       type: 'MONITOR_KB_EBIS_DETAIL_OGP_PROGRESS_3_TELKOM',
-      payload: axios.get(`${url.API}/ebis_getkbcc/div/EBIS/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/state/OGP/nmitra/TELKOM/range/3`)
+      payload:  RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getkbcc/div/EBIS/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/state/OGP/nmitra/TELKOM/range/3`)
     })
 
     //DES DETAIL OGP PROGRESS
     this.props.dispatch({
       type: 'MONITOR_KB_DES_DETAIL_OGP_PROGRESS_3',
-      payload: axios.get(`${url.API}/ebis_getkbcc/div/DES/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/state/OGP/nmitra/ALL/range/3`)
+      payload:  RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getkbcc/div/DES/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/state/OGP/nmitra/ALL/range/3`)
     })
     this.props.dispatch({
       type: 'MONITOR_KB_DES_DETAIL_OGP_PROGRESS_3_SUBS',
-      payload: axios.get(`${url.API}/ebis_getkbcc/div/DES/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/state/OGP/nmitra/CFU/range/3`)
+      payload:  RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getkbcc/div/DES/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/state/OGP/nmitra/CFU/range/3`)
     })
     this.props.dispatch({
       type: 'MONITOR_KB_DES_DETAIL_OGP_PROGRESS_3_MITRA',
-      payload: axios.get(`${url.API}/ebis_getkbcc/div/DES/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/state/OGP/nmitra/MITRA/range/3`)
+      payload:  RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getkbcc/div/DES/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/state/OGP/nmitra/MITRA/range/3`)
     })
     this.props.dispatch({
       type: 'MONITOR_KB_DES_DETAIL_OGP_PROGRESS_3_TELKOM',
-      payload: axios.get(`${url.API}/ebis_getkbcc/div/DES/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/state/OGP/nmitra/TELKOM/range/3`)
+      payload:  RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getkbcc/div/DES/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/state/OGP/nmitra/TELKOM/range/3`)
     })
 
     //DBS DETAIL OGP PROGRESS
     this.props.dispatch({
       type: 'MONITOR_KB_DBS_DETAIL_OGP_PROGRESS_3',
-      payload: axios.get(`${url.API}/ebis_getkbcc/div/DBS/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/state/OGP/nmitra/ALL/range/3`)
+      payload:  RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getkbcc/div/DBS/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/state/OGP/nmitra/ALL/range/3`)
     })
     this.props.dispatch({
       type: 'MONITOR_KB_DBS_DETAIL_OGP_PROGRESS_3_SUBS',
-      payload: axios.get(`${url.API}/ebis_getkbcc/div/DBS/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/state/OGP/nmitra/CFU/range/3`)
+      payload:  RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getkbcc/div/DBS/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/state/OGP/nmitra/CFU/range/3`)
     })
     this.props.dispatch({
       type: 'MONITOR_KB_DBS_DETAIL_OGP_PROGRESS_3_MITRA',
-      payload: axios.get(`${url.API}/ebis_getkbcc/div/DBS/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/state/OGP/nmitra/MITRA/range/3`)
+      payload:  RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getkbcc/div/DBS/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/state/OGP/nmitra/MITRA/range/3`)
     })
     this.props.dispatch({
       type: 'MONITOR_KB_DBS_DETAIL_OGP_PROGRESS_3_TELKOM',
-      payload: axios.get(`${url.API}/ebis_getkbcc/div/DBS/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/state/OGP/nmitra/TELKOM/range/3`)
+      payload:  RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getkbcc/div/DBS/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/state/OGP/nmitra/TELKOM/range/3`)
     })
 
     //DGS DETAIL OGP PROGRESS
     this.props.dispatch({
       type: 'MONITOR_KB_DGS_DETAIL_OGP_PROGRESS_3',
-      payload: axios.get(`${url.API}/ebis_getkbcc/div/DGS/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/state/OGP/nmitra/ALL/range/3`)
+      payload:  RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getkbcc/div/DGS/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/state/OGP/nmitra/ALL/range/3`)
     })
     this.props.dispatch({
       type: 'MONITOR_KB_DGS_DETAIL_OGP_PROGRESS_3_SUBS',
-      payload: axios.get(`${url.API}/ebis_getkbcc/div/DGS/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/state/OGP/nmitra/CFU/range/3`)
+      payload:  RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getkbcc/div/DGS/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/state/OGP/nmitra/CFU/range/3`)
     })
     this.props.dispatch({
       type: 'MONITOR_KB_DGS_DETAIL_OGP_PROGRESS_3_MITRA',
-      payload: axios.get(`${url.API}/ebis_getkbcc/div/DGS/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/state/OGP/nmitra/MITRA/range/3`)
+      payload:  RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getkbcc/div/DGS/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/state/OGP/nmitra/MITRA/range/3`)
     })
     this.props.dispatch({
       type: 'MONITOR_KB_DGS_DETAIL_OGP_PROGRESS_3_TELKOM',
-      payload: axios.get(`${url.API}/ebis_getkbcc/div/DGS/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/state/OGP/nmitra/TELKOM/range/3`)
+      payload:  RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getkbcc/div/DGS/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/state/OGP/nmitra/TELKOM/range/3`)
     })
 
   }  
@@ -166,7 +199,9 @@ class detailMonitorProgressOgp3 extends Component {
       loaderTampilDetail: true,
       pressed: false
     })
-    axios.get(`${url.API}/ebis_getkbproject/div/${div}/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/state/OGP/range/3/nmitra/${nmitra}/mitra/${mitra}`).then((res) => {
+    RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getkbproject/div/${div}/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/state/OGP/range/3/nmitra/${nmitra}/mitra/${mitra}`).then((res) => {
       this.setState({ dataTampung: res.data, loaderTampilDetail: false });
     }).catch((err) => {
       this.setState({
@@ -182,7 +217,9 @@ class detailMonitorProgressOgp3 extends Component {
       pressed: true,
       loaderTampilDetail: true
     })
-    axios.get(`${url.API}/ebis_getkbproject/div/${level.level}/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/state/OGP/mitra/${level.mitra}/idproject/${level.id}`).then((res) => {
+    RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getkbproject/div/${level.level}/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/state/OGP/mitra/${level.mitra}/idproject/${level.id}`).then((res) => {
       this.setState({ OgpData: res.data, loaderTampilDetail: false });
     }).catch((err) => {
       this.setState({

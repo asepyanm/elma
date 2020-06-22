@@ -63,7 +63,7 @@ class EbisDetailColumnProspectScreens extends Component{
       type:'DETAIL_BILLCOM_EBIS',
       payload:RNFetchBlob.config({
         trusty:true
-      }). fetch('GET', `${url.API2}/${url.API2}/ebis_getdeallistsub/stage/BILLCOM/deal/${namedeal}/div/EBIS/categ/ALL/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
+      }). fetch('GET', `${url.API2}/ebis_getdeallistsub/stage/BILLCOM/deal/${namedeal}/div/EBIS/categ/ALL/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/${this.state.reg}/witel/${this.state.witel}`)
     });
     this.props.dispatch({
       type:'DETAIL_BILLCOM_DES',

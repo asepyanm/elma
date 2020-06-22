@@ -16,6 +16,7 @@ import {connect} from 'react-redux';
 import Modal from "react-native-modal";
 
 import axios from 'axios';
+import RNFetchBlob from 'react-native-fetch-blob'
 
 //global
 import renderIf from '../../../../../../components/renderIf';
@@ -57,25 +58,36 @@ class EbisScreens extends Component{
   refreshPeriode(sDate,eDate,sTreg,sWitel){
     this.props.dispatch({
       type:'EBIS_HOME_BMD',
-      payload:axios.get(`${url.API2}/ebis_getdealmain/div/EBIS/startdate/${sDate}/enddate/${eDate}/treg/${sTreg}/witel/${sWitel}/`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API2}/ebis_getdealmain/div/EBIS/startdate/${sDate}/enddate/${eDate}/treg/ALL/witel/ALL/`)
+
     });
     this.props.dispatch({
       type:'EBIS_HOME_CURRENT_BMD',
-      payload:axios.get(`${url.API2}/ebis_getdealcurr/div/EBIS/treg/${sTreg}/witel/${sWitel}/`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API2}/ebis_getdealcurr/div/EBIS/treg/ALL/witel/ALL/`)
     });
     this.props.dispatch({
       type:'EBIS_HOME_SUBMISSION_BMD',
-      payload:axios.get(`${url.API2}/ebis_getdealsub/startdate/${sDate}/enddate/${eDate}/div/EBIS/treg/${sTreg}/witel/${sWitel}/`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API2}/ebis_getdealsub/startdate/${sDate}/enddate/${eDate}/div/EBIS/treg/ALL/witel/ALL/`)
     });
 
     this.props.dispatch({
       type:'EBIS_HOME_DOWNLOAD_BMD',
-      payload:axios.get(`${url.API2}/ebis_getdealrawdata/startdate/${sDate}/enddate/${eDate}/div/EBIS/treg/${sTreg}/witel/${sWitel}`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API2}/ebis_getdealrawdata/startdate/${sDate}/enddate/${eDate}/div/EBIS/treg/ALL/witel/ALL`)
     });
 
     this.props.dispatch({
       type:'EBIS_LASTUPDATE_BMD',
-      payload:axios.get(`${url.API2}/ebis_lastime`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API2}/ebis_lastime`)
     });
   }
 

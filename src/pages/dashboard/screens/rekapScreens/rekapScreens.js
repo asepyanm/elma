@@ -18,6 +18,7 @@ import { connect } from 'react-redux';
 import Modal from "react-native-modal";
 import axios from 'axios';
 import { StackNavigator } from "react-navigation";
+import RNFetchBlob from 'react-native-fetch-blob'
 
 //global
 import renderIf from '../../../components/renderIf'
@@ -77,15 +78,21 @@ class RekapScreens extends Component {
 
     this.props.dispatch({
       type: 'MONITOR_REKAP_ALL_SUMMARY',      
-      payload:axios.get(`${url.API}/ebis_getnotificationsummaryrekap/group/${loginGroup}`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getnotificationsummaryrekap/group/${loginGroup}`)
     })
     this.props.dispatch({
       type: 'MONITOR_REKAP_WIN_SUMMARY',      
-      payload:axios.get(`${url.API}/ebis_getnotificationsummaryrekap/group/${loginGroup}`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getnotificationsummaryrekap/group/${loginGroup}`)
     })
     this.props.dispatch({
       type: 'MONITOR_REKAP_LOSE_SUMMARY',      
-      payload:axios.get(`${url.API}/ebis_getnotificationsummaryrekap/group/${loginGroup}`)
+      payload:RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getnotificationsummaryrekap/group/${loginGroup}`)
     })
 
   }
@@ -98,7 +105,9 @@ class RekapScreens extends Component {
       loaderTampilDetail:true,
       dataTampung:[],
     })
-    axios.get(`${url.API}/ebis_getnotificationproject/status/WIN/group/${loginGroup}`).then((res) => {
+    RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getnotificationproject/status/WIN/group/${loginGroup}`).then((res) => {
       this.setState({dataTampung:res.data, loaderTampilDetail:false });
     }).catch((err) => {
       this.setState({
@@ -117,7 +126,9 @@ class RekapScreens extends Component {
       loaderTampilDetail:true,
       dataTampung:[],
     })
-    axios.get(`${url.API}/ebis_getnotificationproject/status/LOSE/group/${loginGroup}`).then((res) => {
+    RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getnotificationproject/status/LOSE/group/${loginGroup}`).then((res) => {
       this.setState({dataTampung:res.data, loaderTampilDetail:false });
     }).catch((err) => {
       this.setState({
@@ -138,7 +149,9 @@ class RekapScreens extends Component {
     })
 
     //console.warn(`${this.state.status} ${id}`)
-    axios.get(`${url.API}/ebis_getnotificationusergroup/status/${this.state.status}/notifid/${id}`).then((res) => { 
+    RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getnotificationusergroup/status/${this.state.status}/notifid/${id}`).then((res) => { 
       this.setState({dataMembers:res.data, loaderTampilContent:false }) 
     }).catch((err) => {
       this.setState({
