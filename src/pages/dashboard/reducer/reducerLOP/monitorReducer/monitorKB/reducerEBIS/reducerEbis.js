@@ -94,35 +94,43 @@ const initialState = {
         }
       break;
       case 'MONITOR_KB_EBIS_FULFILLED':
+          const dataJSON1 = JSON.parse(action.payload.data)
+
         return{
           ...state, 
           //Current status
-          dataEbisWin:action.payload.data[0].KB_REV,
-          dataEbisWP: action.payload.data[0].KB_PROJECT
+          dataEbisWin:dataJSON1[0].KB_REV,
+          dataEbisWP: dataJSON1[0].KB_PROJECT
         }
       break;
       case 'MONITOR_KB_EBIS_SUBS_FULFILLED':
+          const dataJSON2 = JSON.parse(action.payload.data)
+
         return{
           ...state, 
           //Current status
-          dataEbisWinSubs:action.payload.data[0].KB_REV,
-          dataEbisWPSubs: action.payload.data[0].WINPROJECT
+          dataEbisWinSubs:dataJSON2[0].KB_REV,
+          dataEbisWPSubs: dataJSON2[0].WINPROJECT
         }
       break;
       case 'MONITOR_KB_EBIS_MITRA_FULFILLED':
+          const dataJSON3 = JSON.parse(action.payload.data)
+
         return{
           ...state, 
           //Current status
-          dataEbisWinMitra:action.payload.data[0].KB_REV,
-          dataEbisWPMitra: action.payload.data[0].WINPROJECT
+          dataEbisWinMitra:dataJSON3[0].KB_REV,
+          dataEbisWPMitra: dataJSON3[0].WINPROJECT
         }
       break;
       case 'MONITOR_KB_EBIS_TELKOM_FULFILLED':
+          const dataJSON4 = JSON.parse(action.payload.data)
+
         return{
           ...state, 
           //Current status
-          dataEbisWinTelkom:action.payload.data[0].KB_REV,
-          dataEbisWPTelkom: action.payload.data[0].WINPROJECT
+          dataEbisWinTelkom:dataJSON4[0].KB_REV,
+          dataEbisWPTelkom: dataJSON4[0].WINPROJECT
         }
       break;
       
@@ -139,35 +147,43 @@ const initialState = {
       break;
   
       case 'MONITOR_KB_EBIS_DONE_FULFILLED':
+          const dataJSON5 = JSON.parse(action.payload.data)
+
         return{
           ...state, 
           //Current status
-          dataEbisDoneWin:action.payload.data[0].KB_REV,
-          dataEbisDoneWP: action.payload.data[0].KB_PROJECT
+          dataEbisDoneWin:dataJSON5[0].KB_REV,
+          dataEbisDoneWP: dataJSON5[0].KB_PROJECT
         }
       break;
       case 'MONITOR_KB_EBIS_DONE_SUBS_FULFILLED':
+          const dataJSON6 = JSON.parse(action.payload.data)
+
         return{
           ...state, 
           //Current status
-          dataEbisDoneWinSubs:action.payload.data[0].KB_REV,
-          dataEbisDoneWPSubs: action.payload.data[0].KB_PROJECT
+          dataEbisDoneWinSubs:dataJSON6[0].KB_REV,
+          dataEbisDoneWPSubs: dataJSON6[0].KB_PROJECT
         }
       break;
       case 'MONITOR_KB_EBIS_DONE_MITRA_FULFILLED':
+          const dataJSON7 = JSON.parse(action.payload.data)
+
         return{
           ...state, 
           //Current status
-          dataEbisDoneWinMitra:action.payload.data[0].KB_REV,
-          dataEbisDoneWPMitra: action.payload.data[0].KB_PROJECT
+          dataEbisDoneWinMitra:dataJSON7[0].KB_REV,
+          dataEbisDoneWPMitra: dataJSON7[0].KB_PROJECT
         }
       break;
       case 'MONITOR_KB_EBIS_DONE_TELKOM_FULFILLED':
+          const dataJSON8 = JSON.parse(action.payload.data)
+
         return{
           ...state, 
           //Current status
-          dataEbisDoneWinTelkom:action.payload.data[0].KB_REV,
-          dataEbisDoneWPTelkom: action.payload.data[0].KB_PROJECT
+          dataEbisDoneWinTelkom:dataJSON8[0].KB_REV,
+          dataEbisDoneWPTelkom: dataJSON8[0].KB_PROJECT
         }
       break;
 
@@ -184,35 +200,43 @@ const initialState = {
       break;
   
       case 'MONITOR_KB_EBIS_OGP_FULFILLED':
+          const dataJSON9 = JSON.parse(action.payload.data)
+
         return{
           ...state, 
           //Current status
-          dataEbisOgpWin:action.payload.data[0].KB_REV,
-          dataEbisOgpWP: action.payload.data[0].KB_PROJECT
+          dataEbisOgpWin:dataJSON9[0].KB_REV,
+          dataEbisOgpWP: dataJSON9[0].KB_PROJECT
         }
       break;
       case 'MONITOR_KB_EBIS_OGP_SUBS_FULFILLED':
+          const dataJSON10 = JSON.parse(action.payload.data)
+
         return{
           ...state, 
           //Current status
-          dataEbisOgpWinSubs:action.payload.data[0].KB_REV,
-          dataEbisOgpWPSubs: action.payload.data[0].KB_PROJECT
+          dataEbisOgpWinSubs:dataJSON10[0].KB_REV,
+          dataEbisOgpWPSubs: dataJSON10[0].KB_PROJECT
         }
       break;
       case 'MONITOR_KB_EBIS_OGP_MITRA_FULFILLED':
+          const dataJSON11 = JSON.parse(action.payload.data)
+
         return{
           ...state, 
           //Current status
-          dataEbisOgpWinMitra:action.payload.data[0].KB_REV,
-          dataEbisOgpWPMitra: action.payload.data[0].KB_PROJECT
+          dataEbisOgpWinMitra:dataJSON11[0].KB_REV,
+          dataEbisOgpWPMitra: dataJSON11[0].KB_PROJECT
         }
       break;
       case 'MONITOR_KB_EBIS_OGP_TELKOM_FULFILLED':
+          const dataJSON12 = JSON.parse(action.payload.data)
+
         return{
           ...state, 
           //Current status
-          dataEbisOgpWinTelkom:action.payload.data[0].KB_REV,
-          dataEbisOgpWPTelkom: action.payload.data[0].KB_PROJECT
+          dataEbisOgpWinTelkom:dataJSON12[0].KB_REV,
+          dataEbisOgpWPTelkom: dataJSON12[0].KB_PROJECT
         }
       break;
 
@@ -229,196 +253,244 @@ const initialState = {
       break;
   
       case 'MONITOR_KB_EBIS_OGP_DATA_FULFILLED':
+          const dataJSON13 = JSON.parse(action.payload.data)
+
         return{
           ...state, 
           //Current status
-          dataOgp3Rev: action.payload.data[0].REVENUE,
-          dataOgp3Project: action.payload.data[0].PROJECT,
-          dataOgp6Rev: action.payload.data[1].REVENUE,
-          dataOgp6Project: action.payload.data[1].PROJECT,
-          dataOgp7Rev: action.payload.data[2].REVENUE,
-          dataOgp7Project: action.payload.data[2].PROJECT
+          dataOgp3Rev: dataJSON13[0].REVENUE,
+          dataOgp3Project: dataJSON13[0].PROJECT,
+          dataOgp6Rev: dataJSON13[1].REVENUE,
+          dataOgp6Project: dataJSON13[1].PROJECT,
+          dataOgp7Rev: dataJSON13[2].REVENUE,
+          dataOgp7Project: dataJSON13[2].PROJECT
         }
       break;
       case 'MONITOR_KB_EBIS_OGP_DATA_SUBS_FULFILLED':
+          const dataJSON14 = JSON.parse(action.payload.data)
+
         return{
           ...state, 
           //Current status
-          dataOgp3RevSubs: action.payload.data[0].REVENUE,
-          dataOgp3ProjectSubs: action.payload.data[0].PROJECT,
-          dataOgp6RevSubs: action.payload.data[1].REVENUE,
-          dataOgp6ProjectSubs: action.payload.data[1].PROJECT,
-          dataOgp7RevSubs: action.payload.data[2].REVENUE,
-          dataOgp7ProjectSubs: action.payload.data[2].PROJECT
+          dataOgp3RevSubs: dataJSON14[0].REVENUE,
+          dataOgp3ProjectSubs: dataJSON14[0].PROJECT,
+          dataOgp6RevSubs: dataJSON14[1].REVENUE,
+          dataOgp6ProjectSubs: dataJSON14[1].PROJECT,
+          dataOgp7RevSubs: dataJSON14[2].REVENUE,
+          dataOgp7ProjectSubs: dataJSON14[2].PROJECT
         }
       break;
       case 'MONITOR_KB_EBIS_OGP_DATA_MITRA_FULFILLED':
+          const dataJSON15 = JSON.parse(action.payload.data)
+
         return{
           ...state, 
           //Current status
-          dataOgp3RevMitra: action.payload.data[0].REVENUE,
-          dataOgp3ProjectMitra: action.payload.data[0].PROJECT,
-          dataOgp6RevMitra: action.payload.data[1].REVENUE,
-          dataOgp6ProjectMitra: action.payload.data[1].PROJECT,
-          dataOgp7RevMitra: action.payload.data[2].REVENUE,
-          dataOgp7ProjectMitra: action.payload.data[2].PROJECT
+          dataOgp3RevMitra: dataJSON15[0].REVENUE,
+          dataOgp3ProjectMitra: dataJSON15[0].PROJECT,
+          dataOgp6RevMitra: dataJSON15[1].REVENUE,
+          dataOgp6ProjectMitra: dataJSON15[1].PROJECT,
+          dataOgp7RevMitra: dataJSON15[2].REVENUE,
+          dataOgp7ProjectMitra: dataJSON15[2].PROJECT
         }
       break;
       case 'MONITOR_KB_EBIS_OGP_DATA_TELKOM_FULFILLED':
+          const dataJSON16 = JSON.parse(action.payload.data)
+
         return{
           ...state, 
           //Current status
-          dataOgp3RevTelkom: action.payload.data[0].REVENUE,
-          dataOgp3ProjectTelkom: action.payload.data[0].PROJECT,
-          dataOgp6RevTelkom: action.payload.data[1].REVENUE,
-          dataOgp6ProjectTelkom: action.payload.data[1].PROJECT,
-          dataOgp7RevTelkom: action.payload.data[2].REVENUE,
-          dataOgp7ProjectTelkom: action.payload.data[2].PROJECT
+          dataOgp3RevTelkom: dataJSON16[0].REVENUE,
+          dataOgp3ProjectTelkom: dataJSON16[0].PROJECT,
+          dataOgp6RevTelkom: dataJSON16[1].REVENUE,
+          dataOgp6ProjectTelkom: dataJSON16[1].PROJECT,
+          dataOgp7RevTelkom: dataJSON16[2].REVENUE,
+          dataOgp7ProjectTelkom: dataJSON16[2].PROJECT
         }
       break;
 
       case 'MONITOR_KB_EBIS_DETAIL_DONE_FULFILLED':
+          const dataJSON17 = JSON.parse(action.payload.data)
+
         return{
           ...state, 
           //Current status
-          detailDone : action.payload.data
+          detailDone : dataJSON17
         }
       break;
       case 'MONITOR_KB_EBIS_DETAIL_DONE_SUBS_FULFILLED':
+          const dataJSON18 = JSON.parse(action.payload.data)
+
         return{
           ...state, 
           //Current status
-          detailDoneSubs : action.payload.data
+          detailDoneSubs : dataJSON18
         }
       break;
       case 'MONITOR_KB_EBIS_DETAIL_DONE_MITRA_FULFILLED':
+          const dataJSON19 = JSON.parse(action.payload.data)
+
         return{
           ...state, 
           //Current status
-          detailDoneMitra : action.payload.data
+          detailDoneMitra : dataJSON19
         }
       break;
       case 'MONITOR_KB_EBIS_DETAIL_DONE_TELKOM_FULFILLED':
+          const dataJSON20 = JSON.parse(action.payload.data)
+
         return{
           ...state, 
           //Current status
-          detailDoneTelkom : action.payload.data
+          detailDoneTelkom : dataJSON20
         }
       break;
 
       case 'MONITOR_KB_EBIS_DETAIL_OGP_FULFILLED':
+          const dataJSON21 = JSON.parse(action.payload.data)
+
       return{
         ...state, 
         //Current status
-        detailOgp : action.payload.data
+        detailOgp : dataJSON21
       }
       break;
       case 'MONITOR_KB_EBIS_DETAIL_OGP_SUBS_FULFILLED':
+          const dataJSON22 = JSON.parse(action.payload.data)
+
         return{
           ...state, 
           //Current status
-          detailOgpSubs : action.payload.data
+          detailOgpSubs : dataJSON22
         }
       break;
       case 'MONITOR_KB_EBIS_DETAIL_OGP_MITRA_FULFILLED':
+          const dataJSON3 = JSON.parse(action.payload.data)
+
         return{
           ...state, 
           //Current status
-          detailOgpMitra : action.payload.data
+          detailOgpMitra : dataJSON23
         }
       break;
       case 'MONITOR_KB_EBIS_DETAIL_OGP_TELKOM_FULFILLED':
+          const dataJSON24 = JSON.parse(action.payload.data)
+
         return{
           ...state, 
           //Current status
-          detailOgpTelkom : action.payload.data
+          detailOgpTelkom : dataJSON24
         }
       break;
 
       case 'MONITOR_KB_EBIS_DETAIL_OGP_PROGRESS_3_FULFILLED':
+          const dataJSON25 = JSON.parse(action.payload.data)
+
       return{
         ...state, 
         //Current status
-        detailOgp3 : action.payload.data
+        detailOgp3 : dataJSON25
       }
       break;
       case 'MONITOR_KB_EBIS_DETAIL_OGP_PROGRESS_3_SUBS_FULFILLED':
+          const dataJSON26 = JSON.parse(action.payload.data)
+
         return{
           ...state, 
           //Current status
-          detailOgp3Subs : action.payload.data
+          detailOgp3Subs : dataJSON26
         }
       break;
       case 'MONITOR_KB_EBIS_DETAIL_OGP_PROGRESS_3_MITRA_FULFILLED':
+          const dataJSON27 = JSON.parse(action.payload.data)
+
         return{
           ...state, 
           //Current status
-          detailOgp3Mitra : action.payload.data
+          detailOgp3Mitra : dataJSON27
         }
       break;
       case 'MONITOR_KB_EBIS_DETAIL_OGP_PROGRESS_3_TELKOM_FULFILLED':
+          const dataJSON28 = JSON.parse(action.payload.data)
+
         return{
           ...state, 
           //Current status
-          detailOgp3Telkom : action.payload.data
+          detailOgp3Telkom : dataJSON28
         }
       break;
 
       case 'MONITOR_KB_EBIS_DETAIL_OGP_PROGRESS_6_FULFILLED':
+          const dataJSON29 = JSON.parse(action.payload.data)
+
         return{
           ...state, 
           //Current status
-          detailOgp6 : action.payload.data
+          detailOgp6 : dataJSON29
         }
       break;
       case 'MONITOR_KB_EBIS_DETAIL_OGP_PROGRESS_6_SUBS_FULFILLED':
+          const dataJSON30 = JSON.parse(action.payload.data)
+
         return{
           ...state, 
           //Current status
-          detailOgp6Subs : action.payload.data
+          detailOgp6Subs : dataJSON30
         }
       break;
       case 'MONITOR_KB_EBIS_DETAIL_OGP_PROGRESS_6_MITRA_FULFILLED':
+          const dataJSON31 = JSON.parse(action.payload.data)
+
         return{
           ...state, 
           //Current status
-          detailOgp6Mitra : action.payload.data
+          detailOgp6Mitra : dataJSON31
         }
       break;
       case 'MONITOR_KB_EBIS_DETAIL_OGP_PROGRESS_6_TELKOM_FULFILLED':
+          const dataJSON32 = JSON.parse(action.payload.data)
+
         return{
           ...state, 
           //Current status
-          detailOgp6Telkom : action.payload.data
+          detailOgp6Telkom : dataJSON32
         }
       break;
 
       case 'MONITOR_KB_EBIS_DETAIL_OGP_PROGRESS_7_FULFILLED':
+          const dataJSON33 = JSON.parse(action.payload.data)
+
         return{
           ...state, 
           //Current status
-          detailOgp7 : action.payload.data
+          detailOgp7 : dataJSON33
         }
       break;
       case 'MONITOR_KB_EBIS_DETAIL_OGP_PROGRESS_7_SUBS_FULFILLED':
+          const dataJSON34 = JSON.parse(action.payload.data)
+
         return{
           ...state, 
           //Current status
-          detailOgp7Subs : action.payload.data
+          detailOgp7Subs : dataJSON34
         }
       break;
       case 'MONITOR_KB_EBIS_DETAIL_OGP_PROGRESS_7_MITRA_FULFILLED':
+          const dataJSON35 = JSON.parse(action.payload.data)
+
         return{
           ...state, 
           //Current status
-          detailOgp7Mitra : action.payload.data
+          detailOgp7Mitra : dataJSON35
         }
       break;
       case 'MONITOR_KB_EBIS_DETAIL_OGP_PROGRESS_7_TELKOM_FULFILLED':
+          const dataJSON36 = JSON.parse(action.payload.data)
+
         return{
           ...state, 
           //Current status
-          detailOgp7Telkom : action.payload.data
+          detailOgp7Telkom : dataJSON36
         }
       break;
 

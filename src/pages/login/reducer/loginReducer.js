@@ -31,13 +31,15 @@ const loginReducer = (state = initialState, action) => {
     break;
 
     case 'LOGIN_FULFILLED':
+      const dataJSON1 = JSON.parse(action.payload.data)
+
       return {
         ...state, 
         isLoggedIn: true,
         loaderStatus:false,
         statusErrorFrom:true,
         //data:action.payload.data,
-        group_ID:action.payload.data[0].GROUP_ID,
+        group_ID:dataJSON1[0].GROUP_ID,
       }
     break;
 

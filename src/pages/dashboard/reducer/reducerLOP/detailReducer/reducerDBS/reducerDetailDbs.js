@@ -51,11 +51,13 @@ const DbsDetailReducer = (state = initialState, action) => {
       }
     break;
     case 'TOTAL_WIN_EBIS_FULFILLED':
+        const dataJSON1 = JSON.parse(action.payload.data)
+
       return{
         ...state, 
         //Current status
-        winrevEbis:action.payload.data[0].WINREV,
-        winprojectEbis:action.payload.data[0].WINPROJECT,
+        winrevEbis:dataJSON1[0].WINREV,
+        winprojectEbis:dataJSON1[0].WINPROJECT,
       }
     break;
 
@@ -70,11 +72,13 @@ const DbsDetailReducer = (state = initialState, action) => {
       }
     break;
     case 'TOTAL_WIN_DES_FULFILLED':
+        const dataJSON2 = JSON.parse(action.payload.data)
+
       return{
         ...state, 
         //Current status
-        winrevDes:action.payload.data[0].WINREV,
-        winprojectDes:action.payload.data[0].WINPROJECT,
+        winrevDes:dataJSON2[0].WINREV,
+        winprojectDes:dataJSON2[0].WINPROJECT,
       }
     break;
     
@@ -89,11 +93,13 @@ const DbsDetailReducer = (state = initialState, action) => {
       }
     break;
     case 'TOTAL_WIN_DBS_FULFILLED':
+        const dataJSON3 = JSON.parse(action.payload.data)
+
       return{
         ...state, 
         //Current status
-        winrevDbs:action.payload.data[0].WINREV,
-        winprojectDbs:action.payload.data[0].WINPROJECT,
+        winrevDbs:dataJSON3[0].WINREV,
+        winprojectDbs:dataJSON3[0].WINPROJECT,
       }
     break;
 
@@ -108,15 +114,17 @@ const DbsDetailReducer = (state = initialState, action) => {
       }
     break;
     case 'TOTAL_WIN_DGS_FULFILLED':
+        const dataJSON4 = JSON.parse(action.payload.data)
+
       return{
         ...state, 
         //Current status
-        winrevDgs:action.payload.data[0].WINREV,
-        winprojectDgs:action.payload.data[0].WINPROJECT,
+        winrevDgs:dataJSON4[0].WINREV,
+        winprojectDgs:dataJSON4[0].WINPROJECT,
       }
     break;    
 
-    //--------------------------prospect
+    //--------------------------WIN
       //detail ALL
       case 'DETAIL_WIN_EBIS_REJECTED':
         return{
@@ -129,35 +137,42 @@ const DbsDetailReducer = (state = initialState, action) => {
         }
       break;
       case 'DETAIL_WIN_EBIS_FULFILLED':
+          const dataJSON5 = JSON.parse(action.payload.data)
+
         return{
           ...state, 
           //Current status
-          dataEbisAll:action.payload.data,
+          dataEbisAll:dataJSON5,
         }
       break;
 
       case 'DETAIL_WIN_DES_FULFILLED':
+          const dataJSON6 = JSON.parse(action.payload.data)
+
         return{
           ...state, 
           //Current status
-          dataDesAll:action.payload.data,
+          dataDesAll:dataJSON6,
         }
       break;
       case 'DETAIL_WIN_DBS_FULFILLED':
+          const dataJSON7 = JSON.parse(action.payload.data)
+
         return{
           ...state, 
           //Current status
-          dataDbsAll:action.payload.data,
+          dataDbsAll:dataJSON7,
         }
       break;
       case 'DETAIL_WIN_DGS_FULFILLED':
+          const dataJSON8 = JSON.parse(action.payload.data)
+
         return{
           ...state, 
           //Current status
-          dataDgsAll:action.payload.data,
+          dataDgsAll:dataJSON8,
         }
       break;
-
 
       //detail SUBS
       case 'DETAIL_SUBS_WIN_EBIS_REJECTED':
@@ -171,31 +186,39 @@ const DbsDetailReducer = (state = initialState, action) => {
         }
       break;
       case 'DETAIL_SUBS_WIN_EBIS_FULFILLED':
+          const dataJSON9 = JSON.parse(action.payload.data)
+
         return{
           ...state, 
           //Current status
-          dataEbisSubs:action.payload.data,
+          dataEbisSubs:dataJSON9,
         }
       break;
       case 'DETAIL_SUBS_WIN_DES_FULFILLED':
+          const dataJSON10 = JSON.parse(action.payload.data)
+
         return{
           ...state, 
           //Current status
-          dataDesSubs:action.payload.data,
+          dataDesSubs:dataJSON10,
         }
       break;
       case 'DETAIL_SUBS_WIN_DBS_FULFILLED':
+          const dataJSON11 = JSON.parse(action.payload.data)
+
         return{
           ...state, 
           //Current status
-          dataDbsSubs:action.payload.data,
+          dataDbsSubs:dataJSON11,
         }
       break;
       case 'DETAIL_SUBS_WIN_DGS_FULFILLED':
+          const dataJSON12 = JSON.parse(action.payload.data)
+
         return{
           ...state, 
           //Current status
-          dataDgsSubs:action.payload.data,
+          dataDgsSubs:dataJSON12,
         }
       break;
 
@@ -211,31 +234,39 @@ const DbsDetailReducer = (state = initialState, action) => {
         }
       break;
       case 'DETAIL_MITRA_WIN_EBIS_FULFILLED':
+          const dataJSON13 = JSON.parse(action.payload.data)
+
         return{
           ...state, 
           //Current status
-          dataEbisMitra:action.payload.data,
+          dataEbisMitra:dataJSON13,
         }
       break;
       case 'DETAIL_MITRA_WIN_DES_FULFILLED':
+          const dataJSON14 = JSON.parse(action.payload.data)
+
         return{
           ...state, 
           //Current status
-          dataDesMitra:action.payload.data,
+          dataDesMitra:dataJSON14,
         }
       break;
       case 'DETAIL_MITRA_WIN_DBS_FULFILLED':
+          const dataJSON15 = JSON.parse(action.payload.data)
+
         return{
           ...state, 
           //Current status
-          dataDbsMitra:action.payload.data,
+          dataDbsMitra:dataJSON15,
         }
       break;
       case 'DETAIL_MITRA_WIN_DGS_FULFILLED':
+          const dataJSON16 = JSON.parse(action.payload.data)
+
         return{
           ...state, 
           //Current status
-          dataDgsMitra:action.payload.data,
+          dataDgsMitra:dataJSON16,
         }
       break;
 
@@ -251,31 +282,39 @@ const DbsDetailReducer = (state = initialState, action) => {
         }
       break;
       case 'DETAIL_TELKOM_WIN_EBIS_FULFILLED':
+          const dataJSON17 = JSON.parse(action.payload.data)
+
         return{
           ...state, 
           //Current status
-          dataEbisTelkom:action.payload.data,
+          dataEbisTelkom:dataJSON17,
         }
       break;
       case 'DETAIL_TELKOM_WIN_DES_FULFILLED':
+          const dataJSON18 = JSON.parse(action.payload.data)
+
         return{
           ...state, 
           //Current status
-          dataDesTelkom:action.payload.data,
+          dataDesTelkom:dataJSON18,
         }
       break;
       case 'DETAIL_TELKOM_WIN_DBS_FULFILLED':
+          const dataJSON19 = JSON.parse(action.payload.data)
+
         return{
           ...state, 
           //Current status
-          dataDbsTelkom:action.payload.data,
+          dataDbsTelkom:dataJSON19,
         }
       break;
       case 'DETAIL_TELKOM_WIN_DGS_FULFILLED':
+          const dataJSON20 = JSON.parse(action.payload.data)
+
         return{
           ...state, 
           //Current status
-          dataDgsTelkom:action.payload.data,
+          dataDgsTelkom:dataJSON20,
         }
       break;
 

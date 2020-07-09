@@ -15,29 +15,29 @@ const initialState = {
   headerDgsValue: '0',
   headerDgsProject: '0',       
  
- //data ebis
- dataEbisAll:[],
- dataEbisSubs:[],
- dataEbisMitra:[],
- dataEbisTelkom:[],
+  //data ebis
+  dataEbisAll:[],
+  dataEbisSubs:[],
+  dataEbisMitra:[],
+  dataEbisTelkom:[],
 
- //data des
- dataDesAll:[],
- dataDesSubs:[],
- dataDesMitra:[],
- dataDesTelkom:[],
+  //data des
+  dataDesAll:[],
+  dataDesSubs:[],
+  dataDesMitra:[],
+  dataDesTelkom:[],
 
- //data dbs
- dataDbsAll:[],
- dataDbsSubs:[],
- dataDbsMitra:[],
- dataDbsTelkom:[],
+  //data dbs
+  dataDbsAll:[],
+  dataDbsSubs:[],
+  dataDbsMitra:[],
+  dataDbsTelkom:[],
 
- //data dgs
- dataDgsAll:[],
- dataDgsSubs:[],
- dataDgsMitra:[],
- dataDgsTelkom:[],
+  //data dgs
+  dataDgsAll:[],
+  dataDgsSubs:[],
+  dataDgsMitra:[],
+  dataDgsTelkom:[],
 };
 
 const DgsDetailReducer = (state = initialState, action) => {
@@ -45,35 +45,43 @@ const DgsDetailReducer = (state = initialState, action) => {
 
     //Header status
     case 'HEADER_BILLCOM_EBIS_FULFILLED':
+        const dataJSON1 = JSON.parse(action.payload.data)
+      
       return{
         ...state, 
-        headerEbisValue: action.payload.data[0].lop_13_2,
-        headerEbisProject: action.payload.data[0].lop_13_3,
+        headerEbisValue: dataJSON1[0].lop_11_1,
+        headerEbisProject: dataJSON1[0].lop_11_2,
       }
       break;
     case 'HEADER_BILLCOM_DES_FULFILLED':
+        const dataJSON2 = JSON.parse(action.payload.data)
+
       return{
         ...state, 
-        headerDesValue: action.payload.data[0].lop_13_2,
-        headerDesProject: action.payload.data[0].lop_13_3,
+        headerDesValue: dataJSON2[0].lop_11_1,
+        headerDesProject: dataJSON2[0].lop_11_2,
       }
       break;
     case 'HEADER_BILLCOM_DBS_FULFILLED':
+        const dataJSON3 = JSON.parse(action.payload.data)
+
       return{
         ...state, 
-        headerDbsValue: action.payload.data[0].lop_13_2,
-        headerDbsProject: action.payload.data[0].lop_13_3,
+        headerDbsValue: dataJSON3[0].lop_11_1,
+        headerDbsProject: dataJSON3[0].lop_11_2,
       }
       break;
     case 'HEADER_BILLCOM_DGS_FULFILLED':
+        const dataJSON4 = JSON.parse(action.payload.data)
+
       return{
         ...state, 
-        headerDgsValue: action.payload.data[0].lop_13_2,
-        headerDgsProject: action.payload.data[0].lop_13_3,
+        headerDgsValue: dataJSON4[0].lop_11_1,
+        headerDgsProject: dataJSON4[0].lop_11_2,
       }
       break;
 
-      //--------------------------prospect
+    //--------------------------BILLCOM
       //detail ALL
       case 'DETAIL_BILLCOM_EBIS_REJECTED':
         return{
@@ -86,35 +94,42 @@ const DgsDetailReducer = (state = initialState, action) => {
         }
       break;
       case 'DETAIL_BILLCOM_EBIS_FULFILLED':
+          const dataJSON5 = JSON.parse(action.payload.data)
+
         return{
           ...state, 
           //Current status
-          dataEbisAll:action.payload.data,
+          dataEbisAll:dataJSON5,
         }
       break;
 
       case 'DETAIL_BILLCOM_DES_FULFILLED':
+          const dataJSON6 = JSON.parse(action.payload.data)
+
         return{
           ...state, 
           //Current status
-          dataDesAll:action.payload.data,
+          dataDesAll:dataJSON6,
         }
       break;
       case 'DETAIL_BILLCOM_DBS_FULFILLED':
+          const dataJSON7 = JSON.parse(action.payload.data)
+
         return{
           ...state, 
           //Current status
-          dataDbsAll:action.payload.data,
+          dataDbsAll:dataJSON7,
         }
       break;
       case 'DETAIL_BILLCOM_DGS_FULFILLED':
+          const dataJSON8 = JSON.parse(action.payload.data)
+
         return{
           ...state, 
           //Current status
-          dataDgsAll:action.payload.data,
+          dataDgsAll:dataJSON8,
         }
       break;
-
 
       //detail SUBS
       case 'DETAIL_SUBS_BILLCOM_EBIS_REJECTED':
@@ -128,31 +143,39 @@ const DgsDetailReducer = (state = initialState, action) => {
         }
       break;
       case 'DETAIL_SUBS_BILLCOM_EBIS_FULFILLED':
+          const dataJSON9 = JSON.parse(action.payload.data)
+
         return{
           ...state, 
           //Current status
-          dataEbisSubs:action.payload.data,
+          dataEbisSubs:dataJSON9,
         }
       break;
       case 'DETAIL_SUBS_BILLCOM_DES_FULFILLED':
+          const dataJSON10 = JSON.parse(action.payload.data)
+
         return{
           ...state, 
           //Current status
-          dataDesSubs:action.payload.data,
+          dataDesSubs:dataJSON10,
         }
       break;
       case 'DETAIL_SUBS_BILLCOM_DBS_FULFILLED':
+          const dataJSON11 = JSON.parse(action.payload.data)
+
         return{
           ...state, 
           //Current status
-          dataDbsSubs:action.payload.data,
+          dataDbsSubs:dataJSON11,
         }
       break;
       case 'DETAIL_SUBS_BILLCOM_DGS_FULFILLED':
+          const dataJSON12 = JSON.parse(action.payload.data)
+
         return{
           ...state, 
           //Current status
-          dataDgsSubs:action.payload.data,
+          dataDgsSubs:dataJSON12,
         }
       break;
 
@@ -168,31 +191,39 @@ const DgsDetailReducer = (state = initialState, action) => {
         }
       break;
       case 'DETAIL_MITRA_BILLCOM_EBIS_FULFILLED':
+          const dataJSON13 = JSON.parse(action.payload.data)
+
         return{
           ...state, 
           //Current status
-          dataEbisMitra:action.payload.data,
+          dataEbisMitra:dataJSON13,
         }
       break;
       case 'DETAIL_MITRA_BILLCOM_DES_FULFILLED':
+          const dataJSON14 = JSON.parse(action.payload.data)
+
         return{
           ...state, 
           //Current status
-          dataDesMitra:action.payload.data,
+          dataDesMitra:dataJSON14,
         }
       break;
       case 'DETAIL_MITRA_BILLCOM_DBS_FULFILLED':
+          const dataJSON15 = JSON.parse(action.payload.data)
+
         return{
           ...state, 
           //Current status
-          dataDbsMitra:action.payload.data,
+          dataDbsMitra:dataJSON15,
         }
       break;
       case 'DETAIL_MITRA_BILLCOM_DGS_FULFILLED':
+          const dataJSON16 = JSON.parse(action.payload.data)
+
         return{
           ...state, 
           //Current status
-          dataDgsMitra:action.payload.data,
+          dataDgsMitra:dataJSON16,
         }
       break;
 
@@ -208,33 +239,42 @@ const DgsDetailReducer = (state = initialState, action) => {
         }
       break;
       case 'DETAIL_TELKOM_BILLCOM_EBIS_FULFILLED':
+          const dataJSON17 = JSON.parse(action.payload.data)
+
         return{
           ...state, 
           //Current status
-          dataEbisTelkom:action.payload.data,
+          dataEbisTelkom:dataJSON17,
         }
       break;
       case 'DETAIL_TELKOM_BILLCOM_DES_FULFILLED':
+          const dataJSON18 = JSON.parse(action.payload.data)
+
         return{
           ...state, 
           //Current status
-          dataDesTelkom:action.payload.data,
+          dataDesTelkom:dataJSON18,
         }
       break;
       case 'DETAIL_TELKOM_BILLCOM_DBS_FULFILLED':
+          const dataJSON19 = JSON.parse(action.payload.data)
+
         return{
           ...state, 
           //Current status
-          dataDbsTelkom:action.payload.data,
+          dataDbsTelkom:dataJSON19,
         }
       break;
       case 'DETAIL_TELKOM_BILLCOM_DGS_FULFILLED':
+          const dataJSON20 = JSON.parse(action.payload.data)
+
         return{
           ...state, 
           //Current status
-          dataDgsTelkom:action.payload.data,
+          dataDgsTelkom:dataJSON20,
         }
       break;
+
 
  
     default:
