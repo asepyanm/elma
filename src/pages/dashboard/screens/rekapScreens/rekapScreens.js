@@ -108,7 +108,7 @@ class RekapScreens extends Component {
     RNFetchBlob.config({
         trusty:true
       }). fetch('GET', `${url.API}/ebis_getnotificationproject/status/WIN/group/${loginGroup}`).then((res) => {
-      this.setState({dataTampung:res.data, loaderTampilDetail:false });
+      this.setState({dataTampung:JSON.parse(res.data), loaderTampilDetail:false });
     }).catch((err) => {
       this.setState({
         loaderTampilDetail:false,
@@ -129,7 +129,7 @@ class RekapScreens extends Component {
     RNFetchBlob.config({
         trusty:true
       }). fetch('GET', `${url.API}/ebis_getnotificationproject/status/LOSE/group/${loginGroup}`).then((res) => {
-      this.setState({dataTampung:res.data, loaderTampilDetail:false });
+      this.setState({dataTampung:JSON.parse(res.data), loaderTampilDetail:false });
     }).catch((err) => {
       this.setState({
         loaderTampilDetail:false,
@@ -152,7 +152,7 @@ class RekapScreens extends Component {
     RNFetchBlob.config({
         trusty:true
       }). fetch('GET', `${url.API}/ebis_getnotificationusergroup/status/${this.state.status}/notifid/${id}`).then((res) => { 
-      this.setState({dataMembers:res.data, loaderTampilContent:false }) 
+      this.setState({dataMembers:JSON.parse(res.data), loaderTampilContent:false }) 
     }).catch((err) => {
       this.setState({
         loaderTampilContent:false,

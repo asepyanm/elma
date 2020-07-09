@@ -200,7 +200,7 @@ class DbsDetailScreens extends Component{
     RNFetchBlob.config({
         trusty:true
       }). fetch('GET', `${url.API}/ebis_getstage5/stage/WIN/div/ALL/maindiv/ALL/mitra/ALL/nmitra/${item.stage_01}/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}/cc/${item.stage_06}/project/${item.stage_07}`).then((res) => {
-      this.setState({dataTampungDetail:res.data, loaderTampilDetailDetail:false });
+      this.setState({dataTampungDetail:JSON.parse(res.data), loaderTampilDetailDetail:false });
     }).catch((err) => {
       this.setState({
         dataTampungDetail: [],
@@ -368,7 +368,7 @@ class DbsDetailScreens extends Component{
     RNFetchBlob.config({
         trusty:true
       }). fetch('GET', `${url.API}/ebis_getstage5/stage/WIN/div/${div}/maindiv/${maindiv}/mainseg/ALL/mitra/ALL/nmitra/${item}/start_date/${this.state.startdate}/end_date/${this.state.enddate}`).then((res) => {
-      this.setState({dataTampung:res.data, loaderTampilDetail:false });
+      this.setState({dataTampung:JSON.parse(res.data), loaderTampilDetail:false });
     }).catch((err) => {
       this.setState({
         dataTampung:[],
@@ -455,7 +455,7 @@ class DbsDetailScreens extends Component{
     RNFetchBlob.config({
         trusty:true
       }). fetch('GET', `${url.API}/ebis_getstage5/stage/WIN/div/${div}/maindiv/${maindiv}/mitra/CFU/nmitra/${item}/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}`).then((res) => {
-      this.setState({dataTampung:res.data, loaderTampilDetail:false });
+      this.setState({dataTampung:JSON.parse(res.data), loaderTampilDetail:false });
     }).catch((err) => {
       this.setState({
         loaderTampilDetail:false
@@ -541,7 +541,7 @@ class DbsDetailScreens extends Component{
     RNFetchBlob.config({
         trusty:true
       }). fetch('GET', `${url.API}/ebis_getstage5/stage/WIN/div/${div}/maindiv/${maindiv}/mitra/MITRA/nmitra/${item}/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}`).then((res) => {
-      this.setState({dataTampung:res.data, loaderTampilDetail:false });
+      this.setState({dataTampung:JSON.parse(res.data), loaderTampilDetail:false });
     }).catch((err) => {
       this.setState({
         loaderTampilDetail:false
@@ -628,7 +628,7 @@ class DbsDetailScreens extends Component{
     RNFetchBlob.config({
         trusty:true
       }). fetch('GET', `${url.API}/ebis_getstage5/stage/WIN/div/${div}/maindiv/${maindiv}/mitra/TELKOM/nmitra/${item}/mainseg/ALL/start_date/${this.state.startdate}/end_date/${this.state.enddate}`).then((res) => {
-      this.setState({dataTampung:res.data, loaderTampilDetail:false });
+      this.setState({dataTampung:JSON.parse(res.data), loaderTampilDetail:false });
     }).catch((err) => {
       this.setState({
         dataTampung: [],

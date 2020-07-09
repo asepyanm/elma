@@ -68,7 +68,7 @@ class JRK{
         // return axios.get(urlstate)
         return RNFetchBlob.config({
           trusty:true
-        }). fetch('GET', urldata)
+        }). fetch('GET', urlstate)
       }
     telkomToken(){
         var postData = {

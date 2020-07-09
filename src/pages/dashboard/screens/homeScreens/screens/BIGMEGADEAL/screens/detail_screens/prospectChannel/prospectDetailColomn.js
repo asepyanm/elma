@@ -175,7 +175,7 @@ class EbisDetailColumnProspectScreens extends Component{
       trusty:true
     }). fetch('GET', `${url.API2}/ebis_getdetdealcc/lopid/${item.LOPID}`)
     .then((res) => {
-      this.setState({dataTampungDetail:res.data, loaderTampilDetailDetail:false });
+      this.setState({dataTampungDetail:JSON.parse(res.data), loaderTampilDetailDetail:false });
     }).catch((err) => {
       this.setState({
         visibleModalDetail:false,
@@ -378,7 +378,7 @@ class EbisDetailColumnProspectScreens extends Component{
       trusty:true
     }). fetch('GET', `${url.API2}/ebis_getdeallistcc/stage/PROSPECT/categ/${maindiv}/deal/${namedeal}/div/${div}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/ALL/witel/ALL/mitra/${item}`)
     .then((res) => {
-      this.setState({dataTampung:res.data, loaderTampilDetail:false });
+      this.setState({dataTampung:JSON.parse(res.data), loaderTampilDetail:false });
     }).catch((err) => {
       this.setState({
         loaderTampilDetail:false
@@ -468,7 +468,7 @@ class EbisDetailColumnProspectScreens extends Component{
       trusty:true
     }). fetch('GET', `${url.API2}/ebis_getdeallistcc/stage/PROSPECT/categ/${maindiv}/deal/${namedeal}/div/${div}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/ALL/witel/ALL/mitra/${item}`)
     .then((res) => {
-      this.setState({dataTampung:res.data, loaderTampilDetail:false });
+      this.setState({dataTampung:JSON.parse(res.data), loaderTampilDetail:false });
     }).catch((err) => {
       this.setState({
         loaderTampilDetail:false
@@ -557,7 +557,7 @@ class EbisDetailColumnProspectScreens extends Component{
       trusty:true
     }). fetch('GET', `${url.API2}/ebis_getdeallistcc/stage/PROSPECT/categ/${maindiv}/deal/${namedeal}/div/${div}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/ALL/witel/ALL/mitra/${item}`)
     .then((res) => {
-      this.setState({dataTampung:res.data, loaderTampilDetail:false });
+      this.setState({dataTampung:JSON.parse(res.data), loaderTampilDetail:false });
     }).catch((err) => {
       this.setState({
         loaderTampilDetail:false
@@ -646,7 +646,7 @@ class EbisDetailColumnProspectScreens extends Component{
       trusty:true
     }). fetch('GET', `${url.API2}/ebis_getdeallistcc/stage/PROSPECT/categ/${maindiv}/deal/${namedeal}/div/${div}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/ALL/witel/ALL/mitra/${item}`)
     .then((res) => {
-      this.setState({dataTampung:res.data, loaderTampilDetail:false });
+      this.setState({dataTampung:JSON.parse(res.data), loaderTampilDetail:false });
     }).catch((err) => {
       this.setState({
         loaderTampilDetail:false

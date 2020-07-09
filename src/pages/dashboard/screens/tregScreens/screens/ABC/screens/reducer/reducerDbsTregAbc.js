@@ -173,6 +173,7 @@ const DbsTregReducerABC = (state = initialState, action) => {
     break;
 
     case 'DBS_CURRENT_ABC_TREG_FULFILLED':
+      
       return{
         ...state, 
         //Current data

@@ -366,7 +366,7 @@ const initialState = {
         }
       break;
       case 'MONITOR_KB_DBS_DETAIL_OGP_MITRA_FULFILLED':
-          const dataJSON3 = JSON.parse(action.payload.data)
+          const dataJSON23 = JSON.parse(action.payload.data)
 
         return{
           ...state, 
