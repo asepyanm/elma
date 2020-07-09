@@ -69,7 +69,8 @@ export default class HomeScreens extends Component{
               >
                 <Text style={selectedTab === 'lop' ? styles.segmentTextActive : styles.segmentTextNonActive}>LOP</Text>
               </Button>
-              <Button 
+
+              {/* <Button 
                 last
                 active={selectedTab==='abc'} 
                 style={
@@ -84,7 +85,8 @@ export default class HomeScreens extends Component{
                 onPress={() => this.setState({selectedTab: 'abc'})} 
               >
                 <Text style={selectedTab === 'abc' ? styles.segmentTextActive : styles.segmentTextNonActive}>ABC</Text>
-              </Button>
+              </Button> */}
+
               <Button 
                 last
                 active={selectedTab==='channel'} 
