@@ -69,9 +69,10 @@ const DgsReducerChannel = (state = initialState, action) => {
 
     //data last update 
     case 'DGS_LASTUPDATE_CHANNEL_FULFILLED':
+      const dataJSON1 = JSON.parse(action.payload.data)
       return {
         ...state, 
-        ebisLastupdate: action.payload.data[0].RECTIME,
+        ebisLastupdate: dataJSON1[0].RECTIME,
       }
     break;
     
@@ -92,45 +93,46 @@ const DgsReducerChannel = (state = initialState, action) => {
     break;
 
     case 'DGS_HOME_CHANNEL_FULFILLED':
+      const dataJSON2 = JSON.parse(action.payload.data)
       return {
         ...state, 
         loaderStatus:false,
 
-        ebisProspectREVENUE:action.payload.data.PROSPECT.TOTAL,
-        ebisProspectProject:action.payload.data.PROSPECT.JML_PROJECT,
-        ebisPROSPECT_GTMA: action.payload.data.PROSPECT_GTMA.TOTAL,
-        ebisPROSPECT_GTMA_PROJECT: action.payload.data.PROSPECT_GTMA.JML_PROJECT,
-        ebisPROSPECT_NGTMA: action.payload.data.PROSPECT_NGTMA.TOTAL,
-        ebisPROSPECT_NGTMA_PROJECT: action.payload.data.PROSPECT_NGTMA.JML_PROJECT,
-        PROSPECT_OC: action.payload.data.PROSPECT_OC.TOTAL,
-        PROSPECT_OC_PROJECT: action.payload.data.PROSPECT_OC.JML_PROJECT,
+        ebisProspectREVENUE:dataJSON2.PROSPECT.TOTAL,
+        ebisProspectProject:dataJSON2.PROSPECT.JML_PROJECT,
+        ebisPROSPECT_GTMA: dataJSON2.PROSPECT_GTMA.TOTAL,
+        ebisPROSPECT_GTMA_PROJECT: dataJSON2.PROSPECT_GTMA.JML_PROJECT,
+        ebisPROSPECT_NGTMA: dataJSON2.PROSPECT_NGTMA.TOTAL,
+        ebisPROSPECT_NGTMA_PROJECT: dataJSON2.PROSPECT_NGTMA.JML_PROJECT,
+        PROSPECT_OC: dataJSON2.PROSPECT_OC.TOTAL,
+        PROSPECT_OC_PROJECT: dataJSON2.PROSPECT_OC.JML_PROJECT,
 
-        ebisSubmisionREVENUE:action.payload.data.SUBMISSION.TOTAL,
-        ebisSubmissionProject:action.payload.data.SUBMISSION.JML_PROJECT,
-        ebisSUBMISSION_GTMA:action.payload.data.SUBMISSION_GTMA.TOTAL,
-        ebisSUBMISSION_GTMA_PROJECT:action.payload.data.SUBMISSION_GTMA.JML_PROJECT,
-        ebisSUBMISSION_NGTMA:action.payload.data.SUBMISSION_NGTMA.TOTAL,
-        ebisSUBMISSION_NGTMA_PROJECT:action.payload.data.SUBMISSION_NGTMA.JML_PROJECT,
-        ebisSUBMISSION_OC: action.payload.data.SUBMISSION_OC.TOTAL,
-        ebisSUBMISSION_OC_PROJECT: action.payload.data.SUBMISSION_OC.JML_PROJECT,
+        ebisSubmisionREVENUE:dataJSON2.SUBMISSION.TOTAL,
+        ebisSubmissionProject:dataJSON2.SUBMISSION.JML_PROJECT,
+        ebisSUBMISSION_GTMA:dataJSON2.SUBMISSION_GTMA.TOTAL,
+        ebisSUBMISSION_GTMA_PROJECT:dataJSON2.SUBMISSION_GTMA.JML_PROJECT,
+        ebisSUBMISSION_NGTMA:dataJSON2.SUBMISSION_NGTMA.TOTAL,
+        ebisSUBMISSION_NGTMA_PROJECT:dataJSON2.SUBMISSION_NGTMA.JML_PROJECT,
+        ebisSUBMISSION_OC: dataJSON2.SUBMISSION_OC.TOTAL,
+        ebisSUBMISSION_OC_PROJECT: dataJSON2.SUBMISSION_OC.JML_PROJECT,
 
-        ebisWinREVENUE:action.payload.data.WIN.TOTAL,
-        ebisWinProject:action.payload.data.WIN.JML_PROJECT,
-        ebisWIN_GTMA: action.payload.data.WIN_GTMA.TOTAL,
-        ebisWIN_GTMA_PROJECT: action.payload.data.WIN_GTMA.JML_PROJECT,
-        ebisWIN_NGTMA: action.payload.data.WIN_NGTMA.TOTAL,
-        ebisWIN_NGTMA_PROJECT: action.payload.data.WIN_NGTMA.JML_PROJECT,
-        ebisWIN_OC: action.payload.data.WIN_OC.TOTAL,
-        ebisWIN_OC_PROJECT: action.payload.data.WIN_OC.JML_PROJECT,
+        ebisWinREVENUE:dataJSON2.WIN.TOTAL,
+        ebisWinProject:dataJSON2.WIN.JML_PROJECT,
+        ebisWIN_GTMA: dataJSON2.WIN_GTMA.TOTAL,
+        ebisWIN_GTMA_PROJECT: dataJSON2.WIN_GTMA.JML_PROJECT,
+        ebisWIN_NGTMA: dataJSON2.WIN_NGTMA.TOTAL,
+        ebisWIN_NGTMA_PROJECT: dataJSON2.WIN_NGTMA.JML_PROJECT,
+        ebisWIN_OC: dataJSON2.WIN_OC.TOTAL,
+        ebisWIN_OC_PROJECT: dataJSON2.WIN_OC.JML_PROJECT,
       
-        ebisBillcomREVENUE:action.payload.data.BILLCOM.TOTAL,
-        ebisBillcomeProject:action.payload.data.BILLCOM.JML_PROJECT,
-        ebisBILLCOM_GTMA: action.payload.data.BILLCOM_GTMA.TOTAL,
-        ebisBILLCOM_GTMA_PROJECT: action.payload.data.BILLCOM_GTMA.JML_PROJECT,
-        ebisBILLCOM_NGTMA: action.payload.data.BILLCOM_NGTMA.TOTAL,
-        ebisBILLCOM_NGTMA_PROJECT: action.payload.data.BILLCOM_NGTMA.JML_PROJECT,
-        ebisBILLCOM_OC: action.payload.data.BILLCOM_OC.TOTAL,
-        ebisBILLCOM_OC_PROJECT: action.payload.data.BILLCOM_OC.JML_PROJECT,
+        ebisBillcomREVENUE:dataJSON2.BILLCOM.TOTAL,
+        ebisBillcomeProject:dataJSON2.BILLCOM.JML_PROJECT,
+        ebisBILLCOM_GTMA: dataJSON2.BILLCOM_GTMA.TOTAL,
+        ebisBILLCOM_GTMA_PROJECT: dataJSON2.BILLCOM_GTMA.JML_PROJECT,
+        ebisBILLCOM_NGTMA: dataJSON2.BILLCOM_NGTMA.TOTAL,
+        ebisBILLCOM_NGTMA_PROJECT: dataJSON2.BILLCOM_NGTMA.JML_PROJECT,
+        ebisBILLCOM_OC: dataJSON2.BILLCOM_OC.TOTAL,
+        ebisBILLCOM_OC_PROJECT: dataJSON2.BILLCOM_OC.JML_PROJECT,
       }
     break;
 
@@ -151,20 +153,21 @@ const DgsReducerChannel = (state = initialState, action) => {
     break;
 
     case 'DGS_HOME_SUBMISSION_CHANNEL_FULFILLED':
+      const dataJSON3 = JSON.parse(action.payload.data)
       return{
         ...state, 
         //Current status
-        SubmissionWINRevenue:action.payload.data.WIN.TOTAL,
-        SubmissionWINProject:action.payload.data.WIN.JML_PROJECT,
+        SubmissionWINRevenue:dataJSON3.WIN.TOTAL,
+        SubmissionWINProject:dataJSON3.WIN.JML_PROJECT,
 
-        SubmissionLOOSERevenue:action.payload.data.LOSE.TOTAL,
-        SubmissionLooseProject:action.payload.data.LOSE.JML_PROJECT,
+        SubmissionLOOSERevenue:dataJSON3.LOSE.TOTAL,
+        SubmissionLooseProject:dataJSON3.LOSE.JML_PROJECT,
 
-        SubmissionWaitingRevenue:action.payload.data.WAITING.TOTAL,
-        SubmissionWaitingProject:action.payload.data.WAITING.JML_PROJECT,
+        SubmissionWaitingRevenue:dataJSON3.WAITING.TOTAL,
+        SubmissionWaitingProject:dataJSON3.WAITING.JML_PROJECT,
 
-        SubmissionCancelRevenue:action.payload.data.CANCEL.TOTAL,
-        SubmissionCancekProject:action.payload.data.CANCEL.JML_PROJECT,
+        SubmissionCancelRevenue:dataJSON3.CANCEL.TOTAL,
+        SubmissionCancekProject:dataJSON3.CANCEL.JML_PROJECT,
       }
     break;
 
@@ -185,17 +188,18 @@ const DgsReducerChannel = (state = initialState, action) => {
     break;
 
     case 'DGS_HOME_CURRENT_CHANNEL_FULFILLED':
+      const dataJSON4 = JSON.parse(action.payload.data)
       return{
         ...state, 
         //Current status
-        currentProspectRevenue:action.payload.data.PROSPECT.TOTAL,
-        currentProspectProject:action.payload.data.PROSPECT.JML_PROJECT,
-        currentSubmissionRevenue:action.payload.data.SUBMISSION.TOTAL,
-        currentSubmissionProject:action.payload.data.SUBMISSION.JML_PROJECT,
-        currentWINRevenue:action.payload.data.WIN.TOTAL,
-        currentWINProject:action.payload.data.WIN.JML_PROJECT,
-        currentBIllcomRevenue:action.payload.data.BILLCOM.TOTAL,
-        currentBillcomProject:action.payload.data.BILLCOM.JML_PROJECT,
+        currentProspectRevenue:dataJSON4.PROSPECT.TOTAL,
+        currentProspectProject:dataJSON4.PROSPECT.JML_PROJECT,
+        currentSubmissionRevenue:dataJSON4.SUBMISSION.TOTAL,
+        currentSubmissionProject:dataJSON4.SUBMISSION.JML_PROJECT,
+        currentWINRevenue:dataJSON4.WIN.TOTAL,
+        currentWINProject:dataJSON4.WIN.JML_PROJECT,
+        currentBIllcomRevenue:dataJSON4.BILLCOM.TOTAL,
+        currentBillcomProject:dataJSON4.BILLCOM.JML_PROJECT,
       }
     break;
 
@@ -214,9 +218,10 @@ const DgsReducerChannel = (state = initialState, action) => {
     break;
 
     case 'DGS_HOME_DOWNLOAD_CHANNEL_FULFILLED':
+      const dataJSON5 = JSON.parse(action.payload.data)
       return {
         ...state, 
-        dataDownloadEbis:action.payload.data,
+        dataDownloadEbis:dataJSON5,
       }
     break;
 

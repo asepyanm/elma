@@ -55,9 +55,10 @@ const DesReducerBMD = (state = initialState, action) => {
 
     //data last update 
     case 'DES_LASTUPDATE_BMD_FULFILLED':
+      const dataJSON1 = JSON.parse(action.payload.data)
       return {
         ...state, 
-        ebisLastupdate: action.payload.data[0].RECTIME,
+        ebisLastupdate: dataJSON1[0].RECTIME,
       }
     break;
     
@@ -78,37 +79,38 @@ const DesReducerBMD = (state = initialState, action) => {
     break;
 
     case 'DES_HOME_BMD_FULFILLED':
+      const dataJSON2 = JSON.parse(action.payload.data)
       return {
         ...state, 
         loaderStatus:false,
 
-        ebisProspectREVENUE:action.payload.data.PROSPECT.TOTAL,
-        ebisProspectProject:action.payload.data.PROSPECT.JML_PROJECT,
-        ebisPROSPECT_GTMA: action.payload.data.PROSPECT_BIGDEAL.TOTAL,
-        ebisPROSPECT_GTMA_PROJECT: action.payload.data.PROSPECT_BIGDEAL.JML_PROJECT,
-        PROSPECT_OC: action.payload.data.PROSPECT_MEGADEAL.TOTAL,
-        PROSPECT_OC_PROJECT: action.payload.data.PROSPECT_MEGADEAL.JML_PROJECT,
+        ebisProspectREVENUE:dataJSON2.PROSPECT.TOTAL,
+        ebisProspectProject:dataJSON2.PROSPECT.JML_PROJECT,
+        ebisPROSPECT_GTMA: dataJSON2.PROSPECT_BIGDEAL.TOTAL,
+        ebisPROSPECT_GTMA_PROJECT: dataJSON2.PROSPECT_BIGDEAL.JML_PROJECT,
+        PROSPECT_OC: dataJSON2.PROSPECT_MEGADEAL.TOTAL,
+        PROSPECT_OC_PROJECT: dataJSON2.PROSPECT_MEGADEAL.JML_PROJECT,
 
-        ebisSubmisionREVENUE:action.payload.data.SUBMISSION.TOTAL,
-        ebisSubmissionProject:action.payload.data.SUBMISSION.JML_PROJECT,
-        ebisSUBMISSION_GTMA:action.payload.data.SUBMISSION_BIGDEAL.TOTAL,
-        ebisSUBMISSION_GTMA_PROJECT:action.payload.data.SUBMISSION_BIGDEAL.JML_PROJECT,
-        ebisSUBMISSION_OC: action.payload.data.SUBMISSION_MEGADEAL.TOTAL,
-        ebisSUBMISSION_OC_PROJECT: action.payload.data.SUBMISSION_MEGADEAL.JML_PROJECT,
+        ebisSubmisionREVENUE:dataJSON2.SUBMISSION.TOTAL,
+        ebisSubmissionProject:dataJSON2.SUBMISSION.JML_PROJECT,
+        ebisSUBMISSION_GTMA:dataJSON2.SUBMISSION_BIGDEAL.TOTAL,
+        ebisSUBMISSION_GTMA_PROJECT:dataJSON2.SUBMISSION_BIGDEAL.JML_PROJECT,
+        ebisSUBMISSION_OC: dataJSON2.SUBMISSION_MEGADEAL.TOTAL,
+        ebisSUBMISSION_OC_PROJECT: dataJSON2.SUBMISSION_MEGADEAL.JML_PROJECT,
 
-        ebisWinREVENUE:action.payload.data.WIN.TOTAL,
-        ebisWinProject:action.payload.data.WIN.JML_PROJECT,
-        ebisWIN_GTMA: action.payload.data.WIN_BIGDEAL.TOTAL,
-        ebisWIN_GTMA_PROJECT: action.payload.data.WIN_BIGDEAL.JML_PROJECT,
-        ebisWIN_OC: action.payload.data.WIN_MEGADEAL.TOTAL,
-        ebisWIN_OC_PROJECT: action.payload.data.WIN_MEGADEAL.JML_PROJECT,
+        ebisWinREVENUE:dataJSON2.WIN.TOTAL,
+        ebisWinProject:dataJSON2.WIN.JML_PROJECT,
+        ebisWIN_GTMA: dataJSON2.WIN_BIGDEAL.TOTAL,
+        ebisWIN_GTMA_PROJECT: dataJSON2.WIN_BIGDEAL.JML_PROJECT,
+        ebisWIN_OC: dataJSON2.WIN_MEGADEAL.TOTAL,
+        ebisWIN_OC_PROJECT: dataJSON2.WIN_MEGADEAL.JML_PROJECT,
       
-        ebisBillcomREVENUE:action.payload.data.BILLCOM.TOTAL,
-        ebisBillcomeProject:action.payload.data.BILLCOM.JML_PROJECT,
-        ebisBILLCOM_GTMA: action.payload.data.BILLCOM_BIGDEAL.TOTAL,
-        ebisBILLCOM_GTMA_PROJECT: action.payload.data.BILLCOM_BIGDEAL.JML_PROJECT,
-        ebisBILLCOM_OC: action.payload.data.BILLCOM_MEGADEAL.TOTAL,
-        ebisBILLCOM_OC_PROJECT: action.payload.data.BILLCOM_MEGADEAL.JML_PROJECT,
+        ebisBillcomREVENUE:dataJSON2.BILLCOM.TOTAL,
+        ebisBillcomeProject:dataJSON2.BILLCOM.JML_PROJECT,
+        ebisBILLCOM_GTMA: dataJSON2.BILLCOM_BIGDEAL.TOTAL,
+        ebisBILLCOM_GTMA_PROJECT: dataJSON2.BILLCOM_BIGDEAL.JML_PROJECT,
+        ebisBILLCOM_OC: dataJSON2.BILLCOM_MEGADEAL.TOTAL,
+        ebisBILLCOM_OC_PROJECT: dataJSON2.BILLCOM_MEGADEAL.JML_PROJECT,
       }
     break;
 
@@ -129,20 +131,21 @@ const DesReducerBMD = (state = initialState, action) => {
     break;
 
     case 'DES_HOME_SUBMISSION_BMD_FULFILLED':
+      const dataJSON3 = JSON.parse(action.payload.data)
       return{
         ...state, 
         //Current status
-        SubmissionWINRevenue:action.payload.data.WIN.TOTAL,
-        SubmissionWINProject:action.payload.data.WIN.JML_PROJECT,
+        SubmissionWINRevenue:dataJSON3.WIN.TOTAL,
+        SubmissionWINProject:dataJSON3.WIN.JML_PROJECT,
 
-        SubmissionLOOSERevenue:action.payload.data.LOSE.TOTAL,
-        SubmissionLooseProject:action.payload.data.LOSE.JML_PROJECT,
+        SubmissionLOOSERevenue:dataJSON3.LOSE.TOTAL,
+        SubmissionLooseProject:dataJSON3.LOSE.JML_PROJECT,
 
-        SubmissionWaitingRevenue:action.payload.data.WAITING.TOTAL,
-        SubmissionWaitingProject:action.payload.data.WAITING.JML_PROJECT,
+        SubmissionWaitingRevenue:dataJSON3.WAITING.TOTAL,
+        SubmissionWaitingProject:dataJSON3.WAITING.JML_PROJECT,
 
-        SubmissionCancelRevenue:action.payload.data.CANCEL.TOTAL,
-        SubmissionCancekProject:action.payload.data.CANCEL.JML_PROJECT,
+        SubmissionCancelRevenue:dataJSON3.CANCEL.TOTAL,
+        SubmissionCancekProject:dataJSON3.CANCEL.JML_PROJECT,
       }
     break;
 
@@ -163,17 +166,18 @@ const DesReducerBMD = (state = initialState, action) => {
     break;
 
     case 'DES_HOME_CURRENT_BMD_FULFILLED':
+      const dataJSON4 = JSON.parse(action.payload.data)
       return{
         ...state, 
         //Current status
-        currentProspectRevenue:action.payload.data.PROSPECT.TOTAL,
-        currentProspectProject:action.payload.data.PROSPECT.JML_PROJECT,
-        currentSubmissionRevenue:action.payload.data.SUBMISSION.TOTAL,
-        currentSubmissionProject:action.payload.data.SUBMISSION.JML_PROJECT,
-        currentWINRevenue:action.payload.data.WIN.TOTAL,
-        currentWINProject:action.payload.data.WIN.JML_PROJECT,
-        currentBIllcomRevenue:action.payload.data.BILLCOM.TOTAL,
-        currentBillcomProject:action.payload.data.BILLCOM.JML_PROJECT,
+        currentProspectRevenue:dataJSON4.PROSPECT.TOTAL,
+        currentProspectProject:dataJSON4.PROSPECT.JML_PROJECT,
+        currentSubmissionRevenue:dataJSON4.SUBMISSION.TOTAL,
+        currentSubmissionProject:dataJSON4.SUBMISSION.JML_PROJECT,
+        currentWINRevenue:dataJSON4.WIN.TOTAL,
+        currentWINProject:dataJSON4.WIN.JML_PROJECT,
+        currentBIllcomRevenue:dataJSON4.BILLCOM.TOTAL,
+        currentBillcomProject:dataJSON4.BILLCOM.JML_PROJECT,
       }
     break;
 
@@ -192,9 +196,10 @@ const DesReducerBMD = (state = initialState, action) => {
     break;
 
     case 'DES_HOME_DOWNLOAD_BMD_FULFILLED':
+      const dataJSON5 = JSON.parse(action.payload.data)
       return {
         ...state, 
-        dataDownloadEbis:action.payload.data,
+        dataDownloadEbis:dataJSON5,
       }
     break;
 

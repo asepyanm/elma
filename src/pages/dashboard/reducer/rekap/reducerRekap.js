@@ -71,39 +71,43 @@ const rekapReducer = (state = initialState, action) => {
     break;
 
     case 'MONITOR_REKAP_SUMMARY_FULFILLED':
+      const dataJSON1 = JSON.parse(action.payload.data)
       return {
         ...state, 
-        allTOTALPROJECT: action.payload.data[0].TOTALPROJECT,
-        allTOTALREV: action.payload.data[0].TOTALREV,
-        winTOTALPROJECT: action.payload.data[1].TOTALPROJECT,
-        winTOTALREV: action.payload.data[1].TOTALREV,
-        loseTOTALPROJECT: action.payload.data[2].TOTALPROJECT,
-        loseTOTALREV: action.payload.data[2].TOTALREV,
+        allTOTALPROJECT: dataJSON1[0].TOTALPROJECT,
+        allTOTALREV: dataJSON1[0].TOTALREV,
+        winTOTALPROJECT: dataJSON1[1].TOTALPROJECT,
+        winTOTALREV: dataJSON1[1].TOTALREV,
+        loseTOTALPROJECT: dataJSON1[2].TOTALPROJECT,
+        loseTOTALREV: dataJSON1[2].TOTALREV,
      
       }
     break;
 
     case 'MONITOR_REKAP_ALL_SUMMARY_FULFILLED':
+      const dataJSON2 = JSON.parse(action.payload.data)
       return {
         ...state, 
-        allTOTALPROJECT: action.payload.data[0].TOTALPROJECT,
-        allTOTALREV: action.payload.data[0].TOTALREV,
+        allTOTALPROJECT: dataJSON2[0].TOTALPROJECT,
+        allTOTALREV: dataJSON2[0].TOTALREV,
     
       }
     break;
     case 'MONITOR_REKAP_WIN_SUMMARY_FULFILLED':
+      const dataJSON3 = JSON.parse(action.payload.data)
       return {
         ...state, 
-        winTOTALPROJECT: action.payload.data[1].TOTALPROJECT,
-        winTOTALREV: action.payload.data[1].TOTALREV,
+        winTOTALPROJECT: dataJSON3[1].TOTALPROJECT,
+        winTOTALREV: dataJSON3[1].TOTALREV,
      
       }
     break;
     case 'MONITOR_REKAP_LOSE_SUMMARY_FULFILLED':
+      const dataJSON4 = JSON.parse(action.payload.data)
       return {
         ...state, 
-        loseTOTALPROJECT: action.payload.data[2].TOTALPROJECT,
-        loseTOTALREV: action.payload.data[2].TOTALREV,
+        loseTOTALPROJECT: dataJSON4[2].TOTALPROJECT,
+        loseTOTALREV: dataJSON4[2].TOTALREV,
      
       }
     break;
@@ -122,9 +126,10 @@ const rekapReducer = (state = initialState, action) => {
     break;
 
     case 'DETAIL_REKAP_WIN_FULFILLED':
+      const dataJSON5 = JSON.parse(action.payload.data)
       return {
         ...state, 
-        dataDetailWin: action.payload.data,
+        dataDetailWin: dataJSON5,
       }
     break;
 
@@ -142,9 +147,10 @@ const rekapReducer = (state = initialState, action) => {
     break;
 
     case 'DETAIL_REKAP_LOSE_FULFILLED':
+      const dataJSON6 = JSON.parse(action.payload.data)
       return {
         ...state, 
-        dataDetailLose: action.payload.data,
+        dataDetailLose: dataJSON6,
       }
     break;
     

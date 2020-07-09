@@ -42,32 +42,36 @@ const EbisDetailReducer = (state = initialState, action) => {
         }
       break;
       case 'DETAIL_PROSPECT_EBIS_FULFILLED':
+        const dataJSON1 = JSON.parse(action.payload.data)
         return{
           ...state, 
           //Current status
-          dataEbisAll:action.payload.data,
+          dataEbisAll:dataJSON1,
         }
       break;
 
       case 'DETAIL_PROSPECT_DES_FULFILLED':
+        const dataJSON2 = JSON.parse(action.payload.data)
         return{
           ...state, 
           //Current status
-          dataDesAll:action.payload.data,
+          dataDesAll:dataJSON2,
         }
       break;
       case 'DETAIL_PROSPECT_DBS_FULFILLED':
+        const dataJSON3 = JSON.parse(action.payload.data)
         return{
           ...state, 
           //Current status
-          dataDbsAll:action.payload.data,
+          dataDbsAll:dataJSON3,
         }
       break;
       case 'DETAIL_PROSPECT_DGS_FULFILLED':
+        const dataJSON4 = JSON.parse(action.payload.data)
         return{
           ...state, 
           //Current status
-          dataDgsAll:action.payload.data,
+          dataDgsAll:dataJSON4,
         }
       break;
 
@@ -83,31 +87,35 @@ const EbisDetailReducer = (state = initialState, action) => {
         }
       break;
       case 'DETAIL_SUBS_PROSPECT_EBIS_FULFILLED':
+        const dataJSON5 = JSON.parse(action.payload.data)
         return{
           ...state, 
           //Current status
-          dataEbisSubs:action.payload.data,
+          dataEbisSubs:dataJSON5,
         }
       break;
       case 'DETAIL_SUBS_PROSPECT_DES_FULFILLED':
+        const dataJSON6 = JSON.parse(action.payload.data)
         return{
           ...state, 
           //Current status
-          dataDesSubs:action.payload.data,
+          dataDesSubs:dataJSON6,
         }
       break;
       case 'DETAIL_SUBS_PROSPECT_DBS_FULFILLED':
+        const dataJSON7 = JSON.parse(action.payload.data)
         return{
           ...state, 
           //Current status
-          dataDbsSubs:action.payload.data,
+          dataDbsSubs:dataJSON7,
         }
       break;
       case 'DETAIL_SUBS_PROSPECT_DGS_FULFILLED':
+        const dataJSON8 = JSON.parse(action.payload.data)
         return{
           ...state, 
           //Current status
-          dataDgsSubs:action.payload.data,
+          dataDgsSubs:dataJSON8,
         }
       break;
 
@@ -123,31 +131,35 @@ const EbisDetailReducer = (state = initialState, action) => {
         }
       break;
       case 'DETAIL_MITRA_PROSPECT_EBIS_FULFILLED':
+        const dataJSON9 = JSON.parse(action.payload.data)
         return{
           ...state, 
           //Current status
-          dataEbisMitra:action.payload.data,
+          dataEbisMitra:dataJSON9,
         }
       break;
       case 'DETAIL_MITRA_PROSPECT_DES_FULFILLED':
+        const dataJSON10 = JSON.parse(action.payload.data)
         return{
           ...state, 
           //Current status
-          dataDesMitra:action.payload.data,
+          dataDesMitra:dataJSON10,
         }
       break;
       case 'DETAIL_MITRA_PROSPECT_DBS_FULFILLED':
+        const dataJSON11 = JSON.parse(action.payload.data)
         return{
           ...state, 
           //Current status
-          dataDbsMitra:action.payload.data,
+          dataDbsMitra:dataJSON11,
         }
       break;
       case 'DETAIL_MITRA_PROSPECT_DGS_FULFILLED':
+        const dataJSON12 = JSON.parse(action.payload.data)
         return{
           ...state, 
           //Current status
-          dataDgsMitra:action.payload.data,
+          dataDgsMitra:dataJSON12,
         }
       break;
 
@@ -163,31 +175,35 @@ const EbisDetailReducer = (state = initialState, action) => {
         }
       break;
       case 'DETAIL_TELKOM_PROSPECT_EBIS_FULFILLED':
+        const dataJSON13 = JSON.parse(action.payload.data)
         return{
           ...state, 
           //Current status
-          dataEbisTelkom:action.payload.data,
+          dataEbisTelkom:dataJSON13,
         }
       break;
       case 'DETAIL_TELKOM_PROSPECT_DES_FULFILLED':
+        const dataJSON14 = JSON.parse(action.payload.data)
         return{
           ...state, 
           //Current status
-          dataDesTelkom:action.payload.data,
+          dataDesTelkom:dataJSON14,
         }
       break;
       case 'DETAIL_TELKOM_PROSPECT_DBS_FULFILLED':
+        const dataJSON15 = JSON.parse(action.payload.data)
         return{
           ...state, 
           //Current status
-          dataDbsTelkom:action.payload.data,
+          dataDbsTelkom:dataJSON15,
         }
       break;
       case 'DETAIL_TELKOM_PROSPECT_DGS_FULFILLED':
+        const dataJSON16 = JSON.parse(action.payload.data)
         return{
           ...state, 
           //Current status
-          dataDgsTelkom:action.payload.data,
+          dataDgsTelkom:dataJSON16,
         }
       break;
 
