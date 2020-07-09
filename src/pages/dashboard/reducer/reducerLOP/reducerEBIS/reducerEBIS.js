@@ -47,9 +47,11 @@ const EbisReducer = (state = initialState, action) => {
   switch (action.type) {
 
     case 'EBIS_LASTUPDATE_FULFILLED':
+      const dataJSON1 = JSON.parse(action.payload.data)
+
       return {
         ...state, 
-        ebisLastupdate: action.payload.data[0].RECTIME,
+        ebisLastupdate: dataJSON1[0].RECTIME,
       }
     break;
 
@@ -69,43 +71,46 @@ const EbisReducer = (state = initialState, action) => {
     break;
 
     case 'EBIS_HOME_FULFILLED':
+      const dataJSON2 = JSON.parse(action.payload.data)
+
       return {
         ...state, 
         loaderStatus:false,
 
-        ebisProspectREVENUE:action.payload.data[0].lop_11_1,
-        ebisProspectProject:action.payload.data[0].lop_11_2,
-        ebisProspectTarget:action.payload.data[0].lop_11_3,
 
-        ebisSubmisionREVENUE:action.payload.data[0].lop_11_6,
-        ebisSubmissionProject:action.payload.data[0].lop_12_1,
-        ebisSubmissionTarget:action.payload.data[0].lop_12_2,
+        ebisProspectREVENUE:dataJSON2[0].lop_11_1,
+        ebisProspectProject:dataJSON2[0].lop_11_2,
+        ebisProspectTarget:dataJSON2[0].lop_11_3,
 
-        ebisWinREVENUE:action.payload.data[0].lop_12_3,
-        ebisWinProject:action.payload.data[0].lop_12_6,
-        ebisWinTarget:action.payload.data[0].lop_13_1,
+        ebisSubmisionREVENUE:dataJSON2[0].lop_11_6,
+        ebisSubmissionProject:dataJSON2[0].lop_12_1,
+        ebisSubmissionTarget:dataJSON2[0].lop_12_2,
 
-        ebisBillcomREVENUE:action.payload.data[0].lop_13_2,
-        ebisBillcomeProject:action.payload.data[0].lop_13_3,
-        ebisBillcommTarget:action.payload.data[0].lop_13_6,
+        ebisWinREVENUE:dataJSON2[0].lop_12_3,
+        ebisWinProject:dataJSON2[0].lop_12_6,
+        ebisWinTarget:dataJSON2[0].lop_13_1,
 
-        ProspectREVENUE:action.payload.data[0].lop_14_1,
-        ProspectProject:action.payload.data[0].lop_14_2,
-        ProspectTarget:action.payload.data[0].lop_14_3,
-        ProspectREVENUE2:action.payload.data[0].lop_14_6,
+        ebisBillcomREVENUE:dataJSON2[0].lop_13_2,
+        ebisBillcomeProject:dataJSON2[0].lop_13_3,
+        ebisBillcommTarget:dataJSON2[0].lop_13_6,
+
+        ProspectREVENUE:dataJSON2[0].lop_14_1,
+        ProspectProject:dataJSON2[0].lop_14_2,
+        ProspectTarget:dataJSON2[0].lop_14_3,
+        ProspectREVENUE2:dataJSON2[0].lop_14_6,
 
         //submission status
-        SubmissionWINRevenue:action.payload.data[0].lop_21_1,
-        SubmissionWINProject:action.payload.data[0].lop_21_2,
+        SubmissionWINRevenue:dataJSON2[0].lop_21_1,
+        SubmissionWINProject:dataJSON2[0].lop_21_2,
 
-        SubmissionLOOSERevenue:action.payload.data[0].lop_22_1,
-        SubmissionLooseProject:action.payload.data[0].lop_22_2,
+        SubmissionLOOSERevenue:dataJSON2[0].lop_22_1,
+        SubmissionLooseProject:dataJSON2[0].lop_22_2,
 
-        SubmissionWaitingRevenue:action.payload.data[0].lop_23_1,
-        SubmissionWaitingProject:action.payload.data[0].lop_23_2,
+        SubmissionWaitingRevenue:dataJSON2[0].lop_23_1,
+        SubmissionWaitingProject:dataJSON2[0].lop_23_2,
 
-        SubmissionCancelRevenue:action.payload.data[0].lop_24_1,
-        SubmissionCancekProject:action.payload.data[0].lop_24_2,
+        SubmissionCancelRevenue:dataJSON2[0].lop_24_1,
+        SubmissionCancekProject:dataJSON2[0].lop_24_2,
       }
     break;
 
@@ -125,17 +130,19 @@ const EbisReducer = (state = initialState, action) => {
     break;
 
     case 'EBIS_HOME_CURRENT_FULFILLED':
+      const dataJSON3 = JSON.parse(action.payload.data)
+
       return{
         ...state, 
         //Current status
-        currentProspectRevenue:action.payload.data[0].lop_01_1,
-        currentProspectProject:action.payload.data[0].lop_01_2,
-        currentSubmissionRevenue:action.payload.data[0].lop_02_1,
-        currentSubmissionProject:action.payload.data[0].lop_02_2,
-        currentWINRevenue:action.payload.data[0].lop_03_1,
-        currentWINProject:action.payload.data[0].lop_03_2,
-        currentBIllcomRevenue:action.payload.data[0].lop_04_1,
-        currentBillcomProject:action.payload.data[0].lop_04_2,
+        currentProspectRevenue:dataJSON3[0].lop_01_1,
+        currentProspectProject:dataJSON3[0].lop_01_2,
+        currentSubmissionRevenue:dataJSON3[0].lop_02_1,
+        currentSubmissionProject:dataJSON3[0].lop_02_2,
+        currentWINRevenue:dataJSON3[0].lop_03_1,
+        currentWINProject:dataJSON3[0].lop_03_2,
+        currentBIllcomRevenue:dataJSON3[0].lop_04_1,
+        currentBillcomProject:dataJSON3[0].lop_04_2,
       }
     break;
 
@@ -157,41 +164,43 @@ const EbisReducer = (state = initialState, action) => {
     break;
 
     case 'EBIS_HOME_FILTER_PERIODE_FULFILLED':
+      const dataJSON4 = JSON.parse(action.payload.data)
+
       return {
         ...state, 
-        ebisProspectREVENUE:action.payload.data[0].lop_11_1,
-        ebisProspectProject:action.payload.data[0].lop_11_2,
-        ebisProspectTarget:action.payload.data[0].lop_11_3,
+        ebisProspectREVENUE:dataJSON4[0].lop_11_1,
+        ebisProspectProject:dataJSON4[0].lop_11_2,
+        ebisProspectTarget:dataJSON4[0].lop_11_3,
 
-        ebisSubmisionREVENUE:action.payload.data[0].lop_11_6,
-        ebisSubmissionProject:action.payload.data[0].lop_12_1,
-        ebisSubmissionTarget:action.payload.data[0].lop_12_2,
+        ebisSubmisionREVENUE:dataJSON4[0].lop_11_6,
+        ebisSubmissionProject:dataJSON4[0].lop_12_1,
+        ebisSubmissionTarget:dataJSON4[0].lop_12_2,
 
-        ebisWinREVENUE:action.payload.data[0].lop_12_3,
-        ebisWinProject:action.payload.data[0].lop_12_6,
-        ebisWinTarget:action.payload.data[0].lop_13_1,
+        ebisWinREVENUE:dataJSON4[0].lop_12_3,
+        ebisWinProject:dataJSON4[0].lop_12_6,
+        ebisWinTarget:dataJSON4[0].lop_13_1,
 
-        ebisBillcomREVENUE:action.payload.data[0].lop_13_2,
-        ebisBillcomeProject:action.payload.data[0].lop_13_3,
-        ebisBillcommTarget:action.payload.data[0].lop_13_6,
+        ebisBillcomREVENUE:dataJSON4[0].lop_13_2,
+        ebisBillcomeProject:dataJSON4[0].lop_13_3,
+        ebisBillcommTarget:dataJSON4[0].lop_13_6,
 
-        ProspectREVENUE:action.payload.data[0].lop_14_1,
-        ProspectProject:action.payload.data[0].lop_14_2,
-        ProspectTarget:action.payload.data[0].lop_14_3,
-        ProspectREVENUE2:action.payload.data[0].lop_14_6,
+        ProspectREVENUE:dataJSON4[0].lop_14_1,
+        ProspectProject:dataJSON4[0].lop_14_2,
+        ProspectTarget:dataJSON4[0].lop_14_3,
+        ProspectREVENUE2:dataJSON4[0].lop_14_6,
 
         //submission status
-        SubmissionWINRevenue:action.payload.data[0].lop_21_1,
-        SubmissionWINProject:action.payload.data[0].lop_21_2,
+        SubmissionWINRevenue:dataJSON4[0].lop_21_1,
+        SubmissionWINProject:dataJSON4[0].lop_21_2,
 
-        SubmissionLOOSERevenue:action.payload.data[0].lop_22_1,
-        SubmissionLooseProject:action.payload.data[0].lop_22_2,
+        SubmissionLOOSERevenue:dataJSON4[0].lop_22_1,
+        SubmissionLooseProject:dataJSON4[0].lop_22_2,
 
-        SubmissionWaitingRevenue:action.payload.data[0].lop_23_1,
-        SubmissionWaitingProject:action.payload.data[0].lop_23_2,
+        SubmissionWaitingRevenue:dataJSON4[0].lop_23_1,
+        SubmissionWaitingProject:dataJSON4[0].lop_23_2,
 
-        SubmissionCancelRevenue:action.payload.data[0].lop_24_1,
-        SubmissionCancekProject:action.payload.data[0].lop_24_2,
+        SubmissionCancelRevenue:dataJSON4[0].lop_24_1,
+        SubmissionCancekProject:dataJSON4[0].lop_24_2,
       }
     break;
 
