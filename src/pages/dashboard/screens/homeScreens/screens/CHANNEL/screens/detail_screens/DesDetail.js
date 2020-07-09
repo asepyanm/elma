@@ -176,7 +176,7 @@ class DesDetailScreens extends Component{
       trusty:true
     }). fetch('GET', `${url.API2}/ebis_getdetchannelcc/lopid/${item.LOPID}`)
     .then((res) => {
-      this.setState({dataTampungDetail:res.data, loaderTampilDetailDetail:false });
+      this.setState({dataTampungDetail:JSON.parse(res.data), loaderTampilDetailDetail:false });
     }).catch((err) => {
       this.setState({
         visibleModalDetail:false,
@@ -376,7 +376,7 @@ class DesDetailScreens extends Component{
       trusty:true
     }). fetch('GET', `${url.API2}/ebis_getdeallistcc/stage/SUBMISSION/categ/${maindiv}/channel/ALL/div/${div}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/ALL/witel/ALL/mitra/${item}`)
     .then((res) => {
-      this.setState({dataTampung:res.data, loaderTampilDetail:false });
+      this.setState({dataTampung:JSON.parse(res.data), loaderTampilDetail:false });
     }).catch((err) => {
       this.setState({
         loaderTampilDetail:false
@@ -465,7 +465,7 @@ class DesDetailScreens extends Component{
       trusty:true
     }). fetch('GET', `${url.API2}/ebis_getdeallistcc/stage/SUBMISSION/categ/${maindiv}/channel/ALL/div/${div}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/ALL/witel/ALL/mitra/${item}`)
     .then((res) => {
-      this.setState({dataTampung:res.data, loaderTampilDetail:false });
+      this.setState({dataTampung:JSON.parse(res.data), loaderTampilDetail:false });
     }).catch((err) => {
       this.setState({
         loaderTampilDetail:false
@@ -553,7 +553,7 @@ class DesDetailScreens extends Component{
       trusty:true
     }). fetch('GET', `${url.API2}/ebis_getdeallistcc/stage/SUBMISSION/categ/${maindiv}/channel/ALL/div/${div}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/ALL/witel/ALL/mitra/${item}`)
     .then((res) => {
-      this.setState({dataTampung:res.data, loaderTampilDetail:false });
+      this.setState({dataTampung:JSON.parse(res.data), loaderTampilDetail:false });
     }).catch((err) => {
       this.setState({
         loaderTampilDetail:false
@@ -641,7 +641,7 @@ class DesDetailScreens extends Component{
       trusty:true
     }). fetch('GET', `${url.API2}/ebis_getdeallistcc/stage/SUBMISSION/categ/${maindiv}/channel/ALL/div/${div}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/treg/ALL/witel/ALL/mitra/${item}`)
     .then((res) => {
-      this.setState({dataTampung:res.data, loaderTampilDetail:false });
+      this.setState({dataTampung:JSON.parse(res.data), loaderTampilDetail:false });
     }).catch((err) => {
       this.setState({
         loaderTampilDetail:false

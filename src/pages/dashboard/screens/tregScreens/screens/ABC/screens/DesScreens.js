@@ -77,7 +77,7 @@ class DesScreens extends Component{
         this.setState({
           statusRegTreg:dataFilter,
           statusGetReg:false,
-          dataRegionalWitel:res.data
+          dataRegionalWitel:JSON.parse(res.data)
         })
       }).catch((err)=> {
         this.setState({

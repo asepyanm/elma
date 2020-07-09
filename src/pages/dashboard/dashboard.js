@@ -42,7 +42,7 @@ class Dashboard extends Component {
       // payload:axios.get(`${url.API}/ebis_getlopmain_ytd/div/EBIS/date1/${date1}/date2/${date2}/treg/ALL/witel/ALL`)
       payload:RNFetchBlob.config({
         trusty:true
-      }). fetch('GET', `${url.API}/ebis_getlopmain_ytd/div/EBIS/date1/${date1}/date2/${date2}/treg/ALL/witel/ALL)`)
+      }). fetch('GET', `${url.API}/ebis_getlopmain_ytd/div/EBIS/date1/${date1}/date2/${date2}/treg/ALL/witel/ALL`)
     });
     this.props.dispatch({
       type:'EBIS_HOME_CURRENT',
@@ -57,7 +57,7 @@ class Dashboard extends Component {
       //payload:axios.get(`${url.API}/ebis_getlopmain_ytd/div/DES`)
       payload:RNFetchBlob.config({
         trusty:true
-      }). fetch('GET', `${url.API}/ebis_getlopmain_ytd/div/DES/date1/${date1}/date2/${date2}/treg/ALL/witel/ALL)`)
+      }). fetch('GET', `${url.API}/ebis_getlopmain_ytd/div/DES/date1/${date1}/date2/${date2}/treg/ALL/witel/ALL`)
     });
     this.props.dispatch({
       type:'DES_HOME_CURRENT',
@@ -71,7 +71,7 @@ class Dashboard extends Component {
       //payload:axios.get(`${url.API}/ebis_getlopmain_ytd/div/DGS`)
       payload:RNFetchBlob.config({
         trusty:true
-      }). fetch('GET', `${url.API}/ebis_getlopmain_ytd/div/DGS/date1/${date1}/date2/${date2}/treg/ALL/witel/ALL)`)
+      }). fetch('GET', `${url.API}/ebis_getlopmain_ytd/div/DGS/date1/${date1}/date2/${date2}/treg/ALL/witel/ALL`)
     });
     this.props.dispatch({
       type:'DGS_HOME_CURRENT',
@@ -85,7 +85,7 @@ class Dashboard extends Component {
       //payload:axios.get(`${url.API}/ebis_getlopmain_ytd/div/DBS`)
       payload:RNFetchBlob.config({
         trusty:true
-      }). fetch('GET', `${url.API}/ebis_getlopmain_ytd/div/DBS/date1/${date1}/date2/${date2}/treg/ALL/witel/ALL)`)
+      }). fetch('GET', `${url.API}/ebis_getlopmain_ytd/div/DBS/date1/${date1}/date2/${date2}/treg/ALL/witel/ALL`)
     });
     this.props.dispatch({
       type:'DBS_HOME_CURRENT',
@@ -95,61 +95,61 @@ class Dashboard extends Component {
     });
 
 
-    //get data ABC -----------------------
-    //EBIS HOME ABC
-    this.props.dispatch({
-      type:'EBIS_ABC',
-      // payload:axios.get(`${url.API}/ebis_getabcmain_ytd/div/EBIS`)
-      payload:RNFetchBlob.config({
-        trusty:true
-      }). fetch('GET', `${url.API}/ebis_getabcmain_ytd/div/EBIS`)
-    });
-    this.props.dispatch({
-      type:'EBIS_CURRENT_ABC',
-      // payload:axios.get(`${url.API}/ebis_getabcmain_current/div/EBIS`)
-      payload:RNFetchBlob.config({
-        trusty:true
-      }). fetch('GET', `${url.API}/ebis_getabcmain_current/div/EBIS`)
-    });
-    //DES HOME ABC
-    this.props.dispatch({
-      type:'DES_ABC',
-      payload:RNFetchBlob.config({
-        trusty:true
-      }). fetch('GET', `${url.API}/ebis_getabcmain_ytd/div/DES`)
-    });
-    this.props.dispatch({
-      type:'DES_CURRENT_ABC',
-      payload:RNFetchBlob.config({
-        trusty:true
-      }). fetch('GET', `${url.API}/ebis_getabcmain_current/div/DES`)
-    });
-    //DBS HOME ABC
-    this.props.dispatch({
-      type:'DBS_ABC',
-      payload:RNFetchBlob.config({
-        trusty:true
-      }). fetch('GET', `${url.API}/ebis_getabcmain_ytd/div/DBS`)
-    });
-    this.props.dispatch({
-      type:'DBS_CURRENT_ABC',
-      payload:RNFetchBlob.config({
-        trusty:true
-      }). fetch('GET', `${url.API}/ebis_getabcmain_current/div/DBS`)
-    });
-    //DGS HOME ABC
-    this.props.dispatch({
-      type:'DGS_ABC',
-      payload:RNFetchBlob.config({
-        trusty:true
-      }). fetch('GET', `${url.API}/ebis_getabcmain_ytd/div/DGS`)
-    });
-    this.props.dispatch({
-      type:'DGS_CURRENT_ABC',
-      payload:RNFetchBlob.config({
-        trusty:true
-      }). fetch('GET', `${url.API}/ebis_getabcmain_current/div/DGS`)
-    });
+    // //get data ABC -----------------------
+    // //EBIS HOME ABC
+    // this.props.dispatch({
+    //   type:'EBIS_ABC',
+    //   // payload:axios.get(`${url.API}/ebis_getabcmain_ytd/div/EBIS`)
+    //   payload:RNFetchBlob.config({
+    //     trusty:true
+    //   }). fetch('GET', `${url.API}/ebis_getabcmain_ytd/div/EBIS`)
+    // });
+    // this.props.dispatch({
+    //   type:'EBIS_CURRENT_ABC',
+    //   // payload:axios.get(`${url.API}/ebis_getabcmain_current/div/EBIS`)
+    //   payload:RNFetchBlob.config({
+    //     trusty:true
+    //   }). fetch('GET', `${url.API}/ebis_getabcmain_current/div/EBIS`)
+    // });
+    // //DES HOME ABC
+    // this.props.dispatch({
+    //   type:'DES_ABC',
+    //   payload:RNFetchBlob.config({
+    //     trusty:true
+    //   }). fetch('GET', `${url.API}/ebis_getabcmain_ytd/div/DES`)
+    // });
+    // this.props.dispatch({
+    //   type:'DES_CURRENT_ABC',
+    //   payload:RNFetchBlob.config({
+    //     trusty:true
+    //   }). fetch('GET', `${url.API}/ebis_getabcmain_current/div/DES`)
+    // });
+    // //DBS HOME ABC
+    // this.props.dispatch({
+    //   type:'DBS_ABC',
+    //   payload:RNFetchBlob.config({
+    //     trusty:true
+    //   }). fetch('GET', `${url.API}/ebis_getabcmain_ytd/div/DBS`)
+    // });
+    // this.props.dispatch({
+    //   type:'DBS_CURRENT_ABC',
+    //   payload:RNFetchBlob.config({
+    //     trusty:true
+    //   }). fetch('GET', `${url.API}/ebis_getabcmain_current/div/DBS`)
+    // });
+    // //DGS HOME ABC
+    // this.props.dispatch({
+    //   type:'DGS_ABC',
+    //   payload:RNFetchBlob.config({
+    //     trusty:true
+    //   }). fetch('GET', `${url.API}/ebis_getabcmain_ytd/div/DGS`)
+    // });
+    // this.props.dispatch({
+    //   type:'DGS_CURRENT_ABC',
+    //   payload:RNFetchBlob.config({
+    //     trusty:true
+    //   }). fetch('GET', `${url.API}/ebis_getabcmain_current/div/DGS`)
+    // });
 
     //get data Channel -----------------------
     //EBIS CHANNEL 

@@ -69,13 +69,15 @@ class LOPscreen extends Component{
         statusRegTreg:'ALL'
       })
     } else {
-      axios.get(`${url.API}/ebis_getwitel/reg/${dataFilter}`).then((res)=>{
+      RNFetchBlob.config({
+        trusty:true
+      }). fetch('GET', `${url.API}/ebis_getwitel/reg/${dataFilter}`).then((res)=>{
         console.log(res);
         this.setState({
           dataWitel:'ALL',
           statusRegTreg:dataFilter,
           statusGetReg:false,
-          dataRegionalWitel:res.data
+          dataRegionalWitel:JSON.parse(res.data)
         })
       }).catch((err)=> {
         this.setState({

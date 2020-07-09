@@ -166,7 +166,7 @@ class detailMonitorDev extends Component{
     RNFetchBlob.config({
         trusty:true
       }). fetch('GET', `${url.API}/ebis_getdeliveryproject/div/${div}/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/range/ALL/nmitra/${nmitra}/cc/${mitra}`).then((res) => {
-      this.setState({dataTampung:res.data, loaderTampilDetail:false });
+      this.setState({dataTampung:JSON.parse(res.data), loaderTampilDetail:false });
     }).catch((err) => {
       this.setState({
         dataTampung:[],
@@ -184,7 +184,7 @@ class detailMonitorDev extends Component{
     RNFetchBlob.config({
         trusty:true
       }). fetch('GET', `${url.API}/ebis_getdeliveryproject/div/${level.level}/treg/${this.state.treg}/witel/${this.state.witel}/startdate/${this.state.startdate}/enddate/${this.state.enddate}/range/ALL/nmitra/ALL/idproject/${level.id}`).then((res) => {
-      this.setState({ OgpData: res.data, loaderTampilDetail: false });
+      this.setState({ OgpData: JSON.parse(res.data), loaderTampilDetail: false });
     }).catch((err) => {
       this.setState({
         loaderTampilDetail: false
