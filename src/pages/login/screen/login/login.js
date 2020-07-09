@@ -125,6 +125,7 @@ _saveToken=async(token)=>{
   }
   setSessionLogin = () => {
     const {username, password} = this.state;
+
     RNFetchBlob.config({
         trusty:true
       }). fetch('GET', `${url.API}/ebis_getlogin?user_id=${username}&user_pass=${password}`).then(async(response) => {
@@ -171,7 +172,8 @@ _saveToken=async(token)=>{
 
   render() {
     const {statusForm,loaderStatus,loginGroup} = this.props;
-  
+
+
     if(this.state.group!=loginGroup){
       //console.warn(`ELMA AsyncStorage.setItem: ${this.state.group} ${loginGroup}`)
       if(loginGroup!='NOT_LOGGED'){
