@@ -36,10 +36,11 @@ const alertReducer = (state = initialState, action) => {
     break;
 
     case 'ALERT_WINLOSE_HEADER_FULFILLED':
+      const dataJSON1 = JSON.parse(action.payload.data)
       return {
         ...state, 
-        headerTOTALPROJECT: action.payload.data[0].TOTALPROJECT,
-        headerTOTALREV: action.payload.data[0].TOTALREV,
+        headerTOTALPROJECT: dataJSON1[0].TOTALPROJECT,
+        headerTOTALREV: dataJSON1[0].TOTALREV,
       }
     break;
 
@@ -57,9 +58,10 @@ const alertReducer = (state = initialState, action) => {
     break;
 
     case 'ALERT_WINLOSE_DETAIL_FULFILLED':
+      const dataJSON2 = JSON.parse(action.payload.data)
       return {
         ...state, 
-        dataDetail: action.payload.data,
+        dataDetail: dataJSON2,
       }
     break;  
 
@@ -77,10 +79,11 @@ const alertReducer = (state = initialState, action) => {
       }
     break;
     case 'ALERT_REKAP_ALL_SUMMARY_FULFILLED':
+      const dataJSON3 = JSON.parse(action.payload.data)
       return {
         ...state, 
-        allTOTALPROJECT: action.payload.data[0].TOTALPROJECT,
-        allTOTALREV: action.payload.data[0].TOTALREV,
+        allTOTALPROJECT: dataJSON3[0].TOTALPROJECT,
+        allTOTALREV: dataJSON3[0].TOTALREV,
    
       }
     break;
@@ -100,10 +103,11 @@ const alertReducer = (state = initialState, action) => {
       }
     break;
     case 'ALERT_REKAP_WIN_SUMMARY_FULFILLED':
+      const dataJSON4 = JSON.parse(action.payload.data)
       return {
         ...state, 
-        allTOTALPROJECT: action.payload.data[1].TOTALPROJECT,
-        allTOTALREV: action.payload.data[1].TOTALREV,
+        allTOTALPROJECT: dataJSON4[1].TOTALPROJECT,
+        allTOTALREV: dataJSON4[1].TOTALREV,
    
       }
     break;
@@ -124,10 +128,11 @@ const alertReducer = (state = initialState, action) => {
       }
     break;
     case 'ALERT_REKAP_LOSE_SUMMARY_FULFILLED':
+      const dataJSON5 = JSON.parse(action.payload.data)
       return {
         ...state, 
-        allTOTALPROJECT: action.payload.data[2].TOTALPROJECT,
-        allTOTALREV: action.payload.data[2].TOTALREV,
+        allTOTALPROJECT: dataJSON5[2].TOTALPROJECT,
+        allTOTALREV: dataJSON5[2].TOTALREV,
    
       }
     break;
