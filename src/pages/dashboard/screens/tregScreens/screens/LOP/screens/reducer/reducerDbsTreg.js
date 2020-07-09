@@ -61,43 +61,44 @@ const DbsTregReducer = (state = initialState, action) => {
     break;
 
     case 'DBS_HOME_TREG_FULFILLED':
+      const dataJSON1 = JSON.parse(action.payload.data)
       return {
         ...state, 
         loaderStatus:false,
 
-        ebisProspectREVENUE:parseInt(action.payload.data[0].lop_11_1),
-        ebisProspectProject:parseInt(action.payload.data[0].lop_11_2),
-        ebisProspectTarget:parseInt(action.payload.data[0].lop_11_3),
+        ebisProspectREVENUE:parseInt(dataJSON1[0].lop_11_1),
+        ebisProspectProject:parseInt(dataJSON1[0].lop_11_2),
+        ebisProspectTarget:parseInt(dataJSON1[0].lop_11_3),
 
-        ebisSubmisionREVENUE:parseInt(action.payload.data[0].lop_11_6),
-        ebisSubmissionProject:parseInt(action.payload.data[0].lop_12_1),
-        ebisSubmissionTarget:parseInt(action.payload.data[0].lop_12_2),
+        ebisSubmisionREVENUE:parseInt(dataJSON1[0].lop_11_6),
+        ebisSubmissionProject:parseInt(dataJSON1[0].lop_12_1),
+        ebisSubmissionTarget:parseInt(dataJSON1[0].lop_12_2),
 
-        ebisWinREVENUE:parseInt(action.payload.data[0].lop_12_3),
-        ebisWinProject:parseInt(action.payload.data[0].lop_12_6),
-        ebisWinTarget:parseInt(action.payload.data[0].lop_13_1),
+        ebisWinREVENUE:parseInt(dataJSON1[0].lop_12_3),
+        ebisWinProject:parseInt(dataJSON1[0].lop_12_6),
+        ebisWinTarget:parseInt(dataJSON1[0].lop_13_1),
 
-        ebisBillcomREVENUE:parseInt(action.payload.data[0].lop_13_2),
-        ebisBillcomeProject:parseInt(action.payload.data[0].lop_13_3),
-        ebisBillcommTarget:parseInt(action.payload.data[0].lop_13_6),
+        ebisBillcomREVENUE:parseInt(dataJSON1[0].lop_13_2),
+        ebisBillcomeProject:parseInt(dataJSON1[0].lop_13_3),
+        ebisBillcommTarget:parseInt(dataJSON1[0].lop_13_6),
 
-        ProspectREVENUE:parseInt(action.payload.data[0].lop_14_1),
-        ProspectProject:parseInt(action.payload.data[0].lop_14_2),
-        ProspectTarget:parseInt(action.payload.data[0].lop_14_3),
-        ProspectREVENUE2:parseInt(action.payload.data[0].lop_14_6),
+        ProspectREVENUE:parseInt(dataJSON1[0].lop_14_1),
+        ProspectProject:parseInt(dataJSON1[0].lop_14_2),
+        ProspectTarget:parseInt(dataJSON1[0].lop_14_3),
+        ProspectREVENUE2:parseInt(dataJSON1[0].lop_14_6),
 
         //submission status
-        SubmissionWINRevenue:parseInt(action.payload.data[0].lop_21_1),
-        SubmissionWINProject:parseInt(action.payload.data[0].lop_21_2),
+        SubmissionWINRevenue:parseInt(dataJSON1[0].lop_21_1),
+        SubmissionWINProject:parseInt(dataJSON1[0].lop_21_2),
 
-        SubmissionLOOSERevenue:parseInt(action.payload.data[0].lop_22_1),
-        SubmissionLooseProject:parseInt(action.payload.data[0].lop_22_2),
+        SubmissionLOOSERevenue:parseInt(dataJSON1[0].lop_22_1),
+        SubmissionLooseProject:parseInt(dataJSON1[0].lop_22_2),
 
-        SubmissionWaitingRevenue:parseInt(action.payload.data[0].lop_23_1),
-        SubmissionWaitingProject:parseInt(action.payload.data[0].lop_23_2),
+        SubmissionWaitingRevenue:parseInt(dataJSON1[0].lop_23_1),
+        SubmissionWaitingProject:parseInt(dataJSON1[0].lop_23_2),
 
-        SubmissionCancelRevenue:parseInt(action.payload.data[0].lop_24_1),
-        SubmissionCancekProject:parseInt(action.payload.data[0].lop_24_2),
+        SubmissionCancelRevenue:parseInt(dataJSON1[0].lop_24_1),
+        SubmissionCancekProject:parseInt(dataJSON1[0].lop_24_2),
       }
     break;
 
@@ -114,17 +115,18 @@ const DbsTregReducer = (state = initialState, action) => {
     break;
 
     case 'DBS_HOME_CURRENT_TREG_FULFILLED':
+      const dataJSON2 = JSON.parse(action.payload.data)
       return{
         ...state, 
         //Current status
-        currentProspectRevenue:parseInt(action.payload.data[0].lop_01_1),
-        currentProspectProject:parseInt(action.payload.data[0].lop_01_2),
-        currentSubmissionRevenue:parseInt(action.payload.data[0].lop_02_1),
-        currentSubmissionProject:parseInt(action.payload.data[0].lop_02_2),
-        currentWINRevenue:parseInt(action.payload.data[0].lop_03_1),
-        currentWINProject:parseInt(action.payload.data[0].lop_03_2),
-        currentBIllcomRevenue:parseInt(action.payload.data[0].lop_04_1),
-        currentBillcomProject:parseInt(action.payload.data[0].lop_04_2),
+        currentProspectRevenue:parseInt(dataJSON2[0].lop_01_1),
+        currentProspectProject:parseInt(dataJSON2[0].lop_01_2),
+        currentSubmissionRevenue:parseInt(dataJSON2[0].lop_02_1),
+        currentSubmissionProject:parseInt(dataJSON2[0].lop_02_2),
+        currentWINRevenue:parseInt(dataJSON2[0].lop_03_1),
+        currentWINProject:parseInt(dataJSON2[0].lop_03_2),
+        currentBIllcomRevenue:parseInt(dataJSON2[0].lop_04_1),
+        currentBillcomProject:parseInt(dataJSON2[0].lop_04_2),
       }
     break;
 
@@ -144,42 +146,43 @@ const DbsTregReducer = (state = initialState, action) => {
     break;
 
     case 'DBS_HOME_TREG_PERIODE_FULFILLED':
+      const dataJSON3 = JSON.parse(action.payload.data)
       return {
         ...state, 
 
-        ebisProspectREVENUE:parseInt(action.payload.data[0].lop_11_1),
-        ebisProspectProject:parseInt(action.payload.data[0].lop_11_2),
-        ebisProspectTarget:parseInt(action.payload.data[0].lop_11_3),
+        ebisProspectREVENUE:parseInt(dataJSON3[0].lop_11_1),
+        ebisProspectProject:parseInt(dataJSON3[0].lop_11_2),
+        ebisProspectTarget:parseInt(dataJSON3[0].lop_11_3),
 
-        ebisSubmisionREVENUE:parseInt(action.payload.data[0].lop_11_6),
-        ebisSubmissionProject:parseInt(action.payload.data[0].lop_12_1),
-        ebisSubmissionTarget:parseInt(action.payload.data[0].lop_12_2),
+        ebisSubmisionREVENUE:parseInt(dataJSON3[0].lop_11_6),
+        ebisSubmissionProject:parseInt(dataJSON3[0].lop_12_1),
+        ebisSubmissionTarget:parseInt(dataJSON3[0].lop_12_2),
 
-        ebisWinREVENUE:parseInt(action.payload.data[0].lop_12_3),
-        ebisWinProject:parseInt(action.payload.data[0].lop_12_6),
-        ebisWinTarget:parseInt(action.payload.data[0].lop_13_1),
+        ebisWinREVENUE:parseInt(dataJSON3[0].lop_12_3),
+        ebisWinProject:parseInt(dataJSON3[0].lop_12_6),
+        ebisWinTarget:parseInt(dataJSON3[0].lop_13_1),
 
-        ebisBillcomREVENUE:parseInt(action.payload.data[0].lop_13_2),
-        ebisBillcomeProject:parseInt(action.payload.data[0].lop_13_3),
-        ebisBillcommTarget:parseInt(action.payload.data[0].lop_13_6),
+        ebisBillcomREVENUE:parseInt(dataJSON3[0].lop_13_2),
+        ebisBillcomeProject:parseInt(dataJSON3[0].lop_13_3),
+        ebisBillcommTarget:parseInt(dataJSON3[0].lop_13_6),
 
-        ProspectREVENUE:parseInt(action.payload.data[0].lop_14_1),
-        ProspectProject:parseInt(action.payload.data[0].lop_14_2),
-        ProspectTarget:parseInt(action.payload.data[0].lop_14_3),
-        ProspectREVENUE2:parseInt(action.payload.data[0].lop_14_6),
+        ProspectREVENUE:parseInt(dataJSON3[0].lop_14_1),
+        ProspectProject:parseInt(dataJSON3[0].lop_14_2),
+        ProspectTarget:parseInt(dataJSON3[0].lop_14_3),
+        ProspectREVENUE2:parseInt(dataJSON3[0].lop_14_6),
 
         //submission status
-        SubmissionWINRevenue:parseInt(action.payload.data[0].lop_21_1),
-        SubmissionWINProject:parseInt(action.payload.data[0].lop_21_2),
+        SubmissionWINRevenue:parseInt(dataJSON3[0].lop_21_1),
+        SubmissionWINProject:parseInt(dataJSON3[0].lop_21_2),
 
-        SubmissionLOOSERevenue:parseInt(action.payload.data[0].lop_22_1),
-        SubmissionLooseProject:parseInt(action.payload.data[0].lop_22_2),
+        SubmissionLOOSERevenue:parseInt(dataJSON3[0].lop_22_1),
+        SubmissionLooseProject:parseInt(dataJSON3[0].lop_22_2),
 
-        SubmissionWaitingRevenue:parseInt(action.payload.data[0].lop_23_1),
-        SubmissionWaitingProject:parseInt(action.payload.data[0].lop_23_2),
+        SubmissionWaitingRevenue:parseInt(dataJSON3[0].lop_23_1),
+        SubmissionWaitingProject:parseInt(dataJSON3[0].lop_23_2),
 
-        SubmissionCancelRevenue:parseInt(action.payload.data[0].lop_24_1),
-        SubmissionCancekProject:parseInt(action.payload.data[0].lop_24_2),
+        SubmissionCancelRevenue:parseInt(dataJSON3[0].lop_24_1),
+        SubmissionCancekProject:parseInt(dataJSON3[0].lop_24_2),
       }
     break;
     
