@@ -106,8 +106,8 @@ const rekapReducer = (state = initialState, action) => {
       const dataJSON4 = JSON.parse(action.payload.data)
       return {
         ...state, 
-        loseTOTALPROJECT: dataJSON4[2].TOTALPROJECT,
-        loseTOTALREV: dataJSON4[2].TOTALREV,
+        loseTOTALPROJECT: dataJSON4[1].TOTALPROJECT,
+        loseTOTALREV: dataJSON4[1].TOTALREV,
      
       }
     break;
