@@ -17,7 +17,7 @@ import {
 import {Header, Icon, Left, Right, Body, Title, Tab, Tabs, Content, Segment, Container} from 'native-base';
 import url from '../../../../config/api_service';
 import Axios from "axios";
-import RNFetchBlob from 'react-native-fetch-blob'
+import RNFetchBlob from 'rn-fetch-blob'
 
 export default class roomList extends Component {
  static navigationOptions = {

@@ -17,7 +17,7 @@ import {connect} from 'react-redux';
 import Modal from "react-native-modal";
 
 import axios from 'axios';
-import RNFetchBlob from 'react-native-fetch-blob'
+import RNFetchBlob from 'rn-fetch-blob'
 
 //global
 import renderIf from '../../../../../../components/renderIf';

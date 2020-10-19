@@ -7,7 +7,7 @@ import { PersistGate } from "redux-persist/es/integration/react";
 import PushNotification from 'react-native-push-notification';
 import notificationActionHandler from './helpers/notificationActionHandler'
 import BackgroundTimer from 'react-native-background-timer';
-import RNFetchBlob from 'react-native-fetch-blob'
+import RNFetchBlob from 'rn-fetch-blob'
 
 import url from './config/api_service';
 import AppNavigation from "./navigations";
@@ -268,7 +268,7 @@ _saveLogNotif= async (statusNotif,totalvalue,title,jenis) =>{
   _storeData = async () => {
     const {status} = this.state;
     try {
-      await AsyncStorage.setItem('notifStatus',status);
+      await AsyncStorage.setItem('notifStatus', JSON.stringify(status) );
     } catch (error) {
       // Error saving data
     }
@@ -282,7 +282,7 @@ _saveLogNotif= async (statusNotif,totalvalue,title,jenis) =>{
       // (optional) Called when Token is generated (iOS and Android)
       onRegister: function(token) {
          // console.warn(`ELMA onCheck: ${token}S`)
-         AsyncStorage.setItem('fcmtoken',token.token);
+         AsyncStorage.setItem('fcmtoken', JSON.stringify(token.token));
           // this._saveToken(token);
           console.log( 'TOKEN:', token );
       },
@@ -398,4 +398,3 @@ _saveLogNotif= async (statusNotif,totalvalue,title,jenis) =>{
       console.warn(err)
     }
   }
-

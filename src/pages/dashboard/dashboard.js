@@ -4,7 +4,7 @@ import { Alert, Container, Header, Title, Content, Footer, FooterTab, Button, Le
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import {connect} from 'react-redux';
 import axios from 'axios';
-import RNFetchBlob from 'react-native-fetch-blob'
+import RNFetchBlob from 'rn-fetch-blob'
 
 //global
 import url from '../../config/api_service';

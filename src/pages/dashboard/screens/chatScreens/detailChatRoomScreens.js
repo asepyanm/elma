@@ -17,7 +17,7 @@ import PropTypes from 'prop-types'
 import emojiUtils from 'emoji-utils'
 import url from '../../../../config/api_service';
 import Axios from "axios";
-import RNFetchBlob from 'react-native-fetch-blob'
+import RNFetchBlob from 'rn-fetch-blob'
 import { GiftedChat } from 'react-native-gifted-chat'
 import BackgroundTimer from 'react-native-background-timer';
 import SlackMessage from './SlackMessage'
@@ -79,7 +79,7 @@ getmessageRooms=async()=>{
       }). fetch('GET', `${url.API}/chatroommessagebyroomid/${this.props.navigation.state.params.room_id}`)
       .then(response => {
          // console.log(` isi response ${JSON.stringify(response.data.data)}`);
-         AsyncStorage.setItem('pesangroupchat',JSON.stringify(response.data.data));
+         AsyncStorage.setItem('pesangroupchat', JSON.stringify(response.data.data));
          this.setState({
             messages:response.data.data
           });
