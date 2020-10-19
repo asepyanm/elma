@@ -2,7 +2,7 @@ import axios from 'axios';
 import {AsyncStorage} from "react-native";
 import url from "../config/api_service"
 
-import RNFetchBlob from 'react-native-fetch-blob'
+import RNFetchBlob from 'rn-fetch-blob'
 
 class JRK{
     tokentelkom;
@@ -41,7 +41,7 @@ class JRK{
       }
     _setStorageValue(key,val){
         try {
-            AsyncStorage.setItem(key,val)
+            AsyncStorage.setItem(key, JSON.stringify(val) )
             return true
          } catch (error) {
            console.log(`gagal save ${error}`)

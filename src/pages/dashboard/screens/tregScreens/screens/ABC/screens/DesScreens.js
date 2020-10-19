@@ -11,7 +11,7 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 import {connect} from 'react-redux';
 import ModalSelector from 'react-native-modal-selector';
 import axios from 'axios';
-import RNFetchBlob from 'react-native-fetch-blob'
+import RNFetchBlob from 'rn-fetch-blob'
 
 //global
 import url from '../../../../../../../config/api_service';

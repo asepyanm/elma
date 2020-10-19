@@ -16,7 +16,7 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 import axios from 'axios';
 import { connect } from "react-redux";
 
-import RNFetchBlob from 'react-native-fetch-blob'
+import RNFetchBlob from 'rn-fetch-blob'
 
 //global component
 import renderIf from '../../../components/renderIf';
@@ -47,7 +47,7 @@ class Login extends Component {
       // console.log(`isi login group string ${JSON.stringify(loginGroup)}`);  
       // console.log(`isi props ${this.props}`);
       // console.log(`isi props string ${JSON.stringify(this.props)}`);
-      await AsyncStorage.setItem('loginGroup',loginGroup);
+      await AsyncStorage.setItem('loginGroup', JSON.stringify(loginGroup) );
     } catch (error) {
       // Error saving data
     }
@@ -131,9 +131,9 @@ _saveToken=async(token)=>{
       }). fetch('GET', `${url.API}/ebis_getlogin?user_id=${username}&user_pass=${password}`).then(async(response) => {
     console.log(`response.data login ${JSON.stringify(response.data)}`);
       const dataSession=response.data[0];
-      AsyncStorage.setItem('user_id',response.data[0].USER_ID);
+      AsyncStorage.setItem('user_id', JSON.stringify(response.data[0].USER_ID));
          try {
-       AsyncStorage.setItem('user_id',response.data[0].USER_ID);
+       AsyncStorage.setItem('user_id',JSON.stringify(response.data[0].USER_ID));
     } catch (error) {
       console.log(`gagal save ${error}`)
     }
@@ -175,7 +175,6 @@ _saveToken=async(token)=>{
 
 
     if(this.state.group!=loginGroup){
-      //console.warn(`ELMA AsyncStorage.setItem: ${this.state.group} ${loginGroup}`)
       if(loginGroup!='NOT_LOGGED'){
         this.setState({group:loginGroup})
         this._storeData();

@@ -118,7 +118,7 @@ AppState.addEventListener('change', appStateListener);
     .then(queue => {
       this.setState({queue});
     });
-    AsyncStorage.setItem('lukeData', 'kosong!')
+    AsyncStorage.setItem('lukeData', JSON.stringify('kosong!'))
     this.checkStatus()
     this.initJob()
     this.getDataButtonGroup()
@@ -362,7 +362,7 @@ _saveLogNotif= async (statusNotif,totalvalue,title,jenis) =>{
   _storeData = async () => {
     const {status} = this.state;
     try {
-      await AsyncStorage.setItem('notifStatus',status);
+      await AsyncStorage.setItem('notifStatus', JSON.stringify(status));
     } catch (error) {
       // Error saving data
     }
@@ -559,7 +559,7 @@ showAlert(title, body) {
       // (optional) Called when Token is generated (iOS and Android)
       onRegister: function(token) {
          // console.warn(`ELMA onCheck: ${token}S`)
-         AsyncStorage.setItem('fcmtoken',token.token);
+         AsyncStorage.setItem('fcmtoken', JSON.stringify(token.token));
           // this._saveToken(token);
           console.log( 'TOKEN:', token );
       },
