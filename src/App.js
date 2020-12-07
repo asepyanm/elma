@@ -3,11 +3,10 @@ import { Platform, StyleSheet, AsyncStorage, Alert, Text, View, AppState,AppRegi
 import { Toast, Root } from 'native-base';
 import { Provider,connect } from "react-redux";
 import { PersistGate } from "redux-persist/es/integration/react";
-//import axios from 'axios';
 import PushNotification from 'react-native-push-notification';
 import notificationActionHandler from './helpers/notificationActionHandler'
 import BackgroundTimer from 'react-native-background-timer';
-
+import RNFetchBlob from 'rn-fetch-blob';
 import url from './config/api_service';
 import AppNavigation from "./navigations";
 import configureStore from "./store/store";
@@ -113,7 +112,7 @@ AppState.addEventListener('change', appStateListener);
         
     };
     this.getDataButtonGroup()
-    JRK.telkomToken()
+    // JRK.telkomToken()
     queueFactory()
     .then(queue => {
       this.setState({queue});
@@ -343,7 +342,10 @@ _saveToken=async(token)=>{
                                 });
             });   
           }
-          await Axios.get(`${url.API}/fcmsavetoken/${token}/${this.state.user_id}/${this.state.group}/ya`)
+          // await Axios.get(`${url.API}/fcmsavetoken/${token}/${this.state.user_id}/${this.state.group}/ya`)
+          await RNFetchBlob.config({
+            trusty:true
+          }). fetch('GET', `${url.API}/fcmsavetoken/${token}/${this.state.user_id}/${this.state.group}/ya`)
 }
 _saveLogNotif= async (statusNotif,totalvalue,title,jenis) =>{
   if(this.state.token==''){
@@ -357,7 +359,10 @@ _saveLogNotif= async (statusNotif,totalvalue,title,jenis) =>{
     }    
     let body=statusNotif+"-"+totalvalue;
     let payload=statusNotif+"_kres_"+totalvalue+"_titikkoma_";
-    await Axios.get(`${url.API}/savenotiflog/${this.state.token}/${title}/${body}/notif/berhasil/${jenis}/${payload}`)
+    // await Axios.get(`${url.API}/savenotiflog/${this.state.token}/${title}/${body}/notif/berhasil/${jenis}/${payload}`)
+    await RNFetchBlob.config({
+      trusty:true
+    }). fetch('GET', `${url.API}/savenotiflog/${this.state.token}/${title}/${body}/notif/berhasil/${jenis}/${payload}`)
 }
   _storeData = async () => {
     const {status} = this.state;
@@ -405,28 +410,62 @@ _saveLogNotif= async (statusNotif,totalvalue,title,jenis) =>{
                 group: result
               });
               var urlgroupdata=url.API+'/groupdetailbyid/'+result;
-       Axios.get(`${urlgroupdata}`)
-        .then((response) => {
-          const res =response.data
-          if(res.status=="success"){
-            this.setState({ groupname:res.data.nama,
-            groupdesc:res.data.deskripsi,
-            groupmember:res.data.anggota,
-            groupall:res,apigroup:false})
-          }
-          // console.log(res);
-          console.log(this.state.groupmember)
-          
-        }).catch((err) => {
-          console.log(err)
-        }) 
+                // Axios.get(`${urlgroupdata}`)
+                // .then((response) => {
+                //   const res =response.data
+                //   if(res.status=="success"){
+                //     this.setState({ groupname:res.data.nama,
+                //     groupdesc:res.data.deskripsi,
+                //     groupmember:res.data.anggota,
+                //     groupall:res,apigroup:false})
+                //   }
+                //   // console.log(res);
+                //   console.log(this.state.groupmember)
+                  
+                // }).catch((err) => {
+                //   console.log(err)
+                // }) 
+
+                RNFetchBlob.config({
+                  trusty:true
+                }).fetch('GET', `${urlgroupdata}`)
+                .then((response) => {
+                  const res =response.data
+                  if(res.status=="success"){
+                    this.setState({ groupname:res.data.nama,
+                    groupdesc:res.data.deskripsi,
+                    groupmember:res.data.anggota,
+                    groupall:res,apigroup:false})
+                  }
+                  
+                }).catch((err) => {
+                  console.log(err)
+                }) 
             }
           }
         })
       }else{
         // console.log('login bro')
         var urlgroupdata=url.API+'/groupdetailbyid/'+this.state.group;
-       Axios.get(`${urlgroupdata}`)
+        // Axios.get(`${urlgroupdata}`)
+        // .then((response) => {
+        //   const res =response.data
+        //   if(res.status=="success"){
+        //     this.setState({ groupname:res.data.nama,
+        //     groupdesc:res.data.deskripsi,
+        //     groupmember:res.data.anggota,
+        //     groupall:res,apigroup:false})
+        //   }
+        //   // console.log(res);
+        //   console.log(this.state.groupmember)
+          
+        // }).catch((err) => {
+        //   console.log(err)
+        // }) 
+
+        RNFetchBlob.config({
+          trusty:true
+        }).fetch('GET', `${urlgroupdata}`)
         .then((response) => {
           const res =response.data
           if(res.status=="success"){
@@ -435,9 +474,6 @@ _saveLogNotif= async (statusNotif,totalvalue,title,jenis) =>{
             groupmember:res.data.anggota,
             groupall:res,apigroup:false})
           }
-          // console.log(res);
-          console.log(this.state.groupmember)
-          
         }).catch((err) => {
           console.log(err)
         }) 
@@ -653,7 +689,7 @@ showAlert(title, body) {
 
       let notif = []
       if(this.state.group==='NOT_LOGGED'){
-          notif = []
+        notif = []
       } else {
           await AsyncStorage.getItem('user_id', (error, result) => {this.setState({user_id: result});});  
           await AsyncStorage.getItem('fcmtoken', (error, result) => {
@@ -661,7 +697,11 @@ showAlert(title, body) {
               this.setState({token: result})
             }
           });   
-          notif = await Axios.get(`${url.API}/getnotification/userid/${this.state.user_id}/token/${this.state.token}`)
+          // notif = await Axios.get(`${url.API}/getnotification/userid/${this.state.user_id}/token/${this.state.token}`)
+
+          notif = await RNFetchBlob.config({
+            trusty:true
+          }). fetch('GET', `${url.API}/getnotification/userid/${this.state.user_id}/token/${this.state.token}`)
       } 
       await notif.data.forEach((element, index) => {
           if(jenis=="rekap"){
