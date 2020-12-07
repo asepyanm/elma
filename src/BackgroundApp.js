@@ -395,6 +395,7 @@ _saveLogNotif= async (statusNotif,totalvalue,title,jenis) =>{
         }
       });
     } catch (err) {
-      console.warn(err)
+      console.log(err)
     }
   }
+}
